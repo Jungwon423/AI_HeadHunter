@@ -1,8 +1,8 @@
-import type { ReactNode } from 'react';
+import type { ReactNode } from 'react'
 
 type IFooterIconListProps = {
-  children: ReactNode;
-};
+  children: ReactNode
+}
 
 const FooterIconList = (props: IFooterIconListProps) => (
   <div className="footer-icon-list flex flex-wrap">
@@ -28,6 +28,6 @@ const FooterIconList = (props: IFooterIconListProps) => (
       `}
     </style>
   </div>
-);
+)
 
-export { FooterIconList };
+export { FooterIconList }

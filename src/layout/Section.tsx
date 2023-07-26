@@ -1,11 +1,11 @@
-import type { ReactNode } from 'react';
+import type { ReactNode } from 'react'
 
 type ISectionProps = {
-  title?: string;
-  description?: string;
-  yPadding?: string;
-  children: ReactNode;
-};
+  title?: string
+  description?: string
+  yPadding?: string
+  children: ReactNode
+}
 
 const Section = (props: ISectionProps) => (
   <div
@@ -26,6 +26,6 @@ const Section = (props: ISectionProps) => (
 
     {props.children}
   </div>
-);
+)
 
-export { Section };
+export { Section }

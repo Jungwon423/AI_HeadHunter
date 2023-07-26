@@ -1,10 +1,10 @@
-import Link from 'next/link';
-import type { ReactNode } from 'react';
+import Link from 'next/link'
+import type { ReactNode } from 'react'
 
 type INavbarProps = {
-  logo: ReactNode;
-  children: ReactNode;
-};
+  logo: ReactNode
+  children: ReactNode
+}
 
 const NavbarTwoColumns = (props: INavbarProps) => (
   <div className="flex flex-wrap items-center py-3 px-6 justify-between">
@@ -30,6 +30,6 @@ const NavbarTwoColumns = (props: INavbarProps) => (
       `}
     </style>
   </div>
-);
+)
 
-export { NavbarTwoColumns };
+export { NavbarTwoColumns }

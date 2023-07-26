@@ -1,9 +1,9 @@
-import className from 'classnames';
+import className from 'classnames'
 
 type IButtonProps = {
-  xl?: boolean;
-  children: string;
-};
+  xl?: boolean
+  children: string
+}
 
 const Button = (props: IButtonProps) => {
   const btnClass = className({
@@ -11,7 +11,7 @@ const Button = (props: IButtonProps) => {
     'btn-xl': props.xl,
     'btn-base': !props.xl,
     'btn-primary': true,
-  });
+  })
 
   return (
     <div className={btnClass}>
@@ -41,7 +41,7 @@ const Button = (props: IButtonProps) => {
         `}
       </style>
     </div>
-  );
-};
+  )
+}
 
-export { Button };
+export { Button }

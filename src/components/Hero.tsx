@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import {Button} from './button';
+import Image from 'next/image'
+import { Button } from './button'
 
 export default function Hero() {
   return (
@@ -23,9 +23,9 @@ export default function Hero() {
           The easiest way to build a React landing page in seconds.
         </p>
         <div className="mt-12">
-            <Button xl>Download Your Free Theme</Button>
+          <Button xl>Download Your Free Theme</Button>
         </div>
       </div>
     </section>
-  );
+  )
 }

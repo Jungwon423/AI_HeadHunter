@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from 'next/image'
 
 const destinations = [
   {
@@ -16,13 +16,15 @@ const destinations = [
     name: 'Tokyo',
     image: '/destination-3.jpg',
   },
-];
+]
 
 export default function Destinations() {
   return (
     <section className="py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-extrabold text-gray-900">Popular Destinations</h2>
+        <h2 className="text-3xl font-extrabold text-gray-900">
+          Popular Destinations
+        </h2>
         <p className="mt-4 max-w-2xl text-xl text-gray-500">
           Explore our most popular destinations and plan your next trip.
         </p>
@@ -39,12 +41,14 @@ export default function Destinations() {
               />
               <div className="absolute inset-0 bg-black opacity-50"></div>
               <div className="absolute inset-0 px-4 py-6 flex items-center justify-center">
-                <h3 className="text-lg font-medium text-white">{destination.name}</h3>
+                <h3 className="text-lg font-medium text-white">
+                  {destination.name}
+                </h3>
               </div>
             </div>
           ))}
         </div>
       </div>
     </section>
-  );
+  )
 }

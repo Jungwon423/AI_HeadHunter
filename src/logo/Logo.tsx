@@ -1,12 +1,12 @@
 type ILogoProps = {
-  xl?: boolean;
-};
+  xl?: boolean
+}
 
 const Logo = (props: ILogoProps) => {
-  const size = props.xl ? '44' : '32';
+  const size = props.xl ? '44' : '32'
   const fontStyle = props.xl
     ? 'font-semibold text-3xl'
-    : 'font-semibold text-xl';
+    : 'font-semibold text-xl'
 
   return (
     <span className={`inline-flex items-center text-gray-900 ${fontStyle}`}>
@@ -27,10 +27,9 @@ const Logo = (props: ILogoProps) => {
         <rect x="15" y="4" width="6" height="16" rx="1" />
         <path d="M4 20h14" />
       </svg>
-
       this is logo
     </span>
-  );
-};
+  )
+}
 
-export { Logo };
+export { Logo }

@@ -1,15 +1,15 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
-import { Background } from '../background/Background';
-import { CenteredFooter } from './CenteredFooter';
-import { Section } from '../layout/Section';
-import { Logo } from '../logo/Logo';
+import { Background } from '../background/Background'
+import { CenteredFooter } from './CenteredFooter'
+import { Section } from '../layout/Section'
+import { Logo } from '../logo/Logo'
 
 const Footer = () => (
   <Background color="bg-gray-100">
     <Section>
       <CenteredFooter
-        logo={<Logo/>}
+        logo={<Logo />}
         iconList={
           <>
             <Link href="/">
@@ -73,6 +73,6 @@ const Footer = () => (
       </CenteredFooter>
     </Section>
   </Background>
-);
+)
 
-export { Footer };
+export { Footer }

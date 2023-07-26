@@ -20,6 +20,6 @@ const FooterCopyright = () => (
       `}
     </style>
   </div>
-);
+)
 
-export { FooterCopyright };
+export { FooterCopyright }
