@@ -33,7 +33,7 @@ export default function Home() {
 
       {/* Main content section */}
       <main className="w-3/4 mx-auto py-16 px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center justify-center h-screen">
+        <div className="flex flex-col items-center justify-center">
           <h1 className="text-black text-3xl md:text-5xl font-bold text-center">
             Build your next vacation with AI
           </h1>
