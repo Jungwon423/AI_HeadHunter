@@ -28,7 +28,6 @@ const HeroOneButton = (props: IHeroOneButtonProps) => (
   </header>
 );
 
-
 const Home: NextPage = () => {
   return (
     <div className="text-gray-600 antialiased">
