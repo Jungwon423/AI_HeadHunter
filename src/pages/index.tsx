@@ -6,7 +6,7 @@ export default function Home() {
     <div className="bg-white min-h-screen">
       {/* Head section */}
       <Head>
-        <title>정원정모동근</title>
+        <title>Triper</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {/* Navigation section */}

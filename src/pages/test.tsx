@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { NavbarTwoColumns } from '../navbar/NavbarTwoColumns'
-import Hero from '../components/hero'
+import Hero from '../components/Hero'
 import Destinations from '../components/Destination'
 // import Reviews from '../components/Reviews';
 import Packages from '../components/Packages'
