@@ -176,18 +176,6 @@ export default function HomePage() {
         <title>Travel Homepage</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      {/* <NavbarTwoColumns logo={<Logo />}>
-        <li>
-          <Link href="https://github.com/ixartz/Next-JS-Landing-Page-Starter-Template">
-            GitHub
-          </Link>
-        </li>
-        <li>
-          <Link href="/">Sign in</Link>
-        </li>
-      </NavbarTwoColumns> */}
-      {/* Navigation section */}
       <MyNavbar />
       <section className="relative">
         <div className="absolute inset-0">

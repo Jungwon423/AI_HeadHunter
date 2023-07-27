@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import MyNavbar from '../navbar/MyNavbar'
 
 export default function Home() {
   return (
@@ -11,26 +12,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {/* Navigation section */}
-      <nav className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex-shrink-0 flex items-center">
-              <Image
-                src="/assets/images/logo.png"
-                alt="Logo"
-                width={32}
-                height={32}
-              />
-              <span className="ml-2 font-bold text-xl font-mono">Triper</span>
-            </div>
-            <div className="flex items-center">
-              <button className="bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600">
-                Sign In
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <MyNavbar />
 
       {/* Main content section */}
       <main className="w-3/4 mx-auto py-16 px-4 sm:px-6 lg:px-8">
