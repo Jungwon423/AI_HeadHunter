@@ -34,10 +34,7 @@ const TravelCoursePage = () => {
     latitude: attractions[0].latitude,
     longitude: attractions[0].longitude,
     zoom: 12,
-  })
-
-  const [activeTab, setActiveTab] = useState(0)
-  const tabs = ['여행 요약', '1일차', '2일차', '3일차'] // 실제 데이터로 대체
+  });
 
   return (
     <div className="flex">
