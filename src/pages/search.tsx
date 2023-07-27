@@ -46,13 +46,13 @@ const TravelCompanions = () => {
       </h2>
       <div className="flex flex-wrap justify-center mt-6">
         {companions.map((companion) => (
-          <div key={companion} >
+          <div key={companion}>
             <TravelButton
-            className={`m-2 ${
-              selectedCompanions.includes(companion)
-                ? 'bg-gray-500 text-white'
-                : 'bg-gray-200 text-gray-700'
-            }`}
+              className={`m-2 ${
+                selectedCompanions.includes(companion)
+                  ? 'bg-gray-500 text-white'
+                  : 'bg-gray-200 text-gray-700'
+              }`}
               onClick={() => handleCompanionClick(companion)}
             >
               {companion}
@@ -120,12 +120,13 @@ const TravelStyles = () => {
       </h2>
       <div className="flex flex-wrap justify-center mt-6">
         {styles.map((style) => (
-          <div key={style} >
-            <TravelButton className={`m-2 ${
-            selectedStyles.includes(style)
-              ? 'bg-gray-500 text-white'
-              : 'bg-gray-200 text-gray-700'
-          }`}
+          <div key={style}>
+            <TravelButton
+              className={`m-2 ${
+                selectedStyles.includes(style)
+                  ? 'bg-gray-500 text-white'
+                  : 'bg-gray-200 text-gray-700'
+              }`}
               onClick={() => handleStylesClick(style)}
             >
               {style}
@@ -134,27 +135,35 @@ const TravelStyles = () => {
         ))}
       </div>
       <div className="mt-6">
-        {selectedStyles.map((style) => (             //추가되는 버튼
-          <span
-            key={style}
-            className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-          >
-            {style}
-            <button
-              type="button"
-              className="ml-2 text-gray-500 hover:text-gray-900"          //제거 x버튼
-              onClick={() => removeStyle(style)}
+        {selectedStyles.map(
+          (
+            style, //추가되는 버튼
+          ) => (
+            <span
+              key={style}
+              className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
             >
-              <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1.414-8l-2.293-2.293a1 1 0 011.414-1.414L10 8.586l2.293-2.293a1 1 0 111.414 1.414L11.414 10l2.293 2.293a1 1 0 01-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 01-1.414-1.414L8.586 10z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </button>
-          </span>
-        ))}
+              {style}
+              <button
+                type="button"
+                className="ml-2 text-gray-500 hover:text-gray-900" //제거 x버튼
+                onClick={() => removeStyle(style)}
+              >
+                <svg
+                  className="w-4 h-4"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1.414-8l-2.293-2.293a1 1 0 011.414-1.414L10 8.586l2.293-2.293a1 1 0 111.414 1.414L11.414 10l2.293 2.293a1 1 0 01-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 01-1.414-1.414L8.586 10z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+            </span>
+          ),
+        )}
       </div>
     </div>
   )
@@ -167,19 +176,7 @@ export default function HomePage() {
         <title>Travel Homepage</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      {/* <NavbarTwoColumns logo={<Logo />}>
-        <li>
-          <Link href="https://github.com/ixartz/Next-JS-Landing-Page-Starter-Template">
-            GitHub
-          </Link>
-        </li>
-        <li>
-          <Link href="/">Sign in</Link>
-        </li>
-      </NavbarTwoColumns> */}
-      {/* Navigation section */}
-      <MyNavbar/>
+      <MyNavbar />
       <section className="relative">
         <div className="absolute inset-0">
           <Image
@@ -197,21 +194,22 @@ export default function HomePage() {
             <div className="text-primary-500">나만의 여행</div>
           </h1>
         </div>
-  </section>
-  <div className="absolute top-3/4 inset-20 flex justify-center items-center">
-      <div className="bg-white max-w-7xl rounded-xl shadow-xl">
-        <TravelTitle />
-        <TravelCompanions />
-        <TravelStyles />
-        <div className='relative m-5 p-5 inset-0 flex justify-center text-center bg-indigo'>
-      <button className="text-lg sm:text-xl md:text-2xl text-white font-bold py-4 px-20 rounded-xl bg-indigo-600 hover:bg-indigo-700 focus:outline-none" onClick={() => router.push("/travel")}>
-        여행하러 가기
-      </button>
-    </div>
+      </section>
+      <div className="absolute top-3/4 inset-20 flex justify-center items-center">
+        <div className="bg-white max-w-7xl rounded-xl shadow-xl">
+          <TravelTitle />
+          <TravelCompanions />
+          <TravelStyles />
+          <div className="relative m-5 p-5 inset-0 flex justify-center text-center bg-indigo">
+            <button
+              className="text-lg sm:text-xl md:text-2xl text-white font-bold py-4 px-20 rounded-xl bg-indigo-600 hover:bg-indigo-700 focus:outline-none"
+              onClick={() => router.push('/travel')}
+            >
+              여행하러 가기
+            </button>
+          </div>
+        </div>
       </div>
-  </div>
     </div>
   )
 }
-
-
