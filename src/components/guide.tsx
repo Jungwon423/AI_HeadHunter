@@ -101,11 +101,8 @@ const Guide = () => {
       </div>
       <div className="flex flex-col w-full">
         {attractions.map((attraction) => (
-          <div>
-            <button
-              key={attraction.name}
-              className="rounded-xl mx-12 my-8 p-1 flex bg-gray-50 shadow-lg hover:shadow-2xl"
-            >
+          <div key={attraction.name}>
+            <button className="rounded-xl mx-12 my-8 p-1 flex bg-gray-50 shadow-lg hover:shadow-2xl">
               <div className="flex-none justify-center item-center w-32 md:w-48 h-32 md:h-48">
                 <Image
                   src={attraction.image}
