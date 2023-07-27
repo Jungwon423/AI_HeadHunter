@@ -4,6 +4,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import TravelButton from '../components/travelButton'
 import MyNavbar from '../navbar/MyNavbar'
+import router from 'next/router'
 
 const TravelTitle = () => (
   <div className="text-center py-20 bg-indigo-500 rounded-tl-xl rounded-tr-xl">
@@ -197,11 +198,16 @@ export default function HomePage() {
           </h1>
         </div>
   </section>
-  <div className="absolute top-2/3 inset-20 flex justify-center items-center">
+  <div className="absolute top-3/4 inset-20 flex justify-center items-center">
       <div className="bg-white max-w-7xl rounded-xl shadow-xl">
         <TravelTitle />
         <TravelCompanions />
         <TravelStyles />
+        <div className='relative m-5 p-5 inset-0 flex justify-center text-center bg-indigo'>
+      <button className="text-lg sm:text-xl md:text-2xl text-white font-bold py-4 px-20 rounded-xl bg-indigo-600 hover:bg-indigo-700 focus:outline-none" onClick={() => router.push("/travel")}>
+        여행하러 가기
+      </button>
+    </div>
       </div>
   </div>
     </div>
