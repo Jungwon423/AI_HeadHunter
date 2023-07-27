@@ -4,12 +4,13 @@ import Link from 'next/link'
 import mapboxgl from 'mapbox-gl'
 
 export default function Home() {
-  mapboxgl.accessToken = 'pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtrcGNwdXQwNm1oM2xvZTJ5Z2Q4djk5In0._rw_aFaBfUjQC-tjkV53Aw'
+  mapboxgl.accessToken =
+    'pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtrcGNwdXQwNm1oM2xvZTJ5Z2Q4djk5In0._rw_aFaBfUjQC-tjkV53Aw'
   const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v11',
     center: [-74.5, 40],
-      zoom: 9,
+    zoom: 9,
   })
 
   return (

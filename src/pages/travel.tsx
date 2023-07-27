@@ -1,11 +1,11 @@
-import { SetStateAction, useState } from 'react';
-import Image from 'next/image';
-import ReactMapGL, { Marker} from 'react-map-gl';
-import ViewportProps from 'react-map-gl';
+import { SetStateAction, useState } from 'react'
+import Image from 'next/image'
+import ReactMapGL, { Marker } from 'react-map-gl'
+import ViewportProps from 'react-map-gl'
 
 interface CustomMapProps {
-  viewport: typeof ViewportProps;
-  onViewportChange: (viewport: typeof ViewportProps) => void;
+  viewport: typeof ViewportProps
+  onViewportChange: (viewport: typeof ViewportProps) => void
 }
 // const CustomMap: React.FC<CustomMapProps> = ({ viewport, onViewportChange }) => {
 //     return (
@@ -40,7 +40,7 @@ const attractions = [
     latitude: -33.8568,
     longitude: 151.2153,
   },
-];
+]
 
 const TravelCoursePage = () => {
   const [viewport, setViewport] = useState({
@@ -49,7 +49,7 @@ const TravelCoursePage = () => {
     latitude: attractions[0].latitude,
     longitude: attractions[0].longitude,
     zoom: 12,
-  });
+  })
 
   return (
     <div className="flex flex-col md:flex-row h-screen">
@@ -73,7 +73,7 @@ const TravelCoursePage = () => {
           {...viewport}
           //onViewportChange={(nextViewport: typeof ViewportProps) => setViewport(nextViewport)}
           //mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_API_TOKEN}
-          mapboxAccessToken='pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtqbDF2N3MwcHJ5M3FucjdqdzhpaWlnIn0.XMJC6lSrpUxqUutc61sK8g'
+          mapboxAccessToken="pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtqbDF2N3MwcHJ5M3FucjdqdzhpaWlnIn0.XMJC6lSrpUxqUutc61sK8g"
           mapStyle="mapbox://styles/mapbox/streets-v11"
         >
           {attractions.map((attraction) => (
@@ -101,7 +101,7 @@ const TravelCoursePage = () => {
         </ReactMapGL>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default TravelCoursePage;
+export default TravelCoursePage

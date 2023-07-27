@@ -188,7 +188,7 @@ export default function HomePage() {
         </li>
       </NavbarTwoColumns> */}
       {/* Navigation section */}
-      <MyNavbar/>
+      <MyNavbar />
       <section className="relative">
         <div className="absolute inset-0">
           <Image
@@ -206,21 +206,22 @@ export default function HomePage() {
             <div className="text-primary-500">나만의 여행</div>
           </h1>
         </div>
-  </section>
-  <div className="absolute top-3/4 inset-20 flex justify-center items-center">
-      <div className="bg-white max-w-7xl rounded-xl shadow-xl">
-        <TravelTitle />
-        <TravelCompanions />
-        <TravelStyles />
-        <div className='relative m-5 p-5 inset-0 flex justify-center text-center bg-indigo'>
-      <button className="text-lg sm:text-xl md:text-2xl text-white font-bold py-4 px-20 rounded-xl bg-indigo-600 hover:bg-indigo-700 focus:outline-none" onClick={() => router.push("/travel")}>
-        여행하러 가기
-      </button>
-    </div>
+      </section>
+      <div className="absolute top-3/4 inset-20 flex justify-center items-center">
+        <div className="bg-white max-w-7xl rounded-xl shadow-xl">
+          <TravelTitle />
+          <TravelCompanions />
+          <TravelStyles />
+          <div className="relative m-5 p-5 inset-0 flex justify-center text-center bg-indigo">
+            <button
+              className="text-lg sm:text-xl md:text-2xl text-white font-bold py-4 px-20 rounded-xl bg-indigo-600 hover:bg-indigo-700 focus:outline-none"
+              onClick={() => router.push('/travel')}
+            >
+              여행하러 가기
+            </button>
+          </div>
+        </div>
       </div>
-  </div>
     </div>
   )
 }
-
-
