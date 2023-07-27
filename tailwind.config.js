@@ -2,6 +2,10 @@
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
+    flex: {
+      '1': '1 1 0%',
+      '2': '1 2 0%'
+    },
     fontSize: {
       xs: '0.75rem',
       sm: '0.875rem',
