@@ -4,7 +4,7 @@ import Guide from '../components/guide'
 
 const TravelCoursePage = () => {
   return (
-    <div className="flex">
+    <div className="flex h-screen">
       <Guide></Guide>
       <TravelMap></TravelMap>
     </div>

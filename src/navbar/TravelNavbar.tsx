@@ -13,7 +13,7 @@ export default function MyNavbar() {
               width={40}
               height={40}
             />
-            <span className="ml-2 font-bold text-xl font-mono">Triper</span>
+            <span className="ml-2 font-bold text-xl font-mono">Trippy</span>
           </div>
         </button>
         <div className="flex items-center">
