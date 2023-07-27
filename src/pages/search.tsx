@@ -45,13 +45,13 @@ const TravelCompanions = () => {
       </h2>
       <div className="flex flex-wrap justify-center mt-6">
         {companions.map((companion) => (
-          <div key={companion} >
+          <div key={companion}>
             <TravelButton
-            className={`m-2 ${
-              selectedCompanions.includes(companion)
-                ? 'bg-gray-500 text-white'
-                : 'bg-gray-200 text-gray-700'
-            }`}
+              className={`m-2 ${
+                selectedCompanions.includes(companion)
+                  ? 'bg-gray-500 text-white'
+                  : 'bg-gray-200 text-gray-700'
+              }`}
               onClick={() => handleCompanionClick(companion)}
             >
               {companion}
@@ -119,12 +119,13 @@ const TravelStyles = () => {
       </h2>
       <div className="flex flex-wrap justify-center mt-6">
         {styles.map((style) => (
-          <div key={style} >
-            <TravelButton className={`m-2 ${
-            selectedStyles.includes(style)
-              ? 'bg-gray-500 text-white'
-              : 'bg-gray-200 text-gray-700'
-          }`}
+          <div key={style}>
+            <TravelButton
+              className={`m-2 ${
+                selectedStyles.includes(style)
+                  ? 'bg-gray-500 text-white'
+                  : 'bg-gray-200 text-gray-700'
+              }`}
               onClick={() => handleStylesClick(style)}
             >
               {style}
@@ -133,27 +134,35 @@ const TravelStyles = () => {
         ))}
       </div>
       <div className="mt-6">
-        {selectedStyles.map((style) => (             //추가되는 버튼
-          <span
-            key={style}
-            className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-          >
-            {style}
-            <button
-              type="button"
-              className="ml-2 text-gray-500 hover:text-gray-900"          //제거 x버튼
-              onClick={() => removeStyle(style)}
+        {selectedStyles.map(
+          (
+            style, //추가되는 버튼
+          ) => (
+            <span
+              key={style}
+              className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
             >
-              <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1.414-8l-2.293-2.293a1 1 0 011.414-1.414L10 8.586l2.293-2.293a1 1 0 111.414 1.414L11.414 10l2.293 2.293a1 1 0 01-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 01-1.414-1.414L8.586 10z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </button>
-          </span>
-        ))}
+              {style}
+              <button
+                type="button"
+                className="ml-2 text-gray-500 hover:text-gray-900" //제거 x버튼
+                onClick={() => removeStyle(style)}
+              >
+                <svg
+                  className="w-4 h-4"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1.414-8l-2.293-2.293a1 1 0 011.414-1.414L10 8.586l2.293-2.293a1 1 0 111.414 1.414L11.414 10l2.293 2.293a1 1 0 01-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 01-1.414-1.414L8.586 10z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+            </span>
+          ),
+        )}
       </div>
     </div>
   )
