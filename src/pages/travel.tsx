@@ -1,5 +1,5 @@
-import Map from '../components/map';
-import Guide from '../components/guide';
+import Map from '../components/TravelMap'
+import Guide from '../components/guide'
 
 const TravelCoursePage = () => {
   return (
@@ -7,7 +7,7 @@ const TravelCoursePage = () => {
       <Guide />
       <Map />
     </div>
-  );
-};
+  )
+}
 
-export default TravelCoursePage;
+export default TravelCoursePage
