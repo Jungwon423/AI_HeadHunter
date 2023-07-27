@@ -2,12 +2,12 @@ import Image from 'next/image'
 import { useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import { NavbarTwoColumns } from '../navbar/NavbarTwoColumns'
 import TravelButton from '../components/travelButton'
+import MyNavbar from '../navbar/MyNavbar'
 
 const TravelTitle = () => (
-  <div className="text-center py-20">
-    <h1 className="text-xl sm:text-2xl md:text-5xl font-extrabold tracking-tight text-gray-900">
+  <div className="text-center py-20 bg-indigo-500 rounded-tl-xl rounded-tr-xl">
+    <h1 className="text-lg sm:text-2xl md:text-4xl font-extrabold tracking-tight text-white">
       어떤 스타일의 여행을 할 계획인가요?
     </h1>
   </div>
@@ -115,7 +115,7 @@ const TravelStyles = () => {
   return (
     <div className="text-center py-20">
       <h2 className="text-lg sm:text-xl md:text-3xl font-extrabold tracking-tight text-gray-900">
-        여행
+        여행 스타일을 알려주세요!
       </h2>
       <div className="flex flex-wrap justify-center mt-6">
         {styles.map((style) => (
@@ -178,30 +178,34 @@ export default function HomePage() {
         </li>
       </NavbarTwoColumns> */}
       {/* Navigation section */}
-      <nav className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex-shrink-0 flex items-center">
-              <Image
-                src="/assets/images/logo.png"
-                alt="Logo"
-                width={32}
-                height={32}
-              />
-              <span className="ml-2 font-bold text-xl font-mono">Triper</span>
-            </div>
-            <div className="flex items-center">
-              <button className="bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600">
-                Sign In
-              </button>
-            </div>
-          </div>
+      <MyNavbar/>
+      <section className="relative">
+        <div className="absolute inset-0">
+          <Image
+            src="/assets/images/travel.jpg"
+            alt="travel"
+            layout="fill"
+            objectFit="cover"
+            quality={100}
+          />
+          <div className="absolute inset-0 bg-black opacity-50"></div>
         </div>
-      </nav>
-
-      <TravelTitle />
-      <TravelCompanions />
-      <TravelStyles />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 md:py-40">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white">
+            AI가 만들어 주는{' \n'}
+            <div className="text-primary-500">나만의 여행</div>
+          </h1>
+        </div>
+  </section>
+  <div className="absolute top-2/3 inset-20 flex justify-center items-center">
+      <div className="bg-white max-w-7xl rounded-xl shadow-xl">
+        <TravelTitle />
+        <TravelCompanions />
+        <TravelStyles />
+      </div>
+  </div>
     </div>
   )
 }
+
+
