@@ -1,13 +1,12 @@
 import Map from 'react-map-gl'
 import GeocoderControl from './geocoder-coder'
-import ControlPanel from './control-panel'
 
 const TravelMap = () => {
   const TOKEN =
-    'pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtqbDF2N3MwcHJ5M3FucjdqdzhpaWlnIn0.XMJC6lSrpUxqUutc61sK8g'
+    'pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtrcGNwdXQwNm1oM2xvZTJ5Z2Q4djk5In0._rw_aFaBfUjQC-tjkV53Aw'
 
   return (
-    <div className="flex-grow">
+    <div className='flex-grow'>
       <Map
         initialViewState={{
           longitude: -79.4512,
@@ -19,7 +18,6 @@ const TravelMap = () => {
       >
         <GeocoderControl mapboxAccessToken={TOKEN} position="top-left" />
       </Map>
-      <ControlPanel />
     </div>
   )
 }
