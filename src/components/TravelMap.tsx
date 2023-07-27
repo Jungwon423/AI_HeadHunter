@@ -1,9 +1,16 @@
 import Map from 'react-map-gl'
 import GeocoderControl from './geocoder-coder'
+import { useState } from 'react';
 
 const TravelMap = () => {
   const TOKEN =
     'pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtrcGNwdXQwNm1oM2xvZTJ5Z2Q4djk5In0._rw_aFaBfUjQC-tjkV53Aw'
+
+    const [isContainerVisible, setIsContainerVisible] = useState(false);
+
+    const handleButtonClick = () => {
+      setIsContainerVisible(!isContainerVisible);
+    };  
 
   return (
     <div className='flex-grow'>
@@ -18,6 +25,10 @@ const TravelMap = () => {
       >
         <GeocoderControl mapboxAccessToken={TOKEN} position="top-left" />
       </Map>
+      <button className="fixed-button fixed top-0" onClick={handleButtonClick}>
+        고정 버튼
+      </button>
+      {isContainerVisible && <div className="large-container">컨테이너 내용</div>}
     </div>
   )
 }
