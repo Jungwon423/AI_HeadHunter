@@ -10,7 +10,7 @@ const TabMenu: React.FC<{
         onClick={() => onTabClick(index)}
         className={`py-2 px-4 font-semibold cursor-pointer hover:text-black border-b-2 ${
           activeTab === index
-            ? 'text-gray-700 border-white'
+            ? 'text-gray-700 border-black'
             : 'text-gray-500 border-transparent'
         }`}
       >
