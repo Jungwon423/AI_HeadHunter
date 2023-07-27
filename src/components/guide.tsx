@@ -1,7 +1,5 @@
-import { SetStateAction, useState } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
-import ReactMapGL, { Marker } from 'react-map-gl'
-import Map from '../components/map'
 import TabMenu from './TabMenu'
 import router from 'next/router'
 

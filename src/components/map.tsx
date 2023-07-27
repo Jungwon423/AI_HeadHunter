@@ -1,7 +1,5 @@
-import { SetStateAction, useState } from 'react'
-import Image from 'next/image'
+import { useState } from 'react'
 import ReactMapGL, { Marker } from 'react-map-gl'
-import exp from 'constants'
 
 const attractions = [
   {

@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import Head from 'next/head'
-import Link from 'next/link'
 import TravelButton from '../components/travelButton'
 import MyNavbar from '../navbar/MyNavbar'
 import router from 'next/router'
