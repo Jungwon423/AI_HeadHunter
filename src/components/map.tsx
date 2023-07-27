@@ -32,7 +32,7 @@ const Map = () => {
   })
 
   return (
-    <div className="flex-1 h-full">
+    <div className="flex-grow">
       <ReactMapGL
         {...viewport}
         //onViewportChange={(nextViewport: typeof ViewportProps) => setViewport(nextViewport)}
