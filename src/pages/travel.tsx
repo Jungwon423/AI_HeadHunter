@@ -7,7 +7,7 @@ const TravelCoursePage = () => {
       <Guide></Guide>
       <Map></Map>
     </div>
-  );
-};
+  )
+}
 
-export default TravelCoursePage;
+export default TravelCoursePage
