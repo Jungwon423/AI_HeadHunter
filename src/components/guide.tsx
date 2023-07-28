@@ -168,25 +168,25 @@ const Guide = () => {
               </div>
             </button>
             <div className="flex justify-center items-center text-center mr-12">
-  <div className="px-2 flex items-center">
-    <Image
-      src="/assets/running-person.svg"
-      width={15}
-      height={15}
-      className="rounded-lg"
-    />
-    <span className="ml-1">{attraction.time}분 |</span>
-  </div>
-  <div className="px-2 flex items-center">
-    <Image
-      src="/assets/car.svg"
-      width={15}
-      height={15}
-      className="rounded-lg"
-    />
-    <span className="ml-1">30분</span>
-  </div>
-</div>
+              <div className="px-2 flex items-center">
+                <Image
+                  src="/assets/running-person.svg"
+                  width={15}
+                  height={15}
+                  className="rounded-lg"
+                />
+                <span className="ml-1">{attraction.time}분 |</span>
+              </div>
+              <div className="px-2 flex items-center">
+                <Image
+                  src="/assets/car.svg"
+                  width={15}
+                  height={15}
+                  className="rounded-lg"
+                />
+                <span className="ml-1">30분</span>
+              </div>
+            </div>
           </div>
         ))}
       </div>
