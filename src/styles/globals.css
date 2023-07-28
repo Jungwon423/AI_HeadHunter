@@ -29,3 +29,31 @@ a {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Hide the default scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 10px;
+}
+
+/* Style the draggable thumb */
+::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  /* border-radius: 5px; */
+  border-radius: 2px;
+}
+
+/* Style the scrollbar track */
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+/* Make the scrollbar draggable */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #aaa;
+}
+
+/* Make the scrollbar draggable when it's being dragged */
+::-webkit-scrollbar-thumb:active {
+  background-color: #999;
+}

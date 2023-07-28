@@ -24,10 +24,10 @@ const TravelMap = () => {
       <div className="absolute bottom-8 right-8 z-10">
         {!showChat && (
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 md:py-3 px-4 md:px-10 rounded-xl shadow"
             onClick={handleChatClick}
           >
-            <div className="text-lg sm:text-xl md:text-2xl">
+            <div className="text-base sm:text-lg md:text-xl">
               Trippy AI에게 더 물어보기
             </div>
           </button>
@@ -47,7 +47,6 @@ const TravelMap = () => {
         <NavigationControl position="top-left" />
         <ScaleControl />
       </Map>
-
       {showChat && <ChatScreen onClose={() => setShowChat(false)} />}
     </div>
   )
