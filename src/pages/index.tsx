@@ -1,11 +1,11 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import MyNavbar from '../navbar/MyNavbar'
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import React from 'react'
 import MapboxGeocoderContainer from '../index_components/MapboxGeocoderContainer'
 import MainTitle from '../index_components/MainTitle'
 import TitleImage from '../index_components/TitleImage'
+import ImageExplain from '../index_components/ImageExplain'
 
 export default function Home() {
   const TOKEN =
@@ -29,14 +29,21 @@ export default function Home() {
         <MapboxGeocoderContainer accessToken={TOKEN} />
 
         <TitleImage></TitleImage>
+        <ImageExplain
+          left={true}
+          h1Text={''}
+          pText={''}
+          image={''}
+        ></ImageExplain>
+        <ImageExplain
+          left={false}
+          h1Text={''}
+          pText={''}
+          image={''}
+        ></ImageExplain>
       </main>
 
       {/* Footer section */}
-      <footer className="bg-gray-800 py-8">
-        <p className="text-center text-gray-400">
-          &copy; 2021 Plan Your Next Trip
-        </p>
-      </footer>
     </div>
   )
 }
