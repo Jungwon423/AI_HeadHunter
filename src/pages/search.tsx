@@ -1,13 +1,14 @@
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import { useState } from 'react'
 import Head from 'next/head'
 import TravelButton from '../components/travelButton'
 import MyNavbar from '../navbar/MyNavbar'
 import router from 'next/router'
+import SearchHero from '../components/SearchHero'
 
 const TravelTitle = () => (
-  <div className="text-center py-20 bg-indigo-500 rounded-tl-xl rounded-tr-xl">
-    <h1 className="text-lg sm:text-2xl md:text-4xl font-extrabold tracking-tight text-white">
+  <div className="text-center py-20 sm:py-30 md:py-40 bg-indigo-400 rounded-tl-xl rounded-tr-xl">
+    <h1 className="text-lg sm:text-xl md:text-3xl font-extrabold tracking-tight text-white">
       어떤 스타일의 여행을 할 계획인가요?
     </h1>
   </div>
@@ -40,14 +41,14 @@ const TravelCompanions = () => {
 
   return (
     <div className="text-center py-20">
-      <h2 className="text-lg sm:text-xl md:text-3xl font-extrabold tracking-tight text-gray-900">
+      <h2 className="text-lg sm:text-xl md:text-2xl font-extrabold tracking-tight text-gray-900">
         누구와 함께 가시나요?
       </h2>
       <div className="flex flex-wrap justify-center mt-6">
         {companions.map((companion) => (
           <div key={companion}>
             <TravelButton
-              className={`m-2 ${
+              className={`m-2 text-xs sm:text-sm md:text-base ${
                 selectedCompanions.includes(companion)
                   ? 'bg-gray-500 text-white'
                   : 'bg-gray-200 text-gray-700'
@@ -63,7 +64,7 @@ const TravelCompanions = () => {
         {selectedCompanions.map((companion) => (
           <span
             key={companion}
-            className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+            className="inline-block text-xs sm:text-sm md:text-base bg-gray-200 rounded-full px-3 py-1 font-semibold text-gray-700 mr-2 mb-2"
           >
             {companion}
             <button
@@ -113,15 +114,15 @@ const TravelStyles = () => {
   }
 
   return (
-    <div className="text-center py-20">
-      <h2 className="text-lg sm:text-xl md:text-3xl font-extrabold tracking-tight text-gray-900">
+    <div className="text-center">
+      <h2 className="text-lg sm:text-xl md:text-2xl font-extrabold tracking-tight text-gray-900">
         여행 스타일을 알려주세요!
       </h2>
       <div className="flex flex-wrap justify-center mt-6">
         {styles.map((style) => (
           <div key={style}>
             <TravelButton
-              className={`m-2 ${
+              className={`m-2 text-xs sm:text-sm md:text-base ${
                 selectedStyles.includes(style)
                   ? 'bg-gray-500 text-white'
                   : 'bg-gray-200 text-gray-700'
@@ -140,7 +141,7 @@ const TravelStyles = () => {
           ) => (
             <span
               key={style}
-              className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+              className="inline-block text-xs sm:text-sm md:text-base bg-gray-200 rounded-full px-3 py-1 font-semibold text-gray-700 mr-2 mb-2"
             >
               {style}
               <button
@@ -176,32 +177,15 @@ export default function HomePage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <MyNavbar />
-      <section className="relative">
-        <div className="absolute inset-0">
-          <Image
-            src="/assets/images/travel.jpg"
-            alt="travel"
-            layout="fill"
-            objectFit="cover"
-            quality={100}
-          />
-          <div className="absolute inset-0 bg-black opacity-50"></div>
-        </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 md:py-40">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white">
-            AI가 만들어 주는{' \n'}
-            <div className="text-primary-500">나만의 여행</div>
-          </h1>
-        </div>
-      </section>
-      <div className="absolute top-3/4 inset-20 flex justify-center items-center">
-        <div className="bg-white max-w-7xl rounded-xl shadow-xl">
+      <SearchHero />
+      <div className="absolute top-80 sm:top-80 md:top-96 inset-20 justify-center items-center">
+        <div className="bg-white min-w-4xl max-w-7xl rounded-xl shadow-xl">
           <TravelTitle />
           <TravelCompanions />
           <TravelStyles />
-          <div className="relative m-5 p-5 inset-0 flex justify-center text-center bg-indigo">
+          <div className="relative m-5 p-5 inset-0 flex-auto justify-center text-center bg-indigo">
             <button
-              className="text-lg sm:text-xl md:text-2xl text-white font-bold py-4 px-20 rounded-xl bg-indigo-600 hover:bg-indigo-700 focus:outline-none"
+              className="w-full text-base sm:text-lg md:text-xl text-white font-bold py-4 px-20 rounded-xl bg-indigo-400 hover:bg-indigo-700 focus:outline-none"
               onClick={() => router.push('/travel')}
             >
               여행하러 가기

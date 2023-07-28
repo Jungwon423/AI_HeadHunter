@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from 'react'
 import TravelMap from '../components/TravelMap'
 import Guide from '../components/guide'
 
