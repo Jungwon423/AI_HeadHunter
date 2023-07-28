@@ -1,7 +1,7 @@
 import Image from 'next/legacy/image'
 import { useState } from 'react'
 import Head from 'next/head'
-import TravelButton from '../components/travelButton'
+import TravelButton from '../components/TravelButton'
 import MyNavbar from '../navbar/MyNavbar'
 import router from 'next/router'
 import SearchHero from '../components/SearchHero'

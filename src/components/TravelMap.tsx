@@ -1,5 +1,11 @@
-import Map from 'react-map-gl'
-import GeocoderControl from './geocoder-coder'
+import Map, {
+  Marker,
+  Popup,
+  NavigationControl,
+  FullscreenControl,
+  ScaleControl,
+  GeolocateControl,
+} from 'react-map-gl'
 import { useState } from 'react'
 import ChatScreen from './ChatScreen'
 
@@ -33,12 +39,14 @@ const TravelMap = () => {
           latitude: 43.6568,
           zoom: 13,
         }}
-        mapStyle="mapbox://styles/mapbox/streets-v9"
+        mapStyle="mapbox://styles/zigdeal/clkjl2a7y001401r27iv81iw2"
         mapboxAccessToken={TOKEN}
       >
-        <GeocoderControl mapboxAccessToken={TOKEN} position="top-left" />
+        <GeolocateControl position="top-left" />
+        <FullscreenControl position="top-left" />
+        <NavigationControl position="top-left" />
+        <ScaleControl />
       </Map>
-
       {showChat && <ChatScreen onClose={() => setShowChat(false)} />}
     </div>
   )

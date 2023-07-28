@@ -2,8 +2,16 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import MyNavbar from '../navbar/MyNavbar'
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder'
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
 
 export default function Home() {
+  const TOKEN =
+    'pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtrcGNwdXQwNm1oM2xvZTJ5Z2Q4djk5In0._rw_aFaBfUjQC-tjkV53Aw'
+
+  var geocoder = new MapboxGeocoder({ accessToken: TOKEN })
+  geocoder.addTo('#geocoder-container')
+
   return (
     <div className="bg-white min-h-screen">
       {/* Head section */}
@@ -26,6 +34,7 @@ export default function Home() {
         </div>
 
         <form className="mt-8 flex justify-between">
+          <div id="geocoder-container"></div>
           {/* Destination input */}
           <div className="relative w-3/4">
             <label htmlFor="destination" className="sr-only">
