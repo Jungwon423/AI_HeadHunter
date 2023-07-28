@@ -20,7 +20,7 @@ type GeocoderControlProps = Omit<
 
 /* eslint-disable complexity,max-statements */
 export default function GeocoderControl(props: GeocoderControlProps) {
-  const [marker, setMarker] = useState(null)
+  const [marker, setMarker] = useState<null | JSX.Element>(null)
 
   const geocoder = useControl<MapboxGeocoder>(
     () => {
