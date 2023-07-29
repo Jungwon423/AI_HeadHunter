@@ -47,8 +47,8 @@ const MapboxGeocoderContainer: React.FC<MapboxGeocoderContainerProps> = ({
             width: 400px;
           }
           .mapboxgl-ctrl-geocoder {
-    width: 1000px !important;
-}
+            width: 1000px !important;
+          }
         `}
       </style>
     </div>
