@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 // 원래의 CSS 클래스 이름이 있던 곳에 직접 Tailwindcss 클래스를 추가합니다.
 const FooterCopyright = () => (
@@ -11,6 +11,6 @@ const FooterCopyright = () => (
       jungwon jungmo donggeun
     </a>
   </div>
-);
+)
 
-export {FooterCopyright};
+export { FooterCopyright }
