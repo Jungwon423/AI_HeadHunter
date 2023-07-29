@@ -1,10 +1,10 @@
 import Image from 'next/legacy/image'
 import { useState } from 'react'
 import Head from 'next/head'
-import TravelButton from '../components/travelButton'
-import MyNavbar from '../navbar/MyNavbar'
+import TravelButton from '../search_components/TravelButton'
+import MyNavbar from '../search_components/MyNavbar'
 import router from 'next/router'
-import SearchHero from '../components/SearchHero'
+import SearchHero from '../search_components/SearchHero'
 
 const TravelTitle = () => (
   <div className="text-center py-20 sm:py-30 md:py-40 bg-indigo-400 rounded-tl-xl rounded-tr-xl">

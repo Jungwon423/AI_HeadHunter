@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import TravelMap from '../components/TravelMap'
-import Guide from '../components/guide'
+import TravelMap from '../travel_components/TravelMap'
+import Guide from '../travel_components/guide'
 
 const TravelCoursePage = () => {
   return (

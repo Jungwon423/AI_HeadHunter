@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Image from 'next/legacy/image'
 import TabMenu from './TabMenu'
-import TravelNavbar from '../navbar/TravelNavbar'
+import TravelNavbar from './TravelNavbar'
 
 const attractions = [
   {

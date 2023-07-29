@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import MyNavbar from '../navbar/MyNavbar'
+import MyNavbar from '../search_components/MyNavbar'
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import React from 'react'
 import MapboxGeocoderContainer from '../index_components/MapboxGeocoderContainer'
