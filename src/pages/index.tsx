@@ -9,7 +9,7 @@ import ImageExplain from '../index_components/ImageExplain'
 import { useSelector, useDispatch } from 'react-redux'
 import { decrement, increment, selectValue } from '../slices/counterSlice'
 
-export default function Home() {
+export default function Home() {//
   const TOKEN =
     'pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtrcGNwdXQwNm1oM2xvZTJ5Z2Q4djk5In0._rw_aFaBfUjQC-tjkV53Aw'
   
