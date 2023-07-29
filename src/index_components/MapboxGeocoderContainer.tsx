@@ -36,13 +36,19 @@ const MapboxGeocoderContainer: React.FC<MapboxGeocoderContainerProps> = ({
       </div>
       <style jsx>
         {`
-          .mapboxgl-ctrl-geocoder {
+          .mapboxgl-ctrl-geocoder.mapboxgl-ctrl {
             min-width: 400px;
             background-color: red;
           }
           .test-css {
             background-color: red;
           }
+          .mapboxgl-ctrl-geocoder--input {
+            width: 400px;
+          }
+          .mapboxgl-ctrl-geocoder {
+    width: 1000px !important;
+}
         `}
       </style>
     </div>

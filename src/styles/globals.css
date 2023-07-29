@@ -57,3 +57,7 @@ a {
 ::-webkit-scrollbar-thumb:active {
   background-color: #999;
 }
+
+.mapboxgl-ctrl-geocoder {
+  width: 500px !important;
+}
