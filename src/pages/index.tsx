@@ -6,6 +6,7 @@ import MapboxGeocoderContainer from '../index_components/MapboxGeocoderContainer
 import MainTitle from '../index_components/MainTitle'
 import TitleImage from '../index_components/TitleImage'
 import ImageExplain from '../index_components/ImageExplain'
+import {Footer} from '../footer/Footer'
 import { useSelector, useDispatch } from 'react-redux'
 import { decrement, increment, selectValue } from '../slices/counterSlice'
 
@@ -51,7 +52,7 @@ export default function Home() {
           image={''}
         ></ImageExplain>
       </main>
-
+      <Footer></Footer>
       {/* Footer section */}
     </div>
   )
