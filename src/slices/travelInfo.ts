@@ -15,7 +15,7 @@ const initialState: TravelInfoState = {
 }
 
 export const travelInfoSlice = createSlice({
-  name: 'city',
+  name: 'travelInfo',
   initialState,
   reducers: {
     setCity: (state, action: PayloadAction<string>) => {

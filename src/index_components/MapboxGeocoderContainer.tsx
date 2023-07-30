@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder'
 import { setCity, selectCity } from '../slices/travelInfo'
 import { useSelector, useDispatch } from 'react-redux'
+import router from 'next/router'
 
 interface MapboxGeocoderContainerProps {
   accessToken: string
@@ -29,8 +30,7 @@ const MapboxGeocoderContainer: React.FC<MapboxGeocoderContainerProps> = ({
         dispatch(setCity(event.result.place_name))
         console.log('city', city)
 
-        const targetUrl = '/search'
-        window.location.href = targetUrl
+        router.push('/search')
       })
       geocoder.addTo(containerRef.current)
     }
