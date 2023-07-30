@@ -6,6 +6,16 @@ import MyNavbar from '../search_components/MyNavbar'
 import router from 'next/router'
 import SearchHero from '../search_components/SearchHero'
 
+import { useSelector, useDispatch } from 'react-redux'
+import {
+  setCity,
+  setCompanion,
+  setTravelStyle,
+  selectCity,
+  selectCompanion,
+  selectTravelStyle,
+} from '../slices/travelInfo'
+
 const TravelTitle = () => (
   <div className="text-center py-20 sm:py-30 md:py-40 bg-indigo-400 rounded-tl-xl rounded-tr-xl">
     <h1 className="text-lg sm:text-xl md:text-3xl font-extrabold tracking-tight text-white">
@@ -170,6 +180,10 @@ const TravelStyles = () => {
 }
 
 export default function HomePage() {
+  // Redux 테스트
+  const city = useSelector(selectCity)
+  const dispatch = useDispatch()
+
   return (
     <div>
       <Head>
@@ -186,7 +200,16 @@ export default function HomePage() {
           <div className="relative m-5 p-5 inset-0 flex-auto justify-center text-center bg-indigo">
             <button
               className="w-full text-base sm:text-lg md:text-xl text-white font-bold py-4 px-20 rounded-xl bg-indigo-400 hover:bg-indigo-700 focus:outline-none"
-              onClick={() => router.push('/travel')}
+              onClick={async () => {
+                // TODO : redux에 저장하는 코드
+                dispatch(setCompanion(''))
+                dispatch(setTravelStyle([]))
+                const res = await fetch('http://localhost:3000/api/hello')
+                const data = await res.json()
+                console.log(data)
+
+                router.push('/travel')
+              }}
             >
               여행하러 가기
             </button>
