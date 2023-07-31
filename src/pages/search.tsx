@@ -86,10 +86,10 @@ export default function SearchPage() {
                 dispatch(setCompanion(selectedCompanion))
                 dispatch(setTravelStyle(selectedStyles))
                 dispatch(setDuration(travelDuration))
-                // const res = await fetch('http://localhost:3000/api/travel')
-                // const data = await res.json()
-                // console.log('API 응답 : ')
-                // console.log(data)
+                const res = await fetch('http://localhost:3000/api/travelInfo')
+                const data = await res.json()
+                console.log('API 응답 : ')
+                console.log(data)
 
                 router.push('/travel')
               }}
