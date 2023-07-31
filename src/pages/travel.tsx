@@ -32,15 +32,19 @@ const TravelCoursePage = () => {
         "Sydney Opera House is a multi-venue performing arts centre at Sydney Harbour in Sydney, New South Wales, Australia. It is one of the 20th century's most famous and distinctive buildings.",
     },
   ]
-  const [selectedAttraction, setSelectedAttraction] = useState<Attraction>(attractions[0]);
+  const [selectedAttraction, setSelectedAttraction] = useState<Attraction | null>(null);
 
-  const handleAttractionClick = (tempAttraction : Attraction) => {
-    setSelectedAttraction(tempAttraction);
+  const handleAttraction = (attraction: Attraction | null) => {
+    if (attraction === selectedAttraction) {
+      setSelectedAttraction(null);
+    } else {
+      setSelectedAttraction(attraction);
+    }
   };
 
   return (
     <div className="flex h-screen">
-      <Guide attractions={attractions} onhandleAttraction={handleAttractionClick}></Guide>
+      <Guide attractions={attractions} onhandleAttraction={handleAttraction} selectedAttraction={selectedAttraction}></Guide>
       <TravelMap attractionInfo={selectedAttraction}></TravelMap>
     </div>
   )

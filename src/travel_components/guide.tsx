@@ -7,13 +7,20 @@ import { selectCity, selectDuration } from '../slices/travelInfo'
 import { Attraction } from '../interfaces/attraction'
 
 interface GuideProps {
-  onhandleAttraction: (attraction: Attraction) => void;
+  onhandleAttraction: (attraction: Attraction | null) => void;
   attractions: Attraction[];
+  selectedAttraction : Attraction | null;
 }
 
 const Guide = (props: GuideProps) => {
-  const handleAttraction = (attraction : Attraction) => {
-    props.onhandleAttraction(attraction);
+  const handleAttraction = (attraction: Attraction) => {
+    if (attraction.toString() == props.selectedAttraction?.toString()) {
+      props.onhandleAttraction(null); // 이미 선택된 관광명소를 누르면 null 값 반환
+      console.log("null")
+    } else {
+      props.onhandleAttraction(attraction); // 관광명소 선택
+      console.log(attraction)
+    }
   };
 
   const [activeTab, setActiveTab] = useState(0)

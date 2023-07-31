@@ -14,7 +14,7 @@ import ChatScreen from './ChatScreen'
 import { Attraction } from '../interfaces/attraction'
 
 interface TravelMapProps {
-  attractionInfo: Attraction;
+  attractionInfo: Attraction | null ;
 }
 
 const TravelMap = (props: TravelMapProps) => {
@@ -27,6 +27,7 @@ const TravelMap = (props: TravelMapProps) => {
     setShowChat(true)
   }
   const coordinate = useSelector(selectCoordinate)
+  console.log(props.attractionInfo)
 
   return (
     <div className="flex-grow">
@@ -39,7 +40,6 @@ const TravelMap = (props: TravelMapProps) => {
         </button>
             <h2>{props.attractionInfo.name}</h2>
             <p>{props.attractionInfo.description}</p>
-            {/* ... */}
           </>
         ) : (
           null
