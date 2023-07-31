@@ -1,4 +1,4 @@
-import DraggableScrollbar from '../utils/DraggableScrollbar'
+import DraggableScrollbar from './DraggableScrollbar'
 
 const TabMenu: React.FC<{
   tabs: string[]

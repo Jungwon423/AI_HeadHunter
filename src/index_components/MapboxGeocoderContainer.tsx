@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder'
-import { setCity, selectCity } from '../slices/travelInfo'
+import { setCity, selectCity, setCoordinate } from '../slices/travelInfo'
 import { useSelector, useDispatch } from 'react-redux'
 import router from 'next/router'
 
@@ -12,7 +12,8 @@ const MapboxGeocoderContainer: React.FC<MapboxGeocoderContainerProps> = ({
   accessToken,
 }) => {
   // Redux
-  const city = useSelector(selectCity)
+  let city = useSelector(selectCity)
+  console.log(city)
   const dispatch = useDispatch()
 
   const containerRef = useRef<HTMLDivElement>(null)
@@ -28,8 +29,8 @@ const MapboxGeocoderContainer: React.FC<MapboxGeocoderContainerProps> = ({
         console.log('Selected place:', event.result)
         // Call your callback function here, passing the selected place as a parameter
         dispatch(setCity(event.result.place_name))
-        console.log('city', city)
-
+        dispatch(setCoordinate(event.result.center))
+        console.log('city : ', city)
         router.push('/search')
       })
       geocoder.addTo(containerRef.current)
@@ -38,7 +39,7 @@ const MapboxGeocoderContainer: React.FC<MapboxGeocoderContainerProps> = ({
 
   return (
     <div>
-      <div className="mt-8 flex justify-center items-center">
+      <div className="mt-2s flex justify-center items-center">
         <div ref={containerRef}></div>
       </div>
     </div>

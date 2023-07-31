@@ -44,7 +44,7 @@ const Footer = () => (
           <Link href="/">About</Link>
         </li>
         <li className="px-5">
-          <Link href="/">Docs</Link>
+          <Link href="/travel">Travel</Link>
         </li>
       </CenteredFooter>
     </Section>

@@ -2,6 +2,8 @@ import { useState } from 'react'
 import Image from 'next/legacy/image'
 import TabMenu from './TabMenu'
 import TravelNavbar from './TravelNavbar'
+import { useSelector } from 'react-redux'
+import { selectCity, selectDuration } from '../slices/travelInfo'
 
 const attractions = [
   {
@@ -34,15 +36,21 @@ const attractions = [
 
 const Guide = () => {
   const [activeTab, setActiveTab] = useState(0)
-  const tabs = [
-    '여행 요약',
-    '1일차',
-    '2일차',
-    '3일차',
-    '4일차',
-    '5일차',
-    '6일차',
-  ] // 실제 데이터로 대체
+  
+  const city = useSelector(selectCity)
+  const duration = useSelector(selectDuration)
+
+  const createTabs = (days: number) => {
+    const tabs = ["여행 요약"];
+
+    for (let i = 1; i <= days; i++) {
+      tabs.push(`${i}일차`);
+    }
+
+    return tabs;
+  };
+
+  const tabs = createTabs(duration);
 
   return (
     <div className="flex-col max-w-lg overflow-y-auto">
@@ -83,13 +91,13 @@ const Guide = () => {
                 ></Image>
                 <div className="w-16 px-1 py-1 rounded-md bg-indigo-500 flex items-center text-center ">
                   <span className="flex text-center text-white text-xs ml-2">
-                    2박 3일
+                    {duration-1}박 {duration}일
                   </span>
                 </div>
               </div>
               <div className="flex-col px-5">
                 <div className="flex-col mb-2 text-sm sm:text-base md:text-xl">
-                  · 여행지역 : Los Angeles
+                  · 여행지역 : {city}
                 </div>
                 <div className="flex text-sm sm:text-base md:text-xl">
                   · 총 이동거리 12km

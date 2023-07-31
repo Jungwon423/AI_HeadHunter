@@ -1,3 +1,6 @@
+import {selectCity, selectCoordinate, setCity } from '../slices/travelInfo'
+import { useSelector, useDispatch } from 'react-redux'
+
 import Map, {
   Marker,
   Popup,
@@ -18,6 +21,7 @@ const TravelMap = () => {
   const handleChatClick = () => {
     setShowChat(true)
   }
+  const coordinate = useSelector(selectCoordinate)
 
   return (
     <div className="flex-grow">
@@ -35,8 +39,8 @@ const TravelMap = () => {
       </div>
       <Map
         initialViewState={{
-          longitude: -79.4512,
-          latitude: 43.6568,
+          longitude: coordinate[0],
+          latitude: coordinate[1],
           zoom: 13,
         }}
         mapStyle="mapbox://styles/zigdeal/clkjl2a7y001401r27iv81iw2"
