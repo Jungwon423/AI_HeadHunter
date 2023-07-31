@@ -4,37 +4,18 @@ import TabMenu from './TabMenu'
 import TravelNavbar from './TravelNavbar'
 import { useSelector } from 'react-redux'
 import { selectCity, selectDuration } from '../slices/travelInfo'
+import { Attraction } from '../interfaces/attraction'
 
-const attractions = [
-  {
-    name: '자유의 여신상',
-    image: '/assets/images/statue-of-liberty.jpg',
-    latitude: 40.6892,
-    longitude: -74.0445,
-    time: 15,
-    description: '자유의 여신상은 유명해요',
-  },
-  {
-    name: 'Eiffel Tower',
-    image: '/assets/images/eiffel-tower.webp',
-    latitude: 48.8584,
-    longitude: 2.2945,
-    time: 30,
-    description:
-      'The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris, France. It is named after the engineer Gustave Eiffel, whose company designed and built the tower.',
-  },
-  {
-    name: 'Sydney Opera House',
-    image: '/assets/images/sydney-opera-house.jpg',
-    latitude: -33.8568,
-    longitude: 151.2153,
-    time: 45,
-    description:
-      "Sydney Opera House is a multi-venue performing arts centre at Sydney Harbour in Sydney, New South Wales, Australia. It is one of the 20th century's most famous and distinctive buildings.",
-  },
-]
+interface GuideProps {
+  onhandleAttraction: (attraction: Attraction) => void;
+  attractions: Attraction[];
+}
 
-const Guide = () => {
+const Guide = (props: GuideProps) => {
+  const handleAttraction = (attraction : Attraction) => {
+    props.onhandleAttraction(attraction);
+  };
+
   const [activeTab, setActiveTab] = useState(0)
   
   const city = useSelector(selectCity)
@@ -132,9 +113,9 @@ const Guide = () => {
         </div>
       </div>
       <div className="flex flex-col justify-center">
-        {attractions.map((attraction) => (
+        {props.attractions.map((attraction) => (
           <div key={attraction.name} className="w-full ml-10 justify-center">
-            <button className="h-56 rounded-xl px-5 my-8 flex-col bg-gray-50 shadow-lg hover:shadow-2xl">
+            <button className="h-56 rounded-xl px-5 my-8 flex-col bg-gray-50 shadow-lg hover:shadow-2xl" onClick={()=>handleAttraction(attraction)}>
               <h2 className="flex text-start text-lg font-bold mt-2 p-2">
                 {attraction.name}
               </h2>

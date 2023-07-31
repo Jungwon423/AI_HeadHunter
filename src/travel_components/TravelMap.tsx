@@ -11,8 +11,13 @@ import Map, {
 } from 'react-map-gl'
 import { useState } from 'react'
 import ChatScreen from './ChatScreen'
+import { Attraction } from '../interfaces/attraction'
 
-const TravelMap = () => {
+interface TravelMapProps {
+  attractionInfo: Attraction;
+}
+
+const TravelMap = (props: TravelMapProps) => {
   const TOKEN =
     'pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtrcGNwdXQwNm1oM2xvZTJ5Z2Q4djk5In0._rw_aFaBfUjQC-tjkV53Aw'
 
@@ -25,6 +30,22 @@ const TravelMap = () => {
 
   return (
     <div className="flex-grow">
+      <div className="travel-map">
+      <div className="container">
+        {props.attractionInfo!=null ? (
+          <>
+          <button className="close-button">
+          X
+        </button>
+            <h2>{props.attractionInfo.name}</h2>
+            <p>{props.attractionInfo.description}</p>
+            {/* ... */}
+          </>
+        ) : (
+          null
+        )}
+      </div>
+    </div>
       <div className="absolute bottom-8 right-8 z-10">
         {!showChat && (
           <button
