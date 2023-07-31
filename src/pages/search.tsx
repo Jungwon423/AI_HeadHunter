@@ -204,7 +204,7 @@ export default function HomePage() {
                 // TODO : redux에 저장하는 코드
                 dispatch(setCompanion(''))
                 dispatch(setTravelStyle([]))
-                const res = await fetch('http://localhost:3000/api/travel')
+                const res = await fetch('http://localhost:3000/api/travelInfo')
                 const data = await res.json()
                 console.log('API 응답 : ')
                 console.log(data)
