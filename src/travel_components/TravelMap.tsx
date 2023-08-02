@@ -1,11 +1,11 @@
 import {
   placeInfo,
-  selectCity,
   selectCoordinate,
   selectTravelSchedule,
-  setCity,
 } from '../slices/travelInfoSlice'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { selectShowChat, setShowChat } from '../slices/travelChatSlice'
+import { useDispatch } from 'react-redux'
 
 import Map, {
   Marker,
@@ -18,50 +18,35 @@ import Map, {
 import { useState } from 'react'
 import ChatScreen from './ChatScreen'
 import { Attraction } from '../interfaces/attraction'
+import Pin from './Pin'
+import TravelChat from './TravelChat'
 
 interface TravelMapProps {
   attractionInfo: Attraction | null
 }
 
 const TravelMap = (props: TravelMapProps) => {
-  const placeList: placeInfo[] = useSelector(selectTravelSchedule)?.get(1) || []
+  const showChat = useSelector(selectShowChat)
+
+  const dispatch = useDispatch()
+
+  const [selectedPlace, setSelectedPlace] = useState<placeInfo | null>(null)
+
+  const placeList: placeInfo[] = useSelector(selectTravelSchedule)?.get(2) || []
+
+  console.log(useSelector(selectTravelSchedule).get(2))
+
+  console.log('selectedPlace')
+  console.log(selectedPlace)
 
   const TOKEN =
     'pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtrcGNwdXQwNm1oM2xvZTJ5Z2Q4djk5In0._rw_aFaBfUjQC-tjkV53Aw'
 
-  const [showChat, setShowChat] = useState(false)
-
-  const handleChatClick = () => {
-    setShowChat(true)
-  }
   const coordinate = useSelector(selectCoordinate)
-  console.log(props.attractionInfo)
 
   return (
     <div className="flex-grow">
-      <div className="travel-map">
-        <div className="container">
-          {props.attractionInfo != null ? (
-            <>
-              <button className="close-button">X</button>
-              <h2>{props.attractionInfo.name}</h2>
-              <p>{props.attractionInfo.description}</p>
-            </>
-          ) : null}
-        </div>
-      </div>
-      <div className="absolute bottom-8 right-8 z-10">
-        {!showChat && (
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 md:py-3 px-4 md:px-10 rounded-xl shadow"
-            onClick={handleChatClick}
-          >
-            <div className="text-base sm:text-lg md:text-xl">
-              Trippy AI에게 더 물어보기
-            </div>
-          </button>
-        )}
-      </div>
+      <TravelChat></TravelChat>
       <Map
         initialViewState={{
           longitude: coordinate[0],
@@ -75,8 +60,35 @@ const TravelMap = (props: TravelMapProps) => {
         <FullscreenControl position="top-left" />
         <NavigationControl position="top-left" />
         <ScaleControl />
+        {placeList.map((place, i) => (
+          <Marker
+            key={i}
+            latitude={place.coordinate[0]}
+            longitude={place.coordinate[1]}
+            onClick={(e) => {
+              e.originalEvent.stopPropagation()
+              setSelectedPlace(place)
+              console.log('Marker Clicked')
+              console.log(place)
+            }}
+          >
+            <Pin></Pin>
+          </Marker>
+        ))}
+        {selectedPlace && (
+          <Popup
+            anchor="top"
+            latitude={selectedPlace.coordinate[0]}
+            longitude={selectedPlace.coordinate[1]}
+            onClose={() => {
+              setSelectedPlace(null)
+            }}
+          >
+            <div>{selectedPlace.name}</div>
+          </Popup>
+        )}
       </Map>
-      {showChat && <ChatScreen onClose={() => setShowChat(false)} />}
+      {showChat && <ChatScreen onClose={() => dispatch(setShowChat(false))} />}
     </div>
   )
 }

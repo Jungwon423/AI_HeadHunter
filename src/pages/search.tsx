@@ -101,7 +101,7 @@ export default function SearchPage() {
                         [
                           {
                             name: '오사카 성',
-                            coordinate: [135.502, 34.6936],
+                            coordinate: [34.6936, 135.502],
                           } as placeInfo,
                         ],
                       ],
