@@ -3,42 +3,42 @@ import Image from 'next/legacy/image'
 import TabMenu from './TabMenu'
 import TravelNavbar from './TravelNavbar'
 import { useSelector } from 'react-redux'
-import { selectCity, selectDuration } from '../slices/travelInfo'
+import { selectCity, selectDuration } from '../slices/travelInfoSlice'
 import { Attraction } from '../interfaces/attraction'
 
 interface GuideProps {
-  onhandleAttraction: (attraction: Attraction | null) => void;
-  attractions: Attraction[];
-  selectedAttraction : Attraction | null;
+  onhandleAttraction: (attraction: Attraction | null) => void
+  attractions: Attraction[]
+  selectedAttraction: Attraction | null
 }
 
 const Guide = (props: GuideProps) => {
   const handleAttraction = (attraction: Attraction) => {
     if (attraction.toString() == props.selectedAttraction?.toString()) {
-      props.onhandleAttraction(null); // 이미 선택된 관광명소를 누르면 null 값 반환
-      console.log("null")
+      props.onhandleAttraction(null) // 이미 선택된 관광명소를 누르면 null 값 반환
+      console.log('null')
     } else {
-      props.onhandleAttraction(attraction); // 관광명소 선택
+      props.onhandleAttraction(attraction) // 관광명소 선택
       console.log(attraction)
     }
-  };
+  }
 
   const [activeTab, setActiveTab] = useState(0)
-  
+
   const city = useSelector(selectCity)
   const duration = useSelector(selectDuration)
 
   const createTabs = (days: number) => {
-    const tabs = ["여행 요약"];
+    const tabs = ['여행 요약']
 
     for (let i = 1; i <= days; i++) {
-      tabs.push(`${i}일차`);
+      tabs.push(`${i}일차`)
     }
 
-    return tabs;
-  };
+    return tabs
+  }
 
-  const tabs = createTabs(duration);
+  const tabs = createTabs(duration)
 
   return (
     <div className="flex-col max-w-lg overflow-y-auto">
@@ -79,7 +79,7 @@ const Guide = (props: GuideProps) => {
                 ></Image>
                 <div className="w-16 px-1 py-1 rounded-md bg-indigo-500 flex items-center text-center ">
                   <span className="flex text-center text-white text-xs ml-2">
-                    {duration-1}박 {duration}일
+                    {duration - 1}박 {duration}일
                   </span>
                 </div>
               </div>
@@ -122,7 +122,10 @@ const Guide = (props: GuideProps) => {
       <div className="flex flex-col justify-center">
         {props.attractions.map((attraction) => (
           <div key={attraction.name} className="w-full ml-10 justify-center">
-            <button className="h-56 rounded-xl px-5 my-8 flex-col bg-gray-50 shadow-lg hover:shadow-2xl" onClick={()=>handleAttraction(attraction)}>
+            <button
+              className="h-56 rounded-xl px-5 my-8 flex-col bg-gray-50 shadow-lg hover:shadow-2xl"
+              onClick={() => handleAttraction(attraction)}
+            >
               <h2 className="flex text-start text-lg font-bold mt-2 p-2">
                 {attraction.name}
               </h2>

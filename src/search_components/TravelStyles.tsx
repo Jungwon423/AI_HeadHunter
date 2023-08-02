@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import TravelButton from './TravelButton';
+import { useState } from 'react'
+import TravelButton from './TravelButton'
 
 type ITravelStylesProps = {
-  selectedStyles: string[];
-  onStylesClick: (style: string) => void;
-  onRemoveStyle: (style: string) => void;
-};
+  selectedStyles: string[]
+  onStylesClick: (style: string) => void
+  onRemoveStyle: (style: string) => void
+}
 
 const TravelStyles = (props: ITravelStylesProps) => {
   const styles = [
@@ -17,14 +17,14 @@ const TravelStyles = (props: ITravelStylesProps) => {
     '문화·예술·역사',
     '관광보다 먹방',
     '쇼핑은 열정적으로',
-  ];
+  ]
 
   const handleStylesClick = (style: string) => {
-    props.onStylesClick(style);
-  };
+    props.onStylesClick(style)
+  }
   const removeStyle = (style: string) => {
-    props.onRemoveStyle(style);
-  };
+    props.onRemoveStyle(style)
+  }
 
   return (
     <div className="text-center">
@@ -79,7 +79,7 @@ const TravelStyles = (props: ITravelStylesProps) => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export { TravelStyles };
+export { TravelStyles }

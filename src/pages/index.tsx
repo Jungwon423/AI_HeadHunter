@@ -19,7 +19,6 @@ export default function Home() {
   const dispatch = useDispatch()
 
   return (
-    
     <div className="bg-white min-h-screen">
       {/* Head section */}
       <Head>

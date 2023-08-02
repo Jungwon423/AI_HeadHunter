@@ -10,7 +10,9 @@ import {
   setCompanion,
   setTravelStyle,
   setDuration,
-} from '../slices/travelInfo'
+  setTravelSchedule,
+  placeInfo,
+} from '../slices/travelInfoSlice'
 import { TravelStyles } from '../search_components/TravelStyles'
 import { TravelCompanion } from '../search_components/TravelCompanion'
 import TravelDuration from '../search_components/TravelDuration'
@@ -29,18 +31,18 @@ export default function SearchPage() {
 
   const [travelDuration, setTravelDuration] = useState<number>(0)
   const handleDurationChange = (value: number) => {
-    setTravelDuration(value);
-    console.log(`여행 기간: ${value}일`);
-  };
+    setTravelDuration(value)
+    console.log(`여행 기간: ${value}일`)
+  }
 
-  const [selectedCompanion, setSelectedCompanion] = useState<string>("");
+  const [selectedCompanion, setSelectedCompanion] = useState<string>('')
   const handleCompanionClick = (companion: string) => {
     if (selectedCompanion === companion) {
-      setSelectedCompanion("");
+      setSelectedCompanion('')
     } else {
-      setSelectedCompanion(companion);
+      setSelectedCompanion(companion)
     }
-  };
+  }
 
   const [selectedStyles, setSelectedStyles] = useState<string[]>([])
   const handleStylesClick = (style: string) => {
@@ -65,16 +67,16 @@ export default function SearchPage() {
       <div className="absolute top-80 sm:top-80 md:top-96 inset-20 justify-center items-center">
         <div className="bg-white min-w-4xl max-w-7xl rounded-xl shadow-xl">
           <TravelTitle />
-          <TravelDuration
-          onDurationChange={handleDurationChange} />
-          <TravelCompanion selectedCompanion={selectedCompanion}
-        onCompanionClick={handleCompanionClick}
-        />
+          <TravelDuration onDurationChange={handleDurationChange} />
+          <TravelCompanion
+            selectedCompanion={selectedCompanion}
+            onCompanionClick={handleCompanionClick}
+          />
           <TravelStyles
-        selectedStyles={selectedStyles}
-        onStylesClick={handleStylesClick}
-        onRemoveStyle={removeStyle}
-      />
+            selectedStyles={selectedStyles}
+            onStylesClick={handleStylesClick}
+            onRemoveStyle={removeStyle}
+          />
           <div className="relative m-5 p-5 inset-0 flex-auto justify-center text-center bg-indigo">
             <button
               className="w-full text-base sm:text-lg md:text-xl text-white font-bold py-4 px-20 rounded-xl bg-indigo-400 hover:bg-indigo-700 focus:outline-none"
@@ -90,6 +92,22 @@ export default function SearchPage() {
                 const data = await res.json()
                 console.log('API 응답 : ')
                 console.log(data)
+
+                dispatch(
+                  setTravelSchedule(
+                    new Map([
+                      [
+                        1,
+                        [
+                          {
+                            name: '오사카 성',
+                            coordinate: [135.502, 34.6936],
+                          } as placeInfo,
+                        ],
+                      ],
+                    ]),
+                  ),
+                )
 
                 router.push('/travel')
               }}

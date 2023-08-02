@@ -1,24 +1,24 @@
-import TravelButton from './TravelButton';
+import TravelButton from './TravelButton'
 
 type ITravelCompanionProps = {
-  selectedCompanion: string;
-  onCompanionClick: (style: string) => void;
-};
+  selectedCompanion: string
+  onCompanionClick: (style: string) => void
+}
 
 const TravelCompanion = (props: ITravelCompanionProps) => {
   const companions = [
-    "혼자",
-    "친구와",
-    "연인과",
-    "아이들과",
-    "부모님과",
-    "배우자와",
-    "기타",
-  ];
+    '혼자',
+    '친구와',
+    '연인과',
+    '아이들과',
+    '부모님과',
+    '배우자와',
+    '기타',
+  ]
 
   const handleCompanionClick = (style: string) => {
-    props.onCompanionClick(style);
-  };
+    props.onCompanionClick(style)
+  }
 
   return (
     <div className="text-center py-20">
@@ -31,8 +31,8 @@ const TravelCompanion = (props: ITravelCompanionProps) => {
             <TravelButton
               className={`m-2 text-xs sm:text-sm md:text-base ${
                 props.selectedCompanion === companion
-                  ? "bg-gray-500 text-white"
-                  : "bg-gray-200 text-gray-700"
+                  ? 'bg-gray-500 text-white'
+                  : 'bg-gray-200 text-gray-700'
               }`}
               onClick={() => handleCompanionClick(companion)}
             >
@@ -42,7 +42,7 @@ const TravelCompanion = (props: ITravelCompanionProps) => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export { TravelCompanion };
+export { TravelCompanion }

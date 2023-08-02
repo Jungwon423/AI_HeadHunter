@@ -1,4 +1,10 @@
-import {selectCity, selectCoordinate, setCity } from '../slices/travelInfo'
+import {
+  placeInfo,
+  selectCity,
+  selectCoordinate,
+  selectTravelSchedule,
+  setCity,
+} from '../slices/travelInfoSlice'
 import { useSelector, useDispatch } from 'react-redux'
 
 import Map, {
@@ -14,10 +20,12 @@ import ChatScreen from './ChatScreen'
 import { Attraction } from '../interfaces/attraction'
 
 interface TravelMapProps {
-  attractionInfo: Attraction | null ;
+  attractionInfo: Attraction | null
 }
 
 const TravelMap = (props: TravelMapProps) => {
+  const placeList: placeInfo[] = useSelector(selectTravelSchedule)?.get(1) || []
+
   const TOKEN =
     'pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtrcGNwdXQwNm1oM2xvZTJ5Z2Q4djk5In0._rw_aFaBfUjQC-tjkV53Aw'
 
@@ -32,20 +40,16 @@ const TravelMap = (props: TravelMapProps) => {
   return (
     <div className="flex-grow">
       <div className="travel-map">
-      <div className="container">
-        {props.attractionInfo!=null ? (
-          <>
-          <button className="close-button">
-          X
-        </button>
-            <h2>{props.attractionInfo.name}</h2>
-            <p>{props.attractionInfo.description}</p>
-          </>
-        ) : (
-          null
-        )}
+        <div className="container">
+          {props.attractionInfo != null ? (
+            <>
+              <button className="close-button">X</button>
+              <h2>{props.attractionInfo.name}</h2>
+              <p>{props.attractionInfo.description}</p>
+            </>
+          ) : null}
+        </div>
       </div>
-    </div>
       <div className="absolute bottom-8 right-8 z-10">
         {!showChat && (
           <button
@@ -62,7 +66,7 @@ const TravelMap = (props: TravelMapProps) => {
         initialViewState={{
           longitude: coordinate[0],
           latitude: coordinate[1],
-          zoom: 13,
+          zoom: 12,
         }}
         mapStyle="mapbox://styles/zigdeal/clkjl2a7y001401r27iv81iw2"
         mapboxAccessToken={TOKEN}

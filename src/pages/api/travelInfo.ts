@@ -9,8 +9,6 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Travel[]>,
 ) {
-    const travelList: Travel[] = [
-        
-    ]
+  const travelList: Travel[] = []
   res.status(200).json(travelList)
 }

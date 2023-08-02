@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import counterReducer from './slices/counterSlice'
-import travelInfoReducer from './slices/travelInfo'
+import travelInfoReducer from './slices/travelInfoSlice'
 
 export const store = configureStore({
   reducer: {

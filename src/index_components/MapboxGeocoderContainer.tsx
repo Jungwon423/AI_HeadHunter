@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder'
-import { setCity, selectCity, setCoordinate } from '../slices/travelInfo'
+import { setCity, selectCity, setCoordinate } from '../slices/travelInfoSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import router from 'next/router'
 
