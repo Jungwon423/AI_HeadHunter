@@ -113,8 +113,7 @@ const Guide = () => {
         </div>
       </div>
       <div className="flex flex-col justify-center">
-        {useSelector(selectTravelSchedule)
-          ?.get(1)
+        {useSelector(selectTravelSchedule)[1]
           ?.map((placeInfo) => (
             <div key={placeInfo.name} className="w-full ml-10 justify-center">
               <button

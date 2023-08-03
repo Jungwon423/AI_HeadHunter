@@ -29,9 +29,7 @@ const TravelMap = () => {
 
   const selectedPlace = useSelector(selectCurrentPlace)
 
-  const placeList: placeInfo[] = useSelector(selectTravelSchedule)?.get(2) || []
-
-  console.log(useSelector(selectTravelSchedule).get(2))
+  const placeList: placeInfo[] = useSelector(selectTravelSchedule)[1] || []
 
   const TOKEN =
     'pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtrcGNwdXQwNm1oM2xvZTJ5Z2Q4djk5In0._rw_aFaBfUjQC-tjkV53Aw'
