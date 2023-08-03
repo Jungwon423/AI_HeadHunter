@@ -3,6 +3,7 @@ import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder'
 import { setCity, selectCity, setCoordinate } from '../slices/travelInfoSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import router from 'next/router'
+import LocalStorage from './LocalStorage'
 
 interface MapboxGeocoderContainerProps {
   accessToken: string
@@ -30,7 +31,20 @@ const MapboxGeocoderContainer: React.FC<MapboxGeocoderContainerProps> = ({
         // Call your callback function here, passing the selected place as a parameter
         dispatch(setCity(event.result.place_name))
         dispatch(setCoordinate(event.result.center))
-        console.log('city : ', city)
+
+        // local storage 에서 tempId 가져오기
+        let tempId : string;
+
+        if (LocalStorage.getItem('tempId') == null) {
+          let randomStr: string = Math.random().toString(36).substring(2, 12);
+          console.log('randomStr : ', randomStr)
+          LocalStorage.setItem('tempId', randomStr)
+          tempId = randomStr
+        }
+        else {
+          tempId = LocalStorage.getItem('tempId')! // null check
+        }
+
         router.push('/search')
       })
       geocoder.addTo(containerRef.current)

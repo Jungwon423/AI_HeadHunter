@@ -18,9 +18,9 @@ export default function MyNavbar() {
           </div>
         </button>
         <div className="flex items-center">
-          <button className="bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600">
+          {/* <button className="bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600">
             회원가입
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
