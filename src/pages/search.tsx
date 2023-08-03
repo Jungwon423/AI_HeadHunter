@@ -16,9 +16,10 @@ import {
 import { TravelStyles } from '../search_components/TravelStyles'
 import { TravelCompanion } from '../search_components/TravelCompanion'
 import TravelDuration from '../search_components/TravelDuration'
+import TravelBudget from '../search_components/TravelBudget'
 
 const TravelTitle = () => (
-  <div className="text-center py-20 sm:py-30 md:py-40 bg-indigo-400 rounded-tl-xl rounded-tr-xl">
+  <div className="text-center py-10 sm:py-15 md:py-20 bg-indigo-400 rounded-tl-xl rounded-tr-xl">
     <h1 className="text-lg sm:text-xl md:text-3xl font-extrabold tracking-tight text-white">
       어떤 스타일의 여행을 할 계획인가요?
     </h1>
@@ -56,6 +57,11 @@ export default function SearchPage() {
     setSelectedStyles(selectedStyles.filter((c) => c !== style))
   }
 
+  const [selectedBudget, setSelectedBudget] = useState<number>(0)
+  const handleBudget = (budget: number) => {
+    setSelectedBudget(budget)
+  }
+
   return (
     <div>
       <Head>
@@ -72,27 +78,29 @@ export default function SearchPage() {
             selectedCompanion={selectedCompanion}
             onCompanionClick={handleCompanionClick}
           />
-          <TravelStyles
+          {/* <TravelStyles
             selectedStyles={selectedStyles}
             onStylesClick={handleStylesClick}
             onRemoveStyle={removeStyle}
-          />
+          /> */}
+          <TravelBudget onBudgetChange={handleBudget}></TravelBudget>
           <div className="relative m-5 p-5 inset-0 flex-auto justify-center text-center bg-indigo">
             <button
               className="w-full text-base sm:text-lg md:text-xl text-white font-bold py-4 px-20 rounded-xl bg-indigo-400 hover:bg-indigo-700 focus:outline-none"
               onClick={async () => {
                 // TODO : redux에 저장하는 코드
-                console.log(selectedStyles)
-                console.log(selectedCompanion)
-                console.log(travelDuration)
+                console.log('selectedStyles : ' + selectedStyles)
+                console.log('selectedCompanion : ' + selectedCompanion)
+                console.log('travelDuration : ' + travelDuration)
                 dispatch(setCompanion(selectedCompanion))
                 dispatch(setTravelStyle(selectedStyles))
                 dispatch(setDuration(travelDuration))
-                const res = await fetch('http://localhost:3000/api/travelInfo')
-                const data = await res.json()
-                console.log('API 응답 : ')
-                console.log(data)
-                router.push('/travel')
+                console.log('selectedBudget : ' + selectedBudget)
+                // const res = await fetch('http://localhost:3000/api/travelInfo')
+                // const data = await res.json()
+                // console.log('API 응답 : ')
+                // console.log(data)
+                // router.push('/travel')
               }}
             >
               여행하러 가기

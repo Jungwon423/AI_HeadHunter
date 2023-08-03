@@ -27,7 +27,6 @@ export default function Home() {
 
       {/* Main content section */}
       <main className="w-3/4 mx-auto py-16 px-4 sm:px-6 lg:px-8">
-
         <MainTitle></MainTitle>
 
         <MapboxGeocoderContainer accessToken={TOKEN} />

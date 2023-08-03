@@ -21,7 +21,7 @@ const TravelCompanion = (props: ITravelCompanionProps) => {
   }
 
   return (
-    <div className="text-center py-20">
+    <div className="text-center py-50">
       <h2 className="text-lg sm:text-xl md:text-2xl font-extrabold tracking-tight text-gray-900">
         누구와 함께 가시나요?
       </h2>
