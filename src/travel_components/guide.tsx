@@ -2,26 +2,19 @@ import { useState } from 'react'
 import Image from 'next/legacy/image'
 import TabMenu from './TabMenu'
 import TravelNavbar from './TravelNavbar'
-import { useSelector } from 'react-redux'
-import { selectCity, selectDuration } from '../slices/travelInfoSlice'
+import { useSelector, useDispatch } from 'react-redux'
+import {
+  selectCity,
+  selectDuration,
+  placeInfo,
+  selectCoordinate,
+  selectTravelSchedule,
+  handleCurrentPlace,
+} from '../slices/travelInfoSlice'
 import { Attraction } from '../interfaces/attraction'
 
-interface GuideProps {
-  onhandleAttraction: (attraction: Attraction | null) => void
-  attractions: Attraction[]
-  selectedAttraction: Attraction | null
-}
-
-const Guide = (props: GuideProps) => {
-  const handleAttraction = (attraction: Attraction) => {
-    if (attraction.toString() == props.selectedAttraction?.toString()) {
-      props.onhandleAttraction(null) // 이미 선택된 관광명소를 누르면 null 값 반환
-      console.log('null')
-    } else {
-      props.onhandleAttraction(attraction) // 관광명소 선택
-      console.log(attraction)
-    }
-  }
+const Guide = () => {
+  const dispatch = useDispatch()
 
   const [activeTab, setActiveTab] = useState(0)
 
@@ -120,74 +113,78 @@ const Guide = (props: GuideProps) => {
         </div>
       </div>
       <div className="flex flex-col justify-center">
-        {props.attractions.map((attraction) => (
-          <div key={attraction.name} className="w-full ml-10 justify-center">
-            <button
-              className="h-56 rounded-xl px-5 my-8 flex-col bg-gray-50 shadow-lg hover:shadow-2xl"
-              onClick={() => handleAttraction(attraction)}
-            >
-              <h2 className="flex text-start text-lg font-bold mt-2 p-2">
-                {attraction.name}
-              </h2>
-              <div className="flex p-2">
-                <div className="w-40">
+        {useSelector(selectTravelSchedule)
+          ?.get(1)
+          ?.map((placeInfo) => (
+            <div key={placeInfo.name} className="w-full ml-10 justify-center">
+              <button
+                className="h-56 rounded-xl px-5 my-8 flex-col bg-gray-50 shadow-lg hover:shadow-2xl"
+                onClick={() => dispatch(handleCurrentPlace(placeInfo))}
+              >
+                <h2 className="flex text-start text-lg font-bold mt-2 p-2">
+                  {placeInfo.name}
+                </h2>
+                <div className="flex p-2">
+                  <div className="w-40">
+                    <Image
+                      src={placeInfo.image}
+                      alt={placeInfo.name}
+                      width={150}
+                      height={150}
+                      objectFit="cover"
+                      className="rounded-lg"
+                    />
+                  </div>
+                  <div className="pl-4 w-52 h-16 flex-col">
+                    <div className="flex items-center">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                        className="w-6 h-6"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      <span className="text-gray-900 text-base py-2">
+                        10:00 AM - 11:00 AM
+                      </span>
+                    </div>
+                    <div className="text-start w-full overflow-hidden">
+                      <div className="line-clamp-4">
+                        {placeInfo.description}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </button>
+              <div className="flex justify-center items-center text-center mr-12">
+                <div className="px-2 flex items-center">
                   <Image
-                    src={attraction.image}
-                    alt={attraction.name}
-                    width={150}
-                    height={150}
-                    objectFit="cover"
+                    src="/assets/running-person.svg"
+                    width={15}
+                    height={15}
                     className="rounded-lg"
                   />
+                  <span className="ml-1">{placeInfo.time}분 |</span>
                 </div>
-                <div className="pl-4 w-52 h-16 flex-col">
-                  <div className="flex items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                    <span className="text-gray-900 text-base py-2">
-                      10:00 AM - 11:00 AM
-                    </span>
-                  </div>
-                  <div className="text-start w-full overflow-hidden">
-                    <div className="line-clamp-4">{attraction.description}</div>
-                  </div>
+                <div className="px-2 flex items-center">
+                  <Image
+                    src="/assets/car.svg"
+                    width={15}
+                    height={15}
+                    className="rounded-lg"
+                  />
+                  <span className="ml-1">30분</span>
                 </div>
-              </div>
-            </button>
-            <div className="flex justify-center items-center text-center mr-12">
-              <div className="px-2 flex items-center">
-                <Image
-                  src="/assets/running-person.svg"
-                  width={15}
-                  height={15}
-                  className="rounded-lg"
-                />
-                <span className="ml-1">{attraction.time}분 |</span>
-              </div>
-              <div className="px-2 flex items-center">
-                <Image
-                  src="/assets/car.svg"
-                  width={15}
-                  height={15}
-                  className="rounded-lg"
-                />
-                <span className="ml-1">30분</span>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   )

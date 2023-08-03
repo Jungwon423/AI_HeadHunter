@@ -5,6 +5,9 @@ import { RootState } from '../store'
 export interface placeInfo {
   name: string
   coordinate: number[]
+  image: string
+  description: string
+  time: number
 }
 
 export interface TravelInfoState {
@@ -15,6 +18,7 @@ export interface TravelInfoState {
   companion: string
   travelStyle: string[]
   travelSchedule: Map<number, placeInfo[]>
+  currentPlace: placeInfo | null
 }
 
 const initialState: TravelInfoState = {
@@ -31,18 +35,34 @@ const initialState: TravelInfoState = {
         {
           name: '오사카 성',
           coordinate: [34.6936, 135.502],
+          image:
+            'https://media.tacdn.com/media/attractions-splice-spp-400x400/0b/27/58/3d.jpg',
+          time: 15,
+          description: '자유의 여신상은 유명해요',
         } as placeInfo,
         {
           name: '도톤보리',
           coordinate: [34.6686, 135.5031],
+          image:
+            'https://media.tacdn.com/media/attractions-splice-spp-400x400/0b/27/58/3d.jpg',
+          time: 15,
+          description: '자유의 여신상은 유명해요',
         } as placeInfo,
         {
           name: '우메다 스카이 빌딩',
           coordinate: [34.705, 135.4904],
+          image:
+            'https://media.tacdn.com/media/attractions-splice-spp-400x400/0b/27/58/3d.jpg',
+          time: 15,
+          description: '자유의 여신상은 유명해요',
         } as placeInfo,
         {
           name: '오사카 수족관',
           coordinate: [34.6546, 135.428],
+          image:
+            'https://media.tacdn.com/media/attractions-splice-spp-400x400/0b/27/58/3d.jpg',
+          time: 15,
+          description: '자유의 여신상은 유명해요',
         } as placeInfo,
       ],
     ],
@@ -52,22 +72,39 @@ const initialState: TravelInfoState = {
         {
           name: '유니버설 스튜디오 재팬',
           coordinate: [34.667842183190174, 135.43209420160437],
+          image:
+            'https://media.tacdn.com/media/attractions-splice-spp-400x400/0b/27/58/3d.jpg',
+          time: 15,
+          description: '자유의 여신상은 유명해요',
         } as placeInfo,
         {
-          name: 'Tempozan Giant Ferris Wheel',
+          name: '덴포잔 대관람차',
           coordinate: [34.658664636837464, 135.43123589467507],
+          image:
+            'https://media.tacdn.com/media/attractions-splice-spp-400x400/0b/27/58/3d.jpg',
+          time: 15,
+          description: '자유의 여신상은 유명해요',
         } as placeInfo,
         {
-          name: '남바 야사카 신사',
+          name: '난바 야사카 신사',
           coordinate: [34.66346532633862, 135.496295559915],
+          image:
+            'https://media.tacdn.com/media/attractions-splice-spp-400x400/0b/27/58/3d.jpg',
+          time: 15,
+          description: '자유의 여신상은 유명해요',
         } as placeInfo,
         {
-          name: '신텐노지',
+          name: '시텐노지',
           coordinate: [34.65617541900762, 135.51633874457755],
+          image:
+            'https://media.tacdn.com/media/attractions-splice-spp-400x400/0b/27/58/3d.jpg',
+          time: 15,
+          description: '자유의 여신상은 유명해요',
         } as placeInfo,
       ],
     ],
   ]),
+  currentPlace: null,
 }
 
 export const travelInfoSlice = createSlice({
@@ -98,6 +135,13 @@ export const travelInfoSlice = createSlice({
     ) => {
       state.travelSchedule = action.payload
     },
+    handleCurrentPlace: (state, action: PayloadAction<placeInfo>) => {
+      if (state.currentPlace?.name === action.payload.name) {
+        state.currentPlace = {} as placeInfo
+      } else {
+        state.currentPlace = action.payload
+      }
+    },
   },
 })
 
@@ -109,6 +153,7 @@ export const {
   setCompanion,
   setTravelStyle,
   setTravelSchedule,
+  handleCurrentPlace,
 } = travelInfoSlice.actions
 
 export const selectCity = (state: RootState) => state.travelInfo.city
@@ -121,5 +166,7 @@ export const selectTravelStyle = (state: RootState) =>
   state.travelInfo.travelStyle
 export const selectTravelSchedule = (state: RootState) =>
   state.travelInfo.travelSchedule
+export const selectCurrentPlace = (state: RootState) =>
+  state.travelInfo.currentPlace
 
 export default travelInfoSlice.reducer

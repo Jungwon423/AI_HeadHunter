@@ -2,6 +2,8 @@ import {
   placeInfo,
   selectCoordinate,
   selectTravelSchedule,
+  handleCurrentPlace,
+  selectCurrentPlace,
 } from '../slices/travelInfoSlice'
 import { useSelector } from 'react-redux'
 import { selectShowChat, setShowChat } from '../slices/travelChatSlice'
@@ -15,29 +17,21 @@ import Map, {
   ScaleControl,
   GeolocateControl,
 } from 'react-map-gl'
-import { useState } from 'react'
+import { use, useState } from 'react'
 import ChatScreen from './ChatScreen'
-import { Attraction } from '../interfaces/attraction'
 import Pin from './Pin'
 import TravelChat from './TravelChat'
 
-interface TravelMapProps {
-  attractionInfo: Attraction | null
-}
-
-const TravelMap = (props: TravelMapProps) => {
+const TravelMap = () => {
   const showChat = useSelector(selectShowChat)
 
   const dispatch = useDispatch()
 
-  const [selectedPlace, setSelectedPlace] = useState<placeInfo | null>(null)
+  const selectedPlace = useSelector(selectCurrentPlace)
 
   const placeList: placeInfo[] = useSelector(selectTravelSchedule)?.get(2) || []
 
   console.log(useSelector(selectTravelSchedule).get(2))
-
-  console.log('selectedPlace')
-  console.log(selectedPlace)
 
   const TOKEN =
     'pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtrcGNwdXQwNm1oM2xvZTJ5Z2Q4djk5In0._rw_aFaBfUjQC-tjkV53Aw'
@@ -67,7 +61,7 @@ const TravelMap = (props: TravelMapProps) => {
             longitude={place.coordinate[1]}
             onClick={(e) => {
               e.originalEvent.stopPropagation()
-              setSelectedPlace(place)
+              dispatch(handleCurrentPlace(place))
               console.log('Marker Clicked')
               console.log(place)
             }}
@@ -81,7 +75,7 @@ const TravelMap = (props: TravelMapProps) => {
             latitude={selectedPlace.coordinate[0]}
             longitude={selectedPlace.coordinate[1]}
             onClose={() => {
-              setSelectedPlace(null)
+              dispatch(handleCurrentPlace(selectedPlace))
             }}
           >
             <div>{selectedPlace.name}</div>
