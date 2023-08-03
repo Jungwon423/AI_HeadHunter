@@ -18,6 +18,7 @@ import Map, {
   ScaleControl,
   GeolocateControl,
   Source,
+  Layer,
 } from 'react-map-gl'
 import { use, useState } from 'react'
 import ChatScreen from './ChatScreen'
@@ -113,7 +114,43 @@ const TravelMap = () => {
             <div>{selectedPlace.name}</div>
           </Popup>
         )}
-        {/* <Source type='geojson'></Source> */}
+        {travelSchedule.map(
+          (day, i) =>
+            (currentDay == 0 || currentDay == i + 1) && (
+              <Source
+                key={i}
+                id="route"
+                type="geojson"
+                data={{
+                  type: 'Feature',
+                  properties: {
+                    id: day,
+                  },
+                  geometry: {
+                    type: 'LineString',
+                    coordinates: day.map((place, j) => [
+                      place.coordinate[1],
+                      place.coordinate[0],
+                    ]),
+                  },
+                }}
+              >
+                <Layer
+                  id="route"
+                  type="line"
+                  source="route"
+                  // layout={{
+                  //   'line-join': 'round',
+                  //   'line-cap': 'round',
+                  // }}
+                  paint={{
+                    'line-color': '#007cbf',
+                    'line-width': 4,
+                  }}
+                />
+              </Source>
+            ),
+        )}
       </Map>
       {showChat && <ChatScreen onClose={() => dispatch(setShowChat(false))} />}
     </div>
