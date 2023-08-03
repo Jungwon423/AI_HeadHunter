@@ -92,23 +92,6 @@ export default function SearchPage() {
                 const data = await res.json()
                 console.log('API 응답 : ')
                 console.log(data)
-
-                dispatch(
-                  setTravelSchedule(
-                    new Map([
-                      [
-                        1,
-                        [
-                          {
-                            name: '오사카 성',
-                            coordinate: [34.6936, 135.502],
-                          } as placeInfo,
-                        ],
-                      ],
-                    ]),
-                  ),
-                )
-
                 router.push('/travel')
               }}
             >
