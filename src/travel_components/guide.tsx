@@ -10,16 +10,15 @@ import {
   selectCoordinate,
   selectTravelSchedule,
   handleCurrentPlace,
+  selectCurrentDay,
 } from '../slices/travelInfoSlice'
-import { Attraction } from '../interfaces/attraction'
 
 const Guide = () => {
   const dispatch = useDispatch()
 
-  const [activeTab, setActiveTab] = useState(0)
-
-  const city = useSelector(selectCity)
-  const duration = useSelector(selectDuration)
+  const city: String = useSelector(selectCity)
+  const duration: number = useSelector(selectDuration)
+  const currrentDay: number = useSelector(selectCurrentDay)
 
   const createTabs = (days: number) => {
     const tabs = ['여행 요약']
@@ -37,7 +36,7 @@ const Guide = () => {
     <div className="flex-col max-w-lg overflow-y-auto">
       <TravelNavbar />
       <section className="bg-gray-50 py-4">
-        <TabMenu tabs={tabs} activeTab={activeTab} onTabClick={setActiveTab} />
+        <TabMenu tabs={tabs} />
       </section>
       <section className="relative">
         <div className="absolute inset-0">
@@ -90,7 +89,9 @@ const Guide = () => {
       </section>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white shadow">
         <div className="flex items-center justify-between h-16">
-          <div className="ml-2 font-bold text-xl font-mono">Day1</div>
+          <div className="ml-2 font-bold text-xl font-mono">
+            Day {currrentDay}
+          </div>
           <div className="flex items-center">
             <button className="px-4 py-2 rounded-md bg-indigo-500 flex items-center ">
               <svg
@@ -113,8 +114,8 @@ const Guide = () => {
         </div>
       </div>
       <div className="flex flex-col justify-center">
-        {useSelector(selectTravelSchedule)[1]
-          ?.map((placeInfo) => (
+        {useSelector(selectTravelSchedule)[currrentDay - 1]?.map(
+          (placeInfo) => (
             <div key={placeInfo.name} className="w-full ml-10 justify-center">
               <button
                 className="h-56 rounded-xl px-5 my-8 flex-col bg-gray-50 shadow-lg hover:shadow-2xl"
@@ -183,7 +184,8 @@ const Guide = () => {
                 </div>
               </div>
             </div>
-          ))}
+          ),
+        )}
       </div>
     </div>
   )
