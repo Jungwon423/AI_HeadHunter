@@ -19,6 +19,7 @@ export interface TravelInfoState {
   travelStyle: string[]
   travelSchedule: placeInfo[][]
   currentPlace: placeInfo | null
+  currentDay: number
 }
 
 const initialState: TravelInfoState = {
@@ -99,6 +100,7 @@ const initialState: TravelInfoState = {
     ],
   ],
   currentPlace: null,
+  currentDay: 0,
 }
 
 export const travelInfoSlice = createSlice({
@@ -133,6 +135,9 @@ export const travelInfoSlice = createSlice({
         state.currentPlace = action.payload
       }
     },
+    setCurrentDay: (state, action: PayloadAction<number>) => {
+      state.currentDay = action.payload
+    },
   },
 })
 
@@ -145,6 +150,7 @@ export const {
   setTravelStyle,
   setTravelSchedule,
   handleCurrentPlace,
+  setCurrentDay,
 } = travelInfoSlice.actions
 
 export const selectCity = (state: RootState) => state.travelInfo.city
@@ -159,5 +165,7 @@ export const selectTravelSchedule = (state: RootState) =>
   state.travelInfo.travelSchedule
 export const selectCurrentPlace = (state: RootState) =>
   state.travelInfo.currentPlace
+export const selectCurrentDay = (state: RootState) =>
+  state.travelInfo.currentDay
 
 export default travelInfoSlice.reducer

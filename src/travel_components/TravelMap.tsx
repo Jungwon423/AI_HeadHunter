@@ -4,6 +4,7 @@ import {
   selectTravelSchedule,
   handleCurrentPlace,
   selectCurrentPlace,
+  selectCurrentDay,
 } from '../slices/travelInfoSlice'
 import { useSelector } from 'react-redux'
 import { selectShowChat, setShowChat } from '../slices/travelChatSlice'
@@ -29,8 +30,10 @@ const TravelMap = () => {
   const dispatch = useDispatch()
 
   const selectedPlace = useSelector(selectCurrentPlace)
+  const currentDay: number = useSelector(selectCurrentDay)
 
-  const placeList: placeInfo[] = useSelector(selectTravelSchedule)[1] || []
+  const placeList: placeInfo[] =
+    useSelector(selectTravelSchedule)[currentDay - 1] || []
 
   const TOKEN =
     'pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtrcGNwdXQwNm1oM2xvZTJ5Z2Q4djk5In0._rw_aFaBfUjQC-tjkV53Aw'
