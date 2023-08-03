@@ -67,7 +67,7 @@ const TravelMap = () => {
             <Pin></Pin>
           </Marker>
         ))}
-        {selectedPlace && (
+        {selectedPlace && selectedPlace.coordinate && (
           <Popup
             anchor="top"
             latitude={selectedPlace.coordinate[0]}
