@@ -100,7 +100,7 @@ export default function SearchPage() {
                 // const data = await res.json()
                 // console.log('API 응답 : ')
                 // console.log(data)
-                // router.push('/travel')
+                router.push('/questionnaire')
               }}
             >
               여행하러 가기

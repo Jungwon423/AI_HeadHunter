@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit'
 import counterReducer from './slices/counterSlice'
 import travelInfoReducer from './slices/travelInfoSlice'
 import travelChatReducer from './slices/travelChatSlice'
+import questionnaireReducer from './slices/questionnaireSlice'
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
     travelInfo: travelInfoReducer,
     travelChat: travelChatReducer,
+    questionnaire: questionnaireReducer,
   },
 })
 
