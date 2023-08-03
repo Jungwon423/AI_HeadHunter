@@ -21,6 +21,7 @@ import { use, useState } from 'react'
 import ChatScreen from './ChatScreen'
 import Pin from './Pin'
 import TravelChat from './TravelChat'
+import TravelContainer from './TravelContainer'
 
 const TravelMap = () => {
   const showChat = useSelector(selectShowChat)
@@ -68,16 +69,22 @@ const TravelMap = () => {
           </Marker>
         ))}
         {selectedPlace && selectedPlace.coordinate && (
-          <Popup
-            anchor="top"
-            latitude={selectedPlace.coordinate[0]}
-            longitude={selectedPlace.coordinate[1]}
-            onClose={() => {
-              dispatch(handleCurrentPlace(selectedPlace))
-            }}
-          >
-            <div>{selectedPlace.name}</div>
-          </Popup>
+          <div>
+            <Popup
+              anchor="top"
+              latitude={selectedPlace.coordinate[0]}
+              longitude={selectedPlace.coordinate[1]}
+              closeButton={false}
+              closeOnClick={false}
+              onClose={() => {
+                dispatch(handleCurrentPlace(selectedPlace))
+              }}
+              className="custom-popup"
+            >
+              <TravelContainer></TravelContainer>
+              <div>{selectedPlace.name}</div>
+            </Popup>
+          </div>
         )}
       </Map>
       {showChat && <ChatScreen onClose={() => dispatch(setShowChat(false))} />}

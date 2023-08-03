@@ -30,6 +30,10 @@ a {
 @tailwind components;
 @tailwind utilities;
 
+custom-popup {
+  @apply bg-white text-black p-4 rounded-lg shadow-xl;
+}
+
 /* Hide the default scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
