@@ -33,7 +33,7 @@ const Guide = () => {
   const tabs = createTabs(duration)
 
   return (
-    <div className="flex-col max-w-lg overflow-y-auto">
+    <div className="flex-col w-96 overflow-y-auto">
       <TravelNavbar />
       <section className="bg-gray-50 py-4">
         <TabMenu tabs={tabs} />
@@ -51,12 +51,8 @@ const Guide = () => {
         </div>
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
           <div className="md:pb-3">
-            <span className="text-lg sm:text-xl md:text-2xl font-extrabold text-white">
-              앤비님
-            </span>
-            <span className="text-lg sm:text-xl md:text-2xl text-white">
-              을 위한 여행 일정
-            </span>
+            <span className="text-xl font-extrabold text-white">앤비님</span>
+            <span className="text-xl text-white">을 위한 여행 일정</span>
           </div>
           <div className="pb-4">
             <div className="bg-white flex rounded w-128 h-32 p-6">
@@ -76,18 +72,16 @@ const Guide = () => {
                 </div>
               </div>
               <div className="flex-col px-5">
-                <div className="flex-col mb-2 text-sm sm:text-base md:text-xl">
+                <div className="flex-col mb-2 text-base">
                   · 여행지역 : {city}
                 </div>
-                <div className="flex text-sm sm:text-base md:text-xl">
-                  · 총 이동거리 12km
-                </div>
+                <div className="flex text-base">· 총 이동거리 12km</div>
               </div>
             </div>
           </div>
         </div>
       </section>
-      <div className="max-w-7xl min-w-2xl mx-auto px-4 sm:px-6 lg:px-8 bg-white shadow">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 bg-white shadow">
         <div className="flex items-center justify-between h-16">
           <div className="ml-2 font-bold text-xl font-mono">
             Day {currrentDay}
@@ -116,26 +110,26 @@ const Guide = () => {
       <div className="flex flex-col justify-center">
         {useSelector(selectTravelSchedule)[currrentDay - 1]?.map(
           (placeInfo) => (
-            <div key={placeInfo.name} className="w-full ml-10 justify-center">
+            <div key={placeInfo.name} className="px-3 justify-center">
               <button
-                className="h-56 rounded-xl px-5 my-8 flex-col bg-gray-50 shadow-lg hover:shadow-2xl"
+                className="h-50 rounded-xl px-5 my-8 flex-col bg-gray-50 shadow-lg hover:shadow-2xl"
                 onClick={() => dispatch(handleCurrentPlace(placeInfo))}
               >
-                <h2 className="flex text-start text-lg font-bold mt-2 p-2">
-                  {placeInfo.name}
-                </h2>
                 <div className="flex p-2">
-                  <div className="w-40">
+                  <div className="w-42">
                     <Image
                       src={placeInfo.image}
                       alt={placeInfo.name}
                       width={150}
-                      height={150}
+                      height={200}
                       objectFit="cover"
                       className="rounded-lg"
                     />
                   </div>
-                  <div className="pl-4 w-52 h-16 flex-col">
+                  <div className="pl-4 w-42 h-16 flex-col">
+                    <h2 className="flex text-start text-base font-bold mt-2 p-2">
+                      {placeInfo.name}
+                    </h2>
                     <div className="flex items-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -143,7 +137,7 @@ const Guide = () => {
                         viewBox="0 0 24 24"
                         strokeWidth="1.5"
                         stroke="currentColor"
-                        className="w-6 h-6"
+                        className="w-4 h-4"
                       >
                         <path
                           strokeLinecap="round"
@@ -151,7 +145,7 @@ const Guide = () => {
                           d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
                         />
                       </svg>
-                      <span className="text-gray-900 text-base py-2">
+                      <span className="text-gray-900 text-sm py-2">
                         10:00 AM - 11:00 AM
                       </span>
                     </div>
