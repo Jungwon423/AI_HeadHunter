@@ -14,10 +14,6 @@ export default function Home() {
   const TOKEN =
     'pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtrcGNwdXQwNm1oM2xvZTJ5Z2Q4djk5In0._rw_aFaBfUjQC-tjkV53Aw'
 
-  // Redux 테스트
-  const count = useSelector(selectValue)
-  const dispatch = useDispatch()
-
   return (
     <div className="bg-white min-h-screen">
       {/* Head section */}
@@ -31,11 +27,6 @@ export default function Home() {
 
       {/* Main content section */}
       <main className="w-3/4 mx-auto py-16 px-4 sm:px-6 lg:px-8">
-        {/* Redux 테스트 */}
-        <h1>The value of count is {count} </h1>
-        <button onClick={() => dispatch(increment())}> Increment </button>
-        <button onClick={() => dispatch(decrement())}> Decrement </button>
-
         <MainTitle></MainTitle>
 
         <MapboxGeocoderContainer accessToken={TOKEN} />
