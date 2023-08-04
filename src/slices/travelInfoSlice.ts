@@ -8,6 +8,10 @@ export interface placeInfo {
   image: string
   description: string
   time: number
+  hashtags: string[]
+  location: string
+  website: string
+  thought: string
 }
 
 export interface TravelInfoState {
@@ -40,8 +44,18 @@ const initialState: TravelInfoState = {
         coordinate: [34.6936, 135.502],
         image:
           'https://media.tacdn.com/media/attractions-splice-spp-400x400/0b/27/58/3d.jpg',
+        location: '1-1 Ōsakajō, Chuo Ward, Osaka, 540-0002 일본',
         time: 15,
-        description: '자유의 여신상은 유명해요',
+        description: '오사카 성은 정말 크고 우람합니다. 마치 그것처럼요.',
+        thought:
+          '오사카 성을 추천하는 이유는 재미있고 fun하며 interesting 하기 때문입니다 쏼라쏼라쏼라',
+        hashtags: [
+          'tourist attraction',
+          'museum',
+          'point of interest',
+          'establishment',
+        ],
+        website: 'https://osakacastle.net/',
       } as placeInfo,
       {
         name: '도톤보리',
