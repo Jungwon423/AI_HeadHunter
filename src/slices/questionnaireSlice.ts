@@ -6,7 +6,7 @@ export interface QuestionnaireState {
   thought?: string
   question?: string
   options?: string[]
-  travelId?: string
+  travel_id?: string
   finished?: boolean
   // loading 상태 저장
   loading: 'idle' | 'pending' | 'succeeded' | 'failed'
@@ -23,9 +23,9 @@ export interface InitialQueryInput {
 }
 
 export interface QueryInput {
-  travelId: string
+  travel_id: string
   user: string
-  anwser: string[]
+  answer: string[]
 }
 
 export const fetchInitialQuery = async (
@@ -48,13 +48,20 @@ export const fetchInitialQuery = async (
 export const fetchQuery = async (
   queryInput: QueryInput,
 ): Promise<QuestionnaireState> => {
+  const config = {
+    withCredentials: true,
+  }
   let API_URL: string = 'http://52.78.50.226:80/travel/query'
+
+  console.log('queryInput : ' + JSON.stringify(queryInput))
 
   const response: AxiosResponse<QuestionnaireState> = await axios.post(
     API_URL,
     /* Include any POST data you need to send */
     queryInput,
+    config,
   )
+  console.log('response : ' + JSON.stringify(response.data))
   return response.data
 }
 
@@ -62,7 +69,7 @@ export const initialState: QuestionnaireState = {
   thought: '',
   question: '',
   options: [],
-  travelId: '',
+  travel_id: '',
   finished: false,
   loading: 'idle',
   error: null,
@@ -76,11 +83,11 @@ export const questionnaireSlice = createSlice({
       state.thought = action.payload.thought
       state.question = action.payload.question
       state.options = action.payload.options
-      state.travelId = action.payload.travelId
+      state.travel_id = action.payload.travel_id
       state.finished = action.payload.finished
     },
     setTravelId: (state, action: PayloadAction<string>) => {
-      state.travelId = action.payload
+      state.travel_id = action.payload
     },
     setLoading: (
       state,
@@ -113,8 +120,8 @@ export const fetchInitialQueryAsync =
       dispatch(setLoading('pending'))
       const questionnaire = await fetchInitialQuery(initialQueryInput)
       dispatch(setQuestionnaire(questionnaire))
-      if (questionnaire && questionnaire.travelId) {
-        dispatch(setTravelId(questionnaire.travelId))
+      if (questionnaire && questionnaire.travel_id) {
+        dispatch(setTravelId(questionnaire.travel_id))
       }
       dispatch(setLoading('succeeded'))
     } catch (error: any) {
@@ -139,9 +146,8 @@ export const fetchQueryAsync =
       dispatch(setLoading('pending'))
       const questionnaire = await fetchQuery(queryInput)
       dispatch(setQuestionnaire(questionnaire))
-      console.log('travelId : ' + questionnaire.travelId)
-      if (questionnaire && questionnaire.travelId) {
-        dispatch(setTravelId(questionnaire.travelId))
+      if (questionnaire && questionnaire.travel_id) {
+        dispatch(setTravelId(questionnaire.travel_id))
       }
       dispatch(setLoading('succeeded'))
     } catch (error: any) {

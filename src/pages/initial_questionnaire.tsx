@@ -13,6 +13,7 @@ import {
   selectCity,
   selectCompanion,
   selectDuration,
+  selectBudget,
 } from '../slices/travelInfoSlice'
 import { link } from 'fs'
 import { useRouter } from 'next/router'
@@ -25,9 +26,9 @@ const InitialQuestionnairePage = () => {
   const city: string = useSelector(selectCity)
   const companion: string = useSelector(selectCompanion)
   const duration: number = useSelector(selectDuration)
-  const budget: number = useSelector(selectDuration)
+  const budget: number = useSelector(selectBudget)
   const questionnaire: QuestionnaireState = useSelector(selectQuestionnaire)
-  const { thought, question, options, travelId, finished, loading, error } =
+  const { thought, question, options, travel_id, finished, loading, error } =
     questionnaire
 
   // 여기서 초기 쿼리 입력 값을 설정하십시오.
@@ -45,6 +46,8 @@ const InitialQuestionnairePage = () => {
   //   budget: 1200000,
   //   companion: '연인과',
   // }
+
+  console.log('initial 화면 : initialQueryInput', initialQueryInput)
 
   const router = useRouter()
 
@@ -65,12 +68,14 @@ const InitialQuestionnairePage = () => {
 
   const handleSubmit = () => {
     const queryInput: QueryInput = {
-      travelId: travelId!,
+      travel_id: travel_id!,
       user: userId,
-      anwser: [selectedOption] as string[],
+      answer: [selectedOption] as string[],
     }
     dispatch(setQueryInput(queryInput))
-    // router.push('/questionnaire')
+
+    console.log('initial 화면 : queryInput', queryInput)
+    router.push('/questionnaire')
   }
 
   if (questionnaire.loading === 'pending') {

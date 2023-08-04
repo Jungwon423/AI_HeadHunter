@@ -3,9 +3,9 @@ import { QueryInput } from './questionnaireSlice'
 import { RootState } from '../store'
 
 export const queryInputInitialState: QueryInput = {
-  travelId: '',
+  travel_id: '',
   user: '',
-  anwser: [],
+  answer: [],
 }
 
 export const queryInputSlice = createSlice({
@@ -13,8 +13,9 @@ export const queryInputSlice = createSlice({
   initialState: queryInputInitialState,
   reducers: {
     setQueryInput: (state, action: PayloadAction<QueryInput>) => {
-      state.travelId = action.payload.travelId
-      state.anwser = action.payload.anwser
+      state.travel_id = action.payload.travel_id
+      state.answer = action.payload.answer
+      state.user = action.payload.user
     },
   },
 })

@@ -16,25 +16,38 @@ import {
   selectCompanion,
   selectDuration,
 } from '../slices/travelInfoSlice'
-import { selectQueryInput } from '../slices/queryInputSlice'
+import { selectQueryInput, setQueryInput } from '../slices/queryInputSlice'
 import { link } from 'fs'
 import { useRouter } from 'next/router'
 import { AppThunk } from '../store'
 
 const QuestionnairePage = () => {
+  const [count, setCount] = useState(0)
+
+  const nextPage = () => {
+    setCount(count + 1)
+  }
+
   const dispatch = useDispatch()
   const userId: string = useSelector(selectUserId)
   const questionnaire: QuestionnaireState = useSelector(selectQuestionnaire)
-  const { thought, question, options, travelId, finished, loading, error } =
+  const { thought, question, options, travel_id, finished, loading, error } =
     questionnaire
   const queryInput: QueryInput = useSelector(selectQueryInput)
+  console.log('2번째 query 화면 : queryInput: ', queryInput)
+  // const queryInput: QueryInput = {
+  //   answer: ['Outdoor activities like hiking'],
+  //   travel_id: '64ccde54c85af62bfb369afd',
+  //   user: '6arap7v529',
+  // }
 
   const router = useRouter()
 
   // 데이터 가져오기
   useEffect(() => {
+    console.log('2번째 query 화면 : queryInput: ', queryInput)
     dispatch(fetchQueryAsync(queryInput))
-  }, [dispatch])
+  }, [dispatch, count])
 
   const [selectedOption, setSelectedOption] = useState<string | undefined>(
     undefined,
@@ -45,15 +58,39 @@ const QuestionnairePage = () => {
   }
 
   const handleSubmit = () => {
-    router.push('/wait')
+    const queryInput: QueryInput = {
+      travel_id: travel_id!,
+      user: userId,
+      answer: [selectedOption] as string[],
+    }
+    dispatch(setQueryInput(queryInput))
+
+    console.log('initial 화면 : queryInput', queryInput)
+    nextPage()
   }
 
   if (questionnaire.loading === 'pending') {
-    return <p>Loading...</p>
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p>Loading...</p>
+      </div>
+    )
   }
 
   if (questionnaire.loading === 'failed') {
-    return <p>Error: {questionnaire.error}</p>
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p>Error: {questionnaire.error}</p>
+      </div>
+    )
+  }
+
+  if (questionnaire.finished) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p>끝</p>
+      </div>
+    )
   }
 
   return (
@@ -85,5 +122,4 @@ const QuestionnairePage = () => {
     </div>
   )
 }
-
 export default QuestionnairePage
