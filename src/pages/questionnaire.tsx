@@ -5,10 +5,14 @@ import {
   selectQuestionnaire,
   QuestionnaireState,
 } from '../slices/questionnaireSlice'
+import { link } from 'fs'
+import { useRouter } from 'next/router'
 
 const QuestionnairePage = () => {
   const question = useSelector(selectQuestionnaire)
   const dispatch = useDispatch()
+
+  const router = useRouter()
 
   const [selectedOption, setSelectedOption] = useState<string | undefined>(
     undefined,
@@ -19,18 +23,15 @@ const QuestionnairePage = () => {
   }
 
   const handleSubmit = () => {
-    // Show loading dialog for 5 seconds
-    setTimeout(() => {
-      alert('Thank you for submitting your answers!')
-    }, 5000)
+    router.push('/wait')
   }
 
   return (
     <div className="flex flex-col items-center justify-center">
       <div className="my-8">
-        <p className="text-lg md:text-xl font-bold mb-4">{question.text}</p>
+        <p className="text-lg md:text-xl font-bold mb-4">{question.thought}</p>
         <div className="flex flex-col items-center">
-          {question.options.map((option, index) => (
+          {question.options!.map((option, index) => (
             <button
               key={index}
               className={`py-2 px-4 rounded-lg border-2 border-gray-400 mb-2 ${
