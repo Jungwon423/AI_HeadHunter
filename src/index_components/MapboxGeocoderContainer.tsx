@@ -32,18 +32,6 @@ const MapboxGeocoderContainer: React.FC<MapboxGeocoderContainerProps> = ({
         dispatch(setCity(event.result.place_name))
         dispatch(setCoordinate(event.result.center))
 
-        // local storage 에서 tempId 가져오기
-        let tempId: string
-
-        if (LocalStorage.getItem('tempId') == null) {
-          let randomStr: string = Math.random().toString(36).substring(2, 12)
-          console.log('randomStr : ', randomStr)
-          LocalStorage.setItem('tempId', randomStr)
-          tempId = randomStr
-        } else {
-          tempId = LocalStorage.getItem('tempId')! // null check
-        }
-
         router.push('/search')
       })
       geocoder.addTo(containerRef.current)

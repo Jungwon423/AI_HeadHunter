@@ -11,8 +11,10 @@ export interface placeInfo {
 }
 
 export interface TravelInfoState {
+  userId: string
   city: string
   duration: number
+  budget: number
   coordinate: number[]
   location: string
   companion: string
@@ -23,8 +25,10 @@ export interface TravelInfoState {
 }
 
 const initialState: TravelInfoState = {
+  userId: '',
   city: '서울',
   duration: 3,
+  budget: 1000000,
   location: '서울 강남구 언주로110 경남아파트',
   coordinate: [135.5023, 34.6937],
   companion: '혼자',
@@ -107,11 +111,17 @@ export const travelInfoSlice = createSlice({
   name: 'travelInfo',
   initialState,
   reducers: {
+    setUserId: (state, action: PayloadAction<string>) => {
+      state.userId = action.payload
+    },
     setCity: (state, action: PayloadAction<string>) => {
       state.city = action.payload
     },
     setDuration: (state, action: PayloadAction<number>) => {
       state.duration = action.payload
+    },
+    setBudget: (state, action: PayloadAction<number>) => {
+      state.budget = action.payload
     },
     setLocation: (state, action: PayloadAction<string>) => {
       state.location = action.payload
@@ -142,9 +152,11 @@ export const travelInfoSlice = createSlice({
 })
 
 export const {
+  setUserId,
   setCity,
   setDuration,
   setLocation,
+  setBudget,
   setCoordinate,
   setCompanion,
   setTravelStyle,
@@ -153,8 +165,10 @@ export const {
   setCurrentDay,
 } = travelInfoSlice.actions
 
+export const selectUserId = (state: RootState) => state.travelInfo.userId
 export const selectCity = (state: RootState) => state.travelInfo.city
 export const selectDuration = (state: RootState) => state.travelInfo.duration
+export const selectBudget = (state: RootState) => state.travelInfo.budget
 export const selectLocation = (state: RootState) => state.travelInfo.location
 export const selectCoordinate = (state: RootState) =>
   state.travelInfo.coordinate
