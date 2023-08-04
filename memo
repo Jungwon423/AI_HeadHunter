@@ -1,90 +1,63 @@
-// TravelMap.tsx
+// intialQuery
 
-import { useState } from 'react'
-import ReactMapGL, { Marker, Popup, NavigationControl, FullscreenControl, ScaleControl, GeolocateControl, Source, Layer } from 'react-map-gl'
-import { useSelector } from 'react-redux'
-import { selectTravelSchedule, selectCurrentPlace } from '../store/travelInfoSlice'
-import { pinColors } from './pinColors'
-import Pin from './Pin'
+{
+    "question": "What type of activities do you prefer in Osaka?",
+    "options": [
+        "Visiting historical sites",
+        "Exploring local food markets",
+        "Attending cultural events",
+        "Shopping",
+        "Outdoor activities like hiking"
+    ],
+    "thought": "Let's start by understanding the customer's preferences about the destination, Osaka. Since they are traveling with their girlfriend, it might be a romantic trip. Let's find out what kind of activities they prefer.",
+    "travel_id": "64cb8d1a31c04d00084edbce"
+}
 
-const TravelMap = () => {
-  const travelSchedule = useSelector(selectTravelSchedule)
-  const selectedPlace = useSelector(selectCurrentPlace)
-  const [viewport, setViewport] = useState({
-    width: '100%',
-    height: '100%',
-    latitude: 37.7577,
-    longitude: -122.4376,
-    zoom: 8,
-  })
+// query
 
-  const pinFeatures = travelSchedule.flatMap(([day, places]) =>
-    places.map((place, index) => ({
-      type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [place.longitude, place.latitude],
-      },
-      properties: {
-        id: `${day}-${index}`,
-        color: pinColors[index % pinColors.length],
-      },
-    }))
-  )
+{
+    "question": "What type of historical sites are you interested in?",
+    "options": [
+        "Ancient history",
+        "Modern history",
+        "Both"
+    ],
+    "thought": "The customer is interested in exploring local food markets and shopping. Let's find out more about their interest in history. Are they interested in ancient history, modern history, or both? Also, let's find out what kind of shopping they prefer. Are they interested in high-end fashion, local crafts, or both?",
+    "travel_id": "64cb8d1a31c04d00084edbce",
+    "finished": false
+}
 
-  const routeFeatures = travelSchedule.map(([day, places]) => ({
-    type: 'Feature',
-    geometry: {
-      type: 'LineString',
-      coordinates: places.map((place) => [place.longitude, place.latitude]),
-    },
-    properties: {
-      id: day,
-    },
-  }))
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchQuestionnaireAsync, selectQuestionnaire } from '../store/questionnaireSlice'
+
+const QuestionnairePage = () => {
+  const dispatch = useDispatch()
+  const questionnaire = useSelector(selectQuestionnaire)
+
+  useEffect(() => {
+    dispatch(fetchQuestionnaireAsync('123'))
+  }, [dispatch])
+
+  if (questionnaire.loading === 'pending') {
+    return <p>Loading...</p>
+  }
+
+  if (questionnaire.loading === 'failed') {
+    return <p>Error: {questionnaire.error}</p>
+  }
 
   return (
-    <ReactMapGL
-      {...viewport}
-      onViewportChange={(nextViewport) => setViewport(nextViewport)}
-      mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
-    >
-      <GeolocateControl position="top-left" />
-      <FullscreenControl position="top-left" />
-      <NavigationControl position="top-left" />
-      <ScaleControl />
-      {pinFeatures.map((feature) => (
-        <Marker
-          key={feature.properties.id}
-          latitude={feature.geometry.coordinates[1]}
-          longitude={feature.geometry.coordinates[0]}
-        >
-          <Pin color={feature.properties.color} />
-        </Marker>
-      ))}
-      {selectedPlace && selectedPlace.coordinate && (
-        <Popup
-          anchor="top"
-          latitude={selectedPlace.coordinate[1]}
-          longitude={selectedPlace.coordinate[0]}
-          onClose={() => dispatch(handleCurrentPlace(selectedPlace))}
-        >
-          <div>{selectedPlace.name}</div>
-        </Popup>
-      )}
-      {routeFeatures.map((feature) => (
-        <Source key={feature.properties.id} type="geojson" data={feature}>
-          <Layer
-            type="line"
-            paint={{
-              'line-color': '#007cbf',
-              'line-width': 4,
-            }}
-          />
-        </Source>
-      ))}
-    </ReactMapGL>
+    <div>
+      <p>{questionnaire.thought}</p>
+      <p>{questionnaire.question}</p>
+      <ul>
+        {questionnaire.options.map((option) => (
+          <li key={option}>{option}</li>
+        ))}
+      </ul>
+    </div>
   )
 }
 
-export default TravelMap
+export default QuestionnairePage

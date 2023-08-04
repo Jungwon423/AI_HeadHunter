@@ -7,8 +7,6 @@ import {
   fetchInitialQueryAsync,
   InitialQueryInput,
   QueryInput,
-  fetchQuery,
-  fetchQueryAsync,
 } from '../slices/questionnaireSlice'
 import {
   selectUserId,
@@ -16,24 +14,43 @@ import {
   selectCompanion,
   selectDuration,
 } from '../slices/travelInfoSlice'
-import { selectQueryInput } from '../slices/queryInputSlice'
 import { link } from 'fs'
 import { useRouter } from 'next/router'
 import { AppThunk } from '../store'
+import { setQueryInput } from '../slices/queryInputSlice'
 
-const QuestionnairePage = () => {
+const InitialQuestionnairePage = () => {
   const dispatch = useDispatch()
   const userId: string = useSelector(selectUserId)
+  const city: string = useSelector(selectCity)
+  const companion: string = useSelector(selectCompanion)
+  const duration: number = useSelector(selectDuration)
+  const budget: number = useSelector(selectDuration)
   const questionnaire: QuestionnaireState = useSelector(selectQuestionnaire)
   const { thought, question, options, travelId, finished, loading, error } =
     questionnaire
-  const queryInput: QueryInput = useSelector(selectQueryInput)
+
+  // 여기서 초기 쿼리 입력 값을 설정하십시오.
+  const initialQueryInput: InitialQueryInput = {
+    user: userId,
+    destination: city,
+    duration: duration,
+    budget: budget,
+    companion: companion,
+  }
+  // const initialQueryInput: InitialQueryInput = {
+  //   user: '6arap7v529',
+  //   destination: '일본, 오사카부오사카시',
+  //   duration: 3,
+  //   budget: 1200000,
+  //   companion: '연인과',
+  // }
 
   const router = useRouter()
 
   // 데이터 가져오기
   useEffect(() => {
-    dispatch(fetchQueryAsync(queryInput))
+    dispatch(fetchInitialQueryAsync(initialQueryInput))
   }, [dispatch])
 
   const [selectedOption, setSelectedOption] = useState<string | undefined>(
@@ -44,12 +61,24 @@ const QuestionnairePage = () => {
     setSelectedOption(option)
   }
 
+  // 제출하기 버튼 클릭 : 다음 화면으로 이동
+
   const handleSubmit = () => {
-    router.push('/wait')
+    const queryInput: QueryInput = {
+      travelId: travelId!,
+      user: userId,
+      anwser: [selectedOption] as string[],
+    }
+    dispatch(setQueryInput(queryInput))
+    // router.push('/questionnaire')
   }
 
   if (questionnaire.loading === 'pending') {
-    return <p>Loading...</p>
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p>Loading...</p>
+      </div>
+    )
   }
 
   if (questionnaire.loading === 'failed') {
@@ -86,4 +115,4 @@ const QuestionnairePage = () => {
   )
 }
 
-export default QuestionnairePage
+export default InitialQuestionnairePage

@@ -12,11 +12,14 @@ import {
   setDuration,
   setTravelSchedule,
   placeInfo,
+  setUserId,
+  setBudget,
 } from '../slices/travelInfoSlice'
 import { TravelStyles } from '../search_components/TravelStyles'
 import { TravelCompanion } from '../search_components/TravelCompanion'
 import TravelDuration from '../search_components/TravelDuration'
 import TravelBudget from '../search_components/TravelBudget'
+import LocalStorage from '../index_components/LocalStorage'
 
 const TravelTitle = () => (
   <div className="text-center py-10 sm:py-15 md:py-20 bg-indigo-400 rounded-tl-xl rounded-tr-xl">
@@ -89,18 +92,31 @@ export default function SearchPage() {
               className="w-full text-base sm:text-lg md:text-xl text-white font-bold py-4 px-20 rounded-xl bg-indigo-400 hover:bg-indigo-700 focus:outline-none"
               onClick={async () => {
                 // TODO : redux에 저장하는 코드
-                console.log('selectedStyles : ' + selectedStyles)
-                console.log('selectedCompanion : ' + selectedCompanion)
-                console.log('travelDuration : ' + travelDuration)
+                // local storage 에서 tempId 가져오기
+                let tempId: string
+
+                if (LocalStorage.getItem('tempId') == null) {
+                  let randomStr: string = Math.random()
+                    .toString(36)
+                    .substring(2, 12)
+                  console.log('randomStr : ', randomStr)
+                  LocalStorage.setItem('tempId', randomStr)
+                  tempId = randomStr
+                } else {
+                  tempId = LocalStorage.getItem('tempId')! // null check
+                }
+
+                dispatch(setUserId(tempId))
                 dispatch(setCompanion(selectedCompanion))
                 dispatch(setTravelStyle(selectedStyles))
                 dispatch(setDuration(travelDuration))
-                console.log('selectedBudget : ' + selectedBudget)
+                dispatch(setBudget(selectedBudget))
+
                 // const res = await fetch('http://localhost:3000/api/travelInfo')
                 // const data = await res.json()
                 // console.log('API 응답 : ')
                 // console.log(data)
-                router.push('/questionnaire')
+                router.push('/initial_questionnaire')
               }}
             >
               여행하러 가기
