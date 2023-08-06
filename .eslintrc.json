@@ -11,9 +11,11 @@
   "extends": [
     "plugin:@typescript-eslint/recommended",
     "airbnb",
+    "plugin:react/recommended",
     "airbnb-typescript",
     "plugin:prettier/recommended",
-    "next/core-web-vitals"
+    "next/core-web-vitals",
+    "next"
   ],
   "rules": {
     // 'React' must be in scope when using JSX 에러 해결 (Next.js)

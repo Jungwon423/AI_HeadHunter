@@ -17,11 +17,12 @@ import {
 } from '../slices/travelInfoSlice'
 import { link } from 'fs'
 import { useRouter } from 'next/router'
-import { AppThunk } from '../store'
+import { AppDispatch } from '../store'
 import { setQueryInput } from '../slices/queryInputSlice'
 
 const InitialQuestionnairePage = () => {
-  const dispatch = useDispatch()
+  //const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>();
   const userId: string = useSelector(selectUserId)
   const city: string = useSelector(selectCity)
   const companion: string = useSelector(selectCompanion)
