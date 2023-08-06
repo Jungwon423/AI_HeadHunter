@@ -14,8 +14,7 @@
     "plugin:react/recommended",
     "airbnb-typescript",
     "plugin:prettier/recommended",
-    "next/core-web-vitals",
-    "next"
+    "next/core-web-vitals"
   ],
   "rules": {
     // 'React' must be in scope when using JSX 에러 해결 (Next.js)
