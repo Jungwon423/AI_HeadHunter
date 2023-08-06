@@ -148,6 +148,7 @@ export const fetchQueryAsync =
       const questionnaire = await fetchQuery(queryInput)
       dispatch(setQuestionnaire(questionnaire))
       if (questionnaire && questionnaire.travel_id) {
+        console.log('questionnaire.travel_id : ' + questionnaire.travel_id)
         dispatch(setTravelId(questionnaire.travel_id))
       }
       dispatch(setLoading('succeeded'))

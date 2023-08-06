@@ -38,6 +38,8 @@ const QuestionnairePage = () => {
   const queryInput: QueryInput = useSelector(selectQueryInput)
   console.log('2번째 query 화면 : queryInput: ', queryInput)
 
+  console.log('2번째 query 화면 : questionnaire: ', questionnaire)
+
   // 데이터 가져오기
   useEffect(() => {
     console.log('2번째 query 화면 : queryInput: ', queryInput)
@@ -85,12 +87,12 @@ const QuestionnairePage = () => {
   }
 
   if (questionnaire.finished) {
-    // return (
-    //   <div className="flex items-center justify-center h-screen">
-    //     <p>끝</p>
-    //   </div>
-    // )
     router.push('/travel')
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p>끝</p>
+      </div>
+    )
   }
 
   return (

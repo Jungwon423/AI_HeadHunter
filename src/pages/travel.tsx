@@ -18,6 +18,7 @@ const TravelCoursePage = () => {
   const dispatch = useDispatch<AppDispatch>()
   const userId: string = useSelector(selectUserId)
   const travelId: string = useSelector(selectTravelId)! // !: travelId is not null
+  console.log('travelId: ', travelId)
   const travelInfo = useSelector(selectTravelInfo)
 
   useEffect(() => {
@@ -27,7 +28,7 @@ const TravelCoursePage = () => {
     // }
     const recommendInput: recommendInput = {
       user: '6arap7v529',
-      travel_id: '64cf68c0af83b81942465af6',
+      travel_id: '64cf766262053d8bdc3aabef',
     }
     console.log('travelInput: ', recommendInput)
     dispatch(fetchTravelScheduleAsync(recommendInput))
