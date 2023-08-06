@@ -21,7 +21,8 @@ type GeocoderControlProps = Omit<
 
 /* eslint-disable complexity,max-statements */
 export default function GeocoderControl(props: GeocoderControlProps) {
-  const [marker, setMarker] = useState(null)
+  //const [marker, setMarker] = useState(null)
+  const [markerProps, setMarkerProps] = useState<MarkerProps | null>(null)
 
   const geocoder = useControl<MapboxGeocoder>(
     () => {
@@ -29,7 +30,7 @@ export default function GeocoderControl(props: GeocoderControlProps) {
         ...props,
         marker: false,
         accessToken: props.mapboxAccessToken,
-      })
+      } as GeocoderOptions)
       ctrl.on('loading', props.onLoading || (() => {}))
       ctrl.on('results', props.onResults || (() => {}))
       ctrl.on('result', (evt) => {
@@ -41,15 +42,16 @@ export default function GeocoderControl(props: GeocoderControlProps) {
           (result.center ||
             (result.geometry?.type === 'Point' && result.geometry.coordinates))
         if (location && props.marker) {
-          setMarker(
-            <Marker
-              {...props.marker}
-              longitude={location[0]}
-              latitude={location[1]}
-            />,
-          )
+          setMarkerProps({
+            ...(typeof props.marker === 'object' && props.marker),
+            longitude: location[0],
+            latitude: location[1],
+          })
+          {
+            markerProps && <Marker {...markerProps} />
+          }
         } else {
-          setMarker(null)
+          setMarkerProps(null)
         }
       })
       ctrl.on('error', props.onError || (() => {}))
@@ -130,7 +132,8 @@ export default function GeocoderControl(props: GeocoderControlProps) {
     //   geocoder.setWorldview(props.worldview);
     // }
   }
-  return marker
+  // 조건부 렌더링 코드를 함수 본문의 return 문으로 옮깁니다.
+  return <>{markerProps && <Marker {...markerProps} />}</>
 }
 
 const noop = () => {}
