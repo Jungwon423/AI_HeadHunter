@@ -76,11 +76,18 @@ function convertToPlaceInfo(attraction: any): placeInfo {
     image: attraction.img,
     description: attraction.description,
     time: 15,
+    summary: attraction.editorial_summary,
+    rating: attraction.rating,
+    ratingCount: attraction.user_ratings_total,
     hashtags: attraction.types,
+    phoneNumber: attraction.international_phone_number,
     location: attraction.formatted_address,
+    googleUrl: attraction.url,
     website: attraction.website,
+    openingHours: attraction.current_opening_hours.weekday_text,
     thought: attraction.thought,
-  }
+    wheelchair: attraction.wheelchair_accessible_entrance,
+  } as placeInfo
 }
 const initialState: TravelInfoState = {
   userId: '',
