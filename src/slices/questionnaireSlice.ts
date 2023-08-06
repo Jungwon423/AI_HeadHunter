@@ -51,7 +51,7 @@ export const fetchQuery = async (
   const config = {
     withCredentials: true,
   }
-  let API_URL: string = 'https://back.zideal.shop/travel/query'
+  let API_URL: string = 'https://back.zigdeal.shop/travel/query'
 
   console.log('queryInput : ' + JSON.stringify(queryInput))
 
