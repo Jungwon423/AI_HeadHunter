@@ -19,7 +19,7 @@ import {
 import { selectQueryInput, setQueryInput } from '../slices/queryInputSlice'
 import { link } from 'fs'
 import { useRouter } from 'next/router'
-import { AppThunk } from '../store'
+import { AppThunk, AppDispatch } from '../store'
 
 const QuestionnairePage = () => {
   const [count, setCount] = useState(0)
@@ -28,7 +28,8 @@ const QuestionnairePage = () => {
     setCount(count + 1)
   }
 
-  const dispatch = useDispatch()
+  //const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>();
   const userId: string = useSelector(selectUserId)
   const questionnaire: QuestionnaireState = useSelector(selectQuestionnaire)
   const { thought, question, options, travel_id, finished, loading, error } =
