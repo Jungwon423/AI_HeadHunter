@@ -9,6 +9,7 @@
     "node": true
   },
   "extends": [
+    "react-app",
     "plugin:@typescript-eslint/recommended",
     "airbnb",
     "airbnb-typescript",
