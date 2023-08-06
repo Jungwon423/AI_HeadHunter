@@ -29,7 +29,7 @@ const QuestionnairePage = () => {
   }
 
   //const dispatch = useDispatch()
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppDispatch>()
   const userId: string = useSelector(selectUserId)
   const questionnaire: QuestionnaireState = useSelector(selectQuestionnaire)
   const { thought, question, options, travel_id, finished, loading, error } =
@@ -50,19 +50,23 @@ const QuestionnairePage = () => {
     dispatch(fetchQueryAsync(queryInput))
   }, [dispatch, count])
 
-  const [selectedOption, setSelectedOption] = useState<string | undefined>(
+  const [selectedOption, setSelectedOption] = useState<string[] | undefined>(
     undefined,
   )
 
   const handleOptionClick = (option: string) => {
-    setSelectedOption(option)
+    if (selectedOption?.includes(option)) {
+      setSelectedOption(selectedOption.filter((item) => item !== option))
+    } else {
+      setSelectedOption([...(selectedOption ?? []), option])
+    }
   }
 
   const handleSubmit = () => {
     const queryInput: QueryInput = {
       travel_id: travel_id!,
       user: userId,
-      answer: [selectedOption] as string[],
+      answer: selectedOption as string[],
     }
     dispatch(setQueryInput(queryInput))
 
@@ -105,7 +109,9 @@ const QuestionnairePage = () => {
             <button
               key={index}
               className={`py-2 px-4 rounded-lg border-2 border-gray-400 mb-2 ${
-                selectedOption === option ? 'bg-indigo-400 text-white' : ''
+                selectedOption?.includes(option)
+                  ? 'bg-indigo-400 text-white'
+                  : ''
               }`}
               onClick={() => handleOptionClick(option)}
             >

@@ -1,11 +1,15 @@
-import { Action, configureStore, ThunkAction,AnyAction } from '@reduxjs/toolkit'
+import {
+  Action,
+  configureStore,
+  ThunkAction,
+  AnyAction,
+} from '@reduxjs/toolkit'
 
 import counterReducer from './slices/counterSlice'
 import travelInfoReducer from './slices/travelInfoSlice'
 import travelChatReducer from './slices/travelChatSlice'
 import questionnaireReducer from './slices/questionnaireSlice'
 import queryInputSlice from './slices/queryInputSlice'
-
 
 export const store = configureStore({
   reducer: {

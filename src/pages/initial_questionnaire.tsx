@@ -22,7 +22,7 @@ import { setQueryInput } from '../slices/queryInputSlice'
 
 const InitialQuestionnairePage = () => {
   //const dispatch = useDispatch()
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppDispatch>()
   const userId: string = useSelector(selectUserId)
   const city: string = useSelector(selectCity)
   const companion: string = useSelector(selectCompanion)
@@ -57,12 +57,16 @@ const InitialQuestionnairePage = () => {
     dispatch(fetchInitialQueryAsync(initialQueryInput))
   }, [dispatch])
 
-  const [selectedOption, setSelectedOption] = useState<string | undefined>(
+  const [selectedOption, setSelectedOption] = useState<string[] | undefined>(
     undefined,
   )
 
   const handleOptionClick = (option: string) => {
-    setSelectedOption(option)
+    if (selectedOption?.includes(option)) {
+      setSelectedOption(selectedOption.filter((item) => item !== option))
+    } else {
+      setSelectedOption([...(selectedOption ?? []), option])
+    }
   }
 
   // 제출하기 버튼 클릭 : 다음 화면으로 이동
@@ -71,7 +75,7 @@ const InitialQuestionnairePage = () => {
     const queryInput: QueryInput = {
       travel_id: travel_id!,
       user: userId,
-      answer: [selectedOption] as string[],
+      answer: selectedOption as string[],
     }
     dispatch(setQueryInput(queryInput))
 
@@ -102,7 +106,9 @@ const InitialQuestionnairePage = () => {
             <button
               key={index}
               className={`py-2 px-4 rounded-lg border-2 border-gray-400 mb-2 ${
-                selectedOption === option ? 'bg-indigo-400 text-white' : ''
+                selectedOption?.includes(option)
+                  ? 'bg-indigo-400 text-white'
+                  : ''
               }`}
               onClick={() => handleOptionClick(option)}
             >
