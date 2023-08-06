@@ -35,7 +35,7 @@ export const fetchInitialQuery = async (
     withCredentials: true,
   }
 
-  let API_URL: string = 'http://52.78.50.226:80/travel/initialQuery'
+  let API_URL: string = 'http://back.zigdeal.shop/travel/initialQuery'
 
   const response: AxiosResponse<QuestionnaireState> = await axios.post(
     API_URL,
