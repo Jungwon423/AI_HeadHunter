@@ -1,7 +1,7 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "prettier"],
+  "plugins": ["react","react-hooks","@typescript-eslint", "prettier"],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
@@ -9,7 +9,6 @@
     "node": true
   },
   "extends": [
-    "react-app",
     "plugin:@typescript-eslint/recommended",
     "airbnb",
     "airbnb-typescript",
