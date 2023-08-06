@@ -70,7 +70,7 @@ const TravelContainer = () => {
         </h2>
         <div className="flex px-2">
           <span className="mt-1 mx-1 mr-2">4.4</span>
-          {/* <StarRating rating={4.4} /> */}
+          <StarRating rating={4.4} />
           <span className="mt-1 ml-1">(61850)</span>
         </div>
         <div className="flex text-gray-500  px-2">

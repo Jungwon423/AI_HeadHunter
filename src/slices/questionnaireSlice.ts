@@ -52,7 +52,7 @@ export const fetchQuery = async (
   const config = {
     withCredentials: true,
   }
-  let API_URL: string = SERVER_API_URL + '/travel/query'
+  let API_URL: string = 'http://52.78.50.226:80/travel/query'
 
   console.log('queryInput : ' + JSON.stringify(queryInput))
 
