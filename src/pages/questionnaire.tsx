@@ -36,13 +36,6 @@ const QuestionnairePage = () => {
     questionnaire
   const queryInput: QueryInput = useSelector(selectQueryInput)
   console.log('2번째 query 화면 : queryInput: ', queryInput)
-  // const queryInput: QueryInput = {
-  //   answer: ['Outdoor activities like hiking'],
-  //   travel_id: '64ccde54c85af62bfb369afd',
-  //   user: '6arap7v529',
-  // }
-
-  const router = useRouter()
 
   // 데이터 가져오기
   useEffect(() => {

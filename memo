@@ -1,63 +1,9 @@
-// intialQuery
-
-{
-    "question": "What type of activities do you prefer in Osaka?",
-    "options": [
-        "Visiting historical sites",
-        "Exploring local food markets",
-        "Attending cultural events",
-        "Shopping",
-        "Outdoor activities like hiking"
-    ],
-    "thought": "Let's start by understanding the customer's preferences about the destination, Osaka. Since they are traveling with their girlfriend, it might be a romantic trip. Let's find out what kind of activities they prefer.",
-    "travel_id": "64cb8d1a31c04d00084edbce"
+interface Cluster {
+  attractions: Map<string, any>[]
+  restaurants: Map<string, any>[]
 }
 
-// query
-
-{
-    "question": "What type of historical sites are you interested in?",
-    "options": [
-        "Ancient history",
-        "Modern history",
-        "Both"
-    ],
-    "thought": "The customer is interested in exploring local food markets and shopping. Let's find out more about their interest in history. Are they interested in ancient history, modern history, or both? Also, let's find out what kind of shopping they prefer. Are they interested in high-end fashion, local crafts, or both?",
-    "travel_id": "64cb8d1a31c04d00084edbce",
-    "finished": false
+interface ResponseData {
+  cluster_attractions: Cluster[]
+  not_recommended_attractions: Cluster[]
 }
-
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchQuestionnaireAsync, selectQuestionnaire } from '../store/questionnaireSlice'
-
-const QuestionnairePage = () => {
-  const dispatch = useDispatch()
-  const questionnaire = useSelector(selectQuestionnaire)
-
-  useEffect(() => {
-    dispatch(fetchQuestionnaireAsync('123'))
-  }, [dispatch])
-
-  if (questionnaire.loading === 'pending') {
-    return <p>Loading...</p>
-  }
-
-  if (questionnaire.loading === 'failed') {
-    return <p>Error: {questionnaire.error}</p>
-  }
-
-  return (
-    <div>
-      <p>{questionnaire.thought}</p>
-      <p>{questionnaire.question}</p>
-      <ul>
-        {questionnaire.options.map((option) => (
-          <li key={option}>{option}</li>
-        ))}
-      </ul>
-    </div>
-  )
-}
-
-export default QuestionnairePage

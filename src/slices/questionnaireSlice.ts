@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState, AppThunk } from '../store'
 import axios, { AxiosResponse } from 'axios'
+import { SERVER_API_URL } from './api_url'
 
 export interface QuestionnaireState {
   thought?: string
@@ -35,7 +36,7 @@ export const fetchInitialQuery = async (
     withCredentials: true,
   }
 
-  let API_URL: string = 'http://52.78.50.226:80/travel/initialQuery'
+  let API_URL: string = SERVER_API_URL + '/travel/initialQuery'
 
   const response: AxiosResponse<QuestionnaireState> = await axios.post(
     API_URL,
@@ -51,7 +52,7 @@ export const fetchQuery = async (
   const config = {
     withCredentials: true,
   }
-  let API_URL: string = 'http://52.78.50.226:80/travel/query'
+  let API_URL: string = SERVER_API_URL + '/travel/query'
 
   console.log('queryInput : ' + JSON.stringify(queryInput))
 
@@ -157,5 +158,7 @@ export const fetchQueryAsync =
   }
 
 export const selectQuestionnaire = (state: RootState) => state.questionnaire
+export const selectTravelId = (state: RootState) =>
+  state.questionnaire.travel_id
 
 export default questionnaireSlice.reducer

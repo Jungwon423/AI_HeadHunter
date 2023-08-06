@@ -1,6 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createAction, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { RootState } from '../store'
+import { RootState, AppThunk } from '../store'
+import axios, { AxiosResponse } from 'axios'
+import { SERVER_API_URL } from './api_url'
+
+export interface recommendInput {
+  travel_id: string
+  user: string
+}
 
 export interface placeInfo {
   name: string
@@ -26,8 +33,48 @@ export interface TravelInfoState {
   travelSchedule: placeInfo[][]
   currentPlace: placeInfo | null
   currentDay: number
+  // loading 상태 저장
+  loading: 'idle' | 'pending' | 'succeeded' | 'failed'
+  // error 상태 저장
+  error: string | null
 }
 
+interface Cluster {
+  attractions: Map<string, any>[]
+  restaurants: Map<string, any>[]
+}
+
+interface ResponseData {
+  cluster_attractions: Cluster[]
+  not_recommended_attractions: Cluster[]
+}
+
+function processCluster(clusterArray: Cluster[]): placeInfo[][] {
+  return clusterArray.map((cluster) => {
+    const attractions = cluster.attractions.map(convertToPlaceInfo)
+    // const restaurants = cluster.restaurants.map(convertToPlaceInfo)
+    // return [...attractions, ...restaurants]
+    return [...attractions]
+  })
+}
+
+// placeInfo 객체와 JSON 객체 간의 변환을 수행하는 함수를 작성합니다.
+function convertToPlaceInfo(attraction: any): placeInfo {
+  return {
+    name: attraction.name,
+    coordinate: [
+      attraction.geometry.location.lat,
+      attraction.geometry.location.lng,
+    ],
+    image: attraction.img,
+    description: attraction.description,
+    time: 15,
+    hashtags: attraction.types,
+    location: attraction.formatted_address,
+    website: attraction.website,
+    thought: attraction.thought,
+  }
+}
 const initialState: TravelInfoState = {
   userId: '',
   city: '서울',
@@ -117,8 +164,34 @@ const initialState: TravelInfoState = {
       } as placeInfo,
     ],
   ],
+  loading: 'idle',
+  error: null,
   currentPlace: null,
   currentDay: 0,
+}
+
+export const fetchTravelSchedule = async (
+  recommendInput: recommendInput,
+): Promise<placeInfo[][]> => {
+  const config = {
+    withCredentials: true,
+  }
+
+  let API_URL: string = SERVER_API_URL + '/travel/recommend'
+
+  const response: AxiosResponse<ResponseData> = await axios.post(
+    API_URL,
+    recommendInput,
+    config,
+  )
+
+  console.log(response.data.cluster_attractions)
+
+  // 이중 for문을 사용하여 JSON 데이터를 placeInfo[][]로 변환합니다.
+  const placeInfos: placeInfo[][] = processCluster(
+    response.data.cluster_attractions,
+  )
+  return placeInfos
 }
 
 export const travelInfoSlice = createSlice({
@@ -162,8 +235,47 @@ export const travelInfoSlice = createSlice({
     setCurrentDay: (state, action: PayloadAction<number>) => {
       state.currentDay = action.payload
     },
+    setLoading: (
+      state,
+      action: PayloadAction<'idle' | 'pending' | 'succeeded' | 'failed'>,
+    ) => {
+      state.loading = action.payload
+    },
+    setError: (state, action: PayloadAction<string | null>) => {
+      state.error = action.payload
+    },
   },
 })
+
+export const fetchTravelScheduleAsync =
+  (recommendInput: recommendInput): AppThunk =>
+  async (
+    dispatch: (arg0: {
+      payload: TravelInfoState | string | placeInfo[][] | null
+      type:
+        | 'travelInfo/setUserId'
+        | 'travelInfo/setCity'
+        | 'travelInfo/setDuration'
+        | 'travelInfo/setBudget'
+        | 'travelInfo/setLocation'
+        | 'travelInfo/setCoordinate'
+        | 'travelInfo/setCompanion'
+        | 'travelInfo/setTravelStyle'
+        | 'travelInfo/setTravelSchedule'
+        | 'travelInfo/setLoading'
+        | 'travelInfo/setError'
+    }) => void,
+  ) => {
+    try {
+      dispatch(setLoading('pending'))
+      const travelSchedule = await fetchTravelSchedule(recommendInput)
+      dispatch(setTravelSchedule(travelSchedule))
+      dispatch(setLoading('succeeded'))
+    } catch (error: any) {
+      dispatch(setError(JSON.stringify(error)))
+      dispatch(setLoading('failed'))
+    }
+  }
 
 export const {
   setUserId,
@@ -177,7 +289,11 @@ export const {
   setTravelSchedule,
   handleCurrentPlace,
   setCurrentDay,
+  setError,
+  setLoading,
 } = travelInfoSlice.actions
+
+export const selectTravelInfo = (state: RootState) => state.travelInfo
 
 export const selectUserId = (state: RootState) => state.travelInfo.userId
 export const selectCity = (state: RootState) => state.travelInfo.city
