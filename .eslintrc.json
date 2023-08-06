@@ -17,6 +17,8 @@
     "next/core-web-vitals"
   ],
   "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     // 'React' must be in scope when using JSX 에러 해결 (Next.js)
     "react/react-in-jsx-scope": "off",
     // ts파일에서 tsx구문 허용 (Next.js)
