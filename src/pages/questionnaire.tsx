@@ -22,6 +22,7 @@ import { useRouter } from 'next/router'
 import { AppThunk, AppDispatch } from '../store'
 
 const QuestionnairePage = () => {
+  const router = useRouter()
   const [count, setCount] = useState(0)
 
   const nextPage = () => {
@@ -84,11 +85,12 @@ const QuestionnairePage = () => {
   }
 
   if (questionnaire.finished) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <p>끝</p>
-      </div>
-    )
+    // return (
+    //   <div className="flex items-center justify-center h-screen">
+    //     <p>끝</p>
+    //   </div>
+    // )
+    router.push('/travel')
   }
 
   return (
