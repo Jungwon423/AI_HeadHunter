@@ -130,6 +130,9 @@ export const selectAttractionQueryError = (state: RootState) =>
 export const selectAttractionQueryResultList = (state: RootState) =>
   state.attractionQuery.resultList
 
+export const selectAttractionQueryTravelId = (state: RootState) =>
+  state.attractionQuery.travel_id
+
 export const { setAttractionQuery, setLoading, setError, setResultList } =
   attractionQuerySlice.actions
 
