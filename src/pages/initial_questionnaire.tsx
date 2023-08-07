@@ -15,7 +15,6 @@ import {
   selectDuration,
   selectBudget,
 } from '../slices/travelInfoSlice'
-import { link } from 'fs'
 import { useRouter } from 'next/router'
 import { AppDispatch } from '../store'
 import { setQueryInput } from '../slices/queryInputSlice'
