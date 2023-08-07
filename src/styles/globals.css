@@ -85,3 +85,5 @@ custom-popup {
     pointer-events: none;
   }
 }
+
+@import './datepicker.css';
