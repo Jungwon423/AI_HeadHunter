@@ -33,7 +33,7 @@ const Preference = () => {
   const recommendInput: recommendInputV2 = {
     travel_id: travelId,
     user: userId,
-    resultList: resultList,
+    answers: resultList,
   }
 
   console.log('recommendInput: ', recommendInput)
@@ -42,7 +42,7 @@ const Preference = () => {
     dispatch(fetchPreferenceAsync(recommendInput))
   }, [])
 
-  if (travelInfo.loading === 'pending') {
+  if (travelInfo.preferenceLoading === 'pending') {
     return (
       <div className="flex items-center justify-center h-screen">
         <p>Loading...</p>
@@ -50,7 +50,7 @@ const Preference = () => {
     )
   }
 
-  if (travelInfo.loading === 'failed') {
+  if (travelInfo.preferenceLoading === 'failed') {
     return <p>Error: {travelInfo.error}</p>
   }
 
