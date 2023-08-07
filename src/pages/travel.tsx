@@ -22,14 +22,14 @@ const TravelCoursePage = () => {
   const travelInfo = useSelector(selectTravelInfo)
 
   useEffect(() => {
-    // const recommendInput: recommendInput = {
-    //   user: userId,
-    //   travel_id: travelId,
-    // }
     const recommendInput: recommendInput = {
-      user: '6arap7v529',
-      travel_id: '64cf766262053d8bdc3aabef',
+      user: userId,
+      travel_id: travelId,
     }
+    // const recommendInput: recommendInput = {
+    //   user: '6arap7v529',
+    //   travel_id: '64cf766262053d8bdc3aabef',
+    // }
     console.log('travelInput: ', recommendInput)
     dispatch(fetchTravelScheduleAsync(recommendInput))
   }, [dispatch])
