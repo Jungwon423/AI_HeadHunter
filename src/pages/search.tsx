@@ -24,7 +24,7 @@ import LocalStorage from '../index_components/LocalStorage'
 const TravelTitle = () => (
   <div className="text-center py-10 sm:py-15 md:py-20 bg-indigo-400 rounded-tl-xl rounded-tr-xl">
     <h1 className="text-lg sm:text-xl md:text-3xl font-extrabold tracking-tight text-white">
-      어떤 스타일의 여행을 할 계획인가요?
+      어떤 스타일의 여행을 할 계획이신가요?
     </h1>
   </div>
 )
@@ -36,7 +36,6 @@ export default function SearchPage() {
   const [travelDuration, setTravelDuration] = useState<number>(0)
   const handleDurationChange = (value: number) => {
     setTravelDuration(value)
-    console.log(`여행 기간: ${value}일`)
   }
 
   const [selectedCompanion, setSelectedCompanion] = useState<string>('')
@@ -73,14 +72,27 @@ export default function SearchPage() {
       </Head>
       <MyNavbar />
       <SearchHero />
-      <div className="absolute top-80 sm:top-80 md:top-96 inset-20 justify-center items-center">
+      <div className="absolute top-72 sm:top-80 md:top-2/3 xl:top-3/4 inset-0 sm:inset-10 md:inset-30 xl:inset-40">
         <div className="bg-white min-w-4xl max-w-7xl rounded-xl shadow-xl">
+          {/* <div className="absolute top-20 right-2">
+            <Image
+              src="/assets/images/robot2.png"
+              alt="robot2"
+              width="230"
+              height="300"
+              objectPosition="center"
+              quality={100}
+            ></Image>
+          </div> */}
+
           <TravelTitle />
+
           <TravelDuration onDurationChange={handleDurationChange} />
           <TravelCompanion
             selectedCompanion={selectedCompanion}
             onCompanionClick={handleCompanionClick}
           />
+
           {/* <TravelStyles
             selectedStyles={selectedStyles}
             onStylesClick={handleStylesClick}
