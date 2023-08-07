@@ -5,12 +5,18 @@ import axios, { AxiosResponse } from 'axios'
 import { SERVER_API_URL } from './api_url'
 import { ZeroOrOne } from './imageQuerySlice'
 
+export interface preference {
+  inferring: string
+  conclusion: string
+}
+
 export interface recommendInput {
   travel_id: string
   user: string
 }
 
 export interface recommendInputV2 {
+  user: string
   travel_id: string
   resultList: ZeroOrOne[]
 }
@@ -50,6 +56,7 @@ export interface TravelInfoState {
   loading: 'idle' | 'pending' | 'succeeded' | 'failed'
   // error 상태 저장
   error: string | null
+  preference: preference
 }
 
 interface Cluster {
@@ -188,6 +195,28 @@ const initialState: TravelInfoState = {
   error: null,
   currentPlace: null,
   currentDay: 0,
+  preference: {
+    inferring: '',
+    conclusion: '',
+  } as preference,
+}
+
+export const fetchPreference = async (
+  recommendInput: recommendInput,
+): Promise<preference> => {
+  const config = {
+    withCredentials: true,
+  }
+
+  let API_URL: string = SERVER_API_URL + '/travel/attractionQueryAnswer'
+
+  const response: AxiosResponse<preference> = await axios.post(
+    API_URL,
+    recommendInput,
+    config,
+  )
+
+  return response.data
 }
 
 export const fetchTravelScheduleV2 = async (
@@ -284,6 +313,9 @@ export const travelInfoSlice = createSlice({
     setError: (state, action: PayloadAction<string | null>) => {
       state.error = action.payload
     },
+    setPreference: (state, action: PayloadAction<preference>) => {
+      state.preference = action.payload
+    },
   },
 })
 
@@ -317,6 +349,37 @@ export const fetchTravelScheduleAsync =
     }
   }
 
+export const fetchPreferenceAsync =
+  (recommendInput: recommendInput): AppThunk =>
+  async (
+    dispatch: (arg0: {
+      payload: TravelInfoState | string | placeInfo[][] | null | preference
+      type:
+        | 'travelInfo/setUserId'
+        | 'travelInfo/setCity'
+        | 'travelInfo/setDuration'
+        | 'travelInfo/setBudget'
+        | 'travelInfo/setLocation'
+        | 'travelInfo/setCoordinate'
+        | 'travelInfo/setCompanion'
+        | 'travelInfo/setTravelStyle'
+        | 'travelInfo/setTravelSchedule'
+        | 'travelInfo/setLoading'
+        | 'travelInfo/setError'
+        | 'travelInfo/setPreference'
+    }) => void,
+  ) => {
+    try {
+      dispatch(setLoading('pending'))
+      const preference = await fetchPreference(recommendInput)
+      dispatch(setPreference(preference))
+      dispatch(setLoading('succeeded'))
+    } catch (error: any) {
+      dispatch(setError(JSON.stringify(error)))
+      dispatch(setLoading('failed'))
+    }
+  }
+
 export const {
   setUserId,
   setCity,
@@ -331,6 +394,7 @@ export const {
   setCurrentDay,
   setError,
   setLoading,
+  setPreference,
 } = travelInfoSlice.actions
 
 export const selectTravelInfo = (state: RootState) => state.travelInfo
@@ -351,5 +415,7 @@ export const selectCurrentPlace = (state: RootState) =>
   state.travelInfo.currentPlace
 export const selectCurrentDay = (state: RootState) =>
   state.travelInfo.currentDay
+export const selectPreference = (state: RootState) =>
+  state.travelInfo.preference
 
 export default travelInfoSlice.reducer

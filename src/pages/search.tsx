@@ -116,7 +116,7 @@ export default function SearchPage() {
                 // const data = await res.json()
                 // console.log('API 응답 : ')
                 // console.log(data)
-                router.push('/initial_questionnaire')
+                router.push('/image_query')
               }}
             >
               여행하러 가기
