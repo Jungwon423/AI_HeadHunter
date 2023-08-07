@@ -10,6 +10,7 @@ import travelInfoReducer from './slices/travelInfoSlice'
 import travelChatReducer from './slices/travelChatSlice'
 import questionnaireReducer from './slices/questionnaireSlice'
 import queryInputSlice from './slices/queryInputSlice'
+import attractionQuerySlice from './slices/imageQuerySlice'
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
     travelChat: travelChatReducer,
     questionnaire: questionnaireReducer,
     queryInput: queryInputSlice,
+    attractionQuery: attractionQuerySlice,
   },
   // middleware: (getDefaultMiddleware) =>
   // getDefaultMiddleware().concat(thunk),

@@ -3,10 +3,16 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { RootState, AppThunk } from '../store'
 import axios, { AxiosResponse } from 'axios'
 import { SERVER_API_URL } from './api_url'
+import { ZeroOrOne } from './imageQuerySlice'
 
 export interface recommendInput {
   travel_id: string
   user: string
+}
+
+export interface recommendInputV2 {
+  travel_id: string
+  resultList: ZeroOrOne[]
 }
 
 export interface placeInfo {
@@ -24,7 +30,7 @@ export interface placeInfo {
   googleUrl?: string //url, 구글 url
   website: string //website, 관광지 website
   openingHours?: string[] //current_opening_hours -> weekday_text, 운영 시간
-  thought: string //thought, ai의 추천 이유
+  thought?: string //thought, ai의 추천 이유
   wheelchair?: boolean //wheelchair_accessible_entrance, 휠체어 이용 가능 여부
 }
 
@@ -56,7 +62,7 @@ interface ResponseData {
   not_recommended_attractions: Cluster[]
 }
 
-function processCluster(clusterArray: Cluster[]): placeInfo[][] {
+export function processCluster(clusterArray: Cluster[]): placeInfo[][] {
   return clusterArray.map((cluster) => {
     const attractions = cluster.attractions.map(convertToPlaceInfo)
     // const restaurants = cluster.restaurants.map(convertToPlaceInfo)
@@ -66,7 +72,7 @@ function processCluster(clusterArray: Cluster[]): placeInfo[][] {
 }
 
 // placeInfo 객체와 JSON 객체 간의 변환을 수행하는 함수를 작성합니다.
-function convertToPlaceInfo(attraction: any): placeInfo {
+export function convertToPlaceInfo(attraction: any): placeInfo {
   return {
     name: attraction.name,
     coordinate: [
@@ -85,7 +91,7 @@ function convertToPlaceInfo(attraction: any): placeInfo {
     // googleUrl: attraction.url,
     website: attraction.website,
     // openingHours: attraction.current_opening_hours.weekday_text,
-    thought: attraction.thought,
+    // thought: attraction.thought,
     // wheelchair: attraction.wheelchair_accessible_entrance,
   } as placeInfo
 }
@@ -182,6 +188,26 @@ const initialState: TravelInfoState = {
   error: null,
   currentPlace: null,
   currentDay: 0,
+}
+
+export const fetchTravelScheduleV2 = async (
+  recommendInput: recommendInputV2,
+): Promise<placeInfo[][]> => {
+  const config = {
+    withCredentials: true,
+  }
+
+  let API_URL: string = SERVER_API_URL + '/travel/recommendV2'
+
+  const response: AxiosResponse<ResponseData> = await axios.post(
+    API_URL,
+    recommendInput,
+    config,
+  )
+
+  // TODO
+  console.log(response.data.cluster_attractions)
+  return []
 }
 
 export const fetchTravelSchedule = async (
