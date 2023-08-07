@@ -5,6 +5,23 @@ import axios, { AxiosResponse } from 'axios'
 import { SERVER_API_URL } from './api_url'
 import { ZeroOrOne } from './imageQuerySlice'
 
+interface OpeningHours {
+  open_now: boolean
+  periods: {
+    open: { day: number; time: string }
+    close: { day: number; time: string }
+  }[]
+  weekday_text: string[]
+}
+interface Review {
+  author_name: string
+  author_url: string
+  profile_photo_url: string
+  rating: number
+  text: string
+  weekday_text: string[]
+}
+
 export interface preference {
   inferring: string
   conclusion: string
@@ -32,12 +49,13 @@ export interface placeInfo {
   ratingCount?: number //user_ratings_total, 구글 별점 갯수
   hashtags: string[] //types, 를 해쉬태그로
   phoneNumber?: number //international_phone_number, 전화번호
-  location: string //formatted address
+  location?: string //formatted address
   googleUrl?: string //url, 구글 url
-  website: string //website, 관광지 website
-  openingHours?: string[] //current_opening_hours -> weekday_text, 운영 시간
+  website?: string //website, 관광지 website
+  openingHours?: OpeningHours //current_opening_hours -> weekday_text, 운영 시간
   thought?: string //thought, ai의 추천 이유
   wheelchair?: boolean //wheelchair_accessible_entrance, 휠체어 이용 가능 여부
+  reviews?: Review[]
 }
 
 export interface TravelInfoState {
@@ -93,17 +111,18 @@ export function convertToPlaceInfo(attraction: any): placeInfo {
     image: attraction.img,
     description: attraction.description,
     time: 15,
-    // summary: attraction.editorial_summary,
-    // rating: attraction.rating,
-    // ratingCount: attraction.user_ratings_total,
+    summary: attraction.editorial_summary['overview'],
+    rating: attraction.rating,
+    ratingCount: attraction.user_ratings_total,
     hashtags: attraction.types,
-    // phoneNumber: attraction.international_phone_number,
+    phoneNumber: attraction.international_phone_number,
     location: attraction.formatted_address,
-    // googleUrl: attraction.url,
+    googleUrl: attraction.url,
     website: attraction.website,
-    // openingHours: attraction.current_opening_hours.weekday_text,
-    // thought: attraction.thought,
-    // wheelchair: attraction.wheelchair_accessible_entrance,
+    openingHours: attraction.current_opening_hours,
+    thought: attraction.thought,
+    wheelchair: attraction.wheelchair_accessible_entrance,
+    reviews: attraction.reviews,
   } as placeInfo
 }
 const initialState: TravelInfoState = {
@@ -266,6 +285,7 @@ export const fetchTravelSchedule = async (
   const placeInfos: placeInfo[][] = processCluster(
     response.data.cluster_attractions,
   )
+  console.log(placeInfos)
   return placeInfos
 }
 

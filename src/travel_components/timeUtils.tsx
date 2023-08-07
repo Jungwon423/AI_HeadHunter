@@ -22,11 +22,12 @@ export function stringToTime(timeString: string): Date {
   }
   const date = new Date()
   date.setHours(hours, parseInt(minute, 10), 0, 0)
-  console.log(date)
+  // console.log(date)
   return date
 }
 
-export function isOpenNow(operatingHours: string[]): boolean {
+export function isOpenNow(operatingHours: string[] | undefined): boolean {
+  if (operatingHours == undefined) return false
   const now = new Date()
   const today = now.getDay()
   const currentDay = getDayString(today)

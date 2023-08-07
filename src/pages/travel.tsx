@@ -27,12 +27,12 @@ const TravelCoursePage = () => {
   const dispatch = useDispatch<AppDispatch>()
   const userId: string = useSelector(selectUserId)
   // const userId: string = '6arap7v529'
-  const travelId: string = useSelector(selectAttractionQueryTravelId) // !: travelId is not null
-  // const travelId: string = '64d0c036661027b73547a58c'
+  //const travelId: string = useSelector(selectAttractionQueryTravelId) // !: travelId is not null
+  const travelId: string = '64d123039a3e0eaa35903b8e'
 
   // console.log('travelId: ', travelId)
-  const resultList = useSelector(selectAttractionQueryResultList)
-  // const resultList = [1, 1, 1, 1, 1, 1, 1, 1]
+  //const resultList = useSelector(selectAttractionQueryResultList)
+  const resultList = [1, 1, 1, 1, 1, 1, 1, 1]
 
   const preference = useSelector(selectPreference)
   const travelInfo = useSelector(selectTravelInfo)
