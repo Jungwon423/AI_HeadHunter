@@ -69,7 +69,7 @@ const ImageQuery = () => {
   }
 
   if (count === 8) {
-    router.push('/preference')
+    router.push('/travel')
     return (
       <div className="flex items-center justify-center h-screen">
         <p>query complete!</p>

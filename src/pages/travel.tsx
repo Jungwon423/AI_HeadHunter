@@ -25,17 +25,14 @@ import {
 
 const TravelCoursePage = () => {
   const dispatch = useDispatch<AppDispatch>()
-  // const userId: string = useSelector(selectUserId)
-  // "6arap7v529"
-  const userId: string = '6arap7v529'
-  // const travelId: string = useSelector(selectAttractionQueryTravelId) // !: travelId is not null
-  // "64d0c036661027b73547a58c"
-  const travelId: string = '64d0c036661027b73547a58c'
+  const userId: string = useSelector(selectUserId)
+  // const userId: string = '6arap7v529'
+  const travelId: string = useSelector(selectAttractionQueryTravelId) // !: travelId is not null
+  // const travelId: string = '64d0c036661027b73547a58c'
 
   // console.log('travelId: ', travelId)
-  // const resultList = useSelector(selectAttractionQueryResultList)
-  // [1, 1, 1, 1, 1, 1, 1, 1]
-  const resultList = [1, 1, 1, 1, 1, 1, 1, 1]
+  const resultList = useSelector(selectAttractionQueryResultList)
+  // const resultList = [1, 1, 1, 1, 1, 1, 1, 1]
 
   const preference = useSelector(selectPreference)
   const travelInfo = useSelector(selectTravelInfo)
@@ -62,12 +59,15 @@ const TravelCoursePage = () => {
       user: userId,
       travel_id: travelId,
     }
-    if (scheduleLoaded === false && preferenceLoaded === true) {
+    if (
+      scheduleLoaded === false &&
+      travelInfo.preferenceLoading === 'succeeded'
+    ) {
       console.log('travelInput: ', recommendInput)
       dispatch(fetchTravelScheduleAsync(recommendInput))
       setScheduleLoaded(true)
     }
-  }, [preferenceLoaded])
+  }, [travelInfo.preferenceLoading])
 
   if (travelInfo.preferenceLoading === 'pending') {
     return (
