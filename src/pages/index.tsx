@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import MyNavbar from '../search_components/MyNavbar'
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
-import React from 'react'
+import React, { useState } from 'react'
 import MapboxGeocoderContainer from '../index_components/MapboxGeocoderContainer'
 import MainTitle from '../index_components/MainTitle'
 import TitleImage from '../index_components/TitleImage'
@@ -9,56 +9,31 @@ import ImageExplain from '../index_components/ImageExplain'
 import { Footer } from '../footer/Footer'
 import { useSelector, useDispatch } from 'react-redux'
 import { decrement, increment, selectValue } from '../slices/counterSlice'
-import Slider from 'react-slick'
-import Responsive from '../index_components/ex'
-import Slick from '../index_components/Slick'
+import Carousel from '../index_components/Carousel'
+import Popup from '../index_components/Popup'
+import DatePicker from '../index_components/DatePicker'
 
-interface itemsProps {
-  item: string
-  name: string
-}
-
-const items: itemsProps[] = [
-  {
-    item: 'http://placehold.it/1200x400',
-    name: '이미지01',
-  },
-  {
-    item: 'http://placehold.it/1200x400/ff0000',
-    name: '이미지02',
-  },
-  {
-    item: 'http://placehold.it/1200x400/00ffff',
-    name: '이미지03',
-  },
-]
-
-function Item() {
-  return (
-    <Slick>
-      {items.map((item, index) => (
-        <div key={index}>
-          <img src={item.item} alt={item.name} />
-        </div>
-      ))}
-    </Slick>
-  )
-}
 export default function Home() {
+  const [isPopupOpen, setIsPopupOpen] = useState(false)
+
+  const openPopup = () => {
+    setIsPopupOpen(true)
+  }
+
+  const closePopup = () => {
+    setIsPopupOpen(false)
+  }
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null)
+
+  const handleDateChange = (date: Date | null) => {
+    setSelectedDate(date)
+  }
+
   const TOKEN =
     'pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtrcGNwdXQwNm1oM2xvZTJ5Z2Q4djk5In0._rw_aFaBfUjQC-tjkV53Aw'
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  }
-
   return (
     <div className="bg-white min-h-screen">
-      {/* Head section */}
       <Head>
         <title>Triper</title>
         <link rel="icon" href="/favicon.ico" />
@@ -66,48 +41,40 @@ export default function Home() {
 
       {/* Navigation section */}
       <MyNavbar />
-
-      {/* Main content section */}
       <main className="w-3/4 mx-auto py-16 px-4 sm:px-6 lg:px-8">
         <MainTitle></MainTitle>
-
-        <MapboxGeocoderContainer accessToken={TOKEN} />
-        <div className="container mx-auto">
-          <h1 className="text-4xl mb-8">Auto Carousel Demo</h1>
-        </div>
-        <Responsive></Responsive>
-        <Slick>
-          {items.map((item, index) => (
-            <div key={index}>
-              <img src={item.item} alt={item.name} />
-            </div>
-          ))}
-        </Slick>
-        <div>
-          <h2> Single Item</h2>
-          <Slider {...settings}>
-            <div>
-              <h3>1</h3>
-            </div>
-            <div>
-              <h3>2</h3>
-            </div>
-            <div>
-              <h3>3</h3>
-            </div>
-            <div>
-              <h3>4</h3>
-            </div>
-            <div>
-              <h3>5</h3>
-            </div>
-            <div>
-              <h3>6</h3>
-            </div>
-          </Slider>
+        <div className="py-10">
+          <MapboxGeocoderContainer accessToken={TOKEN} />
         </div>
 
         <TitleImage></TitleImage>
+        <div className="mx-auto">
+          <button
+            onClick={openPopup}
+            className="px-4 py-2 bg-blue-600 text-white rounded-md"
+          >
+            Open Popup
+          </button>
+          <Popup isOpen={isPopupOpen} onClose={closePopup}>
+            {/* 내용을 여기에 입력하세요. */}
+            <h1 className="text-xl mb-4">Popup Title</h1>
+          </Popup>
+        </div>
+        <DatePicker
+          selectedDate={selectedDate}
+          onDateChange={handleDateChange}
+        />
+        {selectedDate && (
+          <p className="mt-4">
+            선택한 날짜:{' '}
+            <strong>{selectedDate.toLocaleDateString('ko-KR')}</strong>
+          </p>
+        )}
+
+        <div className="md:text-base sm:text-xl xl:text-2xl font-bold">
+          추천 여행지
+        </div>
+        <Carousel></Carousel>
         <ImageExplain
           left={true}
           h1Text={''}
