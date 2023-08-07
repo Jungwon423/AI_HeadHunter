@@ -53,7 +53,8 @@ function Carousel() {
           <Image
             src="/assets/images/travel.jpg"
             alt="travel"
-            layout="fill"
+            width={500}
+            height={500}
             objectPosition="center"
           />
         </div>
@@ -61,7 +62,8 @@ function Carousel() {
           <Image
             src="/assets/images/travel2.jpg"
             alt="travel"
-            layout="fill"
+            width={500}
+            height={500}
             objectPosition="center"
             quality={100}
           />
@@ -70,25 +72,28 @@ function Carousel() {
           <Image
             src="/assets/images/eiffel-tower.webp"
             alt="travel"
-            layout="fill"
+            width={500}
+            height={500}
             objectPosition="center"
             quality={100}
           />
         </div>
         <div>
           <Image
-            src="/assets/images/statue-of-liberty.webp"
+            src="/assets/images/statue-of-liberty.jpg"
             alt="travel"
-            layout="fill"
+            width={500}
+            height={500}
             objectPosition="center"
             quality={100}
           />
         </div>
         <div>
           <Image
-            src="/assets/images/sydney-opera-house.webp"
+            src="/assets/images/sydney-opera-house.jpg"
             alt="travel"
-            layout="fill"
+            width={500}
+            height={500}
             objectPosition="center"
             quality={100}
           />
@@ -97,7 +102,8 @@ function Carousel() {
           <Image
             src="/assets/images/osaka.webp "
             alt="travel"
-            layout="fill"
+            width={500}
+            height={500}
             objectPosition="center"
             quality={100}
           />

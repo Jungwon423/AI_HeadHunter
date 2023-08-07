@@ -53,7 +53,7 @@ export default function Home() {
             onClick={openPopup}
             className="px-4 py-2 bg-blue-600 text-white rounded-md"
           >
-            Open Popup
+            오사카 버튼
           </button>
           <Popup isOpen={isPopupOpen} onClose={closePopup}>
             {/* 내용을 여기에 입력하세요. */}
