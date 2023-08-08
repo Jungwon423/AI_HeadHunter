@@ -23,12 +23,6 @@ import persistedAttractionQueryReducer from './slices/imageQuerySlice'
 export const store = configureStore({
   reducer: {
     tab: tabSlice,
-    counter: counterReducer,
-    travelInfo: travelInfoReducer,
-    travelChat: travelChatReducer,
-    questionnaire: questionnaireReducer,
-    queryInput: queryInputSlice,
-    attractionQuery: attractionQuerySlice,
     counter: persistedCounterReducer,
     travelInfo: persistedTravelInfoReducer,
     travelChat: persistedTravelChatReducer,
