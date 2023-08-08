@@ -1,6 +1,5 @@
-import DraggableScrollbar from '../DraggableScrollbar'
 import { useSelector, useDispatch } from 'react-redux'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import {
   handleCurrentPlace,
   placeInfo,
@@ -10,13 +9,12 @@ import {
   selectTravelSchedule,
 } from '../../slices/travelInfoSlice'
 
-const TravelSchedule: placeInfo[][] = useSelector(selectTravelSchedule)
-const currentDay: number = useSelector(selectCurrentDay)
-const dispatch = useDispatch()
-
 const GuideContainer = () => {
+  const currentDay: number = useSelector(selectCurrentDay)
+  const TravelSchedule: placeInfo[][] = useSelector(selectTravelSchedule)
+  const dispatch = useDispatch()
   return (
-    <div>
+    <div className="flex flex-col justify-center">
       {TravelSchedule[currentDay - 1]?.map((placeInfo) => (
         <div key={placeInfo.name} className="px-3 justify-center">
           <button
