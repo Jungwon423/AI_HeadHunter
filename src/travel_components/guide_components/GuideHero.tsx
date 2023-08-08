@@ -1,7 +1,6 @@
-import DraggableScrollbar from '../DraggableScrollbar'
 import { useSelector, useDispatch } from 'react-redux'
-import Image from 'next/image'
 import { selectCity, selectDuration } from '../../slices/travelInfoSlice'
+import Image from 'next/legacy/image'
 
 const GuideHero = () => {
   const city: String = useSelector(selectCity)

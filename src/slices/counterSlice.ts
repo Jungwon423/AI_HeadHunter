@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../store'
+import { persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
 
 export interface CounterState {
   value: number
@@ -30,9 +32,19 @@ export const counterSlice = createSlice({
   },
 })
 
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+
+const persistedCounterReducer = persistReducer(
+  persistConfig,
+  counterSlice.reducer,
+)
+
 // Action creators are generated for each case reducer function
 export const { increment, decrement, incrementByAmount } = counterSlice.actions
 
 export const selectValue = (state: RootState) => state.counter.value
 
-export default counterSlice.reducer
+export default persistedCounterReducer

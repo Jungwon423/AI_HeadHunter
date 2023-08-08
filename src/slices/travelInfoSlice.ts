@@ -4,6 +4,8 @@ import { RootState, AppThunk } from '../store'
 import axios, { AxiosResponse } from 'axios'
 import { SERVER_API_URL } from './api_url'
 import { ZeroOrOne } from './imageQuerySlice'
+import { persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
 
 interface OpeningHours {
   open_now: boolean
@@ -428,6 +430,16 @@ export const {
   setPreferenceError,
 } = travelInfoSlice.actions
 
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+
+const persistedTravelInfoReducer = persistReducer(
+  persistConfig,
+  travelInfoSlice.reducer,
+)
+
 export const selectTravelInfo = (state: RootState) => state.travelInfo
 
 export const selectUserId = (state: RootState) => state.travelInfo.userId
@@ -454,4 +466,4 @@ export const selectPreferenceLoading = (state: RootState) =>
 export const selectPreferenceError = (state: RootState) =>
   state.travelInfo.preferenceError
 
-export default travelInfoSlice.reducer
+export default persistedTravelInfoReducer

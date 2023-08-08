@@ -10,6 +10,8 @@ import { SERVER_API_URL } from './api_url'
 import axios from 'axios'
 import { init } from 'next/dist/compiled/@vercel/og/satori'
 import App from 'next/app'
+import { persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
 
 export type ZeroOrOne = 0 | 1
 
@@ -118,6 +120,16 @@ export const fetchAttractionQueryAsync =
     }
   }
 
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+
+const persistedAttractionQueryReducer = persistReducer(
+  persistConfig,
+  attractionQuerySlice.reducer,
+)
+
 export const selectAttractionQueryList = (state: RootState) =>
   state.attractionQuery.query_list
 
@@ -138,4 +150,4 @@ export const { setAttractionQuery, setLoading, setError, setResultList } =
 
 export const selectAttractionQuery = (state: RootState) => state.attractionQuery
 
-export default attractionQuerySlice.reducer
+export default persistedAttractionQueryReducer

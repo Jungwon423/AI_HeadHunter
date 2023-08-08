@@ -12,6 +12,13 @@ import questionnaireReducer from './slices/questionnaireSlice'
 import queryInputSlice from './slices/queryInputSlice'
 import attractionQuerySlice from './slices/imageQuerySlice'
 import tabSlice from './slices/tabSlice'
+import persistedCounterReducer from './slices/counterSlice'
+import persistedAttractionQuerySlice from './slices/imageQuerySlice'
+import persistedTravelInfoReducer from './slices/travelInfoSlice'
+import persistedTravelChatReducer from './slices/travelChatSlice'
+import persistedQuestionnaireReducer from './slices/questionnaireSlice'
+import persistedQueryInputReducer from './slices/queryInputSlice'
+import persistedAttractionQueryReducer from './slices/imageQuerySlice'
 
 export const store = configureStore({
   reducer: {
@@ -22,6 +29,12 @@ export const store = configureStore({
     questionnaire: questionnaireReducer,
     queryInput: queryInputSlice,
     attractionQuery: attractionQuerySlice,
+    counter: persistedCounterReducer,
+    travelInfo: persistedTravelInfoReducer,
+    travelChat: persistedTravelChatReducer,
+    questionnaire: persistedQuestionnaireReducer,
+    queryInput: persistedQueryInputReducer,
+    attractionQuery: persistedAttractionQueryReducer,
   },
   // middleware: (getDefaultMiddleware) =>
   // getDefaultMiddleware().concat(thunk),

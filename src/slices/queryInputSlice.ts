@@ -1,6 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { QueryInput } from './questionnaireSlice'
 import { RootState } from '../store'
+import { persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
 
 export const queryInputInitialState: QueryInput = {
   travel_id: '',
@@ -20,8 +22,18 @@ export const queryInputSlice = createSlice({
   },
 })
 
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+
+const persistedQueryInputReducer = persistReducer(
+  persistConfig,
+  queryInputSlice.reducer,
+)
+
 export const { setQueryInput } = queryInputSlice.actions
 
 export const selectQueryInput = (state: RootState) => state.queryInput
 
-export default queryInputSlice.reducer
+export default persistedQueryInputReducer
