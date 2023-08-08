@@ -54,6 +54,9 @@ export const fetchAttractionQuery = async (
 
   const response = await axios.post(API_URL, initialQuery, config)
 
+  console.log('/travel/attractionQuery')
+  console.log(response.data)
+
   // console.log('response.data : ' + JSON.stringify(response.data.query_list))
   // 이중 for문을 사용하여 JSON 데이터를 placeInfo[][]로 변환합니다.
 

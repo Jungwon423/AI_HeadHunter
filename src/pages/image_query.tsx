@@ -98,6 +98,11 @@ const ImageQuery = () => {
 
   console.log('통과')
   console.log('count : ' + count)
+
+  console.log(
+    'attractionQuery.query_list',
+    attractionQuery.query_list[count][0],
+  )
   console.log(
     'attractionQuery.query_list',
     attractionQuery.query_list[count][0],
@@ -128,15 +133,15 @@ const ImageQuery = () => {
               }}
             />
           </div>
-          <h2 className="text-2xl font-bold mb-2">
+          {/* <h2 className="text-2xl font-bold mb-2">
             {attractionQuery.query_list[count][0].name}
           </h2>
           <p className="text-gray-600 text-lg">
             {attractionQuery.query_list[count][0].summary?.overview}
-          </p>
+          </p> */}
         </div>
         <div className="w-1/2 h-80 rounded-lg overflow-hidden">
-          <div className="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64">
+          {/* <div className="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64">
             <img
               src={attractionQuery.query_list[count][1].image}
               alt={attractionQuery.query_list[count][1].image}
@@ -146,8 +151,8 @@ const ImageQuery = () => {
           <h3 className="mt-6 text-sm text-gray-500">
             <span className="absolute inset-0" />
             {attractionQuery.query_list[count][1].name}
-          </h3>
-          {/* <Image
+          </h3> */}
+          <Image
             src={attractionQuery.query_list[count][1].image}
             alt="Right Image"
             width={400}
@@ -164,7 +169,7 @@ const ImageQuery = () => {
           </h2>
           <p className="text-gray-600 text-lg">
             {attractionQuery.query_list[count][1].summary?.overview}
-          </p> */}
+          </p>
         </div>
       </div>
     </div>
