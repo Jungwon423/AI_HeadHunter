@@ -1,5 +1,5 @@
 import React from 'react'
-import Image from "next/legacy/image"
+import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { InitialQueryInput } from '../slices/questionnaireSlice'
@@ -119,8 +119,12 @@ const ImageQuery = () => {
             alt="Left Image"
             width={400}
             height={400}
-            style={{ objectFit: 'cover' }}
             onClick={() => handleImageClick('left')}
+            style={{
+              objectFit: 'cover',
+              maxWidth: '100%',
+              height: 'auto',
+            }}
           />
         </div>
         <div className="w-1/2 h-80 rounded-lg overflow-hidden">
@@ -129,8 +133,12 @@ const ImageQuery = () => {
             alt="Right Image"
             width={400}
             height={400}
-            style={{ objectFit: 'cover' }}
             onClick={() => handleImageClick('right')}
+            style={{
+              objectFit: 'cover',
+              maxWidth: '100%',
+              height: 'auto',
+            }}
           />
         </div>
       </div>

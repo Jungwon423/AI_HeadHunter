@@ -69,7 +69,11 @@ const TravelContainer = () => {
           alt={selectedPlace?.name}
           width={384}
           height={280}
-          objectFit="cover"
+          style={{
+            maxWidth: '100%',
+            height: 'auto',
+            objectFit: 'cover',
+          }}
         />
       </div>
       <div className="w-full h-16 flex-col">

@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { selectCity, selectDuration } from '../../slices/travelInfoSlice'
 import Image from 'next/legacy/image'
+import { selectCity, selectDuration } from '../../slices/travelInfoSlice'
 
 const GuideHero = () => {
   const city: String = useSelector(selectCity)

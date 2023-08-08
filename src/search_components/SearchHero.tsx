@@ -1,4 +1,4 @@
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 
 export default function SearchHero() {
   return (
@@ -7,10 +7,13 @@ export default function SearchHero() {
         <Image
           src="/assets/images/travel.jpg"
           alt="travel"
-          layout="fill"
-          objectFit="cover"
-          objectPosition="center"
           quality={100}
+          fill
+          sizes="100vw"
+          style={{
+            objectFit: 'cover',
+            objectPosition: 'center',
+          }}
         />
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="absolute inset-0 sm:inset-10 md:inset-30 xl:inset-40 flex items-center px-10">

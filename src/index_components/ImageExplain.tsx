@@ -1,4 +1,4 @@
-import Image from "next/legacy/image"
+import Image from 'next/image'
 
 type ImageExplainProps = {
   left: boolean
@@ -31,9 +31,13 @@ const ImageExplain: React.FC<ImageExplainProps> = ({
           <Image
             src="/assets/images/introduction-image.png"
             alt="Introduction Image"
-            layout="responsive"
             width={500}
             height={500}
+            sizes="100vw"
+            style={{
+              width: '100%',
+              height: 'auto',
+            }}
           />
         </div>
       </div>
@@ -46,16 +50,20 @@ const ImageExplain: React.FC<ImageExplainProps> = ({
           <Image
             src="/assets/images/screenshot1.webp"
             alt="Screenshot 1"
-            layout="responsive"
             width={800}
             height={640}
             className="border-gray-300 border-4 border-solid rounded-lg shadow-sm"
+            sizes="100vw"
             style={{
               borderColor: '#ddd',
               borderWidth: '4px',
               borderStyle: 'solid',
+
               boxShadow:
                 '0 1px 2px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.05), 0 4px 8px rgba(0, 0, 0, 0.05), 0 8px 16px rgba(0, 0, 0, 0.05), 0 16px 32px rgba(0, 0, 0, 0.05), 0 32px 64px rgba(0, 0, 0, 0.05)',
+
+              width: '100%',
+              height: 'auto',
             }}
           />
         </div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import Image from "next/legacy/image"
+import Image from 'next/image'
 import router from 'next/router'
 
 export default function MyNavbar() {
@@ -13,6 +13,10 @@ export default function MyNavbar() {
               alt="Logo"
               width={40}
               height={40}
+              style={{
+                maxWidth: '100%',
+                height: 'auto',
+              }}
             />
             <span className="ml-2 font-bold text-xl font-mono">Trippy</span>
           </div>

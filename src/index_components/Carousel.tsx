@@ -2,7 +2,7 @@ import React from 'react'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 
 function Carousel() {
   const settings = {
@@ -55,7 +55,11 @@ function Carousel() {
             alt="travel"
             width={500}
             height={500}
-            objectPosition="center"
+            style={{
+              maxWidth: '100%',
+              height: 'auto',
+              objectPosition: 'center',
+            }}
           />
         </div>
         <div>
@@ -64,8 +68,12 @@ function Carousel() {
             alt="travel"
             width={500}
             height={500}
-            objectPosition="center"
             quality={100}
+            style={{
+              maxWidth: '100%',
+              height: 'auto',
+              objectPosition: 'center',
+            }}
           />
         </div>
         <div>
@@ -74,8 +82,12 @@ function Carousel() {
             alt="travel"
             width={500}
             height={500}
-            objectPosition="center"
             quality={100}
+            style={{
+              maxWidth: '100%',
+              height: 'auto',
+              objectPosition: 'center',
+            }}
           />
         </div>
         <div>
@@ -84,8 +96,12 @@ function Carousel() {
             alt="travel"
             width={500}
             height={500}
-            objectPosition="center"
             quality={100}
+            style={{
+              maxWidth: '100%',
+              height: 'auto',
+              objectPosition: 'center',
+            }}
           />
         </div>
         <div>
@@ -94,8 +110,12 @@ function Carousel() {
             alt="travel"
             width={500}
             height={500}
-            objectPosition="center"
             quality={100}
+            style={{
+              maxWidth: '100%',
+              height: 'auto',
+              objectPosition: 'center',
+            }}
           />
         </div>
         <div>
@@ -104,8 +124,12 @@ function Carousel() {
             alt="travel"
             width={500}
             height={500}
-            objectPosition="center"
             quality={100}
+            style={{
+              maxWidth: '100%',
+              height: 'auto',
+              objectPosition: 'center',
+            }}
           />
         </div>
       </Slider>
