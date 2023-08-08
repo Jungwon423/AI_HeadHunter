@@ -119,7 +119,7 @@ const ImageQuery = () => {
             alt="Left Image"
             width={400}
             height={400}
-            objectFit="cover"
+            style={{ objectFit: 'cover' }}
             onClick={() => handleImageClick('left')}
           />
         </div>
@@ -129,7 +129,7 @@ const ImageQuery = () => {
             alt="Right Image"
             width={400}
             height={400}
-            objectFit="cover"
+            style={{ objectFit: 'cover' }}
             onClick={() => handleImageClick('right')}
           />
         </div>

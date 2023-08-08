@@ -2,6 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState, AppThunk } from '../store'
 import axios, { AxiosResponse } from 'axios'
 import { SERVER_API_URL } from './api_url'
+import { persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
 
 export interface QuestionnaireState {
   thought?: string
@@ -157,9 +159,17 @@ export const fetchQueryAsync =
       dispatch(setLoading('failed'))
     }
   }
+const persistConfig = {
+  key: 'root',
+  storage,
+}
 
+const persistedQuestionnaireReducer = persistReducer(
+  persistConfig,
+  questionnaireSlice.reducer,
+)
 export const selectQuestionnaire = (state: RootState) => state.questionnaire
 export const selectTravelId = (state: RootState) =>
   state.questionnaire.travel_id
 
-export default questionnaireSlice.reducer
+export default persistedQuestionnaireReducer
