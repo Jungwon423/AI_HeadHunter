@@ -1,5 +1,5 @@
 import React from 'react'
-import Image from "next/legacy/image"
+import Image from 'next/image'
 
 interface GoogleButtonProps {
   url: string
@@ -20,6 +20,10 @@ const GoogleButton: React.FC<GoogleButtonProps> = ({ url }) => {
         alt="Google Logo"
         width={20}
         height={20}
+        style={{
+          maxWidth: '100%',
+          height: 'auto',
+        }}
       />
       <span className="ml-2 font-medium">Google Maps</span>
     </button>

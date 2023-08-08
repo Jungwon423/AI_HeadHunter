@@ -1,6 +1,6 @@
 // components/Popup.tsx
 import React from 'react'
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 
 interface PopupProps {
   isOpen: boolean
@@ -36,12 +36,17 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose, children }) => {
         </div>
         <div className="flex bg-white">
           <Image
-            className="rounded" // 여기에 클래스 적용
+            // 여기에 클래스 적용
+            className="rounded"
             src="/assets/images/osaka.webp "
             alt="travel"
             width={200}
             height={250}
             quality={100}
+            style={{
+              maxWidth: '100%',
+              height: 'auto',
+            }}
           />
         </div>
       </div>

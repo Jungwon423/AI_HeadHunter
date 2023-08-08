@@ -1,6 +1,6 @@
 import DraggableScrollbar from './DraggableScrollbar'
 import { useSelector, useDispatch } from 'react-redux'
-import Image from "next/legacy/image"
+import Image from 'next/image'
 import { selectCity, selectDuration } from '../slices/travelInfoSlice'
 
 const GuideHero = () => {
@@ -13,9 +13,12 @@ const GuideHero = () => {
         <Image
           src="/assets/images/travel2.jpg"
           alt="travel"
-          layout="fill"
-          objectFit="cover"
           quality={100}
+          fill
+          sizes="100vw"
+          style={{
+            objectFit: 'cover',
+          }}
         />
         <div className="absolute inset-0 bg-black opacity-50"></div>
       </div>
@@ -30,10 +33,14 @@ const GuideHero = () => {
               <Image
                 src="/assets/images/calendar.webp"
                 alt="travel"
-                objectFit="fill"
                 width={70}
                 height={70}
                 quality={100}
+                style={{
+                  maxWidth: '100%',
+                  height: 'auto',
+                  objectFit: 'fill',
+                }}
               ></Image>
               <div className="w-16 px-1 py-1 rounded-md bg-indigo-500 flex items-center text-center ">
                 <span className="flex text-center text-white text-xs ml-2">

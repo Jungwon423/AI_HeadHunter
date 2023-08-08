@@ -1,4 +1,4 @@
-import Image from "next/legacy/image"
+import Image from 'next/image'
 
 const TitleImage = () => {
   return (
@@ -6,9 +6,13 @@ const TitleImage = () => {
       <Image
         src="/assets/images/introduction-image.png"
         alt="Introduction Image"
-        layout="responsive"
         width={1200}
         height={1200}
+        sizes="100vw"
+        style={{
+          width: '100%',
+          height: 'auto',
+        }}
       />
     </div>
   )

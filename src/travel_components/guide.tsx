@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 import TabMenu from './TabMenu'
 import TravelNavbar from './TravelNavbar'
 import { useSelector, useDispatch } from 'react-redux'
@@ -62,8 +62,12 @@ const Guide = () => {
                     alt={placeInfo.name}
                     width={150}
                     height={200}
-                    objectFit="cover"
                     className="rounded-lg"
+                    style={{
+                      maxWidth: '100%',
+                      height: 'auto',
+                      objectFit: 'cover',
+                    }}
                   />
                 </div>
                 <div className="pl-3 w-40 flex-col">
@@ -102,6 +106,11 @@ const Guide = () => {
                   width={15}
                   height={15}
                   className="rounded-lg"
+                  style={{
+                    maxWidth: '100%',
+                    height: 'auto',
+                    objectFit: 'cover',
+                  }}
                 />
                 <span className="ml-1">{placeInfo.time}분 |</span>
               </div>
@@ -111,6 +120,11 @@ const Guide = () => {
                   width={15}
                   height={15}
                   className="rounded-lg"
+                  style={{
+                    maxWidth: '100%',
+                    height: 'auto',
+                    objectFit: 'cover',
+                  }}
                 />
                 <span className="ml-1">30분</span>
               </div>

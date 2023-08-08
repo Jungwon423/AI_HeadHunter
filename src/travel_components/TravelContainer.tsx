@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   placeInfo,
@@ -73,7 +73,11 @@ const TravelContainer = () => {
           alt={selectedPlace?.name}
           width={384}
           height={280}
-          objectFit="cover"
+          style={{
+            maxWidth: '100%',
+            height: 'auto',
+            objectFit: 'cover',
+          }}
         />
       </div>
       <div className="w-full h-16 flex-col">
@@ -278,7 +282,16 @@ const TravelContainer = () => {
           </div>
         ) : null}
         <div className="mt-3 flex items-center px-2 text-gray-700">
-          <Image src="/assets/wheelchair.png" width={24} height={24} />
+          <Image
+            src="/assets/wheelchair.png"
+            width={24}
+            height={24}
+            style={{
+              maxWidth: '100%',
+              height: 'auto',
+              objectFit: 'cover',
+            }}
+          />
           <div className="px-2 text-gray-700">
             {selectedPlace?.wheelchair
               ? '전용 휠체어 입구가 있습니다.'
