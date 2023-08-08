@@ -74,7 +74,7 @@ export default function Home() {
         <div className="md:text-base sm:text-xl xl:text-2xl font-bold">
           추천 여행지
         </div>
-        <Carousel></Carousel>
+        {/* <Carousel></Carousel> */}
         <ImageExplain
           left={true}
           h1Text={''}
