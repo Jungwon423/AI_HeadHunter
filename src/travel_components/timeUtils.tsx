@@ -22,7 +22,7 @@ export function stringToTime(timeString: string): Date {
   }
   const date = new Date()
   date.setHours(hours, parseInt(minute, 10), 0, 0)
-  // console.log(date)
+  console.log(date)
   return date
 }
 
@@ -34,11 +34,12 @@ export function isOpenNow(operatingHours: string[] | undefined): boolean {
   const hoursEntry = operatingHours.find((entry) =>
     entry.startsWith(currentDay),
   )
-  if (!hoursEntry) {
+  if (!hoursEntry || hoursEntry.includes('휴무')) {
     return false
   }
   const [start, end] = hoursEntry.slice(currentDay.length).split(' ~ ')
-  const startTime = stringToTime(start.trim())
+  let tempStart = start.substring(2)
+  const startTime = stringToTime(tempStart.trim())
   const endTime = stringToTime(end.trim())
   return now >= startTime && now <= endTime
 }

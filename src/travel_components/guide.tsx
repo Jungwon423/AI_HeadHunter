@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { use, useState } from 'react'
 import Image from 'next/legacy/image'
-import TabMenu from './TabMenu'
-import TravelNavbar from './TravelNavbar'
+import TabMenu from './guide_components/TabMenu'
+import TravelNavbar from './guide_components/TravelNavbar'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   selectCity,
@@ -12,8 +12,8 @@ import {
   handleCurrentPlace,
   selectCurrentDay,
 } from '../slices/travelInfoSlice'
-import GuideHero from './GuideHero'
-import GuideDay from './GuideDay'
+import GuideHero from './guide_components/GuideHero'
+import GuideDay from './guide_components/GuideDay'
 
 const Guide = () => {
   const dispatch = useDispatch()
@@ -21,6 +21,7 @@ const Guide = () => {
   const city: String = useSelector(selectCity)
   const duration: number = useSelector(selectDuration)
   const currentDay: number = useSelector(selectCurrentDay)
+  const TravelSchedule: placeInfo[][] = useSelector(selectTravelSchedule)
 
   const createTabs = (days: number) => {
     const tabs = ['여행 요약']
@@ -41,83 +42,52 @@ const Guide = () => {
         <TabMenu tabs={tabs} />
       </section>
       <GuideHero></GuideHero>
-      <GuideDay></GuideDay>
+      {currentDay !== 0 ? <GuideDay></GuideDay> : null}
       {currentDay === 0 ? (
-        // 새로운 div를 추가합니다.
-        <div>day가 0임</div>
+        <div className="px-3 justify-center">
+          <div className="flex justify-center text-sm font-bold py-2 mt-2">
+            이번 코스에서 언급된 <b>주요 키워드</b>
+          </div>
+          <h2 className="flex justify-center text-sm font-bold py-2 mt-2">
+            여행 요약
+          </h2>
+          <div className="flex justify-center text-sm font-bold py-2 mt-2">
+            오사카 여행에서 주의해야 할 사항은 아주 덥다는 것입니다.
+          </div>
+        </div>
       ) : (
-        <div>day가 0이 아님</div>
-      )}
-      <div className="flex flex-col justify-center">
-        {useSelector(selectTravelSchedule)[currentDay - 1]?.map((placeInfo) => (
-          <div key={placeInfo.name} className="px-3 justify-center">
-            <button
-              className="h-50 rounded-xl px-5 my-8 flex-col bg-gray-50 shadow-lg hover:shadow-2xl"
-              onClick={() => dispatch(handleCurrentPlace(placeInfo))}
-            >
-              <div className="flex">
-                <div className="w-42">
-                  <Image
-                    src={placeInfo.image}
-                    alt={placeInfo.name}
-                    width={150}
-                    height={200}
-                    objectFit="cover"
-                    className="rounded-lg"
-                  />
-                </div>
-                <div className="pl-3 w-40 flex-col">
-                  <h2 className="flex justify-center text-sm font-bold py-2 mt-2">
-                    {placeInfo.name}
-                  </h2>
-                  {/* <div className="flex items-center">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        className="w-4 h-4"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-                      <span className="text-gray-900 text-sm">
-                        10:00 AM - 11:00 AM
-                      </span>
-                    </div> */}
-                  <div className="h-40 overflow-y-scroll text-gray-700 text-sm text-start w-40 p-2">
-                    {placeInfo.summary}
+        <div className="flex flex-col justify-center">
+          {TravelSchedule[currentDay - 1]?.map((placeInfo) => (
+            <div key={placeInfo.name} className="px-3 justify-center">
+              <button
+                className="h-50 rounded-xl px-5 my-8 flex-col bg-gray-50 shadow-lg hover:shadow-2xl"
+                onClick={() => dispatch(handleCurrentPlace(placeInfo))}
+              >
+                <div className="flex">
+                  <div className="w-42">
+                    <Image
+                      src={placeInfo.image}
+                      alt={placeInfo.name}
+                      width={150}
+                      height={200}
+                      objectFit="cover"
+                      className="rounded-lg"
+                    />
+                  </div>
+                  <div className="pl-3 w-40 flex-col">
+                    <h2 className="flex justify-center text-sm font-bold py-2 mt-2">
+                      {placeInfo.name}
+                    </h2>
+                    <div className="h-40 overflow-y-scroll text-gray-700 text-sm text-start w-40 p-2">
+                      {placeInfo.summary?.overview}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </button>
-            <div className="flex justify-center items-center text-center mr-12">
-              <div className="px-2 flex items-center">
-                <Image
-                  src="/assets/running-person.svg"
-                  width={15}
-                  height={15}
-                  className="rounded-lg"
-                />
-                <span className="ml-1">{placeInfo.time}분 |</span>
-              </div>
-              <div className="px-2 flex items-center">
-                <Image
-                  src="/assets/car.svg"
-                  width={15}
-                  height={15}
-                  className="rounded-lg"
-                />
-                <span className="ml-1">30분</span>
-              </div>
+              </button>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { selectCurrentDay } from '../slices/travelInfoSlice'
+import { selectCurrentDay } from '../../slices/travelInfoSlice'
 
 const GuideDay = () => {
   const currentDay: number = useSelector(selectCurrentDay)

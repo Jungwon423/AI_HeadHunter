@@ -11,9 +11,11 @@ import travelChatReducer from './slices/travelChatSlice'
 import questionnaireReducer from './slices/questionnaireSlice'
 import queryInputSlice from './slices/queryInputSlice'
 import attractionQuerySlice from './slices/imageQuerySlice'
+import tabSlice from './slices/tabSlice'
 
 export const store = configureStore({
   reducer: {
+    tab: tabSlice,
     counter: counterReducer,
     travelInfo: travelInfoReducer,
     travelChat: travelChatReducer,

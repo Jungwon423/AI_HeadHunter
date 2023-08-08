@@ -13,13 +13,15 @@ interface OpeningHours {
   }[]
   weekday_text: string[]
 }
+interface Summary {
+  overview: string
+}
 interface Review {
   author_name: string
   author_url: string
   profile_photo_url: string
   rating: number
   text: string
-  weekday_text: string[]
 }
 
 export interface preference {
@@ -44,7 +46,7 @@ export interface placeInfo {
   image: string
   description: string
   time: number
-  summary?: string //editorial_summary, 짧은 설명
+  summary?: Summary //editorial_summary, 짧은 설명
   rating?: number //rating,  구글 별점
   ratingCount?: number //user_ratings_total, 구글 별점 갯수
   hashtags: string[] //types, 를 해쉬태그로
@@ -111,7 +113,7 @@ export function convertToPlaceInfo(attraction: any): placeInfo {
     image: attraction.img,
     description: attraction.description,
     time: 15,
-    summary: attraction.editorial_summary['overview'],
+    summary: attraction.editorial_summary,
     rating: attraction.rating,
     ratingCount: attraction.user_ratings_total,
     hashtags: attraction.types,

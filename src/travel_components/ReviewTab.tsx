@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { setCurrentTabIndex, selectCurrentTabIndex } from '../slices/tabSlice'
 
-const GuideTab = () => {
+const ReviewTab = () => {
   const tabs = ['개요', '리뷰', '정보']
   const dispatch = useDispatch()
-  const [currentTabIndex, setCurrentTabIndex] = useState(0)
+  const currentTabIndex = useSelector(selectCurrentTabIndex)
 
-  const handleClickTab = (index: React.SetStateAction<number>) => {
-    setCurrentTabIndex(index)
+  const handleClickTab = (index: number) => {
+    dispatch(setCurrentTabIndex(index))
   }
 
   return (
@@ -34,4 +35,4 @@ const GuideTab = () => {
   )
 }
 
-export default GuideTab
+export default ReviewTab

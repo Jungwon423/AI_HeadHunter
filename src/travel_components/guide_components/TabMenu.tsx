@@ -1,4 +1,4 @@
-import DraggableScrollbar from './DraggableScrollbar'
+import DraggableScrollbar from '../DraggableScrollbar'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   selectCity,
@@ -9,7 +9,7 @@ import {
   handleCurrentPlace,
   selectCurrentDay,
   setCurrentDay,
-} from '../slices/travelInfoSlice'
+} from '../../slices/travelInfoSlice'
 
 const TabMenu: React.FC<{
   tabs: string[]
