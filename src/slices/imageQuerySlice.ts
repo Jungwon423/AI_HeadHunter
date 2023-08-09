@@ -34,11 +34,8 @@ const initialState: AttractionQueryState = {
 }
 
 export function processAttractionList(atttractionList: any): placeInfo[][] {
-  console.log('atttractionList : ' + JSON.stringify(atttractionList))
   return atttractionList.map((cluster: any) => {
-    // console.log('cluster : ' + JSON.stringify(cluster))
     const attractions = cluster.map(convertToPlaceInfo)
-    console.log('success')
     return [...attractions]
   })
 }
@@ -54,12 +51,6 @@ export const fetchAttractionQuery = async (
 
   const response = await axios.post(API_URL, initialQuery, config)
 
-  console.log('/travel/attractionQuery')
-  console.log(response.data)
-
-  // console.log('response.data : ' + JSON.stringify(response.data.query_list))
-  // 이중 for문을 사용하여 JSON 데이터를 placeInfo[][]로 변환합니다.
-
   const placeInfos: placeInfo[][] = processAttractionList(
     response.data.query_list,
   )
@@ -71,7 +62,6 @@ export const fetchAttractionQuery = async (
     error: null,
     resultList: [],
   }
-  console.log(attractionQuery.query_list)
   return attractionQuery
 }
 
@@ -97,6 +87,9 @@ export const attractionQuerySlice = createSlice({
     },
     setResultList: (state, action: PayloadAction<ZeroOrOne>) => {
       state.resultList = [...state.resultList, action.payload]
+    },
+    initializeResultList: (state) => {
+      state.resultList = []
     },
   },
 })
@@ -148,8 +141,13 @@ export const selectAttractionQueryResultList = (state: RootState) =>
 export const selectAttractionQueryTravelId = (state: RootState) =>
   state.attractionQuery.travel_id
 
-export const { setAttractionQuery, setLoading, setError, setResultList } =
-  attractionQuerySlice.actions
+export const {
+  setAttractionQuery,
+  setLoading,
+  setError,
+  setResultList,
+  initializeResultList,
+} = attractionQuerySlice.actions
 
 export const selectAttractionQuery = (state: RootState) => state.attractionQuery
 

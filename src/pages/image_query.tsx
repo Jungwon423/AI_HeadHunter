@@ -10,25 +10,18 @@ import {
   selectDuration,
   selectBudget,
 } from '../slices/travelInfoSlice'
-import { selectQueryInput, setQueryInput } from '../slices/queryInputSlice'
-import { link } from 'fs'
 import { useRouter } from 'next/router'
-import { AppThunk, AppDispatch } from '../store'
+import { AppDispatch } from '../store'
 import {
   fetchAttractionQueryAsync,
-  fetchAttractionQuery,
-  selectAttractionQueryList,
   selectAttractionQuery,
   selectAttractionQueryResultList,
   setResultList,
+  initializeResultList,
 } from '../slices/imageQuerySlice'
 
 const ImageQuery = () => {
   const [count, setCount] = useState(0)
-
-  const nextPage = () => {
-    setCount(count + 1)
-  }
 
   const router = useRouter()
 
@@ -41,7 +34,7 @@ const ImageQuery = () => {
 
   const attractionQuery = useSelector(selectAttractionQuery)
 
-  console.log('attractionQuery', attractionQuery)
+  const resultList = useSelector(selectAttractionQueryResultList)
 
   // 여기서 초기 쿼리 입력 값을 설정하십시오.
   const initialQueryInput: InitialQueryInput = {
@@ -51,14 +44,12 @@ const ImageQuery = () => {
     budget: budget,
     companion: companion,
   }
-  console.log('initial 화면 : initialQueryInput', initialQueryInput)
-
   useEffect(() => {
     dispatch(fetchAttractionQueryAsync(initialQueryInput))
-    console.log('initial 화면 : initialQueryInput', initialQueryInput)
   }, [])
 
   const handleImageClick = (image: string) => {
+    console.log('resultList : ' + resultList)
     if (image === 'left') {
       dispatch(setResultList(0))
       setCount(count + 1)
@@ -95,26 +86,6 @@ const ImageQuery = () => {
   if (attractionQuery.loading === 'failed') {
     return <p>Error: {attractionQuery.error}</p>
   }
-
-  console.log('통과')
-  console.log('count : ' + count)
-
-  console.log(
-    'attractionQuery.query_list',
-    attractionQuery.query_list[count][0],
-  )
-  console.log(
-    'attractionQuery.query_list',
-    attractionQuery.query_list[count][0],
-  )
-  console.log(
-    'attractionQuery.query_list',
-    attractionQuery.query_list[count][0].image,
-  )
-  console.log(
-    'attractionQuery.query_list',
-    attractionQuery.query_list[count][1].image,
-  )
 
   return (
     <div className="flex flex-col h-screen">

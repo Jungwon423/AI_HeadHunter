@@ -1,49 +1,13 @@
-import TravelContainer from '../travel_components/TravelContainer'
-import TravelMap from '../travel_components/TravelMap'
-import Guide from '../travel_components/guide'
-
-import { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import {
-  fetchPreferenceAsync,
-  fetchTravelSchedule,
-  fetchTravelScheduleAsync,
-  placeInfo,
-  recommendInput,
-  recommendInputV2,
-  selectCity,
-  selectCurrentDay,
-  selectDuration,
-  selectPreference,
-  selectTravelInfo,
-  selectTravelSchedule,
-  selectUserId,
-} from '../slices/travelInfoSlice'
-import { fetchQueryAsync, selectTravelId } from '../slices/questionnaireSlice'
-import { AppDispatch } from '../store'
-import { useRouter } from 'next/router'
-import {
-  ZeroOrOne,
-  selectAttractionQueryResultList,
-  selectAttractionQueryTravelId,
-} from '../slices/imageQuerySlice'
+import { useSelector } from 'react-redux'
+import { placeInfo, selectTravelSchedule } from '../slices/travelInfoSlice'
 
 // TODO : 페이지 수정
 
 const RecommendPage = () => {
-  const dispatch = useDispatch()
-
-  const city: String = useSelector(selectCity)
-  const duration: number = useSelector(selectDuration)
-  const currentDay: number = useSelector(selectCurrentDay)
   const TravelSchedule: placeInfo[][] = useSelector(selectTravelSchedule)
 
-  console.log('TravelSchedule', TravelSchedule)
-
   return TravelSchedule.map((day: placeInfo[]) => {
-    console.log('day', day)
     return day.map((place: placeInfo) => {
-      console.log('place', place)
       return (
         <div className="flex flex-col md:flex-row" key={place.name}>
           <img

@@ -30,7 +30,6 @@ const Preference = () => {
   const userId: string = useSelector(selectUserId)
   const travelId: string = useSelector(selectAttractionQueryTravelId) // !: travelId is not null
 
-  // console.log('travelId: ', travelId)
   const resultList = useSelector(selectAttractionQueryResultList)
 
   const preference = useSelector(selectPreference)
@@ -45,16 +44,14 @@ const Preference = () => {
       user: userId,
       answers: resultList as ZeroOrOne[],
     }
-    console.log('recommendInput : ' + recommendInput)
     if (preferenceLoaded === false) {
-      console.log('recommendInput: ', recommendInput)
+      console.log('preference 추천 Input: ', recommendInput)
       dispatch(fetchPreferenceAsync(recommendInput))
       setPreferenceLoaded(true)
     }
   }, [])
 
   useEffect(() => {
-    console.log()
     const recommendInput: recommendInput = {
       user: userId,
       travel_id: travelId,
@@ -63,7 +60,7 @@ const Preference = () => {
       scheduleLoaded === false &&
       travelInfo.preferenceLoading === 'succeeded'
     ) {
-      console.log('travelInput: ', recommendInput)
+      console.log('여행지 추천 Input: ', recommendInput)
       dispatch(fetchTravelScheduleAsync(recommendInput))
       setScheduleLoaded(true)
     }
@@ -102,10 +99,7 @@ const Preference = () => {
   let buttonClass = `rounded px-4 py-2 font-bold text-white hover:bg-blue-600 ${buttonColor} `
 
   const handleButtonClick = () => {
-    console.log(travelInfo.loading)
-
     if (travelInfo.loading === 'succeeded') {
-      console.log('페이지 이동')
       router.push('/recommend')
     }
   }

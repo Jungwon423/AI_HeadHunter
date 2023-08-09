@@ -1,25 +1,22 @@
-import Image from 'next/image'
 import { useState } from 'react'
 import Head from 'next/head'
 import MyNavbar from '../search_components/MyNavbar'
 import router from 'next/router'
 import SearchHero from '../search_components/SearchHero'
 
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {
   setCompanion,
   setTravelStyle,
   setDuration,
-  setTravelSchedule,
-  placeInfo,
   setUserId,
   setBudget,
 } from '../slices/travelInfoSlice'
-import { TravelStyles } from '../search_components/TravelStyles'
 import { TravelCompanion } from '../search_components/TravelCompanion'
 import TravelDuration from '../search_components/TravelDuration'
 import TravelBudget from '../search_components/TravelBudget'
 import LocalStorage from '../index_components/LocalStorage'
+import { initializeResultList } from '../slices/imageQuerySlice'
 
 const TravelTitle = () => (
   <div className="text-center py-10 sm:py-15 md:py-20 bg-indigo-400 rounded-tl-xl rounded-tr-xl">
@@ -111,7 +108,6 @@ export default function SearchPage() {
                   let randomStr: string = Math.random()
                     .toString(36)
                     .substring(2, 12)
-                  console.log('randomStr : ', randomStr)
                   LocalStorage.setItem('tempId', randomStr)
                   tempId = randomStr
                 } else {
@@ -123,11 +119,7 @@ export default function SearchPage() {
                 dispatch(setTravelStyle(selectedStyles))
                 dispatch(setDuration(travelDuration))
                 dispatch(setBudget(selectedBudget))
-
-                // const res = await fetch('http://localhost:3000/api/travelInfo')
-                // const data = await res.json()
-                // console.log('API 응답 : ')
-                // console.log(data)
+                dispatch(initializeResultList())
                 router.push('/image_query')
               }}
             >
