@@ -23,6 +23,8 @@ import {
   selectAttractionQueryTravelId,
 } from '../slices/imageQuerySlice'
 
+// TODO : 페이지 수정
+
 const RecommendPage = ()=>  {
   return (
     <div className="flex h-screen">
