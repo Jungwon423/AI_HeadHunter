@@ -48,7 +48,7 @@ const Preference = () => {
       user: userId,
       answers: resultList as ZeroOrOne[],
     }
-    console.log('recommendInput : '+recommendInput)
+    console.log('recommendInput : ' + recommendInput)
     if (preferenceLoaded === false) {
       console.log('recommendInput: ', recommendInput)
       dispatch(fetchPreferenceAsync(recommendInput))
@@ -59,7 +59,6 @@ const Preference = () => {
   useEffect(() => {
     console.log()
     const recommendInput: recommendInput = {
-      
       user: userId,
       travel_id: travelId,
     }
@@ -100,7 +99,7 @@ const Preference = () => {
     if (travelInfo.loading === 'succeeded') {
       console.log('페이지 이동')
       router.push('/recommend')
-  }
+    }
   }
 
   return (
@@ -110,11 +109,13 @@ const Preference = () => {
           {preference.inferring} {preference.conclusion}
         </div>
         <div className="flex flex-col items-center justify-center"></div>
-        <button className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600" onClick={handleButtonClick}>
-  {buttonStatus}
-</button>
+        <button
+          className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600"
+          onClick={handleButtonClick}
+        >
+          {buttonStatus}
+        </button>
       </div>
-      
     </div>
   )
 }
