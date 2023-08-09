@@ -24,7 +24,7 @@ import {
 } from '../slices/imageQuerySlice'
 
 const TravelCoursePage = () => {
-const router = useRouter()
+  const router = useRouter()
 
   const dispatch = useDispatch<AppDispatch>()
   //const userId: string = useSelector(selectUserId)
@@ -98,7 +98,7 @@ const router = useRouter()
     if (travelInfo.loading === 'succeeded') {
       console.log('페이지 이동')
       router.push('/travel')
-  }
+    }
   }
 
   return (
@@ -108,11 +108,13 @@ const router = useRouter()
           {preference.inferring} {preference.conclusion}
         </div>
         <div className="flex flex-col items-center justify-center"></div>
-        <button className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600" onClick={handleButtonClick}>
-  {buttonStatus}
-</button>
+        <button
+          className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600"
+          onClick={handleButtonClick}
+        >
+          {buttonStatus}
+        </button>
       </div>
-      
     </div>
   )
 
