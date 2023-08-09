@@ -27,14 +27,11 @@ const Preference = () => {
   const router = useRouter()
 
   const dispatch = useDispatch<AppDispatch>()
-  //const userId: string = useSelector(selectUserId)
-  const userId: string = 'yftq9ni3zt'
-  //const travelId: string = useSelector(selectAttractionQueryTravelId) // !: travelId is not null
-  const travelId: string = '64d2f8168daf327b97e2bebf'
+  const userId: string = useSelector(selectUserId)
+  const travelId: string = useSelector(selectAttractionQueryTravelId) // !: travelId is not null
 
   // console.log('travelId: ', travelId)
-  //const resultList = useSelector(selectAttractionQueryResultList)
-  const resultList = [1, 1, 1, 1, 1, 1, 1, 1]
+  const resultList = useSelector(selectAttractionQueryResultList)
 
   const preference = useSelector(selectPreference)
   const travelInfo = useSelector(selectTravelInfo)
@@ -93,6 +90,17 @@ const Preference = () => {
     buttonStatus = '추천 확인하러 가기'
   }
 
+  let buttonColor: string = 'bg-blue-500'
+  if (travelInfo.loading === 'pending') {
+    buttonColor = 'bg-gray-500'
+  } else if (travelInfo.loading === 'failed') {
+    buttonColor = 'bg-red-500'
+  } else {
+    buttonColor = 'bg-blue-500'
+  }
+
+  let buttonClass = `rounded px-4 py-2 font-bold text-white hover:bg-blue-600 ${buttonColor} `
+
   const handleButtonClick = () => {
     console.log(travelInfo.loading)
 
@@ -105,14 +113,17 @@ const Preference = () => {
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="flex flex-col items-center justify-center">
-        <div className="flex flex-col items-center justify-center">
-          {preference.inferring} {preference.conclusion}
+        <div className="rounded overflow-hidden border border-black">
+          <h2 className="text-2xl font-bold mb-2">Inferring</h2>
+          <p className="text-gray-600 text-lg">{preference.inferring}</p>
         </div>
-        <div className="flex flex-col items-center justify-center"></div>
-        <button
-          className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600"
-          onClick={handleButtonClick}
-        >
+        <div className="flex flex-col items-center justify-center">
+          <div className="rounded overflow-hidden border border-black">
+            <h2 className="text-2xl font-bold mb-2">Conclusion</h2>
+            <p className="text-gray-600 text-lg">{preference.conclusion}</p>
+          </div>
+        </div>
+        <button className={buttonClass} onClick={handleButtonClick}>
           {buttonStatus}
         </button>
       </div>
