@@ -2,16 +2,13 @@ import Head from 'next/head'
 import MyNavbar from '../search_components/MyNavbar'
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import React, { useState } from 'react'
-import MapboxGeocoderContainer from '../index_components/MapboxGeocoderContainer'
 import MainTitle from '../index_components/MainTitle'
 import TitleImage from '../index_components/TitleImage'
 import ImageExplain from '../index_components/ImageExplain'
 import { Footer } from '../footer/Footer'
-import Carousel from '../index_components/Carousel'
 import Popup from '../index_components/Popup'
 import DatePicker from '../index_components/DatePicker'
 import { AutocompleteInput } from '../index_components/AutocompleteInput'
-import Image from 'next/image'
 import Link from 'next/link'
 
 export default function Home() {
@@ -30,9 +27,6 @@ export default function Home() {
     setSelectedDate(date)
   }
   const sampleItems = ['오사카', '도쿄', '서울', '방콕', '파리']
-
-  const TOKEN =
-    'pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtrcGNwdXQwNm1oM2xvZTJ5Z2Q4djk5In0._rw_aFaBfUjQC-tjkV53Aw'
 
   return (
     <div className="bg-white min-h-screen">

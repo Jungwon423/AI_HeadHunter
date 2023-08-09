@@ -10,25 +10,18 @@ import {
   selectDuration,
   selectBudget,
 } from '../slices/travelInfoSlice'
-import { selectQueryInput, setQueryInput } from '../slices/queryInputSlice'
-import { link } from 'fs'
 import { useRouter } from 'next/router'
-import { AppThunk, AppDispatch } from '../store'
+import { AppDispatch } from '../store'
 import {
   fetchAttractionQueryAsync,
-  fetchAttractionQuery,
-  selectAttractionQueryList,
   selectAttractionQuery,
   selectAttractionQueryResultList,
   setResultList,
+  initializeResultList,
 } from '../slices/imageQuerySlice'
 
 const ImageQuery = () => {
   const [count, setCount] = useState(0)
-
-  const nextPage = () => {
-    setCount(count + 1)
-  }
 
   const router = useRouter()
 
@@ -56,6 +49,7 @@ const ImageQuery = () => {
   }, [])
 
   const handleImageClick = (image: string) => {
+    console.log('resultList : ' + resultList)
     if (image === 'left') {
       dispatch(setResultList(0))
       setCount(count + 1)
@@ -63,7 +57,6 @@ const ImageQuery = () => {
       dispatch(setResultList(1))
       setCount(count + 1)
     }
-    console.log('resultList : ' + resultList)
   }
 
   if (count === 8) {

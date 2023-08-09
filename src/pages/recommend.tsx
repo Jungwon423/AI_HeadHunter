@@ -38,12 +38,8 @@ const RecommendPage = () => {
   const currentDay: number = useSelector(selectCurrentDay)
   const TravelSchedule: placeInfo[][] = useSelector(selectTravelSchedule)
 
-  console.log('TravelSchedule', TravelSchedule)
-
   return TravelSchedule.map((day: placeInfo[]) => {
-    console.log('day', day)
     return day.map((place: placeInfo) => {
-      console.log('place', place)
       return (
         <div className="flex flex-col md:flex-row" key={place.name}>
           <img
@@ -53,7 +49,7 @@ const RecommendPage = () => {
           />
           <div className="flex flex-col md:w-1/2 md:pl-4">
             <h2 className="text-2xl font-bold mb-2">{place.name}</h2>
-            <p className="text-gray-600 text-lg mb-2">
+            <p className="text-gray-600 text-lg mb-2"></p>
               {place.summary?.overview}
             </p>
             <ul className="list-disc pl-4 mb-2">

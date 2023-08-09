@@ -88,6 +88,9 @@ export const attractionQuerySlice = createSlice({
     setResultList: (state, action: PayloadAction<ZeroOrOne>) => {
       state.resultList = [...state.resultList, action.payload]
     },
+    initializeResultList: (state) => {
+      state.resultList = []
+    },
   },
 })
 
@@ -138,8 +141,13 @@ export const selectAttractionQueryResultList = (state: RootState) =>
 export const selectAttractionQueryTravelId = (state: RootState) =>
   state.attractionQuery.travel_id
 
-export const { setAttractionQuery, setLoading, setError, setResultList } =
-  attractionQuerySlice.actions
+export const {
+  setAttractionQuery,
+  setLoading,
+  setError,
+  setResultList,
+  initializeResultList,
+} = attractionQuerySlice.actions
 
 export const selectAttractionQuery = (state: RootState) => state.attractionQuery
 
