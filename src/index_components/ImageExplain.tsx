@@ -33,6 +33,7 @@ const ImageExplain: React.FC<ImageExplainProps> = ({
             alt="Introduction Image"
             width={500}
             height={500}
+            priority
             sizes="100vw"
             style={{
               width: '100%',

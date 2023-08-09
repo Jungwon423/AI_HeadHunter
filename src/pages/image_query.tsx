@@ -131,7 +131,8 @@ const ImageQuery = () => {
           <Image
             src={attractionQuery.query_list[count][0].image}
             alt="Right Image"
-            layout="fill"
+            fill
+            sizes="undefined"
             onClick={() => handleImageClick('right')}
             style={{
               objectPosition: 'right',
@@ -156,13 +157,15 @@ const ImageQuery = () => {
             alt="Right Image"
             width={150}
             height={150}
+            style={{ width: '100%', height: 'auto' }}
           ></Image>
         </div>
         <div className="relative w-1/2 h-full">
           <Image
             src={attractionQuery.query_list[count][1].image}
             alt="Right Image"
-            layout="fill"
+            fill
+            sizes="undefined"
             onClick={() => handleImageClick('right')}
             style={{
               objectPosition: 'left',

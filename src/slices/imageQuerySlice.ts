@@ -36,7 +36,7 @@ const initialState: AttractionQueryState = {
 export function processAttractionList(atttractionList: any): placeInfo[][] {
   console.log('atttractionList : ' + JSON.stringify(atttractionList))
   return atttractionList.map((cluster: any) => {
-    console.log('cluster : ' + JSON.stringify(cluster))
+    // console.log('cluster : ' + JSON.stringify(cluster))
     const attractions = cluster.map(convertToPlaceInfo)
     console.log('success')
     return [...attractions]
