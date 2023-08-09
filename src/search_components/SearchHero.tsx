@@ -3,7 +3,7 @@ import Image from 'next/image'
 export default function SearchHero() {
   return (
     <section className="relative h-[40vh] md:h-[70vh] lg:h-[75vh] xl:h-[80vh] 2xl:h-[80vh]">
-      <div className="relative w-full h-full">
+      <div className="relative w-full h-3/4">
         <Image
           src="/assets/images/travel.jpg"
           alt="travel"

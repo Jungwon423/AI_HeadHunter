@@ -72,7 +72,7 @@ export default function SearchPage() {
       </Head>
       <MyNavbar />
       <SearchHero />
-      <div className="absolute top-72 sm:top-80 md:top-2/3 xl:top-3/4 inset-0 sm:inset-10 md:inset-30 xl:inset-40">
+      <div className="absolute top-1/3 sm:top-1/3 md:top-1/2 xl:top-1/2 inset-0 sm:inset-10 md:inset-30 xl:inset-40">
         <div className="bg-white min-w-4xl max-w-7xl rounded-xl shadow-xl">
           {/* <div className="absolute top-20 right-2">
             <Image
@@ -85,7 +85,7 @@ export default function SearchPage() {
             ></Image>
           </div> */}
 
-          <TravelTitle />
+          {/* <TravelTitle /> */}
 
           <TravelDuration onDurationChange={handleDurationChange} />
           <TravelCompanion
@@ -98,7 +98,7 @@ export default function SearchPage() {
             onStylesClick={handleStylesClick}
             onRemoveStyle={removeStyle}
           /> */}
-          <TravelBudget onBudgetChange={handleBudget}></TravelBudget>
+          {/* <TravelBudget onBudgetChange={handleBudget}></TravelBudget> */}
           <div className="relative m-5 p-5 inset-0 flex-auto justify-center text-center bg-indigo">
             <button
               className="w-full text-base sm:text-lg md:text-xl text-white font-bold py-4 px-20 rounded-xl bg-indigo-400 hover:bg-indigo-700 focus:outline-none"
