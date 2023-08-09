@@ -41,7 +41,7 @@ const ImageQuery = () => {
 
   const attractionQuery = useSelector(selectAttractionQuery)
 
-  console.log('attractionQuery', attractionQuery)
+  const resultList = useSelector(selectAttractionQueryResultList)
 
   // 여기서 초기 쿼리 입력 값을 설정하십시오.
   const initialQueryInput: InitialQueryInput = {
@@ -51,11 +51,8 @@ const ImageQuery = () => {
     budget: budget,
     companion: companion,
   }
-  console.log('initial 화면 : initialQueryInput', initialQueryInput)
-
   useEffect(() => {
     dispatch(fetchAttractionQueryAsync(initialQueryInput))
-    console.log('initial 화면 : initialQueryInput', initialQueryInput)
   }, [])
 
   const handleImageClick = (image: string) => {
@@ -66,6 +63,7 @@ const ImageQuery = () => {
       dispatch(setResultList(1))
       setCount(count + 1)
     }
+    console.log('resultList : ' + resultList)
   }
 
   if (count === 8) {
@@ -95,26 +93,6 @@ const ImageQuery = () => {
   if (attractionQuery.loading === 'failed') {
     return <p>Error: {attractionQuery.error}</p>
   }
-
-  console.log('통과')
-  console.log('count : ' + count)
-
-  console.log(
-    'attractionQuery.query_list',
-    attractionQuery.query_list[count][0],
-  )
-  console.log(
-    'attractionQuery.query_list',
-    attractionQuery.query_list[count][0],
-  )
-  console.log(
-    'attractionQuery.query_list',
-    attractionQuery.query_list[count][0].image,
-  )
-  console.log(
-    'attractionQuery.query_list',
-    attractionQuery.query_list[count][1].image,
-  )
 
   return (
     <div className="flex flex-col h-screen">

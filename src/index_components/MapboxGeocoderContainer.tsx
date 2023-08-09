@@ -14,20 +14,17 @@ const MapboxGeocoderContainer: React.FC<MapboxGeocoderContainerProps> = ({
 }) => {
   // Redux
   let city = useSelector(selectCity)
-  console.log(city)
   const dispatch = useDispatch()
 
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (containerRef.current) {
-      console.log('containerRef.current', containerRef.current)
       const geocoder = new MapboxGeocoder({
         accessToken,
         placeholder: '다음 여행지는 어디로 가시나요?',
       })
       geocoder.on('result', (event) => {
-        console.log('Selected place:', event.result)
         // Call your callback function here, passing the selected place as a parameter
         dispatch(setCity(event.result.place_name))
         dispatch(setCoordinate(event.result.center))
