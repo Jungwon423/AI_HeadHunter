@@ -25,10 +25,10 @@ import {
 
 const TravelCoursePage = () => {
   const dispatch = useDispatch<AppDispatch>()
-  const userId: string = useSelector(selectUserId)
-  // const userId: string = '6arap7v529'
+  //const userId: string = useSelector(selectUserId)
+  const userId: string = '2yftq9ni3zt'
   //const travelId: string = useSelector(selectAttractionQueryTravelId) // !: travelId is not null
-  const travelId: string = '64d123039a3e0eaa35903b8e'
+  const travelId: string = '64d2f8168daf327b97e2bebf'
 
   // console.log('travelId: ', travelId)
   //const resultList = useSelector(selectAttractionQueryResultList)
