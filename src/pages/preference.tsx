@@ -1,19 +1,24 @@
-import React from 'react'
-import Image from 'next/image'
+import TravelContainer from '../travel_components/TravelContainer'
+import TravelMap from '../travel_components/TravelMap'
+import Guide from '../travel_components/guide'
+
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useRouter } from 'next/router'
-import { AppDispatch } from '../store'
 import {
-  fetchPreference,
-  selectUserId,
-  recommendInputV2,
   fetchPreferenceAsync,
+  fetchTravelSchedule,
+  fetchTravelScheduleAsync,
+  recommendInput,
+  recommendInputV2,
   selectPreference,
   selectTravelInfo,
+  selectUserId,
 } from '../slices/travelInfoSlice'
-import { selectTravelId } from '../slices/questionnaireSlice'
+import { fetchQueryAsync, selectTravelId } from '../slices/questionnaireSlice'
+import { AppDispatch } from '../store'
+import { useRouter } from 'next/router'
 import {
+  ZeroOrOne,
   selectAttractionQueryResultList,
   selectAttractionQueryTravelId,
 } from '../slices/imageQuerySlice'
@@ -22,25 +27,51 @@ const Preference = () => {
   const router = useRouter()
 
   const dispatch = useDispatch<AppDispatch>()
-  const userId: string = useSelector(selectUserId)
-  const travelId: string = useSelector(selectAttractionQueryTravelId) // !: travelId is not null
-  console.log('travelId: ', travelId)
-  const resultList = useSelector(selectAttractionQueryResultList)
+  //const userId: string = useSelector(selectUserId)
+  const userId: string = 'yftq9ni3zt'
+  //const travelId: string = useSelector(selectAttractionQueryTravelId) // !: travelId is not null
+  const travelId: string = '64d2f8168daf327b97e2bebf'
+
+  // console.log('travelId: ', travelId)
+  //const resultList = useSelector(selectAttractionQueryResultList)
+  const resultList = [1, 1, 1, 1, 1, 1, 1, 1]
 
   const preference = useSelector(selectPreference)
   const travelInfo = useSelector(selectTravelInfo)
 
-  const recommendInput: recommendInputV2 = {
-    travel_id: travelId,
-    user: userId,
-    answers: resultList,
-  }
-
-  console.log('recommendInput: ', recommendInput)
+  const [preferenceLoaded, setPreferenceLoaded] = useState(false)
+  const [scheduleLoaded, setScheduleLoaded] = useState(false)
 
   useEffect(() => {
-    dispatch(fetchPreferenceAsync(recommendInput))
+    const recommendInput: recommendInputV2 = {
+      travel_id: travelId,
+      user: userId,
+      answers: resultList as ZeroOrOne[],
+    }
+    console.log('recommendInput : '+recommendInput)
+    if (preferenceLoaded === false) {
+      console.log('recommendInput: ', recommendInput)
+      dispatch(fetchPreferenceAsync(recommendInput))
+      setPreferenceLoaded(true)
+    }
   }, [])
+
+  useEffect(() => {
+    console.log()
+    const recommendInput: recommendInput = {
+      
+      user: userId,
+      travel_id: travelId,
+    }
+    if (
+      scheduleLoaded === false &&
+      travelInfo.preferenceLoading === 'succeeded'
+    ) {
+      console.log('travelInput: ', recommendInput)
+      dispatch(fetchTravelScheduleAsync(recommendInput))
+      setScheduleLoaded(true)
+    }
+  }, [travelInfo.preferenceLoading])
 
   if (travelInfo.preferenceLoading === 'pending') {
     return (
@@ -54,6 +85,24 @@ const Preference = () => {
     return <p>Error: {travelInfo.error}</p>
   }
 
+  let buttonStatus: string = ''
+  if (travelInfo.loading === 'pending') {
+    buttonStatus = 'loading'
+  } else if (travelInfo.loading === 'failed') {
+    buttonStatus = 'something wrong'
+  } else {
+    buttonStatus = '추천 확인하러 가기'
+  }
+
+  const handleButtonClick = () => {
+    console.log(travelInfo.loading)
+
+    if (travelInfo.loading === 'succeeded') {
+      console.log('페이지 이동')
+      router.push('/recommend')
+  }
+  }
+
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="flex flex-col items-center justify-center">
@@ -61,7 +110,11 @@ const Preference = () => {
           {preference.inferring} {preference.conclusion}
         </div>
         <div className="flex flex-col items-center justify-center"></div>
+        <button className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600" onClick={handleButtonClick}>
+  {buttonStatus}
+</button>
       </div>
+      
     </div>
   )
 }

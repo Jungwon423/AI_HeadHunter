@@ -23,4 +23,14 @@ import {
   selectAttractionQueryTravelId,
 } from '../slices/imageQuerySlice'
 
-const RecommendPage = ()=>  {}
+const RecommendPage = ()=>  {
+  return (
+    <div className="flex h-screen">
+      <Guide></Guide>
+      <TravelContainer></TravelContainer>
+      <TravelMap></TravelMap>
+    </div>
+  )
+}
+
+export default RecommendPage

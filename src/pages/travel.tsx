@@ -24,9 +24,11 @@ import {
 } from '../slices/imageQuerySlice'
 
 const TravelCoursePage = () => {
+const router = useRouter()
+
   const dispatch = useDispatch<AppDispatch>()
   //const userId: string = useSelector(selectUserId)
-  const userId: string = '2yftq9ni3zt'
+  const userId: string = 'yftq9ni3zt'
   //const travelId: string = useSelector(selectAttractionQueryTravelId) // !: travelId is not null
   const travelId: string = '64d2f8168daf327b97e2bebf'
 
@@ -81,6 +83,40 @@ const TravelCoursePage = () => {
     return <p>Error: {travelInfo.error}</p>
   }
 
+  let buttonStatus: string = ''
+  if (travelInfo.loading === 'pending') {
+    buttonStatus = 'loading'
+  } else if (travelInfo.loading === 'failed') {
+    buttonStatus = 'something wrong'
+  } else {
+    buttonStatus = '추천 확인하러 가기'
+  }
+
+  const handleButtonClick = () => {
+    console.log(travelInfo.loading)
+
+    if (travelInfo.loading === 'succeeded') {
+      console.log('페이지 이동')
+      router.push('/travel')
+  }
+  }
+
+  return (
+    <div className="flex items-center justify-center h-screen">
+      <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center">
+          {preference.inferring} {preference.conclusion}
+        </div>
+        <div className="flex flex-col items-center justify-center"></div>
+        <button className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600" onClick={handleButtonClick}>
+  {buttonStatus}
+</button>
+      </div>
+      
+    </div>
+  )
+
+  // 버튼 회색
   if (travelInfo.loading === 'pending') {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -94,6 +130,7 @@ const TravelCoursePage = () => {
     )
   }
 
+  // 버튼 빨간색 - 생성 실패했습니다
   if (travelInfo.loading === 'failed') {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -109,44 +146,6 @@ const TravelCoursePage = () => {
       <TravelMap></TravelMap>
     </div>
   )
-  //
-  //
-  //
-  //
-  //
-
-  // useEffect(() => {
-  //   const recommendInput: recommendInput = {
-  //     user: userId,
-  //     travel_id: travelId,
-  //   }
-  //   console.log('travelInput: ', recommendInput)
-  //   dispatch(fetchTravelScheduleAsync(recommendInput))
-  // }, [dispatch])
-
-  // if (travelInfo.loading === 'pending') {
-  //   return (
-  //     <div className="flex items-center justify-center h-screen">
-  //       <p>Loading...</p>
-  //     </div>
-  //   )
-  // }
-
-  // if (travelInfo.loading === 'failed') {
-  //   return (
-  //     <div className="flex items-center justify-center h-screen">
-  //       <p>Error: {travelInfo.error}</p>
-  //     </div>
-  //   )
-  // }
-
-  // return (
-  //   <div className="flex h-screen">
-  //     <Guide></Guide>
-  //     <TravelContainer></TravelContainer>
-  //     <TravelMap></TravelMap>
-  //   </div>
-  // )
 }
 
 export default TravelCoursePage
