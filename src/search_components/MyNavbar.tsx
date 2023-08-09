@@ -15,6 +15,7 @@ export default function MyNavbar() {
               height={40}
               style={{
                 maxWidth: '100%',
+                width: 'auto',
                 height: 'auto',
               }}
             />
