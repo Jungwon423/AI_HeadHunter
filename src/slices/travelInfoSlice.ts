@@ -1,4 +1,4 @@
-import { createAction, createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { RootState, AppThunk } from '../store'
 import axios, { AxiosResponse } from 'axios'
@@ -264,7 +264,6 @@ export const fetchTravelScheduleV2 = async (
   )
 
   // TODO
-  console.log(response.data.cluster_attractions)
   return []
 }
 
@@ -283,13 +282,10 @@ export const fetchTravelSchedule = async (
     config,
   )
 
-  console.log(response.data.cluster_attractions)
-
   // 이중 for문을 사용하여 JSON 데이터를 placeInfo[][]로 변환합니다.
   const placeInfos: placeInfo[][] = processCluster(
     response.data.cluster_attractions,
   )
-  console.log(placeInfos)
   return placeInfos
 }
 

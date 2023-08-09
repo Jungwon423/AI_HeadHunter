@@ -17,7 +17,6 @@ import {
   selectAttractionQuery,
   selectAttractionQueryResultList,
   setResultList,
-  initializeResultList,
 } from '../slices/imageQuerySlice'
 
 const ImageQuery = () => {

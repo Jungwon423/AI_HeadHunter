@@ -38,6 +38,11 @@ const Preference = () => {
   const [preferenceLoaded, setPreferenceLoaded] = useState(false)
   const [scheduleLoaded, setScheduleLoaded] = useState(false)
 
+  console.log(
+    '/Preference 페이지 진입 + travelInfo.preferenceLoading : ' +
+      travelInfo.preferenceLoading,
+  )
+
   useEffect(() => {
     const recommendInput: recommendInputV2 = {
       travel_id: travelId,
@@ -60,6 +65,9 @@ const Preference = () => {
       scheduleLoaded === false &&
       travelInfo.preferenceLoading === 'succeeded'
     ) {
+      console.log(
+        'travelInfo.preferenceLoading : ' + travelInfo.preferenceLoading,
+      )
       console.log('여행지 추천 Input: ', recommendInput)
       dispatch(fetchTravelScheduleAsync(recommendInput))
       setScheduleLoaded(true)

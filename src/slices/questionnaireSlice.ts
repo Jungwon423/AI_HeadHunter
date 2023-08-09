@@ -56,15 +56,12 @@ export const fetchQuery = async (
   }
   let API_URL: string = SERVER_API_URL + '/travel/query'
 
-  console.log('queryInput : ' + JSON.stringify(queryInput))
-
   const response: AxiosResponse<QuestionnaireState> = await axios.post(
     API_URL,
     /* Include any POST data you need to send */
     queryInput,
     config,
   )
-  console.log('response : ' + JSON.stringify(response.data))
   return response.data
 }
 
@@ -150,7 +147,6 @@ export const fetchQueryAsync =
       const questionnaire = await fetchQuery(queryInput)
       dispatch(setQuestionnaire(questionnaire))
       if (questionnaire && questionnaire.travel_id) {
-        console.log('questionnaire.travel_id : ' + questionnaire.travel_id)
         dispatch(setTravelId(questionnaire.travel_id))
       }
       dispatch(setLoading('succeeded'))
