@@ -1,4 +1,4 @@
-import Image from "next/legacy/image"
+import Image from 'next/image'
 import { useState } from 'react'
 import Head from 'next/head'
 import MyNavbar from '../search_components/MyNavbar'
