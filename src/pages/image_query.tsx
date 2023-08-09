@@ -115,61 +115,71 @@ const ImageQuery = () => {
     'attractionQuery.query_list',
     attractionQuery.query_list[count][1].image,
   )
+
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <div className="flex flex-row w-full">
-        <div className="w-1/2 rounded-lg overflow-hidden">
-          <div className="flex flex-row justify-center">
-            <Image
-              src={attractionQuery.query_list[count][0].image}
-              alt="Left Image"
-              width={400}
-              height={400}
-              onClick={() => handleImageClick('left')}
-              style={{
-                objectFit: 'cover',
-                maxWidth: '100%',
-                height: 'auto',
-              }}
-            />
-          </div>
-          {/* <h2 className="text-2xl font-bold mb-2">
-            {attractionQuery.query_list[count][0].name}
-          </h2>
-          <p className="text-gray-600 text-lg">
-            {attractionQuery.query_list[count][0].summary?.overview}
-          </p> */}
+    <div className="flex flex-col h-screen">
+      <div className="flex justify-center items-center w-screen h-28">
+        <div className="text-2xl md:text-4xl xl:text-5xl font-bold">
+          여행 이상형 월드컵 16강
         </div>
-        <div className="w-1/2 h-80 rounded-lg overflow-hidden">
-          {/* <div className="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64">
-            <img
-              src={attractionQuery.query_list[count][1].image}
-              alt={attractionQuery.query_list[count][1].image}
-              className="h-full w-full object-cover object-center"
-            />
+        <div className="font-bold text-2xl md:text-4xl xl:text-5xl ml-5">
+          {count + 1}/8
+        </div>
+      </div>
+      <div className="flex justify-center items-center h-full bg-black">
+        <div className="relative w-1/2 h-full">
+          <Image
+            src={attractionQuery.query_list[count][0].image}
+            alt="Right Image"
+            layout="fill"
+            onClick={() => handleImageClick('right')}
+            style={{
+              objectPosition: 'right',
+              objectFit: 'contain',
+              maxWidth: '100%',
+              height: '100%',
+            }}
+          />
+          <div className="flex flex-col bg-gray-800 justify-end opacity-80 p-2">
+            <div className="flex justify-end text-white text-base sm:text-xl font-bold mt-2 mb-2">
+              {attractionQuery.query_list[count][0].name}
+            </div>
+            <div className="flex justify-end text-white text-xs sm:text-sm mt-3 mb-3">
+              {attractionQuery.query_list[count][0].summary?.overview}
+            </div>
           </div>
-          <h3 className="mt-6 text-sm text-gray-500">
-            <span className="absolute inset-0" />
-            {attractionQuery.query_list[count][1].name}
-          </h3> */}
+        </div>
+        <div className="fixed z-10">
+          <Image
+            src="/assets/images/vs.png"
+            onClick={() => handleImageClick('right')}
+            alt="Right Image"
+            width={150}
+            height={150}
+          ></Image>
+        </div>
+        <div className="relative w-1/2 h-full">
           <Image
             src={attractionQuery.query_list[count][1].image}
             alt="Right Image"
-            width={400}
-            height={400}
+            layout="fill"
             onClick={() => handleImageClick('right')}
             style={{
-              objectFit: 'cover',
+              objectPosition: 'left',
+              objectFit: 'contain',
               maxWidth: '100%',
-              height: 'auto',
+              height: '100%',
             }}
           />
-          <h2 className="text-2xl font-bold mb-2">
-            {attractionQuery.query_list[count][1].name}
-          </h2>
-          <p className="text-gray-600 text-lg">
-            {attractionQuery.query_list[count][1].summary?.overview}
-          </p>
+
+          <div className="flex flex-col bg-gray-800 justify-end opacity-80 p-2">
+            <div className="text-white text-base sm:text-xl font-bold mt-2 mb-2">
+              {attractionQuery.query_list[count][1].name}
+            </div>
+            <div className="text-white text-xs sm:text-sm mt-3 mb-3">
+              {attractionQuery.query_list[count][1].summary?.overview}
+            </div>
+          </div>
         </div>
       </div>
     </div>
