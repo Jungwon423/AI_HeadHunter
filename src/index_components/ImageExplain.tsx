@@ -18,14 +18,8 @@ const ImageExplain: React.FC<ImageExplainProps> = ({
       <div className="flex flex-col md:flex-row items-center">
         {/* First image on the right and text on the left */}
         <div className="w-full md:w-2/3 pr-8">
-          <h1 className="text-4xl font-extrabold text-gray-900">
-            Welcome to My Website
-          </h1>
-          <p className="mt-4 text-lg text-gray-500">
-            This is a brief introduction to my website. Here, you can find
-            information about my services and products. Feel free to explore and
-            contact me if you have any questions.
-          </p>
+          <h1 className="text-4xl font-extrabold text-gray-900">{h1Text}</h1>
+          <p className="mt-4 text-lg text-gray-500">{pText}</p>
         </div>
         <div className="w-full md:w-1/3">
           <Image
@@ -49,7 +43,7 @@ const ImageExplain: React.FC<ImageExplainProps> = ({
         {/* Second image on the left and text on the right */}
         <div className="w-full md:w-1/2 pr-8">
           <Image
-            src="/assets/images/screenshot1.webp"
+            src="/assets/screen1.png"
             alt="Screenshot 1"
             width={800}
             height={640}
@@ -69,14 +63,8 @@ const ImageExplain: React.FC<ImageExplainProps> = ({
           />
         </div>
         <div className="w-full md:w-1/2">
-          <h1 className="text-4xl font-extrabold text-gray-900">
-            Welcome to My Website
-          </h1>
-          <p className="mt-4 text-lg text-gray-500">
-            This is a brief introduction to my website. Here, you can find
-            information about my services and products. Feel free to explore and
-            contact me if you have any questions.
-          </p>
+          <h1 className="text-4xl font-extrabold text-gray-900">{h1Text}</h1>
+          <p className="mt-4 text-lg text-gray-500">{pText}</p>
         </div>
       </div>
     )

@@ -41,7 +41,7 @@ const Footer = () => (
           <Link href="/">Home</Link>
         </li>
         <li className="px-5">
-          <Link href="/">About</Link>
+          <Link href="/">Team</Link>
         </li>
         <li className="px-5">
           <Link href="/travel">Travel</Link>
