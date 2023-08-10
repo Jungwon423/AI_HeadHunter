@@ -239,6 +239,8 @@ export const fetchPreference = async (
 
   let API_URL: string = SERVER_API_URL + '/travel/attractionQueryAnswer'
 
+  console.log('API_URL', API_URL)
+
   const response: AxiosResponse<preference> = await axios.post(
     API_URL,
     recommendInput,
@@ -275,6 +277,8 @@ export const fetchTravelSchedule = async (
   }
 
   let API_URL: string = SERVER_API_URL + '/travel/recommendAttractions'
+
+  console.log('API_URL', API_URL)
 
   const response: AxiosResponse<ResponseData> = await axios.post(
     API_URL,
@@ -351,6 +355,12 @@ export const travelInfoSlice = createSlice({
     setPreferenceError: (state, action: PayloadAction<string | null>) => {
       state.preferenceError = action.payload
     },
+    initialize: (state) => {
+      setPreferenceLoading('idle')
+      setPreferenceError(null)
+      setLoading('idle')
+      setError(null)
+    },
   },
 })
 
@@ -424,6 +434,7 @@ export const {
   setPreference,
   setPreferenceLoading,
   setPreferenceError,
+  initialize,
 } = travelInfoSlice.actions
 
 const persistConfig = {

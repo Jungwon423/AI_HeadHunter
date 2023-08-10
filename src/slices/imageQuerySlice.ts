@@ -88,8 +88,9 @@ export const attractionQuerySlice = createSlice({
     setResultList: (state, action: PayloadAction<ZeroOrOne>) => {
       state.resultList = [...state.resultList, action.payload]
     },
-    initializeResultList: (state) => {
+    initialize: (state) => {
       state.resultList = []
+      state.loading = 'idle'
     },
   },
 })
@@ -146,7 +147,7 @@ export const {
   setLoading,
   setError,
   setResultList,
-  initializeResultList,
+  initialize,
 } = attractionQuerySlice.actions
 
 export const selectAttractionQuery = (state: RootState) => state.attractionQuery

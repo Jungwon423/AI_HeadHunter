@@ -1,20 +1,15 @@
-import TravelContainer from '../travel_components/TravelContainer'
-import TravelMap from '../travel_components/TravelMap'
-import Guide from '../travel_components/guide'
-
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   fetchPreferenceAsync,
-  fetchTravelSchedule,
   fetchTravelScheduleAsync,
   recommendInput,
   recommendInputV2,
   selectPreference,
   selectTravelInfo,
   selectUserId,
+  initialize,
 } from '../slices/travelInfoSlice'
-import { fetchQueryAsync, selectTravelId } from '../slices/questionnaireSlice'
 import { AppDispatch } from '../store'
 import { useRouter } from 'next/router'
 import {
@@ -38,10 +33,9 @@ const Preference = () => {
   const [preferenceLoaded, setPreferenceLoaded] = useState(false)
   const [scheduleLoaded, setScheduleLoaded] = useState(false)
 
-  console.log(
-    '/Preference 페이지 진입 + travelInfo.preferenceLoading : ' +
-      travelInfo.preferenceLoading,
-  )
+  useEffect(() => {
+    dispatch(initialize())
+  }, [])
 
   useEffect(() => {
     const recommendInput: recommendInputV2 = {
@@ -50,11 +44,17 @@ const Preference = () => {
       answers: resultList as ZeroOrOne[],
     }
     if (preferenceLoaded === false) {
+      console.log('preferenceLoaded: ' + preferenceLoaded)
       console.log('preference 추천 Input: ', recommendInput)
       dispatch(fetchPreferenceAsync(recommendInput))
       setPreferenceLoaded(true)
     }
   }, [])
+
+  // console.log(
+  //   '/Preference 페이지 진입 + travelInfo.preferenceLoading : ' +
+  //     travelInfo.preferenceLoading,
+  // )
 
   useEffect(() => {
     const recommendInput: recommendInput = {
@@ -63,6 +63,7 @@ const Preference = () => {
     }
     if (
       scheduleLoaded === false &&
+      preferenceLoaded === true &&
       travelInfo.preferenceLoading === 'succeeded'
     ) {
       console.log(

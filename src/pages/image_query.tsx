@@ -17,7 +17,9 @@ import {
   selectAttractionQuery,
   selectAttractionQueryResultList,
   setResultList,
+  initialize,
 } from '../slices/imageQuerySlice'
+import { init } from 'next/dist/compiled/@vercel/og/satori'
 
 const ImageQuery = () => {
   const [count, setCount] = useState(0)
@@ -25,14 +27,13 @@ const ImageQuery = () => {
   const router = useRouter()
 
   const dispatch = useDispatch<AppDispatch>()
+
   const userId: string = useSelector(selectUserId)
   const city: string = useSelector(selectCity)
   const companion: string = useSelector(selectCompanion)
   const duration: number = useSelector(selectDuration)
   const budget: number = useSelector(selectBudget)
-
   const attractionQuery = useSelector(selectAttractionQuery)
-
   const resultList = useSelector(selectAttractionQueryResultList)
 
   // 여기서 초기 쿼리 입력 값을 설정하십시오.
@@ -43,7 +44,9 @@ const ImageQuery = () => {
     budget: budget,
     companion: companion,
   }
+
   useEffect(() => {
+    dispatch(initialize())
     dispatch(fetchAttractionQueryAsync(initialQueryInput))
   }, [])
 

@@ -16,7 +16,6 @@ import { TravelCompanion } from '../search_components/TravelCompanion'
 import TravelDuration from '../search_components/TravelDuration'
 import TravelBudget from '../search_components/TravelBudget'
 import LocalStorage from '../index_components/LocalStorage'
-import { initializeResultList } from '../slices/imageQuerySlice'
 
 const TravelTitle = () => (
   <div className="text-center py-10 sm:py-15 md:py-20 bg-indigo-400 rounded-tl-xl rounded-tr-xl">
@@ -119,7 +118,6 @@ export default function SearchPage() {
                 dispatch(setTravelStyle(selectedStyles))
                 dispatch(setDuration(travelDuration))
                 dispatch(setBudget(selectedBudget))
-                dispatch(initializeResultList())
                 router.push('/image_query')
               }}
             >

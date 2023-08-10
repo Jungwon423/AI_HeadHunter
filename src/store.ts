@@ -5,15 +5,7 @@ import {
   AnyAction,
 } from '@reduxjs/toolkit'
 
-import counterReducer from './slices/counterSlice'
-import travelInfoReducer from './slices/travelInfoSlice'
-import travelChatReducer from './slices/travelChatSlice'
-import questionnaireReducer from './slices/questionnaireSlice'
-import queryInputSlice from './slices/queryInputSlice'
-import attractionQuerySlice from './slices/imageQuerySlice'
 import tabSlice from './slices/tabSlice'
-import persistedCounterReducer from './slices/counterSlice'
-import persistedAttractionQuerySlice from './slices/imageQuerySlice'
 import persistedTravelInfoReducer from './slices/travelInfoSlice'
 import persistedTravelChatReducer from './slices/travelChatSlice'
 import persistedQuestionnaireReducer from './slices/questionnaireSlice'
@@ -23,7 +15,6 @@ import persistedAttractionQueryReducer from './slices/imageQuerySlice'
 export const store = configureStore({
   reducer: {
     tab: tabSlice,
-    counter: persistedCounterReducer,
     travelInfo: persistedTravelInfoReducer,
     travelChat: persistedTravelChatReducer,
     questionnaire: persistedQuestionnaireReducer,
