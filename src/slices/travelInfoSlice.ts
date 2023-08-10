@@ -138,86 +138,7 @@ const initialState: TravelInfoState = {
   coordinate: [135.5023, 34.6937],
   companion: '혼자',
   travelStyle: ['문화', '쇼핑', '음식'],
-  travelSchedule: [
-    [
-      {
-        name: '오사카 성',
-        coordinate: [34.6936, 135.502],
-        image:
-          'https://media.tacdn.com/media/attractions-splice-spp-400x400/0b/27/58/3d.jpg',
-        location: '1-1 Ōsakajō, Chuo Ward, Osaka, 540-0002 일본',
-        time: 15,
-        description: '오사카 성은 정말 크고 우람합니다. 마치 그것처럼요.',
-        thought:
-          '오사카 성을 추천하는 이유는 재미있고 fun하며 interesting 하기 때문입니다 쏼라쏼라쏼라',
-        hashtags: [
-          'tourist attraction',
-          'museum',
-          'point of interest',
-          'establishment',
-        ],
-        website: 'https://osakacastle.net/',
-      } as placeInfo,
-      {
-        name: '도톤보리',
-        coordinate: [34.6686, 135.5031],
-        image:
-          'https://media.tacdn.com/media/attractions-splice-spp-400x400/0b/27/58/3d.jpg',
-        time: 15,
-        description: '자유의 여신상은 유명해요',
-      } as placeInfo,
-      {
-        name: '우메다 스카이 빌딩',
-        coordinate: [34.705, 135.4904],
-        image:
-          'https://media.tacdn.com/media/attractions-splice-spp-400x400/0b/27/58/3d.jpg',
-        time: 15,
-        description: '자유의 여신상은 유명해요',
-      } as placeInfo,
-      {
-        name: '오사카 수족관',
-        coordinate: [34.6546, 135.428],
-        image:
-          'https://media.tacdn.com/media/attractions-splice-spp-400x400/0b/27/58/3d.jpg',
-        time: 15,
-        description: '자유의 여신상은 유명해요',
-      } as placeInfo,
-    ],
-    [
-      {
-        name: '유니버설 스튜디오 재팬',
-        coordinate: [34.667842183190174, 135.43209420160437],
-        image:
-          'https://media.tacdn.com/media/attractions-splice-spp-400x400/0b/27/58/3d.jpg',
-        time: 15,
-        description: '자유의 여신상은 유명해요',
-      } as placeInfo,
-      {
-        name: '덴포잔 대관람차',
-        coordinate: [34.658664636837464, 135.43123589467507],
-        image:
-          'https://media.tacdn.com/media/attractions-splice-spp-400x400/0b/27/58/3d.jpg',
-        time: 15,
-        description: '자유의 여신상은 유명해요',
-      } as placeInfo,
-      {
-        name: '난바 야사카 신사',
-        coordinate: [34.66346532633862, 135.496295559915],
-        image:
-          'https://media.tacdn.com/media/attractions-splice-spp-400x400/0b/27/58/3d.jpg',
-        time: 15,
-        description: '자유의 여신상은 유명해요',
-      } as placeInfo,
-      {
-        name: '시텐노지',
-        coordinate: [34.65617541900762, 135.51633874457755],
-        image:
-          'https://media.tacdn.com/media/attractions-splice-spp-400x400/0b/27/58/3d.jpg',
-        time: 15,
-        description: '자유의 여신상은 유명해요',
-      } as placeInfo,
-    ],
-  ],
+  travelSchedule: [],
   loading: 'idle',
   error: null,
   currentPlace: null,
@@ -248,25 +169,6 @@ export const fetchPreference = async (
   )
 
   return response.data
-}
-
-export const fetchTravelScheduleV2 = async (
-  recommendInput: recommendInputV2,
-): Promise<placeInfo[][]> => {
-  const config = {
-    withCredentials: true,
-  }
-
-  let API_URL: string = SERVER_API_URL + '/travel/recommendV2'
-
-  const response: AxiosResponse<ResponseData> = await axios.post(
-    API_URL,
-    recommendInput,
-    config,
-  )
-
-  // TODO
-  return []
 }
 
 export const fetchTravelSchedule = async (

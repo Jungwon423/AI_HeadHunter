@@ -2,13 +2,12 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   fetchPreferenceAsync,
-  fetchTravelScheduleAsync,
   recommendInput,
   recommendInputV2,
   selectPreference,
-  selectTravelInfo,
   selectUserId,
   initialize,
+  selectTravelInfo,
 } from '../slices/travelInfoSlice'
 import { AppDispatch } from '../store'
 import { useRouter } from 'next/router'
@@ -17,6 +16,10 @@ import {
   selectAttractionQueryResultList,
   selectAttractionQueryTravelId,
 } from '../slices/imageQuerySlice'
+import {
+  fetchRecommendAttractionsAsync,
+  selectRecommendAttractions,
+} from '../slices/recommendSlice'
 
 const Preference = () => {
   const router = useRouter()
@@ -29,6 +32,8 @@ const Preference = () => {
 
   const preference = useSelector(selectPreference)
   const travelInfo = useSelector(selectTravelInfo)
+
+  const recommendAttractions = useSelector(selectRecommendAttractions)
 
   const [preferenceLoaded, setPreferenceLoaded] = useState(false)
   const [scheduleLoaded, setScheduleLoaded] = useState(false)
@@ -51,11 +56,6 @@ const Preference = () => {
     }
   }, [])
 
-  // console.log(
-  //   '/Preference 페이지 진입 + travelInfo.preferenceLoading : ' +
-  //     travelInfo.preferenceLoading,
-  // )
-
   useEffect(() => {
     const recommendInput: recommendInput = {
       user: userId,
@@ -70,7 +70,7 @@ const Preference = () => {
         'travelInfo.preferenceLoading : ' + travelInfo.preferenceLoading,
       )
       console.log('여행지 추천 Input: ', recommendInput)
-      dispatch(fetchTravelScheduleAsync(recommendInput))
+      dispatch(fetchRecommendAttractionsAsync(recommendInput))
       setScheduleLoaded(true)
     }
   }, [travelInfo.preferenceLoading])
@@ -88,18 +88,18 @@ const Preference = () => {
   }
 
   let buttonStatus: string = ''
-  if (travelInfo.loading === 'pending') {
+  if (recommendAttractions.loading === 'pending') {
     buttonStatus = 'loading'
-  } else if (travelInfo.loading === 'failed') {
+  } else if (recommendAttractions.loading === 'failed') {
     buttonStatus = 'something wrong'
   } else {
     buttonStatus = '추천 확인하러 가기'
   }
 
   let buttonColor: string = 'bg-blue-500'
-  if (travelInfo.loading === 'pending') {
+  if (recommendAttractions.loading === 'pending') {
     buttonColor = 'bg-gray-500'
-  } else if (travelInfo.loading === 'failed') {
+  } else if (recommendAttractions.loading === 'failed') {
     buttonColor = 'bg-red-500'
   } else {
     buttonColor = 'bg-blue-500'
@@ -108,7 +108,7 @@ const Preference = () => {
   let buttonClass = `rounded px-4 py-2 font-bold text-white hover:bg-blue-600 ${buttonColor} `
 
   const handleButtonClick = () => {
-    if (travelInfo.loading === 'succeeded') {
+    if (recommendAttractions.loading === 'succeeded') {
       router.push('/recommend')
     }
   }

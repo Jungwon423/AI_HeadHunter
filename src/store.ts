@@ -11,6 +11,7 @@ import persistedTravelChatReducer from './slices/travelChatSlice'
 import persistedQuestionnaireReducer from './slices/questionnaireSlice'
 import persistedQueryInputReducer from './slices/queryInputSlice'
 import persistedAttractionQueryReducer from './slices/imageQuerySlice'
+import persistedRecommendAttractionsReducer from './slices/recommendSlice'
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
     questionnaire: persistedQuestionnaireReducer,
     queryInput: persistedQueryInputReducer,
     attractionQuery: persistedAttractionQueryReducer,
+    recommendAttractions: persistedRecommendAttractionsReducer,
   },
   // middleware: (getDefaultMiddleware) =>
   // getDefaultMiddleware().concat(thunk),

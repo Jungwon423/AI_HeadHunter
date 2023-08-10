@@ -1,15 +1,9 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { InitialQueryInput } from './questionnaireSlice'
 import { RootState, AppThunk } from '../store'
-import {
-  convertToPlaceInfo,
-  placeInfo,
-  processCluster,
-} from './travelInfoSlice'
+import { convertToPlaceInfo, placeInfo } from './travelInfoSlice'
 import { SERVER_API_URL } from './api_url'
 import axios from 'axios'
-import { init } from 'next/dist/compiled/@vercel/og/satori'
-import App from 'next/app'
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
