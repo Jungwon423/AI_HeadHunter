@@ -211,7 +211,7 @@ export const selectCurrentDay = (state: RootState) =>
   state.recommendAttractions.currentDay
 
 const persistConfig = {
-  key: 'root',
+  key: 'recommend',
   storage,
 }
 

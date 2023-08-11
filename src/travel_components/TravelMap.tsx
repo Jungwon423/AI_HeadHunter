@@ -1,5 +1,4 @@
 import {
-  placeInfo,
   selectCoordinate,
   selectTravelSchedule,
   handleCurrentPlace,
@@ -24,6 +23,7 @@ import ChatScreen from './ChatScreen'
 import Pin from './Pin'
 import TravelChat from './TravelChat'
 import GeocoderControl from './GeocoderControl'
+import { PlaceInfo } from '../interfaces/placeInfo'
 
 const TravelMap = () => {
   const pinColors = [
@@ -57,7 +57,7 @@ const TravelMap = () => {
   const currentDay: number = useSelector(selectCurrentDay)
   console.log('currentDay: ' + currentDay)
 
-  const travelSchedule: placeInfo[][] = useSelector(selectTravelSchedule) || []
+  const travelSchedule: PlaceInfo[][] = useSelector(selectTravelSchedule) || []
 
   const TOKEN =
     'pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtrcGNwdXQwNm1oM2xvZTJ5Z2Q4djk5In0._rw_aFaBfUjQC-tjkV53Aw'

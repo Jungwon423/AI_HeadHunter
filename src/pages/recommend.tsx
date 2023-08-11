@@ -23,7 +23,7 @@ import { RecommendInput } from '../interfaces/recommendInput'
 import { PlaceInfo } from '../interfaces/placeInfo'
 
 const RecommendPage = () => {
-  const dispatch = useDispatch<AppDispatch>()
+  const dispatch = useDispatch()
   const userId: string = useSelector(selectUserId)
   const travelId: string = useSelector(selectAttractionQueryTravelId) // !: travelId is not null
   const travelInfo = useSelector(selectTravelInfo)
@@ -40,7 +40,7 @@ const RecommendPage = () => {
       user: userId,
       travel_id: travelId,
     }
-    dispatch(fetchTravelScheduleAsync(input))
+    //dispatch(fetchTravelScheduleAsync(input))
   }, [])
 
   const router = useRouter()

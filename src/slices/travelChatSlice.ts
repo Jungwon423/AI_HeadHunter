@@ -23,7 +23,7 @@ export const travelChatSlice = createSlice({
 })
 
 const persistConfig = {
-  key: 'root',
+  key: 'chat',
   storage,
 }
 

@@ -292,7 +292,7 @@ export const {
 } = travelInfoSlice.actions
 
 const persistConfig = {
-  key: 'root',
+  key: 'travel',
   storage,
 }
 
