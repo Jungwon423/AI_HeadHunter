@@ -17,9 +17,6 @@ import GuideDay from './guide_components/GuideDay'
 import GuideContainer from './guide_components/GuideContainer'
 
 const Guide = () => {
-  const dispatch = useDispatch()
-
-  const city: String = useSelector(selectCity)
   const duration: number = useSelector(selectDuration)
   const currentDay: number = useSelector(selectCurrentDay)
   const TravelSchedule: placeInfo[][] = useSelector(selectTravelSchedule)

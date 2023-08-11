@@ -1,11 +1,3 @@
-import {
-  placeInfo,
-  selectCoordinate,
-  selectTravelSchedule,
-  handleCurrentPlace,
-  selectCurrentPlace,
-  selectCurrentDay,
-} from '../slices/travelInfoSlice'
 import { useSelector } from 'react-redux'
 import { selectShowChat, setShowChat } from '../slices/travelChatSlice'
 import { useDispatch } from 'react-redux'
@@ -20,12 +12,18 @@ import Map, {
   Source,
   Layer,
 } from 'react-map-gl'
-import ChatScreen from './ChatScreen'
 import Pin from './Pin'
 import TravelChat from './TravelChat'
-import GeocoderControl from './GeocoderControl'
+import {
+  handleCurrentPlace,
+  selectAttractions,
+  selectCoordinate,
+  selectCurrentDay,
+  selectCurrentPlace,
+} from '../slices/recommendSlice'
+import { PlaceInfo } from '../interfaces/placeInfo'
 
-const TravelMap = () => {
+const RecommendMap = () => {
   const pinColors = [
     '#FF5A5F',
     '#00A699',
@@ -54,11 +52,13 @@ const TravelMap = () => {
   const dispatch = useDispatch()
 
   const selectedPlace = useSelector(selectCurrentPlace)
+  console.log(selectedPlace)
   const currentDay: number = useSelector(selectCurrentDay)
   console.log('currentDay: ' + currentDay)
 
-  const travelSchedule: placeInfo[][] = useSelector(selectTravelSchedule) || []
-
+  //const travelSchedule: placeInfo[][] = useSelector(selectTravelSchedule) || []
+  const travelSchedule: PlaceInfo[][] = useSelector(selectAttractions) || []
+  console.log(travelSchedule)
   const TOKEN =
     'pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtrcGNwdXQwNm1oM2xvZTJ5Z2Q4djk5In0._rw_aFaBfUjQC-tjkV53Aw'
 
@@ -151,9 +151,9 @@ const TravelMap = () => {
             ),
         )}
       </Map>
-      {showChat && <ChatScreen onClose={() => dispatch(setShowChat(false))} />}
+      {/* {showChat && <ChatScreen onClose={() => dispatch(setShowChat(false))} />} */}
     </div>
   )
 }
 
-export default TravelMap
+export default RecommendMap

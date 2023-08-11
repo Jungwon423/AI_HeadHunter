@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   fetchPreferenceAsync,
-  recommendInput,
   recommendInputV2,
   selectPreference,
   selectUserId,
@@ -20,6 +19,7 @@ import {
   fetchRecommendAttractionsAsync,
   selectRecommendAttractions,
 } from '../slices/recommendSlice'
+import { RecommendInput } from '../interfaces/recommendInput'
 
 const Preference = () => {
   const router = useRouter()
@@ -57,7 +57,7 @@ const Preference = () => {
   }, [])
 
   useEffect(() => {
-    const recommendInput: recommendInput = {
+    const recommendInput: RecommendInput = {
       user: userId,
       travel_id: travelId,
     }

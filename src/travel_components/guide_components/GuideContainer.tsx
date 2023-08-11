@@ -2,16 +2,16 @@ import { useSelector, useDispatch } from 'react-redux'
 import Image from 'next/legacy/image'
 import {
   handleCurrentPlace,
-  placeInfo,
   selectCity,
   selectCurrentDay,
   selectDuration,
   selectTravelSchedule,
 } from '../../slices/travelInfoSlice'
+import { PlaceInfo } from '../../interfaces/placeInfo'
 
 const GuideContainer = () => {
   const currentDay: number = useSelector(selectCurrentDay)
-  const TravelSchedule: placeInfo[][] = useSelector(selectTravelSchedule)
+  const TravelSchedule: PlaceInfo[][] = useSelector(selectTravelSchedule)
   const dispatch = useDispatch()
   return (
     <div className="flex flex-col justify-center">

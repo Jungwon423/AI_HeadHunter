@@ -6,60 +6,17 @@ import { SERVER_API_URL } from './api_url'
 import { ZeroOrOne } from './imageQuerySlice'
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-
-interface OpeningHours {
-  open_now: boolean
-  periods: {
-    open: { day: number; time: string }
-    close: { day: number; time: string }
-  }[]
-  weekday_text: string[]
-}
-interface Summary {
-  overview: string
-}
-interface Review {
-  author_name: string
-  author_url: string
-  profile_photo_url: string
-  rating: number
-  text: string
-}
-
-export interface preference {
-  inferring: string
-  conclusion: string
-}
-
-export interface recommendInput {
-  travel_id: string
-  user: string
-}
+import { OpeningHours } from '../interfaces/openingHours'
+import { Review } from '../interfaces/review'
+import { Preference } from '../interfaces/preference'
+import { PlaceInfo } from '../interfaces/placeInfo'
+import { RecommendInput } from '../interfaces/recommendInput'
+import { Cluster } from '../interfaces/Cluster'
 
 export interface recommendInputV2 {
   user: string
   travel_id: string
   answers: ZeroOrOne[]
-}
-
-export interface placeInfo {
-  name: string
-  coordinate: number[]
-  image: string
-  description: string
-  time: number
-  summary?: Summary //editorial_summary, 짧은 설명
-  rating?: number //rating,  구글 별점
-  ratingCount?: number //user_ratings_total, 구글 별점 갯수
-  hashtags: string[] //types, 를 해쉬태그로
-  phoneNumber?: number //international_phone_number, 전화번호
-  location?: string //formatted address
-  googleUrl?: string //url, 구글 url
-  website?: string //website, 관광지 website
-  openingHours?: OpeningHours //current_opening_hours -> weekday_text, 운영 시간
-  thought?: string //thought, ai의 추천 이유
-  wheelchair?: boolean //wheelchair_accessible_entrance, 휠체어 이용 가능 여부
-  reviews?: Review[]
 }
 
 export interface TravelInfoState {
@@ -71,23 +28,18 @@ export interface TravelInfoState {
   location: string
   companion: string
   travelStyle: string[]
-  travelSchedule: placeInfo[][]
-  currentPlace: placeInfo | null
+  travelSchedule: PlaceInfo[][]
+  currentPlace: PlaceInfo | null
   currentDay: number
   // loading 상태 저장
   loading: 'idle' | 'pending' | 'succeeded' | 'failed'
   // error 상태 저장
   error: string | null
-  preference: preference
+  preference: Preference
   // loading 상태 저장
   preferenceLoading: 'idle' | 'pending' | 'succeeded' | 'failed'
   // error 상태 저장
   preferenceError: string | null
-}
-
-interface Cluster {
-  attractions: Map<string, any>[]
-  restaurants: Map<string, any>[]
 }
 
 interface ResponseData {
@@ -95,7 +47,7 @@ interface ResponseData {
   not_recommended_attractions: Cluster[]
 }
 
-export function processCluster(clusterArray: Cluster[]): placeInfo[][] {
+export function processCluster(clusterArray: Cluster[]): PlaceInfo[][] {
   return clusterArray.map((cluster) => {
     const attractions = cluster.attractions.map(convertToPlaceInfo)
     // const restaurants = cluster.restaurants.map(convertToPlaceInfo)
@@ -105,7 +57,7 @@ export function processCluster(clusterArray: Cluster[]): placeInfo[][] {
 }
 
 // placeInfo 객체와 JSON 객체 간의 변환을 수행하는 함수를 작성합니다.
-export function convertToPlaceInfo(attraction: any): placeInfo {
+export function convertToPlaceInfo(attraction: any): PlaceInfo {
   return {
     name: attraction.name,
     coordinate: [
@@ -127,7 +79,7 @@ export function convertToPlaceInfo(attraction: any): placeInfo {
     thought: attraction.thought,
     wheelchair: attraction.wheelchair_accessible_entrance,
     reviews: attraction.reviews,
-  } as placeInfo
+  } as PlaceInfo
 }
 const initialState: TravelInfoState = {
   userId: '',
@@ -146,14 +98,14 @@ const initialState: TravelInfoState = {
   preference: {
     inferring: '',
     conclusion: '',
-  } as preference,
+  } as Preference,
   preferenceLoading: 'idle',
   preferenceError: null,
 }
 
 export const fetchPreference = async (
-  recommendInput: recommendInput,
-): Promise<preference> => {
+  recommendInput: RecommendInput,
+): Promise<Preference> => {
   const config = {
     withCredentials: true,
   }
@@ -162,7 +114,7 @@ export const fetchPreference = async (
 
   console.log('API_URL', API_URL)
 
-  const response: AxiosResponse<preference> = await axios.post(
+  const response: AxiosResponse<Preference> = await axios.post(
     API_URL,
     recommendInput,
     config,
@@ -172,8 +124,8 @@ export const fetchPreference = async (
 }
 
 export const fetchTravelSchedule = async (
-  recommendInput: recommendInput,
-): Promise<placeInfo[][]> => {
+  recommendInput: RecommendInput,
+): Promise<PlaceInfo[][]> => {
   const config = {
     withCredentials: true,
   }
@@ -189,7 +141,7 @@ export const fetchTravelSchedule = async (
   )
 
   // 이중 for문을 사용하여 JSON 데이터를 placeInfo[][]로 변환합니다.
-  const placeInfos: placeInfo[][] = processCluster(
+  const placeInfos: PlaceInfo[][] = processCluster(
     response.data.cluster_attractions,
   )
   return placeInfos
@@ -223,12 +175,12 @@ export const travelInfoSlice = createSlice({
     setTravelStyle: (state, action: PayloadAction<string[]>) => {
       state.travelStyle = action.payload
     },
-    setTravelSchedule: (state, action: PayloadAction<placeInfo[][]>) => {
+    setTravelSchedule: (state, action: PayloadAction<PlaceInfo[][]>) => {
       state.travelSchedule = action.payload
     },
-    handleCurrentPlace: (state, action: PayloadAction<placeInfo>) => {
+    handleCurrentPlace: (state, action: PayloadAction<PlaceInfo>) => {
       if (state.currentPlace?.name === action.payload.name) {
-        state.currentPlace = {} as placeInfo
+        state.currentPlace = {} as PlaceInfo
       } else {
         state.currentPlace = action.payload
       }
@@ -245,7 +197,7 @@ export const travelInfoSlice = createSlice({
     setError: (state, action: PayloadAction<string | null>) => {
       state.error = action.payload
     },
-    setPreference: (state, action: PayloadAction<preference>) => {
+    setPreference: (state, action: PayloadAction<Preference>) => {
       state.preference = action.payload
     },
     setPreferenceLoading: (
@@ -267,10 +219,10 @@ export const travelInfoSlice = createSlice({
 })
 
 export const fetchTravelScheduleAsync =
-  (recommendInput: recommendInput): AppThunk =>
+  (recommendInput: RecommendInput): AppThunk =>
   async (
     dispatch: (arg0: {
-      payload: TravelInfoState | string | placeInfo[][] | null
+      payload: TravelInfoState | string | PlaceInfo[][] | null
       type:
         | 'travelInfo/setUserId'
         | 'travelInfo/setCity'
@@ -297,10 +249,10 @@ export const fetchTravelScheduleAsync =
   }
 
 export const fetchPreferenceAsync =
-  (recommendInput: recommendInput): AppThunk =>
+  (recommendInput: RecommendInput): AppThunk =>
   async (
     dispatch: (arg0: {
-      payload: TravelInfoState | string | placeInfo[][] | null | preference
+      payload: TravelInfoState | string | PlaceInfo[][] | null | Preference
       type:
         | 'travelInfo/setUserId'
         | 'travelInfo/setPreference'
