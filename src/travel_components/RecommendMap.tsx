@@ -22,6 +22,7 @@ import {
   selectCurrentPlace,
 } from '../slices/recommendSlice'
 import { PlaceInfo } from '../interfaces/placeInfo'
+import ChatScreen from './ChatScreen'
 
 const RecommendMap = () => {
   const pinColors = [
@@ -63,13 +64,23 @@ const RecommendMap = () => {
     'pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtrcGNwdXQwNm1oM2xvZTJ5Z2Q4djk5In0._rw_aFaBfUjQC-tjkV53Aw'
 
   const coordinate = useSelector(selectCoordinate)
+  console.log(coordinate)
 
   return (
-    <div className="flex-grow">
+    <div className="flex flex-grow">
       <TravelChat></TravelChat>
       <Map
         initialViewState={{
-          longitude: coordinate[0],
+          longitude: coordinate[0], //130 어쩌구
+          latitude: coordinate[1],
+          zoom: 11.7,
+        }}
+        mapStyle="mapbox://styles/zigdeal/clkjl2a7y001401r27iv81iw2"
+        mapboxAccessToken={TOKEN}
+      ></Map>
+      <Map
+        initialViewState={{
+          longitude: coordinate[0], //130 어쩌구
           latitude: coordinate[1],
           zoom: 11.7,
         }}
@@ -86,7 +97,7 @@ const RecommendMap = () => {
             (place, j) =>
               (currentDay == 0 || currentDay == i + 1) && (
                 <Marker
-                  key={j}
+                  key={j + 10}
                   latitude={place.coordinate[0]}
                   longitude={place.coordinate[1]}
                   onClick={(e) => {
@@ -151,7 +162,7 @@ const RecommendMap = () => {
             ),
         )}
       </Map>
-      {/* {showChat && <ChatScreen onClose={() => dispatch(setShowChat(false))} />} */}
+      {showChat && <ChatScreen onClose={() => dispatch(setShowChat(false))} />}
     </div>
   )
 }

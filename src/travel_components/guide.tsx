@@ -4,22 +4,19 @@ import TabMenu from './guide_components/TabMenu'
 import TravelNavbar from './guide_components/TravelNavbar'
 import { useSelector, useDispatch } from 'react-redux'
 import {
-  selectCity,
   selectDuration,
-  placeInfo,
-  selectCoordinate,
   selectTravelSchedule,
-  handleCurrentPlace,
   selectCurrentDay,
 } from '../slices/travelInfoSlice'
 import GuideHero from './guide_components/GuideHero'
 import GuideDay from './guide_components/GuideDay'
 import GuideContainer from './guide_components/GuideContainer'
+import { PlaceInfo } from '../interfaces/placeInfo'
 
 const Guide = () => {
   const duration: number = useSelector(selectDuration)
   const currentDay: number = useSelector(selectCurrentDay)
-  const TravelSchedule: placeInfo[][] = useSelector(selectTravelSchedule)
+  const TravelSchedule: PlaceInfo[][] = useSelector(selectTravelSchedule)
 
   const createTabs = (days: number) => {
     const tabs = ['여행 요약']

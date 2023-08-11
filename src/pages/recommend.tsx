@@ -3,13 +3,21 @@ import {
   initialize,
   handleCurrentPlace,
   setCurrentDay,
-  selectCurrentDay,
-  selectCurrentPlace,
   selectUserId,
+  selectAttractions,
 } from '../slices/recommendSlice'
+import Map, {
+  Marker,
+  Popup,
+  NavigationControl,
+  FullscreenControl,
+  ScaleControl,
+  GeolocateControl,
+  Source,
+  Layer,
+} from 'react-map-gl'
 import { useRouter } from 'next/router'
-import { selectAttractions } from '../slices/recommendSlice'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { selectAttractionQueryTravelId } from '../slices/imageQuerySlice'
 import { AppDispatch } from '../store'
 import Image from 'next/image'
@@ -18,21 +26,26 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import {
   fetchTravelScheduleAsync,
   selectTravelInfo,
+  selectCoordinate,
 } from '../slices/travelInfoSlice'
 import { RecommendInput } from '../interfaces/recommendInput'
 import { PlaceInfo } from '../interfaces/placeInfo'
 
 const RecommendPage = () => {
-  const dispatch = useDispatch()
+  const TOKEN =
+    'pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtrcGNwdXQwNm1oM2xvZTJ5Z2Q4djk5In0._rw_aFaBfUjQC-tjkV53Aw'
+  const [viewport, setViewport] = useState({
+    latitude: 37.5665, // 초기 위도, 예시로 서울의 위도를 사용함
+    longitude: 126.978, // 초기 경도, 예시로 서울의 경도를 사용함
+    zoom: 10, // 초기 줌 레벨
+    width: '100vw',
+    height: '100vh',
+  })
+  const dispatch = useDispatch<AppDispatch>()
   const userId: string = useSelector(selectUserId)
   const travelId: string = useSelector(selectAttractionQueryTravelId) // !: travelId is not null
   const travelInfo = useSelector(selectTravelInfo)
   // const showChat = useSelector(selectShowChat)
-
-  const selectedPlace = useSelector(selectCurrentPlace)
-  console.log(selectedPlace)
-  const currentDay: number = useSelector(selectCurrentDay)
-  console.log('currentDay: ' + currentDay)
 
   useEffect(() => {
     dispatch(initialize())
@@ -40,7 +53,7 @@ const RecommendPage = () => {
       user: userId,
       travel_id: travelId,
     }
-    //dispatch(fetchTravelScheduleAsync(input))
+    dispatch(fetchTravelScheduleAsync(input))
   }, [])
 
   const router = useRouter()
@@ -69,6 +82,8 @@ const RecommendPage = () => {
   let buttonClass = `rounded px-4 py-2 font-bold text-white hover:bg-blue-600 ${buttonColor} `
 
   const attractions: PlaceInfo[][] = useSelector(selectAttractions)
+  const coordinate = useSelector(selectCoordinate)
+  console.log(coordinate)
 
   return (
     <div className="flex flex-row">
@@ -153,11 +168,17 @@ const RecommendPage = () => {
           </div>
         </div>
       </div>
-      <div>
-        <div className="">
-          <RecommendMap></RecommendMap>
-        </div>
-      </div>
+      <div className="">hi</div>
+      <Map
+        initialViewState={{
+          longitude: coordinate[0], //130 어쩌구
+          latitude: coordinate[1],
+          zoom: 11.7,
+        }}
+        mapStyle="mapbox://styles/zigdeal/clkjl2a7y001401r27iv81iw2"
+        mapboxAccessToken={TOKEN}
+      ></Map>
+      {/* <RecommendMap></RecommendMap> */}
     </div>
   )
 }

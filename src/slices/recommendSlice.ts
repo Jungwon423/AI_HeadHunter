@@ -9,6 +9,7 @@ import { persistReducer } from 'redux-persist'
 import { PlaceInfo } from '../interfaces/placeInfo'
 import { RecommendInput } from '../interfaces/recommendInput'
 import { Cluster } from '../interfaces/Cluster'
+import { Preference } from '../interfaces/preference'
 
 export interface RecommendAttractions {
   attractions: PlaceInfo[][]
@@ -26,6 +27,11 @@ export interface RecommendAttractions {
   travelStyle: string[]
   currentPlace: PlaceInfo | null
   currentDay: number
+  preference: Preference
+  // loading 상태 저장
+  preferenceLoading: 'idle' | 'pending' | 'succeeded' | 'failed'
+  // error 상태 저장
+  preferenceError: string | null
 }
 
 const initialState: RecommendAttractions = {
@@ -42,6 +48,12 @@ const initialState: RecommendAttractions = {
   travelStyle: ['문화', '쇼핑', '음식'],
   currentPlace: null,
   currentDay: 1,
+  preference: {
+    inferring: '',
+    conclusion: '',
+  } as Preference,
+  preferenceLoading: 'idle',
+  preferenceError: null,
 }
 
 interface ResponseData {
@@ -125,9 +137,25 @@ const recommendAttractionsSlice = createSlice({
     setCurrentDay: (state, action: PayloadAction<number>) => {
       state.currentDay = action.payload
     },
+    setPreference: (state, action: PayloadAction<Preference>) => {
+      state.preference = action.payload
+    },
+    setPreferenceLoading: (
+      state,
+      action: PayloadAction<'idle' | 'pending' | 'succeeded' | 'failed'>,
+    ) => {
+      state.preferenceLoading = action.payload
+    },
+    setPreferenceError: (state, action: PayloadAction<string | null>) => {
+      state.preferenceError = action.payload
+    },
     initialize: (state) => {
-      state.loading = 'idle'
-      state.error = null
+      // setPreferenceLoading('idle')
+      // setPreferenceError(null)
+      // state.loading = 'idle'
+      // state.error = null
+      setLoading('idle')
+      setError(null)
     },
   },
 })
@@ -177,6 +205,9 @@ export const {
   handleCurrentPlace,
   setCurrentDay,
   initialize,
+  setPreference,
+  setPreferenceLoading,
+  setPreferenceError,
 } = recommendAttractionsSlice.actions
 
 export const selectRecommendAttractions = (state: RootState) =>
@@ -209,6 +240,13 @@ export const selectCurrentPlace = (state: RootState) =>
   state.recommendAttractions.currentPlace
 export const selectCurrentDay = (state: RootState) =>
   state.recommendAttractions.currentDay
+export const selectPreference = (state: RootState) =>
+  state.travelInfo.preference
+
+export const selectPreferenceLoading = (state: RootState) =>
+  state.travelInfo.preferenceLoading
+export const selectPreferenceError = (state: RootState) =>
+  state.travelInfo.preferenceError
 
 const persistConfig = {
   key: 'recommend',
