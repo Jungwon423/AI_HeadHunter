@@ -8,12 +8,13 @@ export default function MyNavbar() {
         <button onClick={() => router.push('/')}>
           <div className="flex-shrink-0 flex items-center">
             <Image
-              src="/assets/images/logo.png"
+              src="/assets/logo.png"
               alt="Logo"
               width={40}
               height={40}
               style={{
                 maxWidth: '100%',
+                width: 'auto',
                 height: 'auto',
               }}
             />

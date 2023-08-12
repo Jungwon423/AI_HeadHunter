@@ -31,10 +31,7 @@ const TravelDuration: React.FC<TravelDurationProps> = ({
   }, [inputValue])
 
   return (
-    <div className="text-center py-10">
-      <h2 className="text-lg sm:text-xl md:text-2xl font-extrabold tracking-tight text-gray-900">
-        여행 기간을 알려주세요
-      </h2>
+    <div className="text-center">
       <div className="flex flex-wrap justify-center mt-6 items-center space-x-4">
         <input
           type="number"
