@@ -31,8 +31,8 @@ const NumberButton: React.FC<NumberButtonProps> = ({ onDurationChange }) => {
   }
 
   return (
-    <div className="text-center">
-      <div className="flex justify-center mt-6 items-center space-x-0">
+    <div className="flex items-center justify-center text-center">
+      <div className="mt-6 items-center space-x-0">
         <button
           onClick={handleDecrease}
           className="bg-indigo-500 w-8 text-white font-bold px-2 py-3 rounded-l-md hover:bg-indigo-600"
@@ -44,7 +44,7 @@ const NumberButton: React.FC<NumberButtonProps> = ({ onDurationChange }) => {
           value={inputValue || ''}
           onChange={handleInputChange}
           placeholder="3"
-          className="text-center duration-input w-16 md:w-20 h-12 py-2 bg-white border-2 border-indigo-500 text-lg md:text-xl text-gray-700 focus:outline-none"
+          className="text-center duration-input w-16 md:w-20 h-12 pb-1 bg-white border-2 border-indigo-500 text-lg md:text-xl text-gray-700 focus:outline-none"
         />
         <button
           onClick={handleIncrease}

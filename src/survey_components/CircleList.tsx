@@ -16,30 +16,25 @@ const CircleListItem: React.FC<CircleListItemProps> = ({
   // 원하는 아이콘 코드로 변경할 수 있습니다.
   const defaultIcon = (
     <div
-      className={` h-2 w-2 bg-indigo-600 rounded-full transition-all duration-300 ease-in-out`}
+      className={` h-3 w-3 bg-indigo-600 rounded-full transition-all duration-300 ease-in-out`}
     ></div>
   )
 
   const selectedIcon = (
-    <div>
+    <div className="">
       <Image
         src="/assets/images/circle.png"
         alt="circle"
-        width={15}
-        height={15}
-        style={{
-          maxWidth: '100%',
-          width: 'auto',
-          height: 'auto',
-        }}
+        width={18}
+        height={18}
       />
     </div>
   )
 
   return (
     <div className="flex items-center cursor-pointer" onClick={onClick}>
-      <span>{isSelected ? selectedIcon : defaultIcon}</span>
-      <span className="ml-4 font-bold text-gray-600 ">{text}</span>
+      <span className="w-8">{isSelected ? selectedIcon : defaultIcon}</span>
+      <span className="pl-4 font-bold text-gray-600">{text}</span>
     </div>
   )
 }

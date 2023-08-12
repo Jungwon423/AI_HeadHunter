@@ -23,7 +23,7 @@ const SurveyButton = (props: ISurveyProps) => {
             <JustButton
               className={`rounded-lg m-2 text-xs sm:text-sm md:text-base ${
                 props.selectedSurveys.includes(survey)
-                  ? 'bg-blue-500 text-white'
+                  ? 'bg-indigo-500 text-white'
                   : 'bg-stone-200 text-stone-500'
               }`}
               onClick={() => handleSurveyClick(survey)}
