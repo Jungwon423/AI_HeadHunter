@@ -87,10 +87,13 @@ const RecommendPage = () => {
 
   return (
     <div className="flex flex-row">
-      <div className="bg-white w-[550px] min-w-[550px] relative h-screen max-h-screen overflow-hidden">
+      <div className="bg-white w-[700px] min-w-[700px] relative h-screen max-h-screen overflow-hidden">
         <div className="flex flex-row">
-          <div className="w-[100px] h-screen">
-            <div className="flex list-none ml-3 my-5">
+          <div className="w-[100px] h-screen flex flex-col">
+            <button
+              className="flex list-none ml-3 my-5"
+              onClick={() => router.push('/')}
+            >
               <Image
                 src="/assets/logo.png"
                 alt="Logo"
@@ -103,23 +106,30 @@ const RecommendPage = () => {
                 }}
               />
               <span className="ml-1 font-bold text-xs font-mono">Trippy</span>
+            </button>
+
+            <div className="text-slate-300 text-sm py-5 ml-6 cursor-pointer font-bold hover:text-blue-400">
+              Day 1
+            </div>
+            <div className="text-slate-300 text-sm py-5 ml-6 cursor-pointer font-bold hover:text-blue-400">
+              Day 2
+            </div>
+            <div className="text-slate-300 text-sm py-5 ml-6 cursor-pointer font-bold hover:text-blue-400">
+              Day 3
             </div>
 
-            <div className="text-gray-600 text-sm py-4 ml-5">Day 1</div>
-            <div className="text-gray-600 text-sm py-4 ml-5">Day 2</div>
-            <div className="text-gray-600 text-sm py-4 ml-5">Day 3</div>
-
-            <div className="relative flex items-end justify-center">
+            <div className="flex-grow"></div>
+            <div className="flex justify-center pl-2 pb-5">
               <button className={buttonClass} onClick={navigateToTravelPage}>
                 {buttonStatus}
               </button>
             </div>
           </div>
 
-          <div className="w-full bg-gray-100 h-screen overflow-y-auto">
+          <div className="w-full bg-[#FAFAFA] h-screen overflow-y-auto">
             <div className="p-4">
-              <div className="flex pt-7 pb-4">
-                <div className="font-bold text-xl">오사카</div>
+              <div className="flex pt-7 pb-1">
+                <div className="pl-4 font-bold text-xl">오사카</div>
                 <span className="pt-2 text-gray-500 text-sm font-bold px-2">
                   2023.08.10(화) ~ 2023.08.20(목)
                 </span>
@@ -128,7 +138,7 @@ const RecommendPage = () => {
                 return day.map((place: PlaceInfo) => {
                   return (
                     <div
-                      className="flex flex-row p-3 bg-white shadow-md rounded-xl px-5 my-5 cursor-pointer"
+                      className="flex flex-row p-3 bg-white shadow-md rounded-xl px-5 my-5 cursor-pointer hover:shadow-indigo-500/40 shadow-slate-200"
                       key={place.name}
                       onClick={() => {
                         dispatch(handleCurrentPlace(place))
@@ -139,8 +149,8 @@ const RecommendPage = () => {
                       <img
                         src={place.image}
                         alt={place.name}
-                        width={100}
-                        height={100}
+                        width={170}
+                        height={170}
                         className="rounded-xl"
                       />
                       <div className="px-3 flex flex-col">
@@ -153,6 +163,15 @@ const RecommendPage = () => {
                             key={place.rating}
                             className="pl-1 bi bi-star-fill text-yellow-400 text-sm"
                           ></i>
+                          <span className="font-bold text-blue-300 text-xs pt-0.5 pl-2">
+                            명소
+                          </span>
+                        </div>
+
+                        <div className="pt-1 text-xs text-gray-500">
+                          <span className="line-clamp-2 ">
+                            {place.location}
+                          </span>
                         </div>
                         <div className="py-3 text-gray-700 text-sm">
                           {place.summary?.overview}
