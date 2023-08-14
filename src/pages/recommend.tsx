@@ -63,8 +63,6 @@ const RecommendPage = () => {
     router.push('/travel')
   }
 
-  console.log('loading_state : ', travelInfo.loading)
-
   let buttonStatus: string = ''
   let buttonColor: string = 'bg-blue-500'
 
@@ -82,8 +80,6 @@ const RecommendPage = () => {
   let buttonClass = `rounded px-4 py-2 font-bold text-white hover:bg-blue-600 ${buttonColor} `
 
   const attractions: PlaceInfo[][] = useSelector(selectAttractions)
-  const coordinate = useSelector(selectCoordinate)
-  console.log(coordinate)
 
   return (
     <div className="flex flex-row">
@@ -143,7 +139,6 @@ const RecommendPage = () => {
                       onClick={() => {
                         dispatch(handleCurrentPlace(place))
                         dispatch(setCurrentDay(attractions.indexOf(day) + 1))
-                        // console.log(place)
                       }}
                     >
                       <img
@@ -187,17 +182,7 @@ const RecommendPage = () => {
           </div>
         </div>
       </div>
-      <div className="">hi</div>
-      <Map
-        initialViewState={{
-          longitude: coordinate[0], //130 어쩌구
-          latitude: coordinate[1],
-          zoom: 11.7,
-        }}
-        mapStyle="mapbox://styles/zigdeal/clkjl2a7y001401r27iv81iw2"
-        mapboxAccessToken={TOKEN}
-      ></Map>
-      {/* <RecommendMap></RecommendMap> */}
+      <RecommendMap></RecommendMap>
     </div>
   )
 }
