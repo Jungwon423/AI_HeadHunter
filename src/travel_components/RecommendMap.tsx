@@ -23,6 +23,8 @@ import {
 } from '../slices/recommendSlice'
 import { PlaceInfo } from '../interfaces/placeInfo'
 import ChatScreen from './ChatScreen'
+import { useEffect, useState } from 'react'
+import { current } from '@reduxjs/toolkit'
 
 const RecommendMap = () => {
   const pinColors = [
@@ -110,7 +112,7 @@ const RecommendMap = () => {
             <div>{selectedPlace.name}</div>
           </Popup>
         )}
-        {travelSchedule.map(
+        {/* {travelSchedule.map(
           (day, i) =>
             (currentDay == 0 || currentDay == i + 1) && (
               <Source
@@ -146,7 +148,7 @@ const RecommendMap = () => {
                 />
               </Source>
             ),
-        )}
+        )} */}
       </Map>
       {showChat && <ChatScreen onClose={() => dispatch(setShowChat(false))} />}
     </div>

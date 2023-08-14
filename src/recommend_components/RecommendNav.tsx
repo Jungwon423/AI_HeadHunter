@@ -63,6 +63,7 @@ const RecommendNav = () => {
       </div>
       {attractions.map((attraction, day) => (
         <div
+          key={day}
           className="text-slate-300 text-sm py-5 ml-6 cursor-pointer font-bold hover:text-blue-400"
           onClick={() => changeDay(day + 1)}
         >

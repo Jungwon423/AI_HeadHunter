@@ -31,13 +31,6 @@ import RecoContainer from '../recommend_components/RecoContainer'
 const RecommendPage = () => {
   const TOKEN =
     'pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtrcGNwdXQwNm1oM2xvZTJ5Z2Q4djk5In0._rw_aFaBfUjQC-tjkV53Aw'
-  const [viewport, setViewport] = useState({
-    latitude: 37.5665, // 초기 위도, 예시로 서울의 위도를 사용함
-    longitude: 126.978, // 초기 경도, 예시로 서울의 경도를 사용함
-    zoom: 10, // 초기 줌 레벨
-    width: '100vw',
-    height: '100vh',
-  })
   const dispatch = useDispatch<AppDispatch>()
   const userId: string = useSelector(selectUserId)
   const travelId: string = useSelector(selectAttractionQueryTravelId) // !: travelId is not null
