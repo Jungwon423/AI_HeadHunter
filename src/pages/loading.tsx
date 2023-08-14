@@ -22,7 +22,12 @@ const Loading = () => {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-      <Lottie loop animationData={loadingJson_1} play style={{width : 150, height: 150}}></Lottie>
+      <Lottie
+        loop
+        animationData={loadingJson_1}
+        play
+        style={{ width: 150, height: 150 }}
+      ></Lottie>
       <p className="text-lg md:text-xl font-bold text-center opacity-75 mt-8">
         {waitTexts[waitTextIndex]}
       </p>

@@ -3,8 +3,8 @@ module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     flex: {
-      '1': '1 1 0%',
-      '2': '1 2 0%'
+      1: '1 1 0%',
+      2: '1 2 0%',
     },
     fontSize: {
       xs: '0.75rem',
@@ -42,7 +42,7 @@ module.exports = {
           800: '#2d3748',
           900: '#1a202c',
         },
-        scrollbar: ["rounded"],
+        scrollbar: ['rounded'],
       },
       lineHeight: {
         hero: '4.5rem',
@@ -51,4 +51,3 @@ module.exports = {
   },
   plugins: [],
 }
-
