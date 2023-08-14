@@ -21,11 +21,6 @@ export default function Home() {
   const closePopup = () => {
     setIsPopupOpen(false)
   }
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null)
-
-  const handleDateChange = (date: Date | null) => {
-    setSelectedDate(date)
-  }
   const sampleItems = ['오사카', '도쿄', '서울', '방콕', '파리']
 
   return (
@@ -35,7 +30,6 @@ export default function Home() {
         <Link href="/favicon.ico"></Link>
       </Head>
 
-      {/* Navigation section */}
       <MyNavbar />
       <main className="w-3/4 mx-auto py-16 px-4 sm:px-6 lg:px-8">
         <MainTitle></MainTitle>
@@ -57,16 +51,6 @@ export default function Home() {
             <h1 className="text-xl mb-4">Popup Title</h1>
           </Popup>
         </div>
-        <DatePicker
-          selectedDate={selectedDate}
-          onDateChange={handleDateChange}
-        />
-        {selectedDate && (
-          <p className="mt-4">
-            선택한 날짜:{' '}
-            <strong>{selectedDate.toLocaleDateString('ko-KR')}</strong>
-          </p>
-        )}
 
         <div className="md:text-base sm:text-xl xl:text-2xl font-bold">
           추천 여행지
@@ -90,7 +74,6 @@ export default function Home() {
         ></ImageExplain>
       </main>
       <Footer></Footer>
-      {/* Footer section */}
     </div>
   )
 }

@@ -1,8 +1,13 @@
 import router from 'next/router'
 import MyNavbar from '../search_components/MyNavbar'
 import CircleListItem from '../survey_components/CircleList'
-import { useState } from 'react'
+import { SyntheticEvent, useState } from 'react'
 import WhoSurvey from '../survey_components/WhoSurvey'
+// import CustomDatePicker from '../survey_components/CustomDatePicker'
+import 'react-datepicker/dist/react-datepicker.css'
+import TDatePicker from '../survey_components/test'
+import DatePicker from '../index_components/DatePicker'
+import SDatePicker from '../survey_components/ddd'
 
 export default function SurveyPage() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
@@ -15,6 +20,13 @@ export default function SurveyPage() {
     '언제 가시나요?',
     '여행 스타일은 어떻게 되시나요?',
   ]
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null)
+
+  const handleDateChange = (date: Date | null) => {
+    setSelectedDate(date)
+  }
+  const [dateRange, setDateRange] = useState([null, null])
+  const [startDate, endDate] = dateRange
 
   return (
     <div className="h-screen">
@@ -53,7 +65,37 @@ export default function SurveyPage() {
         </div>
         {selectedIndex == 0 ? <WhoSurvey /> : null}
         {selectedIndex == 1 ? <WhoSurvey /> : null}
-        <div>달력 만들기</div>
+        <div className="flex py-5 w-full flex-col items-center">
+          <div className="px-10 flex flex-col flex-grow">
+            <div className="text-2xl font-bold pt-20">
+              여행 날짜는 언제인가요?
+            </div>
+            <TDatePicker
+              startDate={startDate}
+              endDate={endDate}
+              onChange={(update) => {
+                //setDateRange(update)
+                console.log(update)
+              }}
+              isClearable
+              placeholderText="달력"
+            />
+            <SDatePicker
+              startDate={startDate}
+              endDate={endDate}
+              onChange={(update) => {
+                //setDateRange(update)
+                console.log(update)
+              }}
+            ></SDatePicker>
+            {selectedDate && (
+              <p className="mt-4">
+                선택한 날짜:{' '}
+                <strong>{selectedDate.toLocaleDateString('ko-KR')}</strong>
+              </p>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   )
