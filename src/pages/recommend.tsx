@@ -60,7 +60,9 @@ const RecommendPage = () => {
           <RecoContainer></RecoContainer>
         </div>
       </div>
-      <div className="">{/* <RecommendMap></RecommendMap> */}</div>
+      <div className="">
+        <RecommendMap></RecommendMap>
+      </div>
     </div>
   )
 }
