@@ -20,6 +20,7 @@ import {
   selectRecommendAttractions,
 } from '../slices/recommendSlice'
 import { RecommendInput } from '../interfaces/recommendInput'
+import Loading from '../components/loading'
 
 const Preference = () => {
   const router = useRouter()
@@ -76,11 +77,7 @@ const Preference = () => {
   }, [travelInfo.preferenceLoading])
 
   if (travelInfo.preferenceLoading === 'pending') {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <p>Loading...</p>
-      </div>
-    )
+    return <Loading></Loading>
   }
 
   if (travelInfo.preferenceLoading === 'failed') {

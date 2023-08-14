@@ -47,7 +47,7 @@ const initialState: RecommendAttractions = {
   companion: '혼자',
   travelStyle: ['문화', '쇼핑', '음식'],
   currentPlace: null,
-  currentDay: 1,
+  currentDay: 0,
   preference: {
     inferring: '',
     conclusion: '',

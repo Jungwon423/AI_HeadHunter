@@ -53,32 +53,20 @@ const RecommendMap = () => {
   const dispatch = useDispatch()
 
   const selectedPlace = useSelector(selectCurrentPlace)
-  console.log(selectedPlace)
   const currentDay: number = useSelector(selectCurrentDay)
-  console.log('currentDay: ' + currentDay)
 
   //const travelSchedule: placeInfo[][] = useSelector(selectTravelSchedule) || []
   const travelSchedule: PlaceInfo[][] = useSelector(selectAttractions) || []
-  console.log(travelSchedule)
   const TOKEN =
     'pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtrcGNwdXQwNm1oM2xvZTJ5Z2Q4djk5In0._rw_aFaBfUjQC-tjkV53Aw'
 
   const coordinate = useSelector(selectCoordinate)
-  console.log(coordinate)
 
   return (
     <div className="flex flex-grow">
       <TravelChat></TravelChat>
       <Map
-        initialViewState={{
-          longitude: coordinate[0], //130 어쩌구
-          latitude: coordinate[1],
-          zoom: 11.7,
-        }}
-        mapStyle="mapbox://styles/zigdeal/clkjl2a7y001401r27iv81iw2"
-        mapboxAccessToken={TOKEN}
-      ></Map>
-      <Map
+        style={{ width: '100vw', height: '100vh' }}
         initialViewState={{
           longitude: coordinate[0], //130 어쩌구
           latitude: coordinate[1],
@@ -103,8 +91,6 @@ const RecommendMap = () => {
                   onClick={(e) => {
                     e.originalEvent.stopPropagation()
                     dispatch(handleCurrentPlace(place))
-                    console.log('Marker Clicked')
-                    console.log(place)
                   }}
                 >
                   <Pin color={pinColors[i]}></Pin>
