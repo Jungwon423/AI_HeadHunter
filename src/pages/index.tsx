@@ -7,7 +7,6 @@ import TitleImage from '../index_components/TitleImage'
 import ImageExplain from '../index_components/ImageExplain'
 import { Footer } from '../footer/Footer'
 import Popup from '../index_components/Popup'
-import DatePicker from '../index_components/DatePicker'
 import { AutocompleteInput } from '../index_components/AutocompleteInput'
 import Link from 'next/link'
 

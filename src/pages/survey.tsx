@@ -5,12 +5,10 @@ import { SyntheticEvent, useState } from 'react'
 import WhoSurvey from '../survey_components/WhoSurvey'
 // import CustomDatePicker from '../survey_components/CustomDatePicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import TDatePicker from '../survey_components/test'
-import DatePicker from '../index_components/DatePicker'
-import SDatePicker from '../survey_components/ddd'
+import MyDatePicker from '../survey_components/MyDatePicker'
 
 export default function SurveyPage() {
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(1)
 
   const handleItemClick = (index: number) => {
     setSelectedIndex(index)
@@ -20,13 +18,16 @@ export default function SurveyPage() {
     '언제 가시나요?',
     '여행 스타일은 어떻게 되시나요?',
   ]
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null)
 
-  const handleDateChange = (date: Date | null) => {
-    setSelectedDate(date)
+  const [startDate, setStartDate] = useState<Date | null>(new Date())
+  const [endDate, setEndDate] = useState<Date | null>(new Date())
+  const handleDatesChange = (
+    newStartDate: Date | null,
+    newEndDate: Date | null,
+  ) => {
+    setStartDate(newStartDate)
+    setEndDate(newEndDate)
   }
-  const [dateRange, setDateRange] = useState([null, null])
-  const [startDate, endDate] = dateRange
 
   return (
     <div className="h-screen">
@@ -70,29 +71,17 @@ export default function SurveyPage() {
               <div className="text-2xl font-bold pt-20">
                 여행 날짜는 언제인가요?
               </div>
-              {/* <TDatePicker
+              <div className="rounded-xl shadow-md bg-stone-50">dd</div>
+              <MyDatePicker
                 startDate={startDate}
                 endDate={endDate}
-                onChange={(update) => {
-                  //setDateRange(update)
-                  console.log(update)
-                }}
-                isClearable
-                placeholderText="달력"
-              /> */}
-              <SDatePicker
-                startDate={startDate}
-                endDate={endDate}
-                onChange={(update) => {
-                  //setDateRange(update)
-                  console.log(update)
-                }}
-              ></SDatePicker>
-              {selectedDate && (
-                <p className="mt-4">
-                  선택한 날짜:{' '}
-                  <strong>{selectedDate.toLocaleDateString('ko-KR')}</strong>
-                </p>
+                onDatesChange={handleDatesChange}
+              ></MyDatePicker>
+              {startDate && endDate && (
+                <div>
+                  <div>{startDate.toLocaleDateString('ko-KR')}</div>
+                  <div>{endDate.toLocaleDateString('ko-KR')}</div>
+                </div>
               )}
             </div>
           </div>
