@@ -2,46 +2,50 @@ import React, { useState } from 'react'
 import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker'
 import DatePicker from 'react-datepicker'
 import ko from 'date-fns/locale/ko'
-import 'react-datepicker/dist/react-datepicker.css'
+// import '../styles/datepicker.css'
+//import styles from '../styles/datepicker.module.css'
+// import 'react-datepicker/dist/react-datepicker.css'
+interface myDateProps {
+  startDate: Date | null
+  endDate: Date | null
+  onDatesChange: (newStartDate: Date | null, newEndDate: Date | null) => void
+}
 
-function SDatePicker({ ...props }: ReactDatePickerProps) {
-  const [startDate, setStartDate] = useState<Date | null>(
-    new Date('2023/08/10'),
-  )
-  const [endDate, setEndDate] = useState<Date | null>(new Date('2023/08/10'))
-  console.log(startDate, endDate)
+const MyDatePicker = ({ startDate, endDate, onDatesChange }: myDateProps) => {
+  const twoMonthsLater = () => {
+    const currentDate = new Date()
+    return new Date(currentDate.setMonth(currentDate.getMonth() + 2))
+  }
+
+  const dayClassNames = (date: Date) => {
+    const day = date.getDay()
+    if (day === 6) {
+      return 'react-datepicker__saturday'
+    } else if (day === 0) {
+      return 'react-datepicker__sunday'
+    } else {
+      return ''
+    }
+  }
+
   return (
     <>
-      {/* <DatePicker
-        {...props}
-        disabledKeyboardNavigation
+      <DatePicker
+        minDate={new Date()}
+        maxDate={twoMonthsLater()}
+        dayClassName={dayClassNames}
         locale={ko}
         selected={startDate}
-        onChange={(date) => date && setStartDate(date)}
-        selectsStart
-        startDate={startDate}
-        endDate={endDate}
-      /> */}
-      <DatePicker
-        {...props}
-        disabledKeyboardNavigation
-        selected={endDate}
-        locale={ko}
-        onChange={(date) => date && setEndDate(date)}
-        selectsEnd
-        startDate={startDate}
-        endDate={endDate}
-        minDate={startDate}
-      />
-      <DatePicker
-        locale={ko}
-        selected={startDate}
-        onChange={(date) => {
-          if (date) {
-            setStartDate(date[0])
-            setEndDate(date[1] || null)
-          }
+        onChange={(dates) => {
+          const [newStartDate, newEndDate] = dates
+          onDatesChange(newStartDate, newEndDate)
         }}
+        // onChange={(date) => {
+        //   if (date) {
+        //     setStartDate(date[0])
+        //     setEndDate(date[1] || null)
+        //   }
+        // }}
         startDate={startDate}
         endDate={endDate}
         selectsRange
@@ -72,9 +76,16 @@ function SDatePicker({ ...props }: ReactDatePickerProps) {
                 {'<'}
               </span>
             </button>
-            <span>
-              {date.getFullYear()}년 {date.getMonth() + 1}월
-            </span>
+            {customHeaderCount === 0 ? (
+              <span className="text-sm">
+                {date.getFullYear()}년 {date.getMonth() + 1}월
+              </span>
+            ) : (
+              <span className="text-sm">
+                {date.getFullYear()}년 {date.getMonth() + 2}월
+              </span>
+            )}
+
             <button
               aria-label="Next Month"
               className={
@@ -98,4 +109,4 @@ function SDatePicker({ ...props }: ReactDatePickerProps) {
   )
 }
 
-export default SDatePicker
+export default MyDatePicker
