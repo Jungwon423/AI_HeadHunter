@@ -2,11 +2,11 @@
 @import '~react-datepicker/dist/react-datepicker.css';
 
 .react-datepicker {
-  @apply bg-white border border-gray-200 rounded;
+  @apply bg-white border-none;
 }
 
 .react-datepicker__header {
-  @apply bg-gradient-to-b from-indigo-500 to-indigo-400 text-white font-semibold;
+  @apply text-black font-semibold bg-gradient-to-b from-white to-slate-50;
 }
 
 .react-datepicker__day-name,
@@ -28,20 +28,24 @@
   @apply bg-gray-400 text-gray-300 inline-flex items-center justify-center cursor-pointer;
   border-radius: 50%;
 }
-.react-datepicker__navigation--previous:before {
+/* .react-datepicker__navigation--previous:before {
   content: '◀';
-}
+} */
 .react-datepicker__navigation--previous:hover {
-  @apply bg-gray-800 text-white;
+  @apply bg-white text-white;
 }
 
 .react-datepicker__navigation--next {
   @apply bg-gray-400 text-gray-300 inline-flex items-center justify-center cursor-pointer;
   border-radius: 50%;
 }
-.react-datepicker__navigation--next:before {
+/* .react-datepicker__navigation--next:before {
   content: '▶';
-}
+} */
 .react-datepicker__navigation--next:hover {
-  @apply bg-gray-800 text-white;
+  @apply bg-gray-600 text-white;
+}
+
+.react-datepicker__day--outside-month {
+  visibility: hidden;
 }

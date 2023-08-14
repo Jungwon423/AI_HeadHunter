@@ -64,38 +64,39 @@ export default function SurveyPage() {
           </div>
         </div>
         {selectedIndex == 0 ? <WhoSurvey /> : null}
-        {selectedIndex == 1 ? <WhoSurvey /> : null}
-        <div className="flex py-5 w-full flex-col items-center">
-          <div className="px-10 flex flex-col flex-grow">
-            <div className="text-2xl font-bold pt-20">
-              여행 날짜는 언제인가요?
+        {selectedIndex == 1 ? (
+          <div className="flex py-5 w-full flex-col items-center">
+            <div className="px-10 flex flex-col flex-grow">
+              <div className="text-2xl font-bold pt-20">
+                여행 날짜는 언제인가요?
+              </div>
+              {/* <TDatePicker
+                startDate={startDate}
+                endDate={endDate}
+                onChange={(update) => {
+                  //setDateRange(update)
+                  console.log(update)
+                }}
+                isClearable
+                placeholderText="달력"
+              /> */}
+              <SDatePicker
+                startDate={startDate}
+                endDate={endDate}
+                onChange={(update) => {
+                  //setDateRange(update)
+                  console.log(update)
+                }}
+              ></SDatePicker>
+              {selectedDate && (
+                <p className="mt-4">
+                  선택한 날짜:{' '}
+                  <strong>{selectedDate.toLocaleDateString('ko-KR')}</strong>
+                </p>
+              )}
             </div>
-            <TDatePicker
-              startDate={startDate}
-              endDate={endDate}
-              onChange={(update) => {
-                //setDateRange(update)
-                console.log(update)
-              }}
-              isClearable
-              placeholderText="달력"
-            />
-            <SDatePicker
-              startDate={startDate}
-              endDate={endDate}
-              onChange={(update) => {
-                //setDateRange(update)
-                console.log(update)
-              }}
-            ></SDatePicker>
-            {selectedDate && (
-              <p className="mt-4">
-                선택한 날짜:{' '}
-                <strong>{selectedDate.toLocaleDateString('ko-KR')}</strong>
-              </p>
-            )}
           </div>
-        </div>
+        ) : null}
       </div>
     </div>
   )
