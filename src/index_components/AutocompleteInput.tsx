@@ -57,7 +57,8 @@ export const AutocompleteInput: React.FC<AutocompleteInputProps> = ({
           className="text-xs sm:text-sm lg:text-lg xl:text-xl whitespace-nowrap bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r"
           onClick={() => {
             dispatch(setCity(inputValue))
-            router.push('/search')
+            // router.push('/search')
+            router.push('/survey')
           }}
         >
           검색

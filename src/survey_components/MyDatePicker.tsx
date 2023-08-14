@@ -51,10 +51,10 @@ const MyDatePicker = ({ startDate, endDate, onDatesChange }: myDateProps) => {
         selectsRange
         inline
         monthsShown={2} // 동시에 보여질 달력의 개수 설정
-        peekNextMonth // 다음/이전 달의 일부를 미리보기 설정
-        showMonthDropdown // 월 선택 설정
+        peekNextMonth // 다음/이전 달의 일부를 미리보기 설
         renderCustomHeader={({
           date,
+          monthDate,
           decreaseMonth,
           increaseMonth,
           customHeaderCount,
@@ -78,14 +78,13 @@ const MyDatePicker = ({ startDate, endDate, onDatesChange }: myDateProps) => {
             </button>
             {customHeaderCount === 0 ? (
               <span className="text-sm">
-                {date.getFullYear()}년 {date.getMonth() + 1}월
+                {date.getFullYear()}년 {monthDate.getMonth() + 1}월
               </span>
             ) : (
               <span className="text-sm">
-                {date.getFullYear()}년 {date.getMonth() + 2}월
+                {date.getFullYear()}년 {monthDate.getMonth() + 1}월
               </span>
             )}
-
             <button
               aria-label="Next Month"
               className={

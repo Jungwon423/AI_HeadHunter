@@ -1,18 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import MyDatePicker from './MyDatePicker'
+import { useDispatch } from 'react-redux'
+import { setDuration } from '../slices/travelInfoSlice'
 
 const WhenSurvey = () => {
-  const [startDate, setStartDate] = useState<Date | null>(new Date())
-  const [endDate, setEndDate] = useState<Date | null>(new Date())
+  const dispatch = useDispatch()
+
+  const [startDate, setStartDate] = useState<Date | null>(null)
+  const [endDate, setEndDate] = useState<Date | null>(null)
   const handleDatesChange = (
     newStartDate: Date | null,
     newEndDate: Date | null,
   ) => {
     setStartDate(newStartDate)
-    const maxDate = new Date()
+    setEndDate(newEndDate)
+    const maxDate = new Date(newStartDate!)
     maxDate.setDate(newStartDate!.getDate() + 29)
-    if (newEndDate! >= maxDate) {
+    if (newEndDate! > maxDate) {
       setEndDate(maxDate)
     } else setEndDate(newEndDate)
   }
@@ -66,7 +71,7 @@ const WhenSurvey = () => {
           <div className="flex flex-grow-0 md:flex-grow border-t-2"></div>
           {startDate && endDate ? (
             <div className="pl-10 pt-4 border-t-2">
-              <div className="w-auto px-4 py-2 rounded-md bg-indigo-500 flex items-center justify-center">
+              <div className="w-auto px-4 py-2 rounded-md bg-indigo-400 flex items-center justify-center">
                 <span className="text-center text-white text-sm md:text-base">
                   {(() => {
                     const differenceInMilliseconds =
@@ -76,6 +81,7 @@ const WhenSurvey = () => {
                     ) // 일수 계산 (소수점 올림)
                     const nights = differenceInDays // 박 수 계산
                     const days = differenceInDays + 1
+                    dispatch(setDuration(days!))
                     if (nights == 0) {
                       return `당일치기`
                     } else return `${nights}박 ${days}일`

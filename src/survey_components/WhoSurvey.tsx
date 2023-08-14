@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import { SurveyButton } from './SurveyButtons'
 import NumberButton from './NumberButton'
+import { useDispatch } from 'react-redux'
+import { setCompanion } from '../slices/travelInfoSlice'
 
 const WhoSurvey = () => {
+  const dispatch = useDispatch()
   const [selectedSurveys, setSelectedSurveys] = useState<string[]>([])
   const handleSurveysClick = (style: string) => {
     if (selectedSurveys.includes(style)) {
@@ -20,6 +23,16 @@ const WhoSurvey = () => {
       setSelectedSurveys2([...selectedSurveys2, style])
     }
   }
+  const [selectedSurveys3, setSelectedSurveys3] = useState<string[]>([])
+  const handleSurveys3Click = (style: string) => {
+    if (selectedSurveys3.includes(style)) {
+      setSelectedSurveys3(selectedSurveys3.filter((c) => c !== style))
+      dispatch(setCompanion(style))
+    } else {
+      setSelectedSurveys3([...selectedSurveys3, style])
+      dispatch(setCompanion(style))
+    }
+  }
   const [travelDuration, setTravelDuration] = useState<number>(0)
   const handleDurationChange = (value: number) => {
     setTravelDuration(value)
@@ -34,6 +47,18 @@ const WhoSurvey = () => {
         <div className="text-base font-bold text-indigo-500 pt-3 pb-5">
           동행 정보를 고려한 여행 일정을 받아볼 수 있어요.
         </div>
+        <SurveyButton
+          surveys={[
+            '혼자',
+            '친구와',
+            '연인과',
+            '아이들과',
+            '부모님과',
+            '배우자와',
+          ]}
+          selectedSurveys={selectedSurveys3}
+          onSurveyClick={handleSurveys3Click}
+        />
         <div className="flex font-bold text-xl pt-3">어른</div>
         <SurveyButton
           surveys={['10대', '20대', '30대', '40대', '50대', '60대 이상']}

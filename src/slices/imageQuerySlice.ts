@@ -1,17 +1,18 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { InitialQueryInput } from './questionnaireSlice'
 import { RootState, AppThunk } from '../store'
-import { convertToPlaceInfo, placeInfo } from './travelInfoSlice'
+import { convertToPlaceInfo } from './travelInfoSlice'
 import { SERVER_API_URL } from './api_url'
 import axios from 'axios'
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
+import { PlaceInfo } from '../interfaces/placeInfo'
 
 export type ZeroOrOne = 0 | 1
 
 export interface AttractionQueryState {
   travel_id: string
-  query_list: placeInfo[][]
+  query_list: PlaceInfo[][]
   // loading 상태 저장
   loading: 'idle' | 'pending' | 'succeeded' | 'failed'
   // error 상태 저장
@@ -27,7 +28,7 @@ const initialState: AttractionQueryState = {
   resultList: [],
 }
 
-export function processAttractionList(atttractionList: any): placeInfo[][] {
+export function processAttractionList(atttractionList: any): PlaceInfo[][] {
   return atttractionList.map((cluster: any) => {
     const attractions = cluster.map(convertToPlaceInfo)
     return [...attractions]
@@ -45,7 +46,7 @@ export const fetchAttractionQuery = async (
 
   const response = await axios.post(API_URL, initialQuery, config)
 
-  const placeInfos: placeInfo[][] = processAttractionList(
+  const placeInfos: PlaceInfo[][] = processAttractionList(
     response.data.query_list,
   )
 

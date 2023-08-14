@@ -24,7 +24,7 @@ const SurveyButton = (props: ISurveyProps) => {
               className={`rounded-lg m-2 text-xs sm:text-sm md:text-base ${
                 props.selectedSurveys.includes(survey)
                   ? 'bg-indigo-500 text-white'
-                  : 'bg-stone-200 text-stone-500'
+                  : 'bg-stone-100 text-stone-600'
               }`}
               onClick={() => handleSurveyClick(survey)}
             >

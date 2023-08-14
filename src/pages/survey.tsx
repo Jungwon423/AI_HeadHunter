@@ -1,28 +1,57 @@
 import router from 'next/router'
 import MyNavbar from '../search_components/MyNavbar'
 import CircleListItem from '../survey_components/CircleList'
-import { SyntheticEvent, useState } from 'react'
+import { useState } from 'react'
 import WhoSurvey from '../survey_components/WhoSurvey'
-// import CustomDatePicker from '../survey_components/CustomDatePicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import MyDatePicker from '../survey_components/MyDatePicker'
 import WhenSurvey from '../survey_components/WhenSurvey'
 import HowSurvey from '../survey_components/HowSurvey'
+import {
+  selectDuration,
+  setBudget,
+  setCompanion,
+  setDuration,
+  setTravelStyle,
+  setUserId,
+} from '../slices/travelInfoSlice'
+import { useSelector, useDispatch } from 'react-redux'
+import LocalStorage from '../index_components/LocalStorage'
 
 export default function SurveyPage() {
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(1)
-
+  const dispatch = useDispatch()
+  let duration = useSelector(selectDuration)
+  const [selectedIndex, setSelectedIndex] = useState<number>(0)
   const handleItemClick = (index: number) => {
     setSelectedIndex(index)
   }
   const items = [
-    '어디로 떠나시나요?',
-    '언제 가시나요?',
+    '주로 누구와 여행하시나요?',
+    '여행 날짜는 언제 인가요?',
     '여행 스타일은 어떻게 되시나요?',
   ]
+  const handleButtonClick = async () => {
+    if (selectedIndex === 2) {
+      let tempId: string
+
+      if (LocalStorage.getItem('tempId') == null) {
+        let randomStr: string = Math.random().toString(36).substring(2, 12)
+        LocalStorage.setItem('tempId', randomStr)
+        tempId = randomStr
+      } else {
+        tempId = LocalStorage.getItem('tempId')! // null check
+      }
+      dispatch(setUserId(tempId))
+      // dispatch(setCompanion(selectedCompanion));
+      // dispatch(setTravelStyle(selectedStyles));
+      // dispatch(setDuration(duration))
+      router.push('/image_query')
+    } else {
+      setSelectedIndex(selectedIndex + 1)
+    }
+  }
 
   return (
-    <div className="h-screen">
+    <div className="min-h-screen pb-16">
       <MyNavbar></MyNavbar>
 
       <div className="flex flex-row w-screen">
@@ -59,11 +88,16 @@ export default function SurveyPage() {
         {selectedIndex == 0 ? <WhoSurvey /> : null}
         {selectedIndex == 1 ? <WhenSurvey></WhenSurvey> : null}
         {selectedIndex == 2 ? <HowSurvey></HowSurvey> : null}
-        <div className="fixed right-2 bottom-2 w-16 h-16 px-4 py-2 rounded-md bg-indigo-500 flex items-center justify-center">
+      </div>
+      <div className="fixed bottom-0 h-16 w-full border-t-2 bg-stone-50 shadow-gray-200 shadow-inner flex items-center justify-end pr-5">
+        <button
+          className="relative w-28 h-12 rounded-xl bg-indigo-500 flex items-center justify-center"
+          onClick={async () => handleButtonClick()}
+        >
           <span className="text-center text-white text-sm md:text-base">
-            다음
+            Next
           </span>
-        </div>
+        </button>
       </div>
     </div>
   )

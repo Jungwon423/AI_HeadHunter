@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { setDuration } from '../slices/travelInfoSlice'
 
 interface NumberButtonProps {
   onDurationChange: (value: number) => void
 }
 
 const NumberButton: React.FC<NumberButtonProps> = ({ onDurationChange }) => {
+  const dispatch = useDispatch()
   const [inputValue, setInputValue] = useState<number | typeof NaN | null>(null)
-  const [durationText, setDurationText] = useState('')
+  useEffect(() => {
+    if (inputValue !== null && !Number.isNaN(inputValue)) {
+      dispatch(setDuration(inputValue))
+    }
+  }, [])
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const enteredValue = parseInt(event.target.value)
