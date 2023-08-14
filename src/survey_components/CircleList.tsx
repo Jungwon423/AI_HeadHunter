@@ -34,7 +34,7 @@ const CircleListItem: React.FC<CircleListItemProps> = ({
   return (
     <div className="flex items-center cursor-pointer" onClick={onClick}>
       <span className="w-8">{isSelected ? selectedIcon : defaultIcon}</span>
-      <span className="pl-4 font-bold text-gray-600">{text}</span>
+      <span className="pl-4 font-bold text-gray-600 xl:text-lg">{text}</span>
     </div>
   )
 }

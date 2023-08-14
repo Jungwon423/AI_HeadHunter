@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker'
 import DatePicker from 'react-datepicker'
 import ko from 'date-fns/locale/ko'
@@ -59,7 +59,7 @@ const MyDatePicker = ({ startDate, endDate, onDatesChange }: myDateProps) => {
           increaseMonth,
           customHeaderCount,
         }) => (
-          <div>
+          <div className="pb-4">
             <button
               aria-label="Previous Month"
               className={

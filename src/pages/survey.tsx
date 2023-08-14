@@ -6,6 +6,8 @@ import WhoSurvey from '../survey_components/WhoSurvey'
 // import CustomDatePicker from '../survey_components/CustomDatePicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import MyDatePicker from '../survey_components/MyDatePicker'
+import WhenSurvey from '../survey_components/WhenSurvey'
+import HowSurvey from '../survey_components/HowSurvey'
 
 export default function SurveyPage() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(1)
@@ -18,16 +20,6 @@ export default function SurveyPage() {
     '언제 가시나요?',
     '여행 스타일은 어떻게 되시나요?',
   ]
-
-  const [startDate, setStartDate] = useState<Date | null>(new Date())
-  const [endDate, setEndDate] = useState<Date | null>(new Date())
-  const handleDatesChange = (
-    newStartDate: Date | null,
-    newEndDate: Date | null,
-  ) => {
-    setStartDate(newStartDate)
-    setEndDate(newEndDate)
-  }
 
   return (
     <div className="h-screen">
@@ -65,27 +57,13 @@ export default function SurveyPage() {
           </div>
         </div>
         {selectedIndex == 0 ? <WhoSurvey /> : null}
-        {selectedIndex == 1 ? (
-          <div className="flex py-5 w-full flex-col items-center">
-            <div className="px-10 flex flex-col flex-grow">
-              <div className="text-2xl font-bold pt-20">
-                여행 날짜는 언제인가요?
-              </div>
-              <div className="rounded-xl shadow-md bg-stone-50">dd</div>
-              <MyDatePicker
-                startDate={startDate}
-                endDate={endDate}
-                onDatesChange={handleDatesChange}
-              ></MyDatePicker>
-              {startDate && endDate && (
-                <div>
-                  <div>{startDate.toLocaleDateString('ko-KR')}</div>
-                  <div>{endDate.toLocaleDateString('ko-KR')}</div>
-                </div>
-              )}
-            </div>
-          </div>
-        ) : null}
+        {selectedIndex == 1 ? <WhenSurvey></WhenSurvey> : null}
+        {selectedIndex == 2 ? <HowSurvey></HowSurvey> : null}
+        <div className="fixed right-2 bottom-2 w-16 h-16 px-4 py-2 rounded-md bg-indigo-500 flex items-center justify-center">
+          <span className="text-center text-white text-sm md:text-base">
+            다음
+          </span>
+        </div>
       </div>
     </div>
   )

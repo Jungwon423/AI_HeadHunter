@@ -6,7 +6,7 @@
 }
 
 .react-datepicker__header {
-  @apply text-black font-semibold bg-gradient-to-b from-white to-white border-0;
+  @apply text-black font-semibold bg-gradient-to-b from-white to-white;
 }
 .react-datepicker__header:not(.react-datepicker__header--has-time-select) {
   @apply border-0;
@@ -17,31 +17,40 @@
 .react-datepicker__sunday {
   @apply text-red-400 !important;
 }
-
 .react-datepicker__day {
-  @apply text-gray-800 py-0 px-1 !important;
+  @apply w-10 py-1 px-1 !important;
 }
 .react-datepicker__day-name {
-  @apply px-1 !important;
+  @apply w-10 !important;
 }
-
+.react-datepicker__day-names {
+  @apply border-b-2;
+}
+/* .react-datepicker__weekday--Sun {
+  @apply text-red-500;
+} */
+.react-datepicker__weekday.react-datepicker__weekday--Sun {
+  @apply text-red-500; /* 일요일 글씨 빨간색으로 변경 */
+}
 .react-datepicker__day--disabled {
   @apply text-gray-500 !important;
 }
-/* .react-datepicker__day:hover {
-  @apply text-black bg-purple-300 !important;
-} */
 
 .react-datepicker__day:focus {
   /* @apply outline-none; */
 }
-
+.react-datepicker__day--in-range {
+  @apply text-white bg-indigo-300 !important;
+}
+.react-datepicker__day--in-selecting-range {
+  @apply text-white bg-indigo-300 !important;
+}
 .react-datepicker__day--selected {
-  @apply text-white bg-black;
+  @apply text-white bg-indigo-400 !important;
 }
 
 .react-datepicker__day--keyboard-selected {
-  @apply text-white bg-black;
+  @apply text-white bg-indigo-400 !important;
 }
 .react-datepicker__navigation--previous {
   @apply border-none bg-gray-400 text-gray-300 inline-flex items-center justify-center cursor-pointer;
