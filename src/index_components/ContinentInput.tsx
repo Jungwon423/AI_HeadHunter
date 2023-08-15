@@ -11,6 +11,11 @@ import {
   SearchResult,
 } from '../interfaces/continentData'
 
+function gotoSurvey(cityName: any) {
+  const dispatch = useDispatch()
+  dispatch(setCity(cityName))
+  router.push('/survey')
+}
 const flattenData = (data: ContinentData) => {
   const dataArray = []
   for (const continent of Object.keys(data)) {
@@ -97,7 +102,6 @@ const ContinentInput = () => {
   }
 
   const searchResults = filterData()
-  const dispatch = useDispatch()
 
   return (
     <>
@@ -160,8 +164,7 @@ const ContinentInput = () => {
                 className="flex p-2 border-b-2"
                 key={key}
                 onClick={() => {
-                  dispatch(setCity(cityName))
-                  router.push('/survey')
+                  gotoSurvey(cityName)
                 }}
               >
                 {cityName ? (
@@ -305,8 +308,7 @@ const CityList = ({ cities, searchTerm }: ICityListProps) => {
           className="flex p-3 h-10"
           key={city.naverId}
           onClick={() => {
-            dispatch(setCity(city.nameKo))
-            router.push('/survey')
+            gotoSurvey(city.nameKo)
           }}
         >
           <Image
