@@ -12,6 +12,7 @@ import persistedQuestionnaireReducer from './slices/questionnaireSlice'
 import persistedQueryInputReducer from './slices/queryInputSlice'
 import persistedAttractionQueryReducer from './slices/imageQuerySlice'
 import persistedRecommendAttractionsReducer from './slices/recommendSlice'
+import persistedSurveyReducer from './slices/surveySlice'
 
 export const store = configureStore({
   reducer: {
@@ -22,6 +23,7 @@ export const store = configureStore({
     queryInput: persistedQueryInputReducer,
     attractionQuery: persistedAttractionQueryReducer,
     recommendAttractions: persistedRecommendAttractionsReducer,
+    survey: persistedSurveyReducer,
   },
   // middleware: (getDefaultMiddleware) =>
   // getDefaultMiddleware().concat(thunk),
