@@ -9,6 +9,9 @@ import { Footer } from '../footer/Footer'
 import Popup from '../index_components/Popup'
 import { AutocompleteInput } from '../index_components/AutocompleteInput'
 import Link from 'next/link'
+import { fetchData } from '../slices/useJson'
+import ContinentList from '../index_components/ContinentList'
+import ContinentInput from '../index_components/ContinentInput'
 
 export default function Home() {
   const [isPopupOpen, setIsPopupOpen] = useState(false)
@@ -21,6 +24,9 @@ export default function Home() {
     setIsPopupOpen(false)
   }
   const sampleItems = ['오사카', '도쿄', '서울', '방콕', '파리']
+  //console.log(fetchData())
+  // const datas = require('/public/json/whole_Geo.json')
+  // console.log(datas)
 
   return (
     <div className="bg-white min-h-screen">
@@ -36,6 +42,10 @@ export default function Home() {
         {/* <div className="py-10">
           <MapboxGeocoderContainer accessToken={TOKEN} />
         </div> */}
+        <div>
+          {/* <ContinentList></ContinentList> */}
+          <ContinentInput></ContinentInput>
+        </div>
 
         <TitleImage></TitleImage>
         <div className="mx-auto">
