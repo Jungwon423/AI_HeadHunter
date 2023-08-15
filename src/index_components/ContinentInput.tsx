@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 const data = require('/public/json/whole_Geo.json')
 import Image from 'next/image'
 import { setCity, setUserId } from '../slices/travelInfoSlice'
 import { useDispatch } from 'react-redux'
 import router from 'next/router'
+import useClickOutside from './useClickOutside'
 import {
   ContinentData,
   ICityListProps,
@@ -30,6 +31,7 @@ const flattenData = (data: ContinentData) => {
   }
   return dataArray
 }
+
 const getHighlightedText = (text: string, searchTerm: string) => {
   const parts = text.split(new RegExp(`(${searchTerm})`, 'gi'))
   return (
@@ -91,14 +93,21 @@ const ContinentInput = () => {
     setSelectedContinent(continent)
   }
   const [isFocused, setIsFocused] = useState(false)
+  const [showContent, setShowContent] = useState(false)
 
+  const handleClickOutside = () => {
+    if (isFocused) {
+      setIsFocused(false)
+      setShowContent(false)
+    }
+  }
+
+  const wrapperRef = useClickOutside<HTMLDivElement>(handleClickOutside)
   const handleFocus = () => {
     setIsFocused(true)
+    setShowContent(true)
   }
 
-  const handleBlur = () => {
-    setIsFocused(false)
-  }
   const clearInput = () => {
     setSearchTerm('')
   }
@@ -143,7 +152,6 @@ const ContinentInput = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           onFocus={handleFocus}
-          onBlur={handleBlur}
           className="border-0 rounded-md w-[330px] px-2 py-1 focus:outline-none"
         />
 
@@ -165,61 +173,69 @@ const ContinentInput = () => {
           </svg>
         ) : null}
       </div>
-      {searchTerm !== '' ? (
-        <div className="p-1 mt-1 overflow-y-auto h-[380px] w-[355px] cursor-pointer">
-          {searchResults.map((item) => {
-            const cityName = item.city ? item.city.nameKo : ''
-            const countryName = item.countryName
-            const key = cityName + '-' + countryName
-            return (
-              <div
-                className="flex p-2 border-b-2"
-                key={key}
-                onClick={() => {
-                  gotoSurvey(cityName)
-                }}
-              >
-                {cityName ? (
-                  <>
-                    <div className="text-xs font-bold">
-                      {getHighlightedText(cityName, searchTerm)}
+      <div ref={wrapperRef}>
+        {showContent && (
+          <div className="test">
+            {searchTerm !== '' ? (
+              <div className="p-1 mt-1 overflow-y-auto h-[350px] w-[355px] cursor-pointer">
+                {searchResults.map((item, index) => {
+                  const cityName = item.city ? item.city.nameKo : ''
+                  const countryName = item.countryName
+                  const key = cityName + '-' + countryName + '-' + index
+                  return (
+                    <div
+                      className="flex p-2 border-b-2"
+                      key={key}
+                      onClick={() => {
+                        gotoSurvey(cityName)
+                      }}
+                    >
+                      {cityName ? (
+                        <>
+                          <div className="text-xs font-bold">
+                            {getHighlightedText(cityName, searchTerm)}
+                          </div>
+                          <div className="pl-2 pt-0.5 text-[10px] text-stone-500">
+                            {getHighlightedText(countryName, searchTerm)}
+                          </div>
+                          <div className="flex-grow"></div>
+                        </>
+                      ) : null}
                     </div>
-                    <div className="pl-2 pt-0.5 text-[10px] text-stone-500">
-                      {getHighlightedText(countryName, searchTerm)}
-                    </div>
-                    <div className="flex-grow"></div>
-                  </>
-                ) : null}
+                  )
+                })}
               </div>
-            )
-          })}
-        </div>
-      ) : (
-        <>
-          <div className="flex h-[380px]">
-            <div className="w-[120px] overflow-y-auto">
-              {continents.map((continent) => (
-                <div className="border-t-2" key={continent}>
-                  <button
-                    className="h-12 text-stone-600 text-xs flex justify-start items-center py-3 px-5"
-                    onClick={() => selectContinent(continent)}
-                  >
-                    {continent}
-                  </button>
+            ) : (
+              <>
+                <div className="flex h-[350px]">
+                  <div className="w-[120px] overflow-y-auto">
+                    {continents.map((continent, index) => (
+                      <div className="border-t-2" key={continent + index}>
+                        <button
+                          className="h-12 text-stone-600 text-xs flex justify-start items-center py-3 px-5"
+                          onClick={() => selectContinent(continent)}
+                        >
+                          {continent}
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="overflow-y-auto">
+                    {selectedContinent && (
+                      <CountryList
+                        countries={
+                          data[selectedContinent as keyof ContinentData]
+                        }
+                        searchTerm={searchTerm}
+                      />
+                    )}
+                  </div>
                 </div>
-              ))}
-            </div>
-            <div className="overflow-y-auto">
-              {selectedContinent && (
-                <CountryList
-                  countries={data[selectedContinent as keyof ContinentData]}
-                  searchTerm={searchTerm}
-                />
-              )}
-            </div>
+              </>
+            )}
           </div>
-        </>
-      )}
+        )}
+      </div>
     </>
   )
 }
@@ -239,8 +255,8 @@ const CountryList = ({ countries, searchTerm }: ICountryListProps) => {
   return (
     <div className="flex flex-col">
       {countryNames.map((countryName, idx) => (
-        <div>
-          <div className="flex border-b-2 mx-6 w-[180px]" key={idx}>
+        <div key={countryName + idx}>
+          <div className="flex border-b-2 mx-6 w-[180px]">
             <button
               className="text-xs font-bold w-full flex justify-start items-center px-1 py-4"
               onClick={() => toggleCountry(countryName)}
@@ -330,10 +346,10 @@ const CityList = ({ cities, searchTerm }: ICityListProps) => {
   }
   return (
     <div className="w-full px-5 py-2 cursor-pointer">
-      {filteredCities.map((city) => (
+      {filteredCities.map((city, index) => (
         <div
           className="flex p-3 h-10"
-          key={city.naverId}
+          key={`${city.naverId}-${index}`}
           onClick={() => {
             gotoSurvey(city.nameKo)
           }}
@@ -344,7 +360,11 @@ const CityList = ({ cities, searchTerm }: ICityListProps) => {
             width={17}
             height={17}
             className="rounded-full"
+            style={{
+              height: 'auto',
+            }}
           ></Image>
+
           <div className="pl-2 text-[10px]">{city.nameKo}</div>
           <div className="flex-grow"></div>
           <div className="flex text-[10px] text-stone-500">도시</div>

@@ -37,12 +37,14 @@ export default function Home() {
       <MyNavbar />
       <main className="w-3/4 mx-auto py-16 px-4 sm:px-6 lg:px-8">
         <MainTitle></MainTitle>
-        <AutocompleteInput items={sampleItems} />
+        {/* <AutocompleteInput items={sampleItems} /> */}
         {/* <div className="py-10">
           <MapboxGeocoderContainer accessToken={TOKEN} />
         </div> */}
         {/* <ContinentList></ContinentList> */}
-        <ContinentInput></ContinentInput>
+        <div className="pt-10 flex flex-col justify-center items-center">
+          <ContinentInput></ContinentInput>
+        </div>
 
         <TitleImage></TitleImage>
         <div className="mx-auto">
