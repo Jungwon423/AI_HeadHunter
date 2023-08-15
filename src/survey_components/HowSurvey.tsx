@@ -41,13 +41,23 @@ const HowSurvey = () => {
                       key={minorCategory.name}
                       className={`border-2 rounded bg-white ${
                         minorCategory.checked
-                          ? 'border-blue-800'
+                          ? 'border-green-500'
                           : 'border-stone-200'
                       }`}
                       onClick={() => {
                         check(majorCategory, minorCategory)
                       }}
                     >
+                      {minorCategory.checked && (
+                        <div className="absolute top-0 right-0">
+                          <Image
+                            src="/assets/images/check_icon.png"
+                            alt="체크 표시"
+                            width={25}
+                            height={25}
+                          />
+                        </div>
+                      )}
                       <div className="flex justify-center items-center px-4 py-2">
                         <Image
                           src="/assets/icons/극장.png"
