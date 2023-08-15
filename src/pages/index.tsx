@@ -9,8 +9,6 @@ import { Footer } from '../footer/Footer'
 import Popup from '../index_components/Popup'
 import { AutocompleteInput } from '../index_components/AutocompleteInput'
 import Link from 'next/link'
-import { fetchData } from '../slices/useJson'
-import ContinentList from '../index_components/ContinentList'
 import ContinentInput from '../index_components/ContinentInput'
 
 export default function Home() {
