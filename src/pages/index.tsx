@@ -10,7 +10,6 @@ import Popup from '../index_components/Popup'
 import { AutocompleteInput } from '../index_components/AutocompleteInput'
 import Link from 'next/link'
 import { fetchData } from '../slices/useJson'
-import ContinentList from '../index_components/ContinentList'
 import ContinentInput from '../index_components/ContinentInput'
 
 export default function Home() {
@@ -42,10 +41,8 @@ export default function Home() {
         {/* <div className="py-10">
           <MapboxGeocoderContainer accessToken={TOKEN} />
         </div> */}
-        <div>
-          {/* <ContinentList></ContinentList> */}
-          <ContinentInput></ContinentInput>
-        </div>
+        {/* <ContinentList></ContinentList> */}
+        <ContinentInput></ContinentInput>
 
         <TitleImage></TitleImage>
         <div className="mx-auto">
