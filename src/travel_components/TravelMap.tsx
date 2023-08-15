@@ -18,15 +18,14 @@ import Map, {
   GeolocateControl,
   Source,
   Layer,
+  MapRef,
 } from 'react-map-gl'
 import ChatScreen from './ChatScreen'
 import Pin from './Pin'
 import TravelChat from './TravelChat'
-import GeocoderControl from './GeocoderControl'
 import { PlaceInfo } from '../interfaces/placeInfo'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import polyline from '@mapbox/polyline'
-import { get } from 'http'
 
 const TravelMap = () => {
   const pinColors = [
@@ -58,15 +57,12 @@ const TravelMap = () => {
 
   const selectedPlace = useSelector(selectCurrentPlace)
   const currentDay: number = useSelector(selectCurrentDay)
-  console.log('currentDay: ' + currentDay)
 
   const travelSchedule: PlaceInfo[][] = useSelector(selectTravelSchedule) || []
-
   const TOKEN =
     'pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtrcGNwdXQwNm1oM2xvZTJ5Z2Q4djk5In0._rw_aFaBfUjQC-tjkV53Aw'
 
   const coordinate = useSelector(selectCoordinate)
-  console.log('coordinate : ' + coordinate)
   interface RouteGeoJSON {
     type: string
     properties: {}
@@ -101,7 +97,37 @@ const TravelMap = () => {
 
   const [routeGeoJSON, setRouteGeoJSON] = useState<RouteGeoJSON | null>(null)
 
-  console.log('routeGeoJSON: ', routeGeoJSON?.geometry.coordinates)
+  const [viewState, setViewState] = useState({
+    longitude: coordinate[0], //130 어쩌구
+    latitude: coordinate[1],
+    zoom: 11.7,
+  })
+  useEffect(() => {
+    if (selectedPlace?.coordinate !== undefined) {
+      console.log(selectedPlace?.coordinate)
+      onSelectCity({
+        longitude: selectedPlace?.coordinate[1]!,
+        latitude: selectedPlace?.coordinate[0]!,
+      })
+    }
+    // setViewState({
+    //   longitude: selectedPlace?.coordinate[1]!, //130 어쩌구
+    //   latitude: selectedPlace?.coordinate[0]!,
+    //   zoom: 13,
+    // })
+  }, [selectedPlace])
+  const mapRef = useRef<MapRef | null>(null)
+
+  const onSelectCity = useCallback(
+    ({ longitude, latitude }: { longitude: number; latitude: number }) => {
+      mapRef.current?.flyTo({
+        center: [longitude, latitude],
+        duration: 2000,
+        zoom: 16,
+      })
+    },
+    [],
+  )
 
   // Optimization API 호출
   const fetchOptimizedRoute = async (coordinates: number[][]): Promise<any> => {
@@ -160,11 +186,10 @@ const TravelMap = () => {
     <div className="flex-grow">
       <TravelChat></TravelChat>
       <Map
-        initialViewState={{
-          longitude: coordinate[0],
-          latitude: coordinate[1],
-          zoom: 11.7,
-        }}
+        ref={mapRef}
+        // style={{ width: '100vw', height: '100vh' }}
+        {...viewState}
+        onMove={(evt) => setViewState(evt.viewState)}
         mapStyle="mapbox://styles/zigdeal/clkjl2a7y001401r27iv81iw2"
         mapboxAccessToken={TOKEN}
       >

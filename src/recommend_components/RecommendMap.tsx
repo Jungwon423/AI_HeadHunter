@@ -9,8 +9,7 @@ import Map, {
   FullscreenControl,
   ScaleControl,
   GeolocateControl,
-  Source,
-  Layer,
+  MapRef,
 } from 'react-map-gl'
 import Pin from '../travel_components/Pin'
 import TravelChat from '../travel_components/TravelChat'
@@ -23,8 +22,7 @@ import {
 } from '../slices/recommendSlice'
 import { PlaceInfo } from '../interfaces/placeInfo'
 import ChatScreen from '../travel_components/ChatScreen'
-import { useEffect, useState } from 'react'
-import { current } from '@reduxjs/toolkit'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 const RecommendMap = () => {
   const pinColors = [
@@ -64,16 +62,48 @@ const RecommendMap = () => {
 
   const coordinate = useSelector(selectCoordinate)
 
+  const [viewState, setViewState] = useState({
+    longitude: coordinate[0], //130 어쩌구
+    latitude: coordinate[1],
+    zoom: 11.7,
+  })
+
+  useEffect(() => {
+    if (selectedPlace?.coordinate !== undefined) {
+      console.log(selectedPlace?.coordinate)
+      onSelectCity({
+        longitude: selectedPlace?.coordinate[1]!,
+        latitude: selectedPlace?.coordinate[0]!,
+      })
+    }
+    // setViewState({
+    //   longitude: selectedPlace?.coordinate[1]!, //130 어쩌구
+    //   latitude: selectedPlace?.coordinate[0]!,
+    //   zoom: 13,
+    // })
+  }, [selectedPlace])
+
+  const mapRef = useRef<MapRef | null>(null)
+
+  const onSelectCity = useCallback(
+    ({ longitude, latitude }: { longitude: number; latitude: number }) => {
+      mapRef.current?.flyTo({
+        center: [longitude, latitude],
+        duration: 2000,
+        zoom: 16,
+      })
+    },
+    [],
+  )
+
   return (
-    <div className="flex flex-grow">
+    <div className="flex">
       <TravelChat></TravelChat>
       <Map
+        ref={mapRef}
         style={{ width: '100vw', height: '100vh' }}
-        initialViewState={{
-          longitude: coordinate[0], //130 어쩌구
-          latitude: coordinate[1],
-          zoom: 11.7,
-        }}
+        {...viewState}
+        onMove={(evt) => setViewState(evt.viewState)}
         mapStyle="mapbox://styles/zigdeal/clkjl2a7y001401r27iv81iw2"
         mapboxAccessToken={TOKEN}
       >
@@ -81,6 +111,7 @@ const RecommendMap = () => {
         <FullscreenControl position="top-left" />
         <NavigationControl position="top-left" />
         <ScaleControl />
+
         {/* <GeocoderControl mapboxAccessToken={TOKEN} position="top-left" /> */}
         {travelSchedule.map((day, i) =>
           day.map(
