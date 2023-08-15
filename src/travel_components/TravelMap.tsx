@@ -159,15 +159,6 @@ const TravelMap = () => {
   return (
     <div className="flex-grow">
       <TravelChat></TravelChat>
-      {/* <Map
-        initialViewState={{
-          longitude: coordinate[0], //130 어쩌구
-          latitude: coordinate[1],
-          zoom: 11.7,
-        }}
-        mapStyle="mapbox://styles/zigdeal/clkjl2a7y001401r27iv81iw2"
-        mapboxAccessToken={TOKEN}
-      ></Map> */}
       <Map
         initialViewState={{
           longitude: coordinate[0],
