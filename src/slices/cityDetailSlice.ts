@@ -1,10 +1,10 @@
 // import { persistReducer } from "redux-persist"
-// import { RootState } from "../store"
+// import { AppThunk, RootState } from "../store"
 // import storage from "redux-persist/es/storage"
 // import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 // import { SERVER_API_URL } from "./api_url"
 
-// export interface AttractionQueryState {
+// export interface CityDetail {
 //   travel_id: string
 //   query_list: PlaceInfo[][]
 //   // loading 상태 저장
@@ -14,7 +14,7 @@
 //   resultList: ZeroOrOne[]
 // }
 
-// const initialState: AttractionQueryState = {
+// const initialState: CityDetail = {
 //   travel_id: '',
 //   query_list: [],
 //   loading: 'idle',
@@ -22,11 +22,11 @@
 //   resultList: [],
 // }
 
-// export const attractionQuerySlice = createSlice({
+// export const CityDetailSlice = createSlice({
 //   name: 'attractionQuery',
 //   initialState,
 //   reducers: {
-//     setCityDetail: (state : CityDetail, action: PayloadAction<AttractionQueryState>) => {
+//     setCityDetail: (state : CityDetail, action: PayloadAction<CityDetail>) => {
 //         state.travel_id = action.payload.travel_id
 //         state.query_list = action.payload.query_list
 //         state.loading = action.payload.loading
@@ -37,10 +37,10 @@
 // })
 
 // export const fetchAttractionQueryAsync =
-//   (initialQuery: InitialQueryInput): AppThunk =>
+//   (initialQuery: input): AppThunk =>
 //   async (
 //     dispatch: (arg0: {
-//       payload: string | AttractionQueryState | null
+//       payload: string | CityDetailState | null
 //       type:
 //         | 'attractionQuery/setAttractionQuery'
 //         | 'attractionQuery/setLoading'
@@ -65,7 +65,7 @@
 
 // const persistedCityDetailReducer = persistReducer(
 //   persistConfig,
-//   attractionQuerySlice.reducer,
+//   CityDetailSlice.reducer,
 // )
 
 // export const {
