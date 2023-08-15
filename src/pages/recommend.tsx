@@ -1,26 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  initialize,
-  handleCurrentPlace,
-  setCurrentDay,
-  selectUserId,
-  selectAttractions,
-} from '../slices/recommendSlice'
-import Map, {
-  Marker,
-  Popup,
-  NavigationControl,
-  FullscreenControl,
-  ScaleControl,
-  GeolocateControl,
-  Source,
-  Layer,
-} from 'react-map-gl'
-import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { initialize, selectUserId } from '../slices/recommendSlice'
+import { useEffect } from 'react'
 import { selectAttractionQueryTravelId } from '../slices/imageQuerySlice'
 import { AppDispatch } from '../store'
-import Image from 'next/image'
 import RecommendMap from '../recommend_components/RecommendMap'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import { fetchTravelScheduleAsync } from '../slices/travelInfoSlice'
@@ -47,13 +29,13 @@ const RecommendPage = () => {
 
   return (
     <div className="flex flex-row">
-      <div className="bg-white w-[700px] min-w-[700px] relative h-screen max-h-screen overflow-hidden">
+      <div className="bg-white w-1/2 min-w-[700px] relative h-screen max-h-screen overflow-hidden">
         <div className="flex flex-row">
           <RecommendNav></RecommendNav>
           <RecoContainer></RecoContainer>
         </div>
       </div>
-      <div className="">
+      <div className="w-1/2">
         <RecommendMap></RecommendMap>
       </div>
     </div>
