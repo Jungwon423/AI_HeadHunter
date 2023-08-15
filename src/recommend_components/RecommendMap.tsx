@@ -12,8 +12,8 @@ import Map, {
   Source,
   Layer,
 } from 'react-map-gl'
-import Pin from './Pin'
-import TravelChat from './TravelChat'
+import Pin from '../travel_components/Pin'
+import TravelChat from '../travel_components/TravelChat'
 import {
   handleCurrentPlace,
   selectAttractions,
@@ -22,7 +22,7 @@ import {
   selectCurrentPlace,
 } from '../slices/recommendSlice'
 import { PlaceInfo } from '../interfaces/placeInfo'
-import ChatScreen from './ChatScreen'
+import ChatScreen from '../travel_components/ChatScreen'
 import { useEffect, useState } from 'react'
 import { current } from '@reduxjs/toolkit'
 
