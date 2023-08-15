@@ -1,24 +1,34 @@
 import router from 'next/router'
 import MyNavbar from '../search_components/MyNavbar'
 import CircleListItem from '../survey_components/CircleList'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import WhoSurvey from '../survey_components/WhoSurvey'
 import 'react-datepicker/dist/react-datepicker.css'
 import WhenSurvey from '../survey_components/WhenSurvey'
 import HowSurvey from '../survey_components/HowSurvey'
-import {
-  selectDuration,
-  setBudget,
-  setCompanion,
-  setDuration,
-  setTravelStyle,
-  setUserId,
-} from '../slices/travelInfoSlice'
+import { selectDuration, selectUserId } from '../slices/travelInfoSlice'
 import { useSelector, useDispatch } from 'react-redux'
-import LocalStorage from '../index_components/LocalStorage'
+import { FirstInput, fecthSurveyInputAsync } from '../slices/surveySlice'
+import { selectCity } from '../slices/travelInfoSlice'
+import { AppDispatch } from '../store'
 
-export default function SurveyPage() {
-  const dispatch = useDispatch()
+export const SurveyPage = () => {
+  const dispatch = useDispatch<AppDispatch>()
+
+  const user = useSelector(selectUserId)
+  const city = useSelector(selectCity)
+
+  useEffect(() => {
+    const firstInput: FirstInput = {
+      user: user!,
+      destination: city,
+    }
+
+    console.log(firstInput)
+
+    dispatch(fecthSurveyInputAsync(firstInput))
+  }, [])
+
   let duration = useSelector(selectDuration)
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
   const handleItemClick = (index: number) => {
@@ -31,19 +41,6 @@ export default function SurveyPage() {
   ]
   const handleButtonClick = async () => {
     if (selectedIndex === 2) {
-      let tempId: string
-
-      if (LocalStorage.getItem('tempId') == null) {
-        let randomStr: string = Math.random().toString(36).substring(2, 12)
-        LocalStorage.setItem('tempId', randomStr)
-        tempId = randomStr
-      } else {
-        tempId = LocalStorage.getItem('tempId')! // null check
-      }
-      dispatch(setUserId(tempId))
-      // dispatch(setCompanion(selectedCompanion));
-      // dispatch(setTravelStyle(selectedStyles));
-      // dispatch(setDuration(duration))
       router.push('/image_query')
     } else {
       setSelectedIndex(selectedIndex + 1)
@@ -102,3 +99,5 @@ export default function SurveyPage() {
     </div>
   )
 }
+
+export default SurveyPage
