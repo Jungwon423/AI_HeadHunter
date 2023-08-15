@@ -10,12 +10,6 @@ import {
   ICountryListProps,
   SearchResult,
 } from '../interfaces/continentData'
-
-function gotoSurvey(cityName: any) {
-  const dispatch = useDispatch()
-  dispatch(setCity(cityName))
-  router.push('/survey')
-}
 const flattenData = (data: ContinentData) => {
   const dataArray = []
   for (const continent of Object.keys(data)) {
@@ -69,6 +63,11 @@ const sortResultsByIndex = (results: SearchResult[], searchTerm: string) => {
 }
 
 const ContinentInput = () => {
+  const dispatch = useDispatch()
+  function gotoSurvey(cityName: any) {
+    dispatch(setCity(cityName))
+    router.push('/survey')
+  }
   const [selectedContinent, setSelectedContinent] = useState('유럽')
   const [searchTerm, setSearchTerm] = useState('')
   const continents = Object.keys(data)
@@ -291,6 +290,11 @@ const CountryList = ({ countries, searchTerm }: ICountryListProps) => {
 }
 
 const CityList = ({ cities, searchTerm }: ICityListProps) => {
+  const dispatch = useDispatch()
+  function gotoSurvey(cityName: any) {
+    dispatch(setCity(cityName))
+    router.push('/survey')
+  }
   const filteredCities = cities.filter((city) =>
     city.nameKo.includes(searchTerm),
   )
@@ -300,7 +304,6 @@ const CityList = ({ cities, searchTerm }: ICityListProps) => {
   if (toggledCategoryData && !filteredCities.includes(toggledCategoryData)) {
     filteredCities.unshift(toggledCategoryData)
   }
-  const dispatch = useDispatch()
   return (
     <div className="w-full px-5 py-2 cursor-pointer">
       {filteredCities.map((city) => (
