@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import Head from 'next/head'
-import MyNavbar from '../search_components/MyNavbar'
+import MyNavbar from '../../search_components/MyNavbar'
 import router from 'next/router'
-import SearchHero from '../search_components/SearchHero'
+import SearchHero from '../../search_components/SearchHero'
 
 import { useDispatch } from 'react-redux'
 import {
@@ -11,11 +11,11 @@ import {
   setDuration,
   setUserId,
   setBudget,
-} from '../slices/travelInfoSlice'
-import { TravelCompanion } from '../search_components/TravelCompanion'
-import TravelDuration from '../search_components/TravelDuration'
-import TravelBudget from '../search_components/TravelBudget'
-import LocalStorage from '../index_components/LocalStorage'
+} from '../../slices/travelInfoSlice'
+import { TravelCompanion } from '../../search_components/TravelCompanion'
+import TravelDuration from '../../search_components/TravelDuration'
+import TravelBudget from '../../search_components/TravelBudget'
+import LocalStorage from '../../index_components/LocalStorage'
 
 const TravelTitle = () => (
   <div className="text-center py-10 sm:py-15 md:py-20 bg-indigo-400 rounded-tl-xl rounded-tr-xl">

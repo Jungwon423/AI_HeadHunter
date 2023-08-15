@@ -6,6 +6,9 @@ import storage from 'redux-persist/lib/storage'
 import { persistReducer } from 'redux-persist'
 
 export interface MinorCategory {
+  map(
+    arg0: (minorCategory: MinorCategory) => import('react').JSX.Element,
+  ): import('react').ReactNode
   name: string
   checked: boolean
 }
@@ -77,6 +80,27 @@ export const surveySlice = createSlice({
     ) => {
       state.category_response = action.payload
     },
+    checkMinorCategory: (
+      state,
+      action: PayloadAction<{ majorCategory: string; minorCategory: string }>,
+    ) => {
+      const { majorCategory, minorCategory } = action.payload
+
+      const major = (
+        state.category
+          .majorCategoriesWithMinorCategories as unknown as MajorCategoriesWithMinorCategories
+      )[majorCategory]
+      if (major) {
+        const minorIndex = major.findIndex((mc) => mc.name === minorCategory)
+        if (minorIndex !== -1) {
+          major[minorIndex].checked = !major[minorIndex].checked
+        } else {
+          console.error('해당 minorCategory를 찾을 수 없습니다.')
+        }
+      } else {
+        console.error('해당 majorCategory를 찾을 수 없습니다.')
+      }
+    },
   },
 })
 
@@ -132,21 +156,19 @@ export const {
   setTravelEndDate,
   setCategory,
   setCategoryResponse,
+  checkMinorCategory,
 } = surveySlice.actions
 
-export const selectCompanion = (state: any) => state.surveyInput.companion
-export const selectCompanionAdult = (state: any) =>
-  state.surveyInput.companion_adult
-export const selectCompanionChild = (state: any) =>
-  state.surveyInput.companion_child
+export const selectCompanion = (state: any) => state.survey.companion
+export const selectCompanionAdult = (state: any) => state.survey.companion_adult
+export const selectCompanionChild = (state: any) => state.survey.companion_child
 export const selectCompanionNumber = (state: any) =>
-  state.surveyInput.companion_number
+  state.survey.companion_number
 export const selectTravelStartDate = (state: any) =>
-  state.surveyInput.travel_start_date
-export const selectTravelEndDate = (state: any) =>
-  state.surveyInput.travel_end_date
-export const selectCategory = (state: any) => state.surveyInput.category
+  state.survey.travel_start_date
+export const selectTravelEndDate = (state: any) => state.survey.travel_end_date
+export const selectCategory = (state: any) => state.survey.category
 export const selectCategoryResponse = (state: any) =>
-  state.surveyInput.category_response
+  state.survey.category_response
 
 export default persistedSurveyReducer
