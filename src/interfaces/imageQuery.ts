@@ -13,7 +13,7 @@ export interface ImageQueryState {
 
 export interface ImageQueryInput {
   user: string
-  travelId: string
+  travel_id: string
   majorCategoriesWithMinorCategories: MajorCategoriesWithMinorCategories
   companion: string
   duration: number

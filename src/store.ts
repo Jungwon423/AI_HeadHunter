@@ -1,14 +1,8 @@
-import {
-  Action,
-  configureStore,
-  ThunkAction,
-  AnyAction,
-} from '@reduxjs/toolkit'
+import { configureStore, ThunkAction, AnyAction } from '@reduxjs/toolkit'
 
 import tabSlice from './slices/tabSlice'
 import persistedTravelInfoReducer from './slices/travelInfoSlice'
 import persistedTravelChatReducer from './slices/travelChatSlice'
-import persistedQueryInputReducer from './slices/queryInputSlice'
 import persistedRecommendInfoReducer from './slices/recommendSlice'
 import persistedCityDetailReducer from './slices/cityDetailSlice'
 import persistedImageQueryReducer from './slices/imageQuerySlice'
@@ -19,7 +13,6 @@ export const store = configureStore({
     cityDetail: persistedCityDetailReducer,
     travelInfo: persistedTravelInfoReducer,
     travelChat: persistedTravelChatReducer,
-    queryInput: persistedQueryInputReducer,
     imageQuery: persistedImageQueryReducer,
     recommendInfo: persistedRecommendInfoReducer,
   },

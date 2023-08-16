@@ -20,7 +20,6 @@ const WhoSurvey = () => {
       setSelectedSurveys([...selectedSurveys, style])
     }
     // TODO : 1개만 설정되도록 수정
-    dispatch(setCompanion(selectedSurveys[0]))
   }
   const [selectedSurveys2, setSelectedSurveys2] = useState<string[]>([])
   const handleSurveys2Click = (style: string) => {
@@ -36,10 +35,12 @@ const WhoSurvey = () => {
   const handleSurveys3Click = (style: string) => {
     if (selectedSurvey3 === style) {
       setSelectedSurvey3(null)
+      dispatch(setCompanionChild(''))
     } else {
+      dispatch(setCompanionChild(style))
       setSelectedSurvey3(style)
-      dispatch(setCompanionChild(selectedSurvey3!))
     }
+    console.log()
   }
   const [travelDuration, setTravelDuration] = useState<number>(0)
   const handleDurationChange = (value: number) => {

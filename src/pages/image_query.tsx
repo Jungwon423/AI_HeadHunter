@@ -6,8 +6,9 @@ import {
   selectUser,
   selectCompanion,
   selectDuration,
-  selectCategoryResponse,
   selectTravelStartDate,
+  selectCategory,
+  selectTravelId,
 } from '../slices/travelInfoSlice'
 import { useRouter } from 'next/router'
 import { AppDispatch } from '../store'
@@ -30,13 +31,15 @@ const ImageQuery = () => {
 
   // selector from 'travelInfoSlice'
   const userId: string = useSelector(selectUser)
+  const travelId: string = useSelector(selectTravelId)
+
   const companion: string = useSelector(selectCompanion)
   const duration: number = useSelector(selectDuration)
 
   const travelStartDate: string = useSelector(selectTravelStartDate)
 
   const majorCategoriesWithMinorCategories: MajorCategoriesWithMinorCategories =
-    useSelector(selectCategoryResponse)
+    useSelector(selectCategory)
 
   // selector from 'imageQuerySlice'
   const attractionQuery = useSelector(selectImageQuery)
@@ -45,7 +48,7 @@ const ImageQuery = () => {
   // 여기서 초기 쿼리 입력 값을 설정하십시오.
   const ImageQueryInput: ImageQueryInput = {
     user: userId,
-    travelId: '', // TODO : 실제값 채워넣기
+    travel_id: travelId,
     majorCategoriesWithMinorCategories: majorCategoriesWithMinorCategories,
     companion: companion,
     duration: duration,
@@ -54,6 +57,7 @@ const ImageQuery = () => {
 
   useEffect(() => {
     dispatch(initialize())
+    console.log('ImageQueryInput : ', ImageQueryInput)
     dispatch(fetchImageQueryAsync(ImageQueryInput))
   }, [])
 
@@ -68,7 +72,7 @@ const ImageQuery = () => {
     }
   }
 
-  if (count === 8) {
+  if (count === resultList.length && count !== 0) {
     // TODO 길이 가변적으로 수정하기
     router.push('/preference')
     return (

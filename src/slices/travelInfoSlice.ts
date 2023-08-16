@@ -22,7 +22,6 @@ export interface TravelInfoState {
   duration: number
 
   category: MajorCategoriesWithMinorCategories
-  category_response: MajorCategoriesWithMinorCategories
 
   // @@@@@ 이상 /survey @@@@@
 
@@ -52,7 +51,6 @@ const initialState: TravelInfoState = {
   duration: 3,
 
   category: {},
-  category_response: {},
   // @@@@@ 이상 /survey @@@@@
   location: '서울 강남구 언주로110 경남아파트',
   coordinate: [135.5023, 34.6937],
@@ -147,15 +145,16 @@ export const travelInfoSlice = createSlice({
       action: PayloadAction<{ majorCategory: string; minorCategory: string }>,
     ) => {
       const { majorCategory, minorCategory } = action.payload
+      const major =
+        state.category! as unknown as MajorCategoriesWithMinorCategories
 
-      const major = (
-        state.category!
-          .majorCategoriesWithMinorCategories as unknown as MajorCategoriesWithMinorCategories
-      )[majorCategory]
-      if (major) {
-        const minorIndex = major.findIndex((mc) => mc.name === minorCategory)
+      if (major[majorCategory]) {
+        const minorIndex = major[majorCategory].findIndex(
+          (mc) => mc.name === minorCategory,
+        )
         if (minorIndex !== -1) {
-          major[minorIndex].checked = !major[minorIndex].checked
+          major[majorCategory][minorIndex].checked =
+            !major[majorCategory][minorIndex].checked
         } else {
           console.error('해당 minorCategory를 찾을 수 없습니다.')
         }
@@ -238,7 +237,5 @@ export const selectTravelEndDate = (state: RootState) =>
 export const selectDuration = (state: RootState) => state.travelInfo.duration
 
 export const selectCategory = (state: RootState) => state.travelInfo.category
-export const selectCategoryResponse = (state: RootState) =>
-  state.travelInfo.category_response
 
 export default persistedTravelInfoReducer

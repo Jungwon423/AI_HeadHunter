@@ -9,7 +9,7 @@ import {
 } from '../slices/cityDetailSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from '../store'
-import { selectCity, setUserId } from '../slices/travelInfoSlice'
+import { selectCity, setUser } from '../slices/travelInfoSlice'
 import ButtonWithImage from './ButtonWithImage'
 import LocalStorage from './LocalStorage'
 import router from 'next/router'
@@ -30,7 +30,7 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
     } else {
       tempId = LocalStorage.getItem('tempId')! // null check
     }
-    dispatch(setUserId(tempId))
+    dispatch(setUser(tempId))
     router.push('/survey')
   }
 

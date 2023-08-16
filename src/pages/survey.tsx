@@ -28,8 +28,6 @@ export const SurveyPage = () => {
       destination: city,
     }
 
-    console.log(surveyInput)
-
     dispatch(fecthSurveyInputAsync(surveyInput))
   }, [])
 
