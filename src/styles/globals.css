@@ -65,6 +65,21 @@ custom-popup {
 .mapboxgl-ctrl-geocoder {
   width: calc(66.67vw) !important;
 }
+.slick-slide:focus {
+  outline: none !important;
+}
+.slick-active:focus {
+  outline: none !important;
+}
+.slick-current:focus {
+  outline: none !important;
+}
+.slick-slide:focus-visible {
+  @apply outline-none !important;
+}
+.slick-list:focus {
+  outline: none !important;
+}
 
 @layer utilities {
   input[type='number']::-webkit-inner-spin-button,

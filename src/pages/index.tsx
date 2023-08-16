@@ -33,20 +33,17 @@ export default function Home() {
       <MyNavbar />
       <main className="w-3/4 mx-auto py-16 px-4 sm:px-6 lg:px-8">
         <MainTitle></MainTitle>
-        {/* <AutocompleteInput items={sampleItems} /> */}
         {/* <div className="py-10">
           <MapboxGeocoderContainer accessToken={TOKEN} />
         </div> */}
         <div className="pt-10 flex flex-col justify-center items-center">
           <ContinentInput openPopup={openPopup}></ContinentInput>
         </div>
-        {/* <TitleImage></TitleImage> */}
         <Popup isOpen={isPopupOpen} onClose={closePopup}></Popup>{' '}
         {/* 적용한 팝업(detail) */}
         <div className="pt-20 md:text-base sm:text-xl xl:text-2xl font-bold">
           추천 여행지
         </div>
-        <Carousel></Carousel>
         <TravelCarousel></TravelCarousel>
         <ImageExplain
           left={true}
@@ -65,6 +62,7 @@ export default function Home() {
           image={'/assets/screenshot/screen1.png'}
         ></ImageExplain>
       </main>
+      <Carousel></Carousel>
       <Footer></Footer>
     </div>
   )

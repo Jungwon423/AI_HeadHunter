@@ -17,6 +17,7 @@ function Carousel() {
     slidesToShow: 2,
     slidesToScroll: 2,
     infinite: false,
+    adaptiveHeight: true,
   }
 
   // 이미지 크기를 설정합니다.

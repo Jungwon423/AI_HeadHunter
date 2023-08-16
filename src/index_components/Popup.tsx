@@ -46,32 +46,49 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
 
   const cityInfos = useSelector(selectCityDetail)
   const cityDetail = cityInfos.city_detail
-  let shortestFlightDuration = cityDetail?.shortestFlightInfo?.duration
-  const flightText =
-    Math.floor(shortestFlightDuration! / 60) +
-    '시간 ' +
-    (shortestFlightDuration! % 60) +
-    '분'
-  let splittedVisa = cityDetail?.visaInfo.description.split(',')
-  let timeDifference = cityDetail?.timezone.offset! - 540
-  let timeDifferenceText = ''
-  if (timeDifference == 0) {
-    timeDifferenceText = '한국과 같음'
-  } else if (timeDifference > 0) {
-    timeDifferenceText =
-      '한국보다 ' + Math.floor(timeDifference! / 60) + '시간 빠름'
+
+  let flightText = ''
+  if (cityDetail && cityDetail.shortestFlightInfo) {
+    let shortestFlightDuration = cityDetail.shortestFlightInfo.duration
+    flightText =
+      Math.floor(shortestFlightDuration! / 60) +
+      '시간 ' +
+      (shortestFlightDuration! % 60) +
+      '분'
   } else {
-    timeDifferenceText =
-      '한국보다 ' + Math.abs(Math.floor(timeDifference! / 60)) + '시간 느림'
+    flightText = '항공 정보 없음'
   }
-  const frequency = cityDetail?.countryInfo.plug[0].frequency.replace(
-    /(\s*)/g,
-    '',
-  ) //공백제거
-  const electric = cityDetail?.countryInfo.plug[0].electricPotential.replace(
-    /(\s*)/g,
-    '',
-  )
+
+  let splittedVisa: string[] = []
+  if (cityDetail && cityDetail.visaInfo) {
+    splittedVisa = cityDetail?.visaInfo.description.split(',')
+  }
+  let timeDifference: number = 0
+  let timeDifferenceText = ''
+  if (cityDetail && cityDetail.timezone.offset) {
+    timeDifference = cityDetail?.timezone.offset! - 540
+    if (timeDifference == 0) {
+      timeDifferenceText = '한국과 같음'
+    } else if (timeDifference > 0) {
+      timeDifferenceText =
+        '한국보다 ' + Math.floor(timeDifference! / 60) + '시간 빠름'
+    } else {
+      timeDifferenceText =
+        '한국보다 ' + Math.abs(Math.floor(timeDifference! / 60)) + '시간 느림'
+    }
+  } else timeDifferenceText = '시차 정보 없음'
+
+  let frequency, electric
+  if (cityDetail && cityDetail.countryInfo && cityDetail.countryInfo.plug) {
+    frequency = cityDetail.countryInfo.plug[0].frequency.replace(/(\s*)/g, '') //공백제거
+    electric = cityDetail.countryInfo.plug[0].electricPotential.replace(
+      /(\s*)/g,
+      '',
+    ) //공백제거
+  } else {
+    frequency = '정보 없음'
+    electric = '전압 정보 없음'
+  }
   if (!isOpen) return null
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-20">
@@ -92,7 +109,7 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
             {cityDetail?.descriptionInfo.publisher}
           </div>
           <div className="flex pt-1">
-            {cityDetail?.weatherRecommend.season ? (
+            {cityDetail?.weatherRecommend ? (
               <ButtonWithImage
                 imageSrc="/assets/buttonIcon/calendar.webp"
                 text="추천"
@@ -107,14 +124,14 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
                 }
               />
             ) : null}
-            {cityDetail?.shortestFlightInfo?.duration ? (
+            {cityDetail?.shortestFlightInfo ? (
               <ButtonWithImage
                 imageSrc="/assets/buttonIcon/plane.png"
                 text="항공"
                 detailText={<div className="pl-1 text-[8px]">{flightText}</div>}
               />
             ) : null}
-            {cityDetail?.visaInfo.description ? (
+            {cityDetail?.visaInfo ? (
               <ButtonWithImage
                 imageSrc="/assets/buttonIcon/boarding-pass.png"
                 text="비자"
@@ -128,7 +145,7 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
                 }
               />
             ) : null}
-            {cityDetail?.countryInfo.currencyInformation.exchangeRate ? (
+            {cityDetail?.countryInfo.currencyInformation ? (
               <ButtonWithImage
                 imageSrc="/assets/buttonIcon/exchange.png"
                 text="환율"
@@ -142,7 +159,7 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
           </div>
 
           <div className="flex flex-row">
-            {cityDetail?.timezone.offset ? (
+            {cityDetail?.timezone ? (
               <ButtonWithImage
                 imageSrc="/assets/buttonIcon/time-zones.png"
                 text="시차"
@@ -151,7 +168,7 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
                 }
               />
             ) : null}
-            {cityDetail?.priceInfo.shortDescription ? (
+            {cityDetail?.priceInfo ? (
               <ButtonWithImage
                 imageSrc="/assets/buttonIcon/price-tag.png"
                 text="물가"
@@ -167,7 +184,7 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
                 }
               />
             ) : null}
-            {cityDetail?.countryInfo.plug[0] ? (
+            {cityDetail?.countryInfo.plug ? (
               <ButtonWithImage
                 imageSrc="/assets/buttonIcon/plug-in.png"
                 text="전압"
@@ -188,7 +205,7 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
                 detailText={
                   <div>
                     {cityDetail?.language.langList.map((lang, index) => (
-                      <div className="pl-1 text-[8px]" key={index}>
+                      <div className="pl-1 text-[6px]" key={index}>
                         {lang}
                       </div>
                     ))}
