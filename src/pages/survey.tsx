@@ -6,27 +6,31 @@ import WhoSurvey from '../survey_components/WhoSurvey'
 import 'react-datepicker/dist/react-datepicker.css'
 import WhenSurvey from '../survey_components/WhenSurvey'
 import HowSurvey from '../survey_components/HowSurvey'
-import { selectDuration, selectUserId } from '../slices/travelInfoSlice'
+import {
+  selectDuration,
+  selectUser,
+  selectCity,
+} from '../slices/travelInfoSlice'
 import { useSelector, useDispatch } from 'react-redux'
-import { AppDispatch, AppThunk } from '../store'
-import { FirstInput, fecthSurveyInputAsync } from '../slices/surveySlice'
-import { selectCity } from '../slices/travelInfoSlice'
+import { AppDispatch } from '../store'
+import { SurveyInput } from '../interfaces/input'
+import { fecthSurveyInputAsync } from '../functions/fetchSurveyInput'
 
 export const SurveyPage = () => {
   const dispatch = useDispatch<AppDispatch>()
 
-  const user = useSelector(selectUserId)
+  const user = useSelector(selectUser)
   const city = useSelector(selectCity)
 
   useEffect(() => {
-    const firstInput: FirstInput = {
+    const surveyInput: SurveyInput = {
       user: user!,
       destination: city,
     }
 
-    console.log(firstInput)
+    console.log(surveyInput)
 
-    dispatch(fecthSurveyInputAsync(firstInput))
+    dispatch(fecthSurveyInputAsync(surveyInput))
   }, [])
 
   const [selectedIndex, setSelectedIndex] = useState<number>(0)

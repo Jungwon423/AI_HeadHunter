@@ -1,5 +1,3 @@
-import { use, useState } from 'react'
-import Image from 'next/legacy/image'
 import TabMenu from './guide_components/TabMenu'
 import TravelNavbar from './guide_components/TravelNavbar'
 import { useSelector, useDispatch } from 'react-redux'
@@ -16,7 +14,6 @@ import { PlaceInfo } from '../interfaces/placeInfo'
 const Guide = () => {
   const duration: number = useSelector(selectDuration)
   const currentDay: number = useSelector(selectCurrentDay)
-  const TravelSchedule: PlaceInfo[][] = useSelector(selectTravelSchedule)
 
   const createTabs = (days: number) => {
     const tabs = ['여행 요약']

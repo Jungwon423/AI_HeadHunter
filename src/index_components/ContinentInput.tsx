@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 const data = require('/public/json/whole_Geo.json')
 import Image from 'next/image'
-import { setCity, setUserId } from '../slices/travelInfoSlice'
+import { setCity, setUser } from '../slices/travelInfoSlice'
 import { useDispatch } from 'react-redux'
 import router from 'next/router'
 import useClickOutside from './useClickOutside'

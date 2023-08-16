@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from '../store'
 import {
-  handleCurrentPlace,
   selectAttractions,
   selectCurrentDay,
+  handleCurrentPlace,
   setCurrentDay,
 } from '../slices/recommendSlice'
 import { PlaceInfo } from '../interfaces/placeInfo'

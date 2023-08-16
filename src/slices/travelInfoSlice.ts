@@ -1,176 +1,78 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { RootState, AppThunk } from '../store'
-import axios, { AxiosResponse } from 'axios'
-import { SERVER_API_URL } from './api_url'
-import { ZeroOrOne } from './imageQuerySlice'
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import { OpeningHours } from '../interfaces/openingHours'
-import { Review } from '../interfaces/review'
-import { Preference } from '../interfaces/preference'
 import { PlaceInfo } from '../interfaces/placeInfo'
-import { RecommendInput } from '../interfaces/recommendInput'
-import { Cluster } from '../interfaces/Cluster'
-
-export interface recommendInputV2 {
-  user: string
-  travel_id: string
-  answers: ZeroOrOne[]
-}
+import { MajorCategoriesWithMinorCategories } from '../interfaces/category'
 
 export interface TravelInfoState {
-  userId: string
+  user: string
   city: string
+
+  travelId: string
+
+  companion: string
+  companion_adult?: string
+  companion_child?: string
+  companion_number?: number
+
+  travel_start_date: string
+  travel_end_date: string
   duration: number
-  budget: number
+
+  category: MajorCategoriesWithMinorCategories
+  category_response: MajorCategoriesWithMinorCategories
+
+  // @@@@@ 이상 /survey @@@@@
+
+  loading: 'idle' | 'pending' | 'succeeded' | 'failed'
+  error: string | null
+
+  // @@@@@ 이상 /recommend -> RecommendNav.tsx
+
   coordinate: number[]
   location: string
-  companion: string
   travelStyle: string[]
   travelSchedule: PlaceInfo[][]
   currentPlace: PlaceInfo | null
   currentDay: number
-  // loading 상태 저장
-  loading: 'idle' | 'pending' | 'succeeded' | 'failed'
-  // error 상태 저장
-  error: string | null
-  preference: Preference
-  // loading 상태 저장
-  preferenceLoading: 'idle' | 'pending' | 'succeeded' | 'failed'
-  // error 상태 저장
-  preferenceError: string | null
 }
 
-interface ResponseData {
-  cluster_attractions: Cluster[]
-  not_recommended_attractions: Cluster[]
-}
-
-export function processCluster(clusterArray: Cluster[]): PlaceInfo[][] {
-  return clusterArray.map((cluster) => {
-    const attractions = cluster.attractions.map(convertToPlaceInfo)
-    // const restaurants = cluster.restaurants.map(convertToPlaceInfo)
-    // return [...attractions, ...restaurants]
-    return [...attractions]
-  })
-}
-
-// placeInfo 객체와 JSON 객체 간의 변환을 수행하는 함수를 작성합니다.
-export function convertToPlaceInfo(attraction: any): PlaceInfo {
-  return {
-    name: attraction.name,
-    coordinate: [
-      attraction.geometry.location.lat,
-      attraction.geometry.location.lng,
-    ],
-    image: attraction.img,
-    description: attraction.description,
-    time: 15,
-    summary: attraction.editorial_summary,
-    rating: attraction.rating,
-    ratingCount: attraction.user_ratings_total,
-    hashtags: attraction.types,
-    phoneNumber: attraction.international_phone_number,
-    location: attraction.formatted_address,
-    googleUrl: attraction.url,
-    website: attraction.website,
-    openingHours: attraction.current_opening_hours,
-    thought: attraction.thought,
-    wheelchair: attraction.wheelchair_accessible_entrance,
-    reviews: attraction.reviews,
-  } as PlaceInfo
-}
 const initialState: TravelInfoState = {
-  userId: '',
+  user: '',
   city: '서울',
+
+  travelId: '',
+
+  companion: '혼자',
+
+  travel_start_date: '',
+  travel_end_date: '',
   duration: 3,
-  budget: 1000000,
+
+  category: {},
+  category_response: {},
+  // @@@@@ 이상 /survey @@@@@
   location: '서울 강남구 언주로110 경남아파트',
   coordinate: [135.5023, 34.6937],
-  companion: '혼자',
   travelStyle: ['문화', '쇼핑', '음식'],
   travelSchedule: [],
   loading: 'idle',
   error: null,
   currentPlace: null,
   currentDay: 0,
-  preference: {
-    inferring: '',
-    conclusion: '',
-  } as Preference,
-  preferenceLoading: 'idle',
-  preferenceError: null,
-}
-
-export const fetchPreference = async (
-  recommendInput: RecommendInput,
-): Promise<Preference> => {
-  const config = {
-    withCredentials: true,
-  }
-
-  let API_URL: string = SERVER_API_URL + '/travel/attractionQueryAnswer'
-
-  console.log('API_URL', API_URL)
-
-  const response: AxiosResponse<Preference> = await axios.post(
-    API_URL,
-    recommendInput,
-    config,
-  )
-
-  return response.data
-}
-
-export const fetchTravelSchedule = async (
-  recommendInput: RecommendInput,
-): Promise<PlaceInfo[][]> => {
-  const config = {
-    withCredentials: true,
-  }
-
-  let API_URL: string = SERVER_API_URL + '/travel/recommendAttractions'
-
-  console.log('API_URL', API_URL)
-
-  const response: AxiosResponse<ResponseData> = await axios.post(
-    API_URL,
-    recommendInput,
-    config,
-  )
-
-  // 이중 for문을 사용하여 JSON 데이터를 placeInfo[][]로 변환합니다.
-  const placeInfos: PlaceInfo[][] = processCluster(
-    response.data.cluster_attractions,
-  )
-  return placeInfos
 }
 
 export const travelInfoSlice = createSlice({
   name: 'travelInfo',
   initialState,
   reducers: {
-    setUserId: (state, action: PayloadAction<string>) => {
-      state.userId = action.payload
-    },
-    setCity: (state, action: PayloadAction<string>) => {
-      state.city = action.payload
-    },
-    setDuration: (state, action: PayloadAction<number>) => {
-      state.duration = action.payload
-    },
-    setBudget: (state, action: PayloadAction<number>) => {
-      state.budget = action.payload
-    },
     setLocation: (state, action: PayloadAction<string>) => {
       state.location = action.payload
     },
     setCoordinate: (state, action: PayloadAction<number[]>) => {
       state.coordinate = action.payload
-    },
-    setCompanion: (state, action: PayloadAction<string>) => {
-      state.companion = action.payload
     },
     setTravelStyle: (state, action: PayloadAction<string[]>) => {
       state.travelStyle = action.payload
@@ -197,98 +99,100 @@ export const travelInfoSlice = createSlice({
     setError: (state, action: PayloadAction<string | null>) => {
       state.error = action.payload
     },
-    setPreference: (state, action: PayloadAction<Preference>) => {
-      state.preference = action.payload
+
+    // @@@@@ 이하 /survey @@@@@
+
+    setUser: (state, action: PayloadAction<string>) => {
+      state.user = action.payload
     },
-    setPreferenceLoading: (
+
+    setCity: (state, action: PayloadAction<string>) => {
+      state.city = action.payload
+    },
+
+    setTravelId: (state, action: PayloadAction<string>) => {
+      state.travelId = action.payload
+    },
+
+    setCompanion: (state, action: PayloadAction<string>) => {
+      state.companion = action.payload
+    },
+
+    setCompanionAdult: (state, action: PayloadAction<string>) => {
+      state.companion_adult = action.payload
+    },
+
+    setCompanionChild: (state, action: PayloadAction<string>) => {
+      state.companion_child = action.payload
+    },
+    setTravelStartDate: (state, action: PayloadAction<string>) => {
+      state.travel_start_date = action.payload
+    },
+    setTravelEndDate: (state, action: PayloadAction<string>) => {
+      state.travel_end_date = action.payload
+    },
+    setDuration: (state, action: PayloadAction<number>) => {
+      state.duration = action.payload
+    },
+
+    setCategory: (
       state,
-      action: PayloadAction<'idle' | 'pending' | 'succeeded' | 'failed'>,
+      action: PayloadAction<MajorCategoriesWithMinorCategories>,
     ) => {
-      state.preferenceLoading = action.payload
+      state.category = action.payload
     },
-    setPreferenceError: (state, action: PayloadAction<string | null>) => {
-      state.preferenceError = action.payload
-    },
-    initialize: (state) => {
-      setPreferenceLoading('idle')
-      setPreferenceError(null)
-      setLoading('idle')
-      setError(null)
+
+    checkMinorCategory: (
+      state,
+      action: PayloadAction<{ majorCategory: string; minorCategory: string }>,
+    ) => {
+      const { majorCategory, minorCategory } = action.payload
+
+      const major = (
+        state.category!
+          .majorCategoriesWithMinorCategories as unknown as MajorCategoriesWithMinorCategories
+      )[majorCategory]
+      if (major) {
+        const minorIndex = major.findIndex((mc) => mc.name === minorCategory)
+        if (minorIndex !== -1) {
+          major[minorIndex].checked = !major[minorIndex].checked
+        } else {
+          console.error('해당 minorCategory를 찾을 수 없습니다.')
+        }
+      } else {
+        console.error('해당 majorCategory를 찾을 수 없습니다.')
+      }
     },
   },
 })
 
-export const fetchTravelScheduleAsync =
-  (recommendInput: RecommendInput): AppThunk =>
-  async (
-    dispatch: (arg0: {
-      payload: TravelInfoState | string | PlaceInfo[][] | null
-      type:
-        | 'travelInfo/setUserId'
-        | 'travelInfo/setCity'
-        | 'travelInfo/setDuration'
-        | 'travelInfo/setBudget'
-        | 'travelInfo/setLocation'
-        | 'travelInfo/setCoordinate'
-        | 'travelInfo/setCompanion'
-        | 'travelInfo/setTravelStyle'
-        | 'travelInfo/setTravelSchedule'
-        | 'travelInfo/setLoading'
-        | 'travelInfo/setError'
-    }) => void,
-  ) => {
-    try {
-      dispatch(setLoading('pending'))
-      const travelSchedule = await fetchTravelSchedule(recommendInput)
-      dispatch(setTravelSchedule(travelSchedule))
-      dispatch(setLoading('succeeded'))
-    } catch (error: any) {
-      dispatch(setError(JSON.stringify(error)))
-      dispatch(setLoading('failed'))
-    }
-  }
-
-export const fetchPreferenceAsync =
-  (recommendInput: RecommendInput): AppThunk =>
-  async (
-    dispatch: (arg0: {
-      payload: TravelInfoState | string | PlaceInfo[][] | null | Preference
-      type:
-        | 'travelInfo/setUserId'
-        | 'travelInfo/setPreference'
-        | 'travelInfo/setPreferenceError'
-        | 'travelInfo/setPreferenceLoading'
-    }) => void,
-  ) => {
-    try {
-      dispatch(setPreferenceLoading('pending'))
-      const preference = await fetchPreference(recommendInput)
-      dispatch(setPreference(preference))
-      dispatch(setPreferenceLoading('succeeded'))
-    } catch (error: any) {
-      dispatch(setPreferenceError(JSON.stringify(error)))
-      dispatch(setPreferenceLoading('failed'))
-    }
-  }
-
 export const {
-  setUserId,
-  setCity,
-  setDuration,
   setLocation,
-  setBudget,
   setCoordinate,
-  setCompanion,
   setTravelStyle,
   setTravelSchedule,
   handleCurrentPlace,
   setCurrentDay,
   setError,
   setLoading,
-  setPreference,
-  setPreferenceLoading,
-  setPreferenceError,
-  initialize,
+
+  // @@@@@ 이하 /survey @@@@@
+
+  setUser,
+  setCity,
+
+  setTravelId,
+
+  setCompanion,
+  setCompanionAdult,
+  setCompanionChild,
+
+  setTravelStartDate,
+  setTravelEndDate,
+  setDuration,
+
+  setCategory,
+  checkMinorCategory,
 } = travelInfoSlice.actions
 
 const persistConfig = {
@@ -303,14 +207,9 @@ const persistedTravelInfoReducer = persistReducer(
 
 export const selectTravelInfo = (state: RootState) => state.travelInfo
 
-export const selectUserId = (state: RootState) => state.travelInfo.userId
-export const selectCity = (state: RootState) => state.travelInfo.city
-export const selectDuration = (state: RootState) => state.travelInfo.duration
-export const selectBudget = (state: RootState) => state.travelInfo.budget
 export const selectLocation = (state: RootState) => state.travelInfo.location
 export const selectCoordinate = (state: RootState) =>
   state.travelInfo.coordinate
-export const selectCompanion = (state: RootState) => state.travelInfo.companion
 export const selectTravelStyle = (state: RootState) =>
   state.travelInfo.travelStyle
 export const selectTravelSchedule = (state: RootState) =>
@@ -319,12 +218,27 @@ export const selectCurrentPlace = (state: RootState) =>
   state.travelInfo.currentPlace
 export const selectCurrentDay = (state: RootState) =>
   state.travelInfo.currentDay
-export const selectPreference = (state: RootState) =>
-  state.travelInfo.preference
 
-export const selectPreferenceLoading = (state: RootState) =>
-  state.travelInfo.preferenceLoading
-export const selectPreferenceError = (state: RootState) =>
-  state.travelInfo.preferenceError
+// @@@@@ 이하 /survey @@@@@
+export const selectUser = (state: RootState) => state.travelInfo.user
+export const selectCity = (state: RootState) => state.travelInfo.city
+
+export const selectTravelId = (state: RootState) => state.travelInfo.travelId
+
+export const selectCompanion = (state: RootState) => state.travelInfo.companion
+export const selectCompanionAdult = (state: RootState) =>
+  state.travelInfo.companion_adult
+export const selectCompanionChild = (state: RootState) =>
+  state.travelInfo.companion_child
+
+export const selectTravelStartDate = (state: RootState) =>
+  state.travelInfo.travel_start_date
+export const selectTravelEndDate = (state: RootState) =>
+  state.travelInfo.travel_end_date
+export const selectDuration = (state: RootState) => state.travelInfo.duration
+
+export const selectCategory = (state: RootState) => state.travelInfo.category
+export const selectCategoryResponse = (state: RootState) =>
+  state.travelInfo.category_response
 
 export default persistedTravelInfoReducer

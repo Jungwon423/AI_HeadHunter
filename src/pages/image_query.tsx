@@ -2,24 +2,24 @@ import React from 'react'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { InitialQueryInput } from '../slices/questionnaireSlice'
 import {
-  selectUserId,
-  selectCity,
+  selectUser,
   selectCompanion,
   selectDuration,
-  selectBudget,
+  selectCategoryResponse,
+  selectTravelStartDate,
 } from '../slices/travelInfoSlice'
 import { useRouter } from 'next/router'
 import { AppDispatch } from '../store'
 import {
-  fetchAttractionQueryAsync,
-  selectAttractionQuery,
-  selectAttractionQueryResultList,
+  selectImageQuery,
+  selectImageQueryResultList,
   setResultList,
   initialize,
 } from '../slices/imageQuerySlice'
-import { init } from 'next/dist/compiled/@vercel/og/satori'
+import { ImageQueryInput } from '../interfaces/imageQuery'
+import { fetchImageQueryAsync } from '../functions/fetchImageQuery'
+import { MajorCategoriesWithMinorCategories } from '../interfaces/category'
 
 const ImageQuery = () => {
   const [count, setCount] = useState(0)
@@ -28,26 +28,33 @@ const ImageQuery = () => {
 
   const dispatch = useDispatch<AppDispatch>()
 
-  const userId: string = useSelector(selectUserId)
-  const city: string = useSelector(selectCity)
+  // selector from 'travelInfoSlice'
+  const userId: string = useSelector(selectUser)
   const companion: string = useSelector(selectCompanion)
   const duration: number = useSelector(selectDuration)
-  const budget: number = useSelector(selectBudget)
-  const attractionQuery = useSelector(selectAttractionQuery)
-  const resultList = useSelector(selectAttractionQueryResultList)
+
+  const travelStartDate: string = useSelector(selectTravelStartDate)
+
+  const majorCategoriesWithMinorCategories: MajorCategoriesWithMinorCategories =
+    useSelector(selectCategoryResponse)
+
+  // selector from 'imageQuerySlice'
+  const attractionQuery = useSelector(selectImageQuery)
+  const resultList = useSelector(selectImageQueryResultList)
 
   // 여기서 초기 쿼리 입력 값을 설정하십시오.
-  const initialQueryInput: InitialQueryInput = {
+  const ImageQueryInput: ImageQueryInput = {
     user: userId,
-    destination: city,
-    duration: duration,
-    budget: budget,
+    travelId: '', // TODO : 실제값 채워넣기
+    majorCategoriesWithMinorCategories: majorCategoriesWithMinorCategories,
     companion: companion,
+    duration: duration,
+    date: travelStartDate, // TODO : 실제값 채워넣기
   }
 
   useEffect(() => {
     dispatch(initialize())
-    dispatch(fetchAttractionQueryAsync(initialQueryInput))
+    dispatch(fetchImageQueryAsync(ImageQueryInput))
   }, [])
 
   const handleImageClick = (image: string) => {
@@ -62,6 +69,7 @@ const ImageQuery = () => {
   }
 
   if (count === 8) {
+    // TODO 길이 가변적으로 수정하기
     router.push('/preference')
     return (
       <div className="flex items-center justify-center h-screen">
@@ -102,7 +110,7 @@ const ImageQuery = () => {
       <div className="flex justify-center items-center h-full bg-black">
         <div className="relative w-1/2 h-full">
           <Image
-            src={attractionQuery.query_list[count][0].image}
+            src={attractionQuery.query_list[count][0].image!}
             alt="Right Image"
             fill
             sizes="undefined"
@@ -135,7 +143,7 @@ const ImageQuery = () => {
         </div>
         <div className="relative w-1/2 h-full">
           <Image
-            src={attractionQuery.query_list[count][1].image}
+            src={attractionQuery.query_list[count][1].image!}
             alt="Right Image"
             fill
             sizes="undefined"

@@ -1,9 +1,9 @@
 import {
-  selectCoordinate,
   selectTravelSchedule,
-  handleCurrentPlace,
+  selectCoordinate,
   selectCurrentPlace,
   selectCurrentDay,
+  handleCurrentPlace,
 } from '../slices/travelInfoSlice'
 import { useSelector } from 'react-redux'
 import { selectShowChat, setShowChat } from '../slices/travelChatSlice'
@@ -91,7 +91,7 @@ const TravelMap = () => {
 
   const currentCoordinates = travelSchedule
     .map((day) =>
-      day.map((place) => [place.coordinate[1], place.coordinate[0]]),
+      day.map((place) => [place.coordinate![1], place.coordinate![0]]),
     )
     .flat()
 
@@ -110,11 +110,6 @@ const TravelMap = () => {
         latitude: selectedPlace?.coordinate[0]!,
       })
     }
-    // setViewState({
-    //   longitude: selectedPlace?.coordinate[1]!, //130 어쩌구
-    //   latitude: selectedPlace?.coordinate[0]!,
-    //   zoom: 13,
-    // })
   }, [selectedPlace])
   const mapRef = useRef<MapRef | null>(null)
 
@@ -204,8 +199,8 @@ const TravelMap = () => {
               (currentDay == 0 || currentDay == i + 1) && (
                 <Marker
                   key={j}
-                  latitude={place.coordinate[0]}
-                  longitude={place.coordinate[1]}
+                  latitude={place.coordinate![0]}
+                  longitude={place.coordinate![1]}
                   onClick={(e) => {
                     e.originalEvent.stopPropagation()
                     dispatch(handleCurrentPlace(place))

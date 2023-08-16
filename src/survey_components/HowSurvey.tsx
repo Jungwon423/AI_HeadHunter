@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch } from '../store'
 import {
   MajorCategoriesWithMinorCategories,
   MinorCategory,
-  checkMinorCategory,
-  selectCategory,
-} from '../slices/surveySlice'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch } from '../store'
+} from '../interfaces/category'
+import { checkMinorCategory, selectCategory } from '../slices/travelInfoSlice'
 
 const HowSurvey = () => {
   const dispatch = useDispatch<AppDispatch>()

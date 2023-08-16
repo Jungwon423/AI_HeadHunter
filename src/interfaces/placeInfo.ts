@@ -1,5 +1,5 @@
-import { OpeningHours } from '../interfaces/openingHours'
-import { Review } from '../interfaces/review'
+import { OpeningHours } from './openingHours'
+import { Review } from './review'
 
 export interface PlaceInfo {
   name?: string
