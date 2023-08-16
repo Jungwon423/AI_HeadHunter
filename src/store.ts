@@ -8,7 +8,7 @@ import {
 import tabSlice from './slices/tabSlice'
 import persistedTravelInfoReducer from './slices/travelInfoSlice'
 import persistedTravelChatReducer from './slices/travelChatSlice'
-import persistedQuestionnaireReducer from './slices/questionnaireSlice'
+import persistedQuestionnaireReducer from './slices/not_used/questionnaireSlice'
 import persistedQueryInputReducer from './slices/queryInputSlice'
 import persistedAttractionQueryReducer from './slices/imageQuerySlice'
 import persistedRecommendAttractionsReducer from './slices/recommendSlice'

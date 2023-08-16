@@ -3,9 +3,11 @@ import Image from 'next/image'
 import MyDatePicker from './MyDatePicker'
 import { useDispatch } from 'react-redux'
 import { setDuration } from '../slices/travelInfoSlice'
+import { AppDispatch } from '../store'
+import { setTravelEndDate, setTravelStartDate } from '../slices/surveySlice'
 
 const WhenSurvey = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
 
   const [startDate, setStartDate] = useState<Date | null>(null)
   const [endDate, setEndDate] = useState<Date | null>(null)
@@ -20,6 +22,9 @@ const WhenSurvey = () => {
     if (newEndDate! > maxDate) {
       setEndDate(maxDate)
     } else setEndDate(newEndDate)
+
+    dispatch(setTravelStartDate(startDate?.toDateString()!))
+    dispatch(setTravelEndDate(endDate?.toDateString()!))
   }
 
   return (

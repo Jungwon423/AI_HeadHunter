@@ -18,9 +18,8 @@ export interface MajorCategoriesWithMinorCategories {
 }
 
 export interface SurveyState {
-  companion: string
-  companion_adult?: string
-  companion_child?: string
+  companion_adult?: string[]
+  companion_child?: string[]
   companion_number: number
 
   travel_start_date: string
@@ -34,9 +33,8 @@ export interface SurveyState {
 }
 
 const initialState: SurveyState = {
-  companion: '',
-  companion_adult: '',
-  companion_child: '',
+  companion_adult: [],
+  companion_child: [],
   companion_number: 0,
 
   travel_start_date: '',
@@ -49,13 +47,10 @@ export const surveySlice = createSlice({
   name: 'survey',
   initialState,
   reducers: {
-    setCompanion: (state, action: PayloadAction<string>) => {
-      state.companion = action.payload
-    },
-    setCompanionAdult: (state, action: PayloadAction<string>) => {
+    setCompanionAdult: (state, action: PayloadAction<string[]>) => {
       state.companion_adult = action.payload
     },
-    setCompanionChild: (state, action: PayloadAction<string>) => {
+    setCompanionChild: (state, action: PayloadAction<string[]>) => {
       state.companion_child = action.payload
     },
     setCompanionNumber: (state, action: PayloadAction<number>) => {
@@ -148,7 +143,6 @@ const persistedSurveyReducer = persistReducer(
 )
 
 export const {
-  setCompanion,
   setCompanionAdult,
   setCompanionChild,
   setCompanionNumber,
@@ -159,7 +153,6 @@ export const {
   checkMinorCategory,
 } = surveySlice.actions
 
-export const selectCompanion = (state: any) => state.survey.companion
 export const selectCompanionAdult = (state: any) => state.survey.companion_adult
 export const selectCompanionChild = (state: any) => state.survey.companion_child
 export const selectCompanionNumber = (state: any) =>

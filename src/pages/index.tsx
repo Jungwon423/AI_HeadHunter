@@ -7,7 +7,6 @@ import TitleImage from '../index_components/TitleImage'
 import ImageExplain from '../index_components/ImageExplain'
 import { Footer } from '../footer/Footer'
 import Popup from '../index_components/Popup'
-import { AutocompleteInput } from '../index_components/AutocompleteInput'
 import Link from 'next/link'
 import ContinentInput from '../index_components/ContinentInput'
 
@@ -49,7 +48,11 @@ export default function Home() {
           >
             오사카 버튼
           </button>
-          <Popup isOpen={isPopupOpen} onClose={closePopup}></Popup>
+          <Popup
+            isOpen={isPopupOpen}
+            onClose={closePopup}
+            children={undefined}
+          ></Popup>
         </div>
 
         <div className="md:text-base sm:text-xl xl:text-2xl font-bold">

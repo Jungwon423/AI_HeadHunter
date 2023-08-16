@@ -39,7 +39,7 @@ const HowSurvey = () => {
                   {minorCategories.map((minorCategory: MinorCategory) => (
                     <div
                       key={minorCategory.name}
-                      className={`border-2 rounded bg-white ${
+                      className={`relative border-2 rounded bg-white ${
                         minorCategory.checked
                           ? 'border-green-500'
                           : 'border-stone-200'

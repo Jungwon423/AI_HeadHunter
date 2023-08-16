@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { QueryInput } from './questionnaireSlice'
+import { QueryInput } from './not_used/questionnaireSlice'
 import { RootState } from '../store'
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
