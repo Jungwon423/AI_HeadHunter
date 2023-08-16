@@ -21,10 +21,7 @@ export default function Home() {
   const closePopup = () => {
     setIsPopupOpen(false)
   }
-  const sampleItems = ['오사카', '도쿄', '서울', '방콕', '파리']
-  //console.log(fetchData())
-  // const datas = require('/public/json/whole_Geo.json')
-  // console.log(datas)
+  // const sampleItems = ['오사카', '도쿄', '서울', '방콕', '파리']
 
   return (
     <div className="bg-white min-h-screen">
@@ -52,10 +49,7 @@ export default function Home() {
           >
             오사카 버튼
           </button>
-          <Popup isOpen={isPopupOpen} onClose={closePopup}>
-            {/* 내용을 여기에 입력하세요. */}
-            <h1 className="text-xl mb-4">Popup Title</h1>
-          </Popup>
+          <Popup isOpen={isPopupOpen} onClose={closePopup}></Popup>
         </div>
 
         <div className="md:text-base sm:text-xl xl:text-2xl font-bold">

@@ -27,7 +27,7 @@ const GuideHero = () => {
           <div className="bg-white flex rounded w-128 h-32 p-6">
             <div className="w-16 flex-col">
               <Image
-                src="/assets/images/calendar.webp"
+                src="/assets/buttonIcon/calendar.webp"
                 alt="travel"
                 objectFit="fill"
                 width={70}

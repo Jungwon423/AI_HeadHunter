@@ -17,24 +17,28 @@ export interface CountryInfo {
     exchangeRate: string
   }
 }
+export interface plusImage {
+  source: string
+  photoURL: string
+}
 
 export interface CityDetail {
-  travelSchedule: CityDetail | null
+  city_detail: CityDetail | null
   travel_id: string
   name_ko: string
   name_en: string
   geoType: string
   image: {
-    photoUrl: string
+    photoURL: string
   }
   continentType: string
   countryType: string
-  imageList: string[]
+  imageList: plusImage[]
   exchangeInfo: {
     description: string
   }
   weatherRecommend: {
-    season: string
+    season: string[]
     fullDescription: string
   }
   visaInfo: {
@@ -50,29 +54,35 @@ export interface CityDetail {
     fullDescription: string
   }
   countryInfo: CountryInfo
+  descriptionInfo: {
+    publisher: string
+    legacy: string
+  }
+  shortestFlightInfo: {
+    duration: number
+    viaCount: number
+  }
 }
 
 const initialState: CityDetail = {
-  travelSchedule: null,
+  city_detail: null,
   travel_id: '64d5db580023220827bfbbbb',
   name_ko: '산토리니',
   name_en: 'Santorini',
   geoType: 'city',
   image: {
-    photoUrl:
+    photoURL:
       'https://dbscthumb-phinf.pstatic.net/5885_000_12/20201216104202993_W700KRB5R.jpg/fb287_3_i1.jpg?type=w540_fst',
   },
   continentType: '유럽',
   countryType: '그리스',
-  imageList: [
-    'https://dbscthumb-phinf.pstatic.net/5885_000_12/20201216104202993_W700KRB5R.jpg/fb287_3_i1.jpg?type=w540_fst',
-  ],
+  imageList: [],
   exchangeInfo: {
     description:
       '현지에서 카드 사용이 보편적이므로 최소한의 현금만 환전할 것을 추천한다. 현지 ATM을 사용하여 출금도 원활하다.',
   },
   weatherRecommend: {
-    season: '5월~9월',
+    season: [],
     fullDescription:
       '초성수기 기간 전이나 후인 5~6월이나 9월 초에 여행을 계획하는 것을 추천한다.4월부터 점차 따뜻해지며, 여행성수기 5~9',
   },
@@ -94,13 +104,15 @@ const initialState: CityDetail = {
       publisher: 'Dd',
     },
     plugin: {
-      electricPotential: 'dd',
+      electricPotential: '240V',
     },
     flagThumbnail: 'dd',
     currencyInformation: {
       exchangeRate: '1455.52',
     },
   },
+  descriptionInfo: { publisher: '', legacy: '' },
+  shortestFlightInfo: { duration: 0, viaCount: 0 },
 }
 
 export const CityDetailSlice = createSlice({
@@ -108,7 +120,7 @@ export const CityDetailSlice = createSlice({
   initialState,
   reducers: {
     setCityDetail: (state, action: PayloadAction<CityDetail>) => {
-      state.travelSchedule = action.payload.travelSchedule
+      state.city_detail = action.payload
     },
     setTravelId: (state, action: PayloadAction<string>) => {
       state.travel_id = action.payload
@@ -123,13 +135,37 @@ export const CityDetailSlice = createSlice({
       state.geoType = action.payload
     },
     setImage: (state, action: PayloadAction<string>) => {
-      state.image.photoUrl = action.payload
+      state.image.photoURL = action.payload
     },
   },
 })
+export function convertToCityDetail(infos: any) {
+  const destination = infos.destination_info
+  return {
+    travel_id: destination._id,
+    name_ko: destination.nameKo,
+    name_en: destination.nameEn,
+    geoType: destination.geoType,
+    image: destination.image,
+    continentType: destination.continentType,
+    countryType: destination.countryType,
+    imageList: destination.imageList,
+    exchangeInfo: destination.exchangeInfo,
+    weatherRecommend: destination.weatherRecommend,
+    visaInfo: destination.visaInfo,
+    tipInfo: destination.tipInfo,
+    priceInfo: destination.priceInfo,
+    countryInfo: destination.countryInfo,
+    descriptionInfo: destination.descriptionInfo,
+    shortestFlightInfo: destination.shortestFlightInfo,
+  } as CityDetail
+}
 
 export interface CityInput {
   destination: string
+}
+export interface Destination {
+  destination_info: CityDetail
 }
 
 export const fetchCityDetail = async (
@@ -140,31 +176,26 @@ export const fetchCityDetail = async (
   const config = {
     withCredentials: true,
   }
-  console.log('API_URL', API_URL)
-
   const response: AxiosResponse<CityDetail> = await axios.post(
     API_URL,
     cityInput,
     config,
   )
-
-  console.log('response', response)
-
-  const dddd: CityDetail = response.data
-  return dddd
+  const cityData: CityDetail = convertToCityDetail(response.data)
+  return cityData
 }
 export const fetchCityDetailAsync =
   (cityInput: CityInput): AppThunk =>
   async (
     dispatch: (arg0: {
       payload: CityDetail | string | null
-      type: 'cityDetail/setTravelSchedule'
+      type: 'cityDetail/setCityDetail'
     }) => void,
   ) => {
     try {
-      const travelSchedule = await fetchCityDetail(cityInput)
-      console.log('travelSchedule', travelSchedule)
-      //dispatch(setCityDetail(travelSchedule))
+      const cityDetail = await fetchCityDetail(cityInput)
+      // console.log('cityDetail', cityDetail)
+      dispatch(setCityDetail(cityDetail))
     } catch (error: any) {
       console.log(error)
     }
@@ -194,6 +225,6 @@ export const selectTravelId = (state: RootState) => state.cityDetail.travel_id
 export const selectNameKo = (state: RootState) => state.cityDetail.name_ko
 export const selectNameEn = (state: RootState) => state.cityDetail.name_en
 export const selectGeoType = (state: RootState) => state.cityDetail.geoType
-export const selectImage = (state: RootState) => state.cityDetail.image.photoUrl
+export const selectImage = (state: RootState) => state.cityDetail.image.photoURL
 
 export default persistedCityDetailReducer

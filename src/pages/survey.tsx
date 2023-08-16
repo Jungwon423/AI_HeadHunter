@@ -34,13 +34,6 @@ export const SurveyPage = () => {
   let duration = useSelector(selectDuration)
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
 
-  const CityInput2: CityInput = {
-    destination: 'Seoul',
-  }
-  useEffect(() => {
-    dispatch(fetchCityDetailAsync(CityInput2))
-  }, [])
-
   const handleItemClick = (index: number) => {
     setSelectedIndex(index)
   }
