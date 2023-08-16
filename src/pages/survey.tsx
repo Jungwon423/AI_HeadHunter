@@ -1,7 +1,7 @@
 import router from 'next/router'
 import MyNavbar from '../search_components/MyNavbar'
 import CircleListItem from '../survey_components/CircleList'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import WhoSurvey from '../survey_components/WhoSurvey'
 import 'react-datepicker/dist/react-datepicker.css'
 import WhenSurvey from '../survey_components/WhenSurvey'
@@ -16,11 +16,21 @@ import {
 } from '../slices/travelInfoSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import LocalStorage from '../index_components/LocalStorage'
+import { CityInput, fetchCityDetailAsync } from '../slices/cityDetailSlice'
+import { AppDispatch, AppThunk } from '../store'
 
 export default function SurveyPage() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   let duration = useSelector(selectDuration)
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
+
+  const CityInput2: CityInput = {
+    destination: 'Seoul',
+  }
+  useEffect(() => {
+    dispatch(fetchCityDetailAsync(CityInput2))
+  }, [])
+
   const handleItemClick = (index: number) => {
     setSelectedIndex(index)
   }

@@ -13,11 +13,12 @@ import persistedQueryInputReducer from './slices/queryInputSlice'
 import persistedAttractionQueryReducer from './slices/imageQuerySlice'
 import persistedRecommendAttractionsReducer from './slices/recommendSlice'
 import persistedSurveyReducer from './slices/surveySlice'
+import persistedCityDetailReducer from './slices/cityDetailSlice'
 
 export const store = configureStore({
   reducer: {
     tab: tabSlice,
-    // cityDetail: persistedCityDetailReducer,
+    cityDetail: persistedCityDetailReducer,
     travelInfo: persistedTravelInfoReducer,
     travelChat: persistedTravelChatReducer,
     questionnaire: persistedQuestionnaireReducer,
