@@ -9,6 +9,7 @@ import { Footer } from '../footer/Footer'
 import Popup from '../index_components/Popup'
 import Link from 'next/link'
 import ContinentInput from '../index_components/ContinentInput'
+import Carousel from '../index_components/Carousel'
 
 export default function Home() {
   const [isPopupOpen, setIsPopupOpen] = useState(false)
@@ -38,29 +39,20 @@ export default function Home() {
         <div className="pt-10 flex flex-col justify-center items-center">
           <ContinentInput openPopup={openPopup}></ContinentInput>
         </div>
-
-        <TitleImage></TitleImage>
-        {/* <div className="mx-auto">
-          <button
-            onClick={openPopup}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md"
-          >
-            오사카 버튼
-          </button>
-        </div> */}
-        <Popup isOpen={isPopupOpen} onClose={closePopup}></Popup>
-
-        <div className="md:text-base sm:text-xl xl:text-2xl font-bold">
+        {/* <TitleImage></TitleImage> */}
+        <Popup isOpen={isPopupOpen} onClose={closePopup}></Popup>{' '}
+        {/* 적용한 팝업(detail) */}
+        <div className="pt-20 md:text-base sm:text-xl xl:text-2xl font-bold">
           추천 여행지
         </div>
-        {/* <Carousel></Carousel> */}
+        <Carousel></Carousel>
         <ImageExplain
           left={true}
-          h1Text={'여행 이상형 월드컵으로 AI에게 여행지 추천받기'}
+          h1Text={'AI가 생성한 여행지를 지금바로 확인해보세요!'}
           pText={
-            '가고 싶은 여행지를 선택하면 AI가 사용자의 성향을 파악합니다. 그에 맞는 여행지를 추천받고 코스를 받아볼 수 있어요.'
+            '여행지에 대한 다양한 정보들과 AI가 추천한 이유를 확인할 수 있어요.'
           }
-          image={''}
+          image={'/assets/screenshot/screenshot2.png'}
         ></ImageExplain>
         <ImageExplain
           left={false}
@@ -68,7 +60,7 @@ export default function Home() {
           pText={
             '가고 싶은 여행지를 선택하면 AI가 사용자의 성향을 파악합니다. 그에 맞는 여행지를 추천받고 코스를 받아볼 수 있어요.'
           }
-          image={''}
+          image={'/assets/screenshot/screen1.png'}
         ></ImageExplain>
       </main>
       <Footer></Footer>

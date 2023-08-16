@@ -17,16 +17,17 @@ const ImageExplain: React.FC<ImageExplainProps> = ({
     return (
       <div className="flex flex-col md:flex-row items-center">
         {/* First image on the right and text on the left */}
-        <div className="w-full md:w-2/3 pr-8">
-          <h1 className="text-4xl font-extrabold text-gray-900">{h1Text}</h1>
+        <div className="w-full md:w-1/3 p-2">
+          <h1 className="text-xl font-extrabold text-gray-900">{h1Text}</h1>
           <p className="mt-4 text-lg text-gray-500">{pText}</p>
         </div>
-        <div className="w-full md:w-1/3">
+        <div className="w-full md:w-2/3">
           <Image
-            src="/assets/images/introduction-image.png"
+            src={image}
             alt="Introduction Image"
-            width={500}
-            height={500}
+            width={600}
+            height={400}
+            className="relative border-gray-300 border-2 border-spacing-60 rounded-lg shadow-xl"
             priority
             sizes="100vw"
             style={{
@@ -41,30 +42,25 @@ const ImageExplain: React.FC<ImageExplainProps> = ({
     return (
       <div className="flex flex-col md:flex-row items-center mt-16">
         {/* Second image on the left and text on the right */}
-        <div className="w-full md:w-1/2 pr-8">
-          <Image
-            src="/assets/screen1.png"
-            alt="Screenshot 1"
-            width={800}
-            height={640}
-            className="border-gray-300 border-4 border-solid rounded-lg shadow-sm"
-            sizes="100vw"
-            style={{
-              borderColor: '#ddd',
-              borderWidth: '4px',
-              borderStyle: 'solid',
-
-              boxShadow:
-                '0 1px 2px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.05), 0 4px 8px rgba(0, 0, 0, 0.05), 0 8px 16px rgba(0, 0, 0, 0.05), 0 16px 32px rgba(0, 0, 0, 0.05), 0 32px 64px rgba(0, 0, 0, 0.05)',
-
-              width: '100%',
-              height: 'auto',
-            }}
-          />
+        <div className="w-full md:w-2/3 px-5">
+          <div className="w-full">
+            <Image
+              src={image}
+              alt="Screenshot 1"
+              width={600}
+              height={400}
+              className="relative border-gray-300 border-2 border-spacing-60 rounded-lg shadow-xl"
+              sizes="100vw"
+              style={{
+                width: '100%',
+                height: 'auto',
+              }}
+            />
+          </div>
         </div>
-        <div className="w-full md:w-1/2">
-          <h1 className="text-4xl font-extrabold text-gray-900">{h1Text}</h1>
-          <p className="mt-4 text-lg text-gray-500">{pText}</p>
+        <div className="w-full md:w-1/3">
+          <div className="text-xl font-extrabold text-gray-900">{h1Text}</div>
+          <div className="mt-4 text-lg text-gray-500">{pText}</div>
         </div>
       </div>
     )

@@ -1,8 +1,14 @@
+// 필요한 모듈을 가져옵니다.
 import React from 'react'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Image from 'next/image'
+
+interface ImageSize {
+  width: number
+  height: number
+}
 
 function Carousel() {
   const settings = {
@@ -12,126 +18,62 @@ function Carousel() {
     slidesToScroll: 2,
     infinite: false,
   }
-  //   var settings = {
-  //     dots: true,
-  //     infinite: false,
-  //     speed: 500,
-  //     slidesToShow: 4,
-  //     slidesToScroll: 4,
-  //     initialSlide: 0,
-  //     responsive: [
-  //       {
-  //         breakpoint: 1024,
-  //         settings: {
-  //           slidesToShow: 3,
-  //           slidesToScroll: 3,
-  //           infinite: true,
-  //           dots: true,
-  //         },
-  //       },
-  //       {
-  //         breakpoint: 600,
-  //         settings: {
-  //           slidesToShow: 2,
-  //           slidesToScroll: 2,
-  //           initialSlide: 2,
-  //         },
-  //       },
-  //       {
-  //         breakpoint: 480,
-  //         settings: {
-  //           slidesToShow: 1,
-  //           slidesToScroll: 1,
-  //         },
-  //       },
-  //     ],
-  //   }
+
+  // 이미지 크기를 설정합니다.
+  const imageSize: ImageSize = { width: 300, height: 200 }
+
   return (
     <div className="py-8">
       <Slider {...settings}>
-        <div className="w-96 h-96">
+        <div className={`w-${imageSize.width} h-${imageSize.height}`}>
           <Image
             src="/assets/images/travel.jpg"
             alt="travel"
-            width={500}
-            height={500}
-            style={{
-              maxWidth: '100%',
-              height: 'auto',
-              objectPosition: 'center',
-            }}
+            width={imageSize.width}
+            height={imageSize.height}
           />
         </div>
-        <div>
+        <div className={`w-${imageSize.width} h-${imageSize.height}`}>
           <Image
             src="/assets/images/travel2.jpg"
             alt="travel"
-            width={500}
-            height={500}
-            quality={100}
-            style={{
-              maxWidth: '100%',
-              height: 'auto',
-              objectPosition: 'center',
-            }}
+            width={imageSize.width}
+            height={imageSize.height}
           />
         </div>
-        <div>
+        <div className={`w-${imageSize.width} h-${imageSize.height}`}>
           <Image
-            src="/assets/images/eiffel-tower.webp"
+            src="/assets/images/elina.jpg"
             alt="travel"
-            width={500}
-            height={500}
-            quality={100}
-            style={{
-              maxWidth: '100%',
-              height: 'auto',
-              objectPosition: 'center',
-            }}
+            width={imageSize.width}
+            height={imageSize.height}
           />
         </div>
-        <div>
+        <div className={`w-${imageSize.width} h-${imageSize.height}`}>
           <Image
-            src="/assets/images/statue-of-liberty.jpg"
+            src="/assets/images/elina2.jpg"
             alt="travel"
-            width={500}
-            height={500}
-            quality={100}
-            style={{
-              maxWidth: '100%',
-              height: 'auto',
-              objectPosition: 'center',
-            }}
+            width={imageSize.width}
+            height={imageSize.height}
           />
         </div>
-        <div>
+        <div className={`w-${imageSize.width} h-${imageSize.height}`}>
           <Image
-            src="/assets/images/sydney-opera-house.jpg"
+            src="/assets/images/elina3.jpg"
             alt="travel"
-            width={500}
-            height={500}
-            quality={100}
-            style={{
-              maxWidth: '100%',
-              height: 'auto',
-              objectPosition: 'center',
-            }}
+            width={imageSize.width}
+            height={imageSize.height}
           />
         </div>
-        <div>
+        <div className={`w-${imageSize.width} h-${imageSize.height}`}>
           <Image
-            src="/assets/images/osaka.webp "
+            src="/assets/images/travel2.jpg"
             alt="travel"
-            width={500}
-            height={500}
-            quality={100}
-            style={{
-              maxWidth: '100%',
-              height: 'auto',
-              objectPosition: 'center',
-            }}
+            width={imageSize.width}
+            height={imageSize.height}
           />
         </div>
+        {/* 이하 반복 */}
       </Slider>
     </div>
   )

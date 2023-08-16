@@ -8,8 +8,6 @@ import WhenSurvey from '../survey_components/WhenSurvey'
 import HowSurvey from '../survey_components/HowSurvey'
 import { selectDuration, selectUserId } from '../slices/travelInfoSlice'
 import { useSelector, useDispatch } from 'react-redux'
-import LocalStorage from '../index_components/LocalStorage'
-import { CityInput, fetchCityDetailAsync } from '../slices/cityDetailSlice'
 import { AppDispatch, AppThunk } from '../store'
 import { FirstInput, fecthSurveyInputAsync } from '../slices/surveySlice'
 import { selectCity } from '../slices/travelInfoSlice'
@@ -31,7 +29,6 @@ export const SurveyPage = () => {
     dispatch(fecthSurveyInputAsync(firstInput))
   }, [])
 
-  let duration = useSelector(selectDuration)
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
 
   const handleItemClick = (index: number) => {
@@ -49,6 +46,13 @@ export const SurveyPage = () => {
       setSelectedIndex(selectedIndex + 1)
     }
   }
+  const handleBackClick = async () => {
+    if (selectedIndex === 0) {
+      router.replace('/')
+    } else {
+      setSelectedIndex(selectedIndex - 1)
+    }
+  }
 
   return (
     <div className="min-h-screen pb-16">
@@ -56,7 +60,7 @@ export const SurveyPage = () => {
 
       <div className="flex flex-row w-screen">
         <div className="hidden md:block overflow-hidden w-0 md:w-1/3 md:min-w-1/3 relative p-8">
-          <button onClick={() => router.back}>
+          <button onClick={handleBackClick}>
             <div className="flex justify-center items-center bg-slate-300 h-8 w-8 rounded-full mb-10">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

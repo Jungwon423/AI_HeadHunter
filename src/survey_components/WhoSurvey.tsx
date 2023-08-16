@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../store'
 import { setCompanionAdult, setCompanionChild } from '../slices/surveySlice'
 import { setCompanion } from '../slices/travelInfoSlice'
+import { SimpleButtons } from './SimpleButtons'
 
 const WhoSurvey = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -28,18 +29,25 @@ const WhoSurvey = () => {
     }
     dispatch(setCompanionAdult(selectedSurveys2))
   }
-  const [selectedSurveys3, setSelectedSurveys3] = useState<string[]>([])
+  const [selectedSurvey3, setSelectedSurvey3] = useState<string | null>(null)
   const handleSurveys3Click = (style: string) => {
-    if (selectedSurveys3.includes(style)) {
-      setSelectedSurveys3(selectedSurveys3.filter((c) => c !== style))
+    if (selectedSurvey3 === style) {
+      setSelectedSurvey3(null)
     } else {
-      setSelectedSurveys3([...selectedSurveys3, style])
+      setSelectedSurvey3(style)
+      // dispatch(setCompanionChild(selectedSurvey3))
     }
-    dispatch(setCompanionChild(selectedSurveys3))
   }
   const [travelDuration, setTravelDuration] = useState<number>(0)
   const handleDurationChange = (value: number) => {
     setTravelDuration(value)
+  }
+  const shouldShowChildrenButton = () => {
+    return (
+      selectedSurvey3 === '부모님과' ||
+      selectedSurvey3 === '친구와' ||
+      selectedSurvey3 === '배우자와'
+    )
   }
 
   return (
@@ -51,38 +59,34 @@ const WhoSurvey = () => {
         <div className="text-base font-bold text-indigo-500 pt-3 pb-5">
           동행 정보를 고려한 여행 일정을 받아볼 수 있어요.
         </div>
-        <SurveyButton
-          surveys={[
-            '혼자',
-            '친구와',
-            '연인과',
-            '아이들과',
-            '부모님과',
-            '배우자와',
-          ]}
-          selectedSurveys={selectedSurveys3}
+        <SimpleButtons
+          surveys={['혼자', '연인과', '친구와', '부모님과', '배우자와']}
+          selectedSurvey={selectedSurvey3}
           onSurveyClick={handleSurveys3Click}
-        />
-        <div className="flex font-bold text-xl pt-3">어른</div>
+        ></SimpleButtons>
+        <div className="flex font-bold text-xl pt-3">나이</div>
         <SurveyButton
           surveys={['10대', '20대', '30대', '40대', '50대', '60대 이상']}
           selectedSurveys={selectedSurveys}
           onSurveyClick={handleSurveysClick}
         />
-        <div className="flex font-bold text-xl pt-7 pb-3">아이</div>
-        <SurveyButton
-          surveys={[
-            '24개월 미만',
-            '48개월 미만',
-            '미취학',
-            '초등학생',
-            '중학생',
-            '고등학생',
-          ]}
-          selectedSurveys={selectedSurveys2}
-          onSurveyClick={handleSurveys2Click}
-        />
-        <div className="flex flex-row items-center pt-10">
+        {shouldShowChildrenButton() && (
+          <>
+            <div className="flex font-bold text-xl pt-7 pb-3">아이</div>
+            <SurveyButton
+              surveys={[
+                '48개월 미만',
+                '미취학',
+                '초등학생',
+                '중학생',
+                '고등학생',
+              ]}
+              selectedSurveys={selectedSurveys2}
+              onSurveyClick={handleSurveys2Click}
+            />
+          </>
+        )}
+        <div className="flex flex-row items-center pt-6">
           <div className="font-bold text-xl pt-5">총 인원수</div>
           <div className="flex flex-grow"></div>
 
