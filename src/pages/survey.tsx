@@ -6,21 +6,31 @@ import WhoSurvey from '../survey_components/WhoSurvey'
 import 'react-datepicker/dist/react-datepicker.css'
 import WhenSurvey from '../survey_components/WhenSurvey'
 import HowSurvey from '../survey_components/HowSurvey'
-import {
-  selectDuration,
-  setBudget,
-  setCompanion,
-  setDuration,
-  setTravelStyle,
-  setUserId,
-} from '../slices/travelInfoSlice'
+import { selectDuration, selectUserId } from '../slices/travelInfoSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import LocalStorage from '../index_components/LocalStorage'
 import { CityInput, fetchCityDetailAsync } from '../slices/cityDetailSlice'
 import { AppDispatch, AppThunk } from '../store'
+import { FirstInput, fecthSurveyInputAsync } from '../slices/surveySlice'
+import { selectCity } from '../slices/travelInfoSlice'
 
-export default function SurveyPage() {
+export const SurveyPage = () => {
   const dispatch = useDispatch<AppDispatch>()
+
+  const user = useSelector(selectUserId)
+  const city = useSelector(selectCity)
+
+  useEffect(() => {
+    const firstInput: FirstInput = {
+      user: user!,
+      destination: city,
+    }
+
+    console.log(firstInput)
+
+    dispatch(fecthSurveyInputAsync(firstInput))
+  }, [])
+
   let duration = useSelector(selectDuration)
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
 
@@ -41,19 +51,6 @@ export default function SurveyPage() {
   ]
   const handleButtonClick = async () => {
     if (selectedIndex === 2) {
-      let tempId: string
-
-      if (LocalStorage.getItem('tempId') == null) {
-        let randomStr: string = Math.random().toString(36).substring(2, 12)
-        LocalStorage.setItem('tempId', randomStr)
-        tempId = randomStr
-      } else {
-        tempId = LocalStorage.getItem('tempId')! // null check
-      }
-      dispatch(setUserId(tempId))
-      // dispatch(setCompanion(selectedCompanion));
-      // dispatch(setTravelStyle(selectedStyles));
-      // dispatch(setDuration(duration))
       router.push('/image_query')
     } else {
       setSelectedIndex(selectedIndex + 1)
@@ -112,3 +109,5 @@ export default function SurveyPage() {
     </div>
   )
 }
+
+export default SurveyPage

@@ -2,11 +2,11 @@ import { OpeningHours } from '../interfaces/openingHours'
 import { Review } from '../interfaces/review'
 
 export interface PlaceInfo {
-  name: string
-  coordinate: number[]
-  image: string
-  description: string
-  time: number
+  name?: string
+  coordinate?: number[]
+  image?: string
+  description?: string
+  time?: number
   summary?: Summary //editorial_summary, 짧은 설명
   rating?: number //rating,  구글 별점
   ratingCount?: number //user_ratings_total, 구글 별점 갯수

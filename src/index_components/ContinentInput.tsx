@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 const data = require('/public/json/whole_Geo.json')
 import Image from 'next/image'
-import { setCity } from '../slices/travelInfoSlice'
+import { setCity, setUserId } from '../slices/travelInfoSlice'
 import { useDispatch } from 'react-redux'
 import router from 'next/router'
 import useClickOutside from './useClickOutside'
@@ -11,6 +11,7 @@ import {
   ICountryListProps,
   SearchResult,
 } from '../interfaces/continentData'
+import LocalStorage from './LocalStorage'
 const flattenData = (data: ContinentData) => {
   const dataArray = []
   for (const continent of Object.keys(data)) {
@@ -67,6 +68,18 @@ const sortResultsByIndex = (results: SearchResult[], searchTerm: string) => {
 const ContinentInput = () => {
   const dispatch = useDispatch()
   function gotoSurvey(cityName: any) {
+    // local storage 에서 tempId 가져오기
+    let tempId: string
+
+    if (LocalStorage.getItem('tempId') == null) {
+      let randomStr: string = Math.random().toString(36).substring(2, 12)
+      LocalStorage.setItem('tempId', randomStr)
+      tempId = randomStr
+    } else {
+      tempId = LocalStorage.getItem('tempId')! // null check
+    }
+
+    dispatch(setUserId(tempId))
     dispatch(setCity(cityName))
     router.push('/survey')
   }
@@ -307,6 +320,18 @@ const CountryList = ({ countries, searchTerm }: ICountryListProps) => {
 const CityList = ({ cities, searchTerm }: ICityListProps) => {
   const dispatch = useDispatch()
   function gotoSurvey(cityName: any) {
+    // local storage 에서 tempId 가져오기
+    let tempId: string
+
+    if (LocalStorage.getItem('tempId') == null) {
+      let randomStr: string = Math.random().toString(36).substring(2, 12)
+      LocalStorage.setItem('tempId', randomStr)
+      tempId = randomStr
+    } else {
+      tempId = LocalStorage.getItem('tempId')! // null check
+    }
+
+    dispatch(setUserId(tempId))
     dispatch(setCity(cityName))
     router.push('/survey')
   }
