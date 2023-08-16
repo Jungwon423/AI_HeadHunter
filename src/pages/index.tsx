@@ -10,6 +10,7 @@ import Popup from '../index_components/Popup'
 import Link from 'next/link'
 import ContinentInput from '../index_components/ContinentInput'
 import Carousel from '../index_components/Carousel'
+import TravelCarousel from '../index_components/TravelCarousel'
 
 export default function Home() {
   const [isPopupOpen, setIsPopupOpen] = useState(false)
@@ -46,6 +47,7 @@ export default function Home() {
           추천 여행지
         </div>
         <Carousel></Carousel>
+        <TravelCarousel></TravelCarousel>
         <ImageExplain
           left={true}
           h1Text={'AI가 생성한 여행지를 지금바로 확인해보세요!'}

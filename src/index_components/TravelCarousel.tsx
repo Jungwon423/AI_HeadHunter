@@ -1,4 +1,3 @@
-// 필요한 모듈을 가져옵니다.
 import React from 'react'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
@@ -10,7 +9,7 @@ interface ImageSize {
   height: number
 }
 
-function Carousel() {
+function TravelCarousel() {
   const settings = {
     dots: true,
     speed: 500,
@@ -20,57 +19,69 @@ function Carousel() {
   }
 
   // 이미지 크기를 설정합니다.
-  const imageSize: ImageSize = { width: 500, height: 200 }
+  const imageSize: ImageSize = { width: 500, height: 400 }
 
   return (
     <div className="py-8">
       <Slider {...settings}>
         <div className={`w-${imageSize.width} h-${imageSize.height}`}>
           <Image
-            src="/assets/images/travel.jpg"
+            src="/assets/carousel/osaka.webp"
             alt="travel"
             width={imageSize.width}
             height={imageSize.height}
+            style={{ width: 'auto' }}
+            className="rounded-xl"
           />
         </div>
         <div className={`w-${imageSize.width} h-${imageSize.height}`}>
           <Image
-            src="/assets/images/travel2.jpg"
+            src="/assets/carousel/sydney.jpg"
             alt="travel"
             width={imageSize.width}
             height={imageSize.height}
+            style={{ width: 'auto' }}
+            className="rounded-xl"
           />
         </div>
         <div className={`w-${imageSize.width} h-${imageSize.height}`}>
           <Image
-            src="/assets/images/elina.jpg"
+            src="/assets/carousel/hawaii.jpg"
             alt="travel"
             width={imageSize.width}
             height={imageSize.height}
+            style={{ width: 'auto' }}
+            className="rounded-xl"
           />
         </div>
         <div className={`w-${imageSize.width} h-${imageSize.height}`}>
           <Image
-            src="/assets/images/elina2.jpg"
+            src="/assets/carousel/danang.jpg"
             alt="travel"
             width={imageSize.width}
             height={imageSize.height}
+            style={{ width: 'auto' }}
+            className="rounded-xl"
           />
         </div>
         <div className={`w-${imageSize.width} h-${imageSize.height}`}>
           <Image
-            src="/assets/images/elina3.jpg"
+            src="/assets/carousel/dubai.jpg"
             alt="travel"
             width={imageSize.width}
             height={imageSize.height}
+            style={{ width: 'auto' }}
+            className="rounded-xl"
           />
         </div>
         <div className={`w-${imageSize.width} h-${imageSize.height}`}>
           <Image
-            src="/assets/images/travel2.jpg"
+            src="/assets/carousel/bankok.jpg"
             alt="travel"
             width={imageSize.width}
             height={imageSize.height}
+            style={{ width: 'auto' }}
+            className="rounded-xl"
           />
         </div>
       </Slider>
@@ -78,4 +89,4 @@ function Carousel() {
   )
 }
 
-export default Carousel
+export default TravelCarousel
