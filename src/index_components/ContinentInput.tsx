@@ -320,21 +320,24 @@ const CityList = ({ cities, searchTerm, openPopup }: ICityListProps) => {
     dispatch(setCity(cityName))
     openPopup()
   }
-  const filteredCities = cities.filter((city) =>
-    city.nameKo.includes(searchTerm),
+  const filteredCities = Array.from(
+    new Map(cities.map((c) => [c.nameKo, c])).values(),
   )
 
   const toggledCategoryData = cities.find((city) => city.nameKo === searchTerm)
 
-  if (toggledCategoryData && !filteredCities.includes(toggledCategoryData)) {
+  if (
+    toggledCategoryData &&
+    !filteredCities.some((c) => c.nameKo === toggledCategoryData.nameKo)
+  ) {
     filteredCities.unshift(toggledCategoryData)
   }
   return (
     <div className="w-full px-5 py-2 cursor-pointer">
-      {filteredCities.map((city, index) => (
+      {filteredCities.map((city) => (
         <div
           className="flex p-3 h-10"
-          key={`${city.naverId}-${index}`}
+          key={`${city.naverId}`}
           onClick={() => {
             getCityInfo(city.nameKo)
           }}

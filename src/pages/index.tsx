@@ -9,8 +9,8 @@ import { Footer } from '../footer/Footer'
 import Popup from '../index_components/Popup'
 import Link from 'next/link'
 import ContinentInput from '../index_components/ContinentInput'
-import Carousel from '../index_components/Carousel'
-import TravelCarousel from '../index_components/TravelCarousel'
+import Carousel from '../index_components/carousel/Carousel'
+import TravelCarousel from '../index_components/carousel/TravelCarousel'
 
 export default function Home() {
   const [isPopupOpen, setIsPopupOpen] = useState(false)
@@ -42,7 +42,7 @@ export default function Home() {
         <Popup isOpen={isPopupOpen} onClose={closePopup}></Popup>{' '}
         {/* 적용한 팝업(detail) */}
         <div className="pt-20 md:text-base sm:text-xl xl:text-2xl font-bold">
-          추천 여행지
+          추천 여행지 TOP 11
         </div>
         <TravelCarousel></TravelCarousel>
         <ImageExplain
@@ -61,8 +61,8 @@ export default function Home() {
           }
           image={'/assets/screenshot/screen1.png'}
         ></ImageExplain>
+        <Carousel></Carousel>
       </main>
-      <Carousel></Carousel>
       <Footer></Footer>
     </div>
   )

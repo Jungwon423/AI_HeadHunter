@@ -28,23 +28,7 @@ function Carousel() {
       <Slider {...settings}>
         <div className={`w-${imageSize.width} h-${imageSize.height}`}>
           <Image
-            src="/assets/images/travel.jpg"
-            alt="travel"
-            width={imageSize.width}
-            height={imageSize.height}
-          />
-        </div>
-        <div className={`w-${imageSize.width} h-${imageSize.height}`}>
-          <Image
             src="/assets/images/travel2.jpg"
-            alt="travel"
-            width={imageSize.width}
-            height={imageSize.height}
-          />
-        </div>
-        <div className={`w-${imageSize.width} h-${imageSize.height}`}>
-          <Image
-            src="/assets/images/elina.jpg"
             alt="travel"
             width={imageSize.width}
             height={imageSize.height}
@@ -60,7 +44,7 @@ function Carousel() {
         </div>
         <div className={`w-${imageSize.width} h-${imageSize.height}`}>
           <Image
-            src="/assets/images/elina3.jpg"
+            src="/assets/images/elina.jpg"
             alt="travel"
             width={imageSize.width}
             height={imageSize.height}
@@ -68,7 +52,7 @@ function Carousel() {
         </div>
         <div className={`w-${imageSize.width} h-${imageSize.height}`}>
           <Image
-            src="/assets/images/travel2.jpg"
+            src="/assets/images/elina3.jpg"
             alt="travel"
             width={imageSize.width}
             height={imageSize.height}

@@ -10,13 +10,13 @@ interface CarouselImageProps {
 
 const CarouselImage = (props: CarouselImageProps) => {
   return (
-    <div className="relative h-[180px] md:h-[340px] xl:h-[500px] focus:outline-none">
+    <div className="relative h-[160px] md:h-[300px] xl:h-[500px] focus:outline-none">
       <div className="p-3">
         <Image
           src={props.src}
           alt={props.title}
           layout="fill"
-          className="rounded-xl"
+          className="rounded-[8%] p-2"
         />
       </div>
       <div className="absolute left-4 md:left-6 xl:left-10 bottom-4 md:bottom-6 xl:bottom-10">
