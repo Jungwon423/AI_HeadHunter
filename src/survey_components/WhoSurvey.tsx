@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
-import Image from 'next/image'
 import { SurveyButton } from './SurveyButtons'
 import NumberButton from './NumberButton'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../store'
-import { setCompanionAdult, setCompanionChild } from '../slices/surveySlice'
-import { setCompanion } from '../slices/travelInfoSlice'
+import {
+  setCompanion,
+  setCompanionAdult,
+  setCompanionChild,
+} from '../slices/travelInfoSlice'
 
 const WhoSurvey = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -26,7 +28,8 @@ const WhoSurvey = () => {
     } else {
       setSelectedSurveys2([...selectedSurveys2, style])
     }
-    dispatch(setCompanionAdult(selectedSurveys2))
+    // TODO : 1개만 설정되도록 수정
+    dispatch(setCompanionAdult(selectedSurveys2[0]))
   }
   const [selectedSurveys3, setSelectedSurveys3] = useState<string[]>([])
   const handleSurveys3Click = (style: string) => {
@@ -35,7 +38,8 @@ const WhoSurvey = () => {
     } else {
       setSelectedSurveys3([...selectedSurveys3, style])
     }
-    dispatch(setCompanionChild(selectedSurveys3))
+    // TODO : 1개만 설정되도록 수정
+    dispatch(setCompanionChild(selectedSurveys3[0]))
   }
   const [travelDuration, setTravelDuration] = useState<number>(0)
   const handleDurationChange = (value: number) => {

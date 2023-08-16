@@ -48,11 +48,7 @@ export default function Home() {
           >
             오사카 버튼
           </button>
-          <Popup
-            isOpen={isPopupOpen}
-            onClose={closePopup}
-            children={undefined}
-          ></Popup>
+          <Popup isOpen={isPopupOpen} onClose={closePopup}></Popup>
         </div>
 
         <div className="md:text-base sm:text-xl xl:text-2xl font-bold">

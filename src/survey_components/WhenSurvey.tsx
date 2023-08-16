@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import Image from 'next/image'
+import React, { useState } from 'react'
 import MyDatePicker from './MyDatePicker'
 import { useDispatch } from 'react-redux'
-import { setDuration } from '../slices/travelInfoSlice'
+import {
+  setDuration,
+  setTravelEndDate,
+  setTravelStartDate,
+} from '../slices/travelInfoSlice'
 import { AppDispatch } from '../store'
-import { setTravelEndDate, setTravelStartDate } from '../slices/surveySlice'
 
 const WhenSurvey = () => {
   const dispatch = useDispatch<AppDispatch>()

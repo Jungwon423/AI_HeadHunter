@@ -25,7 +25,7 @@ const TravelContainer = () => {
       <CloseButton />
       <div className="w-full">
         <Image
-          src={selectedPlace?.image}
+          src={selectedPlace?.image!}
           alt={selectedPlace?.name}
           width={384}
           height={280}

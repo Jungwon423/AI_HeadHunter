@@ -8,12 +8,10 @@ import {
 import tabSlice from './slices/tabSlice'
 import persistedTravelInfoReducer from './slices/travelInfoSlice'
 import persistedTravelChatReducer from './slices/travelChatSlice'
-import persistedQuestionnaireReducer from './slices/not_used/questionnaireSlice'
 import persistedQueryInputReducer from './slices/queryInputSlice'
-import persistedAttractionQueryReducer from './slices/imageQuerySlice'
-import persistedRecommendAttractionsReducer from './slices/recommendSlice'
-import persistedSurveyReducer from './slices/surveySlice'
+import persistedRecommendInfoReducer from './slices/recommendSlice'
 import persistedCityDetailReducer from './slices/cityDetailSlice'
+import persistedImageQueryReducer from './slices/imageQuerySlice'
 
 export const store = configureStore({
   reducer: {
@@ -21,11 +19,9 @@ export const store = configureStore({
     cityDetail: persistedCityDetailReducer,
     travelInfo: persistedTravelInfoReducer,
     travelChat: persistedTravelChatReducer,
-    questionnaire: persistedQuestionnaireReducer,
     queryInput: persistedQueryInputReducer,
-    attractionQuery: persistedAttractionQueryReducer,
-    recommendAttractions: persistedRecommendAttractionsReducer,
-    survey: persistedSurveyReducer,
+    imageQuery: persistedImageQueryReducer,
+    recommendInfo: persistedRecommendInfoReducer,
   },
   // middleware: (getDefaultMiddleware) =>
   // getDefaultMiddleware().concat(thunk),

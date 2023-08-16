@@ -1,74 +1,22 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { InitialQueryInput } from './questionnaireSlice'
-import { RootState, AppThunk } from '../store'
-import { convertToPlaceInfo } from './travelInfoSlice'
-import { SERVER_API_URL } from './api_url'
-import axios from 'axios'
+import { RootState } from '../store'
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import { PlaceInfo } from '../interfaces/placeInfo'
+import { ImageQueryState } from '../interfaces/imageQuery'
+import { ZeroOrOne } from '../interfaces/zeroOrOne'
 
-export type ZeroOrOne = 0 | 1
-
-export interface AttractionQueryState {
-  travel_id: string
-  query_list: PlaceInfo[][]
-  // loading 상태 저장
-  loading: 'idle' | 'pending' | 'succeeded' | 'failed'
-  // error 상태 저장
-  error: string | null
-  resultList: ZeroOrOne[]
-}
-
-const initialState: AttractionQueryState = {
-  travel_id: '',
+const initialState: ImageQueryState = {
   query_list: [],
   loading: 'idle',
   error: null,
   resultList: [],
 }
 
-export function processAttractionList(atttractionList: any): PlaceInfo[][] {
-  return atttractionList.map((cluster: any) => {
-    const attractions = cluster.map(convertToPlaceInfo)
-    return [...attractions]
-  })
-}
-
-export const fetchAttractionQuery = async (
-  initialQuery: InitialQueryInput,
-): Promise<AttractionQueryState> => {
-  const config = {
-    withCredentials: true,
-  }
-
-  let API_URL: string = SERVER_API_URL + '/travel/attractionQuery'
-
-  const response = await axios.post(API_URL, initialQuery, config)
-
-  const placeInfos: PlaceInfo[][] = processAttractionList(
-    response.data.query_list,
-  )
-
-  const attractionQuery: AttractionQueryState = {
-    travel_id: response.data.travel_id,
-    query_list: placeInfos,
-    loading: 'pending',
-    error: null,
-    resultList: [],
-  }
-  return attractionQuery
-}
-
-export const attractionQuerySlice = createSlice({
-  name: 'attractionQuery',
+export const imageQuerySlice = createSlice({
+  name: 'imageQuery',
   initialState,
   reducers: {
-    setAttractionQuery: (
-      state,
-      action: PayloadAction<AttractionQueryState>,
-    ) => {
-      state.travel_id = action.payload.travel_id
+    setImageQuery: (state, action: PayloadAction<ImageQueryState>) => {
       state.query_list = action.payload.query_list
     },
     setLoading: (
@@ -90,61 +38,33 @@ export const attractionQuerySlice = createSlice({
   },
 })
 
-export const fetchAttractionQueryAsync =
-  (initialQuery: InitialQueryInput): AppThunk =>
-  async (
-    dispatch: (arg0: {
-      payload: string | AttractionQueryState | null
-      type:
-        | 'attractionQuery/setAttractionQuery'
-        | 'attractionQuery/setLoading'
-        | 'attractionQuery/setError'
-    }) => void,
-  ) => {
-    try {
-      dispatch(setLoading('pending'))
-      const attractionQuery = await fetchAttractionQuery(initialQuery)
-      dispatch(setAttractionQuery(attractionQuery))
-      dispatch(setLoading('succeeded'))
-    } catch (error) {
-      dispatch(setError(JSON.stringify(error)))
-      dispatch(setLoading('failed'))
-    }
-  }
-
 const persistConfig = {
-  key: 'root',
+  key: 'image_query',
   storage,
 }
 
-const persistedAttractionQueryReducer = persistReducer(
+const persistedImageQueryReducer = persistReducer(
   persistConfig,
-  attractionQuerySlice.reducer,
+  imageQuerySlice.reducer,
 )
 
-export const selectAttractionQueryList = (state: RootState) =>
-  state.attractionQuery.query_list
-
-export const selectAttractionQueryLoading = (state: RootState) =>
-  state.attractionQuery.loading
-
-export const selectAttractionQueryError = (state: RootState) =>
-  state.attractionQuery.error
-
-export const selectAttractionQueryResultList = (state: RootState) =>
-  state.attractionQuery.resultList
-
-export const selectAttractionQueryTravelId = (state: RootState) =>
-  state.attractionQuery.travel_id
+export const selectImageQueryList = (state: RootState) =>
+  state.imageQuery.query_list
+export const selectImageQueryLoading = (state: RootState) =>
+  state.imageQuery.loading
+export const selectImageQueryError = (state: RootState) =>
+  state.imageQuery.error
+export const selectImageQueryResultList = (state: RootState) =>
+  state.imageQuery.resultList
 
 export const {
-  setAttractionQuery,
+  setImageQuery,
   setLoading,
   setError,
   setResultList,
   initialize,
-} = attractionQuerySlice.actions
+} = imageQuerySlice.actions
 
-export const selectAttractionQuery = (state: RootState) => state.attractionQuery
+export const selectImageQuery = (state: RootState) => state.imageQuery
 
-export default persistedAttractionQueryReducer
+export default persistedImageQueryReducer

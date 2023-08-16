@@ -14,11 +14,11 @@ import Map, {
 import Pin from '../travel_components/Pin'
 import TravelChat from '../travel_components/TravelChat'
 import {
-  handleCurrentPlace,
   selectAttractions,
   selectCoordinate,
-  selectCurrentDay,
   selectCurrentPlace,
+  selectCurrentDay,
+  handleCurrentPlace,
 } from '../slices/recommendSlice'
 import { PlaceInfo } from '../interfaces/placeInfo'
 import ChatScreen from '../travel_components/ChatScreen'
@@ -55,7 +55,6 @@ const RecommendMap = () => {
   const selectedPlace = useSelector(selectCurrentPlace)
   const currentDay: number = useSelector(selectCurrentDay)
 
-  //const travelSchedule: placeInfo[][] = useSelector(selectTravelSchedule) || []
   const travelSchedule: PlaceInfo[][] = useSelector(selectAttractions) || []
   const TOKEN =
     'pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtrcGNwdXQwNm1oM2xvZTJ5Z2Q4djk5In0._rw_aFaBfUjQC-tjkV53Aw'
@@ -76,11 +75,6 @@ const RecommendMap = () => {
         latitude: selectedPlace?.coordinate[0]!,
       })
     }
-    // setViewState({
-    //   longitude: selectedPlace?.coordinate[1]!, //130 어쩌구
-    //   latitude: selectedPlace?.coordinate[0]!,
-    //   zoom: 13,
-    // })
   }, [selectedPlace])
 
   const mapRef = useRef<MapRef | null>(null)
@@ -112,15 +106,14 @@ const RecommendMap = () => {
         <NavigationControl position="top-left" />
         <ScaleControl />
 
-        {/* <GeocoderControl mapboxAccessToken={TOKEN} position="top-left" /> */}
         {travelSchedule.map((day, i) =>
           day.map(
             (place, j) =>
               (currentDay == 0 || currentDay == i + 1) && (
                 <Marker
                   key={j + 10}
-                  latitude={place.coordinate[0]}
-                  longitude={place.coordinate[1]}
+                  latitude={place.coordinate![0]}
+                  longitude={place.coordinate![1]}
                   onClick={(e) => {
                     e.originalEvent.stopPropagation()
                     dispatch(handleCurrentPlace(place))
@@ -143,43 +136,6 @@ const RecommendMap = () => {
             <div>{selectedPlace.name}</div>
           </Popup>
         )}
-        {/* {travelSchedule.map(
-          (day, i) =>
-            (currentDay == 0 || currentDay == i + 1) && (
-              <Source
-                key={i}
-                id="route"
-                type="geojson"
-                data={{
-                  type: 'Feature',
-                  properties: {
-                    id: day,
-                  },
-                  geometry: {
-                    type: 'LineString',
-                    coordinates: day.map((place, j) => [
-                      place.coordinate[1],
-                      place.coordinate[0],
-                    ]),
-                  },
-                }}
-              >
-                <Layer
-                  id="route"
-                  type="line"
-                  source="route"
-                  // layout={{
-                  //   'line-join': 'round',
-                  //   'line-cap': 'round',
-                  // }}
-                  paint={{
-                    'line-color': '#007cbf',
-                    'line-width': 4,
-                  }}
-                />
-              </Source>
-            ),
-        )} */}
       </Map>
       {showChat && <ChatScreen onClose={() => dispatch(setShowChat(false))} />}
     </div>
