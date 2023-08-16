@@ -1,5 +1,5 @@
 import router from 'next/router'
-import MyNavbar from '../search_components/MyNavbar'
+import MyNavbar from '../components/MyNavbar'
 import CircleListItem from '../survey_components/CircleList'
 import { useEffect, useState } from 'react'
 import WhoSurvey from '../survey_components/WhoSurvey'

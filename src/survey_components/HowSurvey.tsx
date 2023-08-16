@@ -27,17 +27,20 @@ const HowSurvey = () => {
         <div className="text-2xl font-bold">
           관심있는 활동을 모두 골라주세요
         </div>
-        <div className="mt-5 shadow-xl rounded-xl">
+        <div className="my-3 rounded-xl">
           {Object.entries(survey).map(([majorCategory, minorCategories]) => (
-            <div key={majorCategory}>
-              <div className="font-bold p-2 bg-stone-100">{majorCategory}</div>
+            <div
+              className="mt-3 shadow-lg rounded-xl border-l-4 border-indigo-300"
+              key={majorCategory}
+            >
+              <div className="font-bold px-2">{majorCategory}</div>
               <div className="grid grid-cols-4 md:grid-cols-6 gap-2 p-2">
                 {minorCategories.map((minorCategory: MinorCategory) => (
                   <div
                     key={minorCategory.name}
                     className={`relative border-2 rounded bg-white ${
                       minorCategory.checked
-                        ? 'border-green-500'
+                        ? 'border-indigo-400'
                         : 'border-stone-200'
                     }`}
                     onClick={() => {
@@ -47,7 +50,7 @@ const HowSurvey = () => {
                     {minorCategory.checked && (
                       <div className="absolute top-0 right-0">
                         <Image
-                          src="/assets/images/check_icon.png"
+                          src="/assets/images/check.png"
                           alt="체크 표시"
                           width={25}
                           height={25}
@@ -56,7 +59,7 @@ const HowSurvey = () => {
                     )}
                     <div className="flex justify-center items-center px-4 py-2">
                       <Image
-                        src="/assets/icons/극장.png"
+                        src="/assets/icons/테마파크.png"
                         alt="대체_텍스트"
                         width={50}
                         height={50}

@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import TravelButton from '../search_components/TravelButton'
 import JustButton from './JustButton'
 
 type ISurveyProps = {
