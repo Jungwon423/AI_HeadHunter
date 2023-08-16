@@ -1,9 +1,8 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 const data = require('/public/json/whole_Geo.json')
 import Image from 'next/image'
 import { setCity, setUser } from '../slices/travelInfoSlice'
 import { useDispatch } from 'react-redux'
-import router from 'next/router'
 import useClickOutside from './useClickOutside'
 import {
   ContinentData,
@@ -11,7 +10,6 @@ import {
   ICountryListProps,
   SearchResult,
 } from '../interfaces/continentData'
-import LocalStorage from './LocalStorage'
 
 export interface ContinentProps {
   openPopup: () => void

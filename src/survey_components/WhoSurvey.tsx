@@ -38,9 +38,8 @@ const WhoSurvey = () => {
       setSelectedSurvey3(null)
     } else {
       setSelectedSurvey3(style)
-      // dispatch(setCompanionChild(selectedSurvey3))
+      dispatch(setCompanionChild(selectedSurvey3!))
     }
-    // dispatch(setCompanionChild(selectedSurveys3))
   }
   const [travelDuration, setTravelDuration] = useState<number>(0)
   const handleDurationChange = (value: number) => {
