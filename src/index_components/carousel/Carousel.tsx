@@ -4,6 +4,7 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Image from 'next/image'
+import CarouselImage from './CarouselImage'
 
 interface ImageSize {
   width: number
@@ -36,7 +37,7 @@ function Carousel() {
         </div>
         <div className={`w-${imageSize.width} h-${imageSize.height}`}>
           <Image
-            src="/assets/images/elina2.jpg"
+            src="/assets/bonus/elina2.jpg"
             alt="travel"
             width={imageSize.width}
             height={imageSize.height}
@@ -44,7 +45,7 @@ function Carousel() {
         </div>
         <div className={`w-${imageSize.width} h-${imageSize.height}`}>
           <Image
-            src="/assets/images/elina.jpg"
+            src="/assets/bonus/elina.jpg"
             alt="travel"
             width={imageSize.width}
             height={imageSize.height}
@@ -52,7 +53,47 @@ function Carousel() {
         </div>
         <div className={`w-${imageSize.width} h-${imageSize.height}`}>
           <Image
-            src="/assets/images/elina3.jpg"
+            src="/assets/bonus/elina3.jpg"
+            alt="travel"
+            width={imageSize.width}
+            height={imageSize.height}
+          />
+        </div>
+        <div className={`w-${imageSize.width} h-${imageSize.height}`}>
+          <Image
+            src="/assets/bonus/elina3.jpg"
+            alt="travel"
+            width={imageSize.width}
+            height={imageSize.height}
+          />
+        </div>
+        <div className={`w-${imageSize.width} h-${imageSize.height}`}>
+          <Image
+            src="/assets/bonus/bonus.jpg"
+            alt="travel"
+            width={imageSize.width}
+            height={imageSize.height}
+          />
+        </div>
+        <div className={`w-${imageSize.width} h-${imageSize.height}`}>
+          <Image
+            src="/assets/bonus/bonus2.jpg"
+            alt="travel"
+            width={imageSize.width}
+            height={imageSize.height}
+          />
+        </div>
+        <div className={`w-${imageSize.width} h-${imageSize.height}`}>
+          <Image
+            src="/assets/bonus/bonus3.jpg"
+            alt="travel"
+            width={imageSize.width}
+            height={imageSize.height}
+          />
+        </div>
+        <div className={`w-${imageSize.width} h-${imageSize.height}`}>
+          <Image
+            src="/assets/bonus/bonus4.jpg"
             alt="travel"
             width={imageSize.width}
             height={imageSize.height}
