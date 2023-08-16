@@ -14,7 +14,7 @@ const ButtonWithImage: React.FC<ButtonWithImageProps> = ({
   detailText,
 }) => {
   return (
-    <button className="flex flex-col w-24 h-18 mr-2 mb-2 px-2 py-2 bg-gray-50 rounded-md shadow-sm">
+    <button className="flex flex-col w-20 h-18 mr-2 mb-2 px-2 py-2 bg-gray-50 rounded-md shadow-sm">
       <div className="flex flex-row pb-3">
         <Image
           src={imageSrc}

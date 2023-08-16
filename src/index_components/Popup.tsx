@@ -45,7 +45,7 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
       '한국보다 ' + Math.floor(timeDifference! / 60) + '시간 빠름'
   } else {
     timeDifferenceText =
-      '한국보다 ' + Math.floor(timeDifference! / 60) + '시간 느림'
+      '한국보다 ' + Math.abs(Math.floor(timeDifference! / 60)) + '시간 느림'
   }
   console.log(cityDetail?.countryInfo.plug[0])
   const frequency = cityDetail?.countryInfo.plug[0].frequency.replace(
@@ -65,11 +65,11 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
         </button>
         <div className="flex-col w-80 mx-6">
           <div className="text-2xl font-bold">{cityDetail?.name_ko}</div>
-          <div className="mb-5 text-xl text-gray-700 font-medium">
+          <div className="mb-3 text-xl text-gray-700 font-medium">
             {cityDetail?.name_en}
           </div>
-          <div className="text-xs text-gray-500 font-bold">
-            {cityDetail?.descriptionInfo.legacy}
+          <div className="text-xs mb-2 text-gray-500 font-bold">
+            {cityDetail?.descriptionInfo.publisher}
           </div>
           <div className="flex pt-1">
             {cityDetail?.weatherRecommend.season ? (
@@ -87,14 +87,14 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
                 }
               />
             ) : null}
-            {flightText ? (
+            {cityDetail?.shortestFlightInfo?.duration ? (
               <ButtonWithImage
                 imageSrc="/assets/buttonIcon/plane.png"
                 text="항공"
                 detailText={<div className="pl-1 text-[8px]">{flightText}</div>}
               />
             ) : null}
-            {splittedVisa ? (
+            {cityDetail?.visaInfo.description ? (
               <ButtonWithImage
                 imageSrc="/assets/buttonIcon/boarding-pass.png"
                 text="비자"
@@ -122,7 +122,7 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
           </div>
 
           <div className="flex flex-row">
-            {timeDifferenceText ? (
+            {cityDetail?.timezone.offset ? (
               <ButtonWithImage
                 imageSrc="/assets/buttonIcon/time-zones.png"
                 text="시차"
@@ -188,19 +188,19 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
             </button>
           </div>
         </div>
-        <div className="flex bg-white">
+        <div className="flex w-72 bg-white">
           <Image
             // 여기에 클래스 적용
             className="rounded"
             src={cityDetail?.image.photoURL!}
             alt="travel"
-            width={350}
-            height={350}
+            width={300}
+            height={200}
             quality={100}
-            style={{
-              maxWidth: '100%',
-              height: 'auto',
-            }}
+            // style={{
+            //   maxWidth: '100%',
+            //   height: 'auto',
+            // }}
           />
         </div>
       </div>
