@@ -1,3 +1,5 @@
+import { ContinentProps } from '../index_components/ContinentInput'
+
 export interface ContinentData {
   [continent: string]: {
     [country: string]: {
@@ -26,7 +28,7 @@ export interface SearchResult {
   countryName: string
 }
 
-export interface ICountryListProps {
+export interface ICountryListProps extends ContinentProps {
   countries: {
     [country: string]: {
       naverId: string
@@ -45,7 +47,7 @@ export interface ICountryListProps {
   searchTerm: string
 }
 
-export interface ICityListProps {
+export interface ICityListProps extends ContinentProps {
   cities: {
     naverId: string
     nameKo: string

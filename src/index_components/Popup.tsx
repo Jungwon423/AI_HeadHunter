@@ -9,8 +9,10 @@ import {
 } from '../slices/cityDetailSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from '../store'
-import { selectCity } from '../slices/travelInfoSlice'
+import { selectCity, setUserId } from '../slices/travelInfoSlice'
 import ButtonWithImage from './ButtonWithImage'
+import LocalStorage from './LocalStorage'
+import router from 'next/router'
 
 interface PopupProps {
   isOpen: boolean
@@ -18,16 +20,31 @@ interface PopupProps {
 }
 
 const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
-  // const city = useSelector(selectCity)
+  function gotoSurvey() {
+    let tempId: string
+
+    if (LocalStorage.getItem('tempId') == null) {
+      let randomStr: string = Math.random().toString(36).substring(2, 12)
+      LocalStorage.setItem('tempId', randomStr)
+      tempId = randomStr
+    } else {
+      tempId = LocalStorage.getItem('tempId')! // null check
+    }
+    dispatch(setUserId(tempId))
+    router.push('/survey')
+  }
+
+  const city = useSelector(selectCity)
   const dispatch = useDispatch<AppDispatch>()
   useEffect(() => {
+    if (!city) return
     const cityInput: CityInput = {
-      destination: '오사카',
+      destination: city,
     }
     dispatch(fetchCityDetailAsync(cityInput))
-  }, [])
+  }, [city, dispatch])
+
   const cityInfos = useSelector(selectCityDetail)
-  console.log(cityInfos.city_detail)
   const cityDetail = cityInfos.city_detail
   let shortestFlightDuration = cityDetail?.shortestFlightInfo?.duration
   const flightText =
@@ -47,11 +64,14 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
     timeDifferenceText =
       '한국보다 ' + Math.abs(Math.floor(timeDifference! / 60)) + '시간 느림'
   }
-  console.log(cityDetail?.countryInfo.plug[0])
   const frequency = cityDetail?.countryInfo.plug[0].frequency.replace(
     /(\s*)/g,
     '',
   ) //공백제거
+  const electric = cityDetail?.countryInfo.plug[0].electricPotential.replace(
+    /(\s*)/g,
+    '',
+  )
   if (!isOpen) return null
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-20">
@@ -156,9 +176,7 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
                     <div className="text-[6px] text-gray-600 font-bold">
                       {frequency}
                     </div>
-                    <div className="text-[8px]">
-                      {cityDetail?.countryInfo.plug[0].electricPotential}
-                    </div>
+                    <div className="text-[8px]">{electric}</div>
                   </div>
                 }
               />
@@ -183,12 +201,15 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
             <button className="flex text-sm px-6 py-2 bg-gray-500 text-white rounded-md">
               도시 정보 더 보기
             </button>
-            <button className="flex text-sm px-8 py-2 bg-indigo-500 text-white rounded-md">
+            <button
+              onClick={gotoSurvey}
+              className="flex text-sm px-8 py-2 bg-indigo-500 text-white rounded-md"
+            >
               일정 만들기 {'>'}
             </button>
           </div>
         </div>
-        <div className="flex w-72 bg-white">
+        <div className="flex w-72 h-80 bg-white">
           <Image
             // 여기에 클래스 적용
             className="rounded"
@@ -197,10 +218,10 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
             width={300}
             height={200}
             quality={100}
-            // style={{
-            //   maxWidth: '100%',
-            //   height: 'auto',
-            // }}
+            style={{
+              maxWidth: '100%',
+              height: 'auto',
+            }}
           />
         </div>
       </div>

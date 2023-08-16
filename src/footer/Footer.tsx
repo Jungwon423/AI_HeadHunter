@@ -40,11 +40,8 @@ const Footer = () => (
         <li className="px-5">
           <Link href="/">Home</Link>
         </li>
-        <li className="px-5">
+        <li className="px-10">
           <Link href="/">Team</Link>
-        </li>
-        <li className="px-5">
-          <Link href="/travel">Travel</Link>
         </li>
       </CenteredFooter>
     </Section>

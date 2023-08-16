@@ -12,6 +12,11 @@ import {
   SearchResult,
 } from '../interfaces/continentData'
 import LocalStorage from './LocalStorage'
+
+export interface ContinentProps {
+  openPopup: () => void
+}
+
 const flattenData = (data: ContinentData) => {
   const dataArray = []
   for (const continent of Object.keys(data)) {
@@ -65,23 +70,11 @@ const sortResultsByIndex = (results: SearchResult[], searchTerm: string) => {
   })
 }
 
-const ContinentInput = () => {
+const ContinentInput = (props: ContinentProps) => {
   const dispatch = useDispatch()
-  function gotoSurvey(cityName: any) {
-    // local storage 에서 tempId 가져오기
-    let tempId: string
-
-    if (LocalStorage.getItem('tempId') == null) {
-      let randomStr: string = Math.random().toString(36).substring(2, 12)
-      LocalStorage.setItem('tempId', randomStr)
-      tempId = randomStr
-    } else {
-      tempId = LocalStorage.getItem('tempId')! // null check
-    }
-
-    dispatch(setUserId(tempId))
+  function getCityInfo(cityName: any) {
     dispatch(setCity(cityName))
-    router.push('/survey')
+    props.openPopup()
   }
   const [selectedContinent, setSelectedContinent] = useState('유럽')
   const [searchTerm, setSearchTerm] = useState('')
@@ -187,7 +180,7 @@ const ContinentInput = () => {
                       className="flex p-2 border-b-2"
                       key={key}
                       onClick={() => {
-                        gotoSurvey(cityName)
+                        getCityInfo(cityName)
                       }}
                     >
                       {cityName ? (
@@ -227,6 +220,7 @@ const ContinentInput = () => {
                           data[selectedContinent as keyof ContinentData]
                         }
                         searchTerm={searchTerm}
+                        openPopup={props.openPopup}
                       />
                     )}
                   </div>
@@ -240,7 +234,11 @@ const ContinentInput = () => {
   )
 }
 
-const CountryList = ({ countries, searchTerm }: ICountryListProps) => {
+const CountryList = ({
+  countries,
+  searchTerm,
+  openPopup,
+}: ICountryListProps) => {
   const [selectedCountry, setSelectedCountry] = useState('')
   const countryNames = Object.keys(countries)
 
@@ -307,6 +305,7 @@ const CountryList = ({ countries, searchTerm }: ICountryListProps) => {
                   key={idx}
                   cities={countries[countryName]}
                   searchTerm={searchTerm}
+                  openPopup={openPopup}
                 />
               </>
             )}
@@ -317,23 +316,11 @@ const CountryList = ({ countries, searchTerm }: ICountryListProps) => {
   )
 }
 
-const CityList = ({ cities, searchTerm }: ICityListProps) => {
+const CityList = ({ cities, searchTerm, openPopup }: ICityListProps) => {
   const dispatch = useDispatch()
-  function gotoSurvey(cityName: any) {
-    // local storage 에서 tempId 가져오기
-    let tempId: string
-
-    if (LocalStorage.getItem('tempId') == null) {
-      let randomStr: string = Math.random().toString(36).substring(2, 12)
-      LocalStorage.setItem('tempId', randomStr)
-      tempId = randomStr
-    } else {
-      tempId = LocalStorage.getItem('tempId')! // null check
-    }
-
-    dispatch(setUserId(tempId))
+  function getCityInfo(cityName: any) {
     dispatch(setCity(cityName))
-    router.push('/survey')
+    openPopup()
   }
   const filteredCities = cities.filter((city) =>
     city.nameKo.includes(searchTerm),
@@ -351,7 +338,7 @@ const CityList = ({ cities, searchTerm }: ICityListProps) => {
           className="flex p-3 h-10"
           key={`${city.naverId}-${index}`}
           onClick={() => {
-            gotoSurvey(city.nameKo)
+            getCityInfo(city.nameKo)
           }}
         >
           <Image
