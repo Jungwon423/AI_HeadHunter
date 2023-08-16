@@ -40,12 +40,6 @@ const MyDatePicker = ({ startDate, endDate, onDatesChange }: myDateProps) => {
           const [newStartDate, newEndDate] = dates
           onDatesChange(newStartDate, newEndDate)
         }}
-        // onChange={(date) => {
-        //   if (date) {
-        //     setStartDate(date[0])
-        //     setEndDate(date[1] || null)
-        //   }
-        // }}
         startDate={startDate}
         endDate={endDate}
         selectsRange

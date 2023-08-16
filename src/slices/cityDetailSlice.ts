@@ -4,14 +4,18 @@ import storage from 'redux-persist/lib/storage'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { SERVER_API_URL } from './api_url'
 import axios, { AxiosResponse } from 'axios'
+import { pl } from 'date-fns/locale'
+
+export interface plugin {
+  electricPotential: string
+  frequency: string
+}
 
 export interface CountryInfo {
   descriptionInfo: {
     publisher: string
   }
-  plugin: {
-    electricPotential: string
-  }
+  plug: plugin[]
   flagThumbnail: string
   currencyInformation: {
     exchangeRate: string
@@ -62,6 +66,12 @@ export interface CityDetail {
     duration: number
     viaCount: number
   }
+  timezone: {
+    offset: number
+  }
+  language: {
+    langList: string[]
+  }
 }
 
 const initialState: CityDetail = {
@@ -103,9 +113,7 @@ const initialState: CityDetail = {
     descriptionInfo: {
       publisher: 'Dd',
     },
-    plugin: {
-      electricPotential: '240V',
-    },
+    plug: [],
     flagThumbnail: 'dd',
     currencyInformation: {
       exchangeRate: '1455.52',
@@ -113,6 +121,8 @@ const initialState: CityDetail = {
   },
   descriptionInfo: { publisher: '', legacy: '' },
   shortestFlightInfo: { duration: 0, viaCount: 0 },
+  timezone: { offset: 0 },
+  language: { langList: [] },
 }
 
 export const CityDetailSlice = createSlice({
@@ -158,6 +168,8 @@ export function convertToCityDetail(infos: any) {
     countryInfo: destination.countryInfo,
     descriptionInfo: destination.descriptionInfo,
     shortestFlightInfo: destination.shortestFlightInfo,
+    timezone: destination.timezone,
+    language: destination.language,
   } as CityDetail
 }
 

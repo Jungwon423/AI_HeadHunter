@@ -12,7 +12,6 @@ import ContinentInput from '../index_components/ContinentInput'
 
 export default function Home() {
   const [isPopupOpen, setIsPopupOpen] = useState(false)
-
   const openPopup = () => {
     setIsPopupOpen(true)
   }
@@ -37,19 +36,19 @@ export default function Home() {
           <MapboxGeocoderContainer accessToken={TOKEN} />
         </div> */}
         <div className="pt-10 flex flex-col justify-center items-center">
-          <ContinentInput></ContinentInput>
+          <ContinentInput openPopup={openPopup}></ContinentInput>
         </div>
 
         <TitleImage></TitleImage>
-        <div className="mx-auto">
+        {/* <div className="mx-auto">
           <button
             onClick={openPopup}
             className="px-4 py-2 bg-blue-600 text-white rounded-md"
           >
             오사카 버튼
           </button>
-          <Popup isOpen={isPopupOpen} onClose={closePopup}></Popup>
-        </div>
+        </div> */}
+        <Popup isOpen={isPopupOpen} onClose={closePopup}></Popup>
 
         <div className="md:text-base sm:text-xl xl:text-2xl font-bold">
           추천 여행지

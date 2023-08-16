@@ -8,9 +8,9 @@ interface NumberButtonProps {
 
 const NumberButton: React.FC<NumberButtonProps> = ({ onDurationChange }) => {
   const dispatch = useDispatch()
-  const [inputValue, setInputValue] = useState<number | typeof NaN | null>(null)
+  const [inputValue, setInputValue] = useState<number | null>(1)
   useEffect(() => {
-    if (inputValue !== null && !Number.isNaN(inputValue)) {
+    if (inputValue !== null) {
       dispatch(setDuration(inputValue))
     }
   }, [])
@@ -29,11 +29,10 @@ const NumberButton: React.FC<NumberButtonProps> = ({ onDurationChange }) => {
   }
 
   const handleIncrease = () => {
-    if (inputValue && inputValue < 30) {
-      setInputValue(inputValue + 1)
-    }
-    if (Number.isNaN(inputValue)) {
+    if (inputValue === null) {
       setInputValue(1)
+    } else if (inputValue > 0 && inputValue < 30) {
+      setInputValue(inputValue + 1)
     }
   }
 
