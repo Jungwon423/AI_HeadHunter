@@ -18,9 +18,10 @@ const ContainerTitle = () => {
       ) : null}
       <div className="flex text-gray-500  px-2">
         <div>
-          {selectedPlace?.hashtags.map((tag, index) => (
-            <span key={index}>#{tag} </span>
-          ))}
+          {selectedPlace?.hashtags &&
+            selectedPlace?.hashtags?.map((tag, index) => (
+              <span key={index}>#{tag} </span>
+            ))}
         </div>
       </div>
     </div>

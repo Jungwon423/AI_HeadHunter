@@ -100,6 +100,11 @@ const ImageQuery = () => {
     return <p>Error: {attractionQuery.error}</p>
   }
 
+  console.log('image 1 : ', attractionQuery.query_list[count][0].image)
+  console.log('image 2 : ', attractionQuery.query_list[count][1].image)
+
+  console.log(attractionQuery.query_list[count])
+
   return (
     <div className="flex flex-col h-screen">
       <div className="flex justify-center items-center w-screen h-28">

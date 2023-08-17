@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import {
   selectCity,
   selectDuration,
-  placeInfo,
   selectCoordinate,
   selectTravelSchedule,
   handleCurrentPlace,
