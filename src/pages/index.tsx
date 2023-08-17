@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import MyNavbar from '../search_components/MyNavbar'
+import MyNavbar from '../components/MyNavbar'
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import React, { useState } from 'react'
 import MainTitle from '../index_components/MainTitle'

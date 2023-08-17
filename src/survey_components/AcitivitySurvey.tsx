@@ -12,7 +12,7 @@ import {
   selectCity,
 } from '../slices/travelInfoSlice'
 
-const HowSurvey = () => {
+const ActivitySurvey = () => {
   const dispatch = useDispatch<AppDispatch>()
   const survey: MajorCategoriesWithMinorCategories = useSelector(selectCategory)
 
@@ -89,4 +89,4 @@ const HowSurvey = () => {
   )
 }
 
-export default HowSurvey
+export default ActivitySurvey

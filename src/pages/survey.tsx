@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import WhoSurvey from '../survey_components/WhoSurvey'
 import 'react-datepicker/dist/react-datepicker.css'
 import WhenSurvey from '../survey_components/WhenSurvey'
-import HowSurvey from '../survey_components/HowSurvey'
+import HowSurvey from '../survey_components/AcitivitySurvey'
 import {
   selectDuration,
   selectUser,
@@ -15,6 +15,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { AppDispatch } from '../store'
 import { SurveyInput } from '../interfaces/input'
 import { fecthSurveyInputAsync } from '../functions/fetchSurveyInput'
+import ActivitySurvey from '../survey_components/AcitivitySurvey'
 
 export const SurveyPage = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -40,6 +41,7 @@ export const SurveyPage = () => {
     '주로 누구와 여행하시나요?',
     '여행 날짜는 언제 인가요?',
     '여행 스타일은 어떻게 되시나요?',
+    '여행지에서 하고 싶은 활동을 골라주세요',
   ]
   const handleButtonClick = async () => {
     if (selectedIndex === 2) {
@@ -80,7 +82,7 @@ export const SurveyPage = () => {
               </svg>
             </div>
           </button>
-          <div className="pt-20 flex flex-col space-y-16">
+          <div className="pt-12 flex flex-col space-y-16">
             {items.map((item, index) => (
               <CircleListItem
                 key={index}
@@ -94,6 +96,7 @@ export const SurveyPage = () => {
         {selectedIndex == 0 ? <WhoSurvey /> : null}
         {selectedIndex == 1 ? <WhenSurvey></WhenSurvey> : null}
         {selectedIndex == 2 ? <HowSurvey></HowSurvey> : null}
+        {selectedIndex == 3 ? <ActivitySurvey></ActivitySurvey> : null}
       </div>
       <div className="fixed bottom-0 h-16 w-full border-t-2 bg-stone-50 shadow-gray-200 shadow-inner flex items-center justify-end pr-5">
         <button
