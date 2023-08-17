@@ -2,87 +2,45 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from '../store'
-import {
-  MajorCategoriesWithMinorCategories,
-  MinorCategory,
-} from '../interfaces/category'
-import {
-  checkMinorCategory,
-  selectCategory,
-  selectCity,
-} from '../slices/travelInfoSlice'
 
 const HowSurvey = () => {
   const dispatch = useDispatch<AppDispatch>()
-  const survey: MajorCategoriesWithMinorCategories = useSelector(selectCategory)
-
-  const check = (majorCategory: string, minorCategory: MinorCategory) => {
-    dispatch(
-      checkMinorCategory({
-        majorCategory,
-        minorCategory: minorCategory.name,
-      }),
-    )
-  }
-  const city = useSelector(selectCity)
 
   return (
-    <div className="flex py-5 w-full flex-col items-center overflow-y-auto">
+    <div className="flex py-5 w-full flex-row items-center">
       <div className="px-10 flex flex-col flex-grow">
-        <div className="text-2xl font-bold">
-          {city}에서 하고 싶은 활동을 골라주세요
-        </div>
-        <div className="text-base font-bold text-indigo-500 pt-3">
-          {city}에서 할 수 있는 것들
-        </div>
-        <div className="my-3 rounded-xl">
-          {Object.entries(survey).map(([majorCategory, minorCategories]) => (
-            <div
-              className="mt-3 shadow-lg rounded-xl border-l-8 border-indigo-300"
-              key={majorCategory}
-            >
-              <div className="font-bold pt-1 pl-2 text-gray-600 text-lg px-2">
-                {majorCategory}
+        <div className="text-2xl font-bold pt-20">여행시작 시간</div>
+        <div className="flex flex-row pt-12">
+          <div className="flex flex-row w-48 shadow-xl rounded-md">
+            <div className="flex-col bg-indigo-400 rounded-l-md px-3 py-3">
+              <div className="flex justify-center text-white font-extrabold">
+                23
               </div>
-              <div className="grid grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-2 p-2">
-                {minorCategories.map((minorCategory: MinorCategory) => (
-                  <div
-                    key={minorCategory.name}
-                    className={`relative border-2 w-18 md:w-32 h-32 rounded bg-white ${
-                      minorCategory.checked
-                        ? 'border-indigo-400'
-                        : 'border-stone-200'
-                    }`}
-                    onClick={() => {
-                      check(majorCategory, minorCategory)
-                    }}
-                  >
-                    {minorCategory.checked && (
-                      <div className="absolute top-0 right-0">
-                        <Image
-                          src="/assets/images/check.png"
-                          alt="체크 표시"
-                          width={40}
-                          height={40}
-                        />
-                      </div>
-                    )}
-                    <div className="flex justify-center items-center px-3 pt-4 pb-2">
-                      <Image
-                        src="/assets/icons/테마파크.png"
-                        alt="대체_텍스트"
-                        width={70}
-                        height={70}
-                      />
-                    </div>
-                    <div className="flex justify-center text-stone-500 text-base font-bold">
-                      {minorCategory.name}
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <div className="flex text-stone-100">OCT</div>
             </div>
-          ))}
+            <div className="flex flex-col justify-center items-center px-5">
+              <div className="flex flex-row justify-center text-indigo-500">
+                <div className="font-extrabold">08</div>
+                <div className="">:23am</div>
+              </div>
+              <div className="flex text-indigo-400">FROM</div>
+            </div>
+          </div>
+          <div className="mx-10 flex flex-row w-42 shadow-xl rounded-md">
+            <div className="flex-col bg-indigo-400 rounded-l-md px-3 py-3">
+              <div className="flex justify-center text-white font-extrabold">
+                26
+              </div>
+              <div className="flex text-stone-100">OCT</div>
+            </div>
+            <div className="flex flex-col justify-center items-center px-5">
+              <div className="flex flex-row justify-center text-indigo-500">
+                <div className="font-extrabold">17</div>
+                <div className="">:54pm</div>
+              </div>
+              <div className="flex text-indigo-400">TO</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

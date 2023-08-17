@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import WhoSurvey from '../survey_components/WhoSurvey'
 import 'react-datepicker/dist/react-datepicker.css'
 import WhenSurvey from '../survey_components/WhenSurvey'
-import HowSurvey from '../survey_components/AcitivitySurvey'
+import HowSurvey from '../survey_components/HowSurvey'
 import {
   selectDuration,
   selectUser,
@@ -44,7 +44,7 @@ export const SurveyPage = () => {
     '여행지에서 하고 싶은 활동을 골라주세요',
   ]
   const handleButtonClick = async () => {
-    if (selectedIndex === 2) {
+    if (selectedIndex === 3) {
       router.push('/image_query')
     } else {
       setSelectedIndex(selectedIndex + 1)
@@ -57,6 +57,7 @@ export const SurveyPage = () => {
       setSelectedIndex(selectedIndex - 1)
     }
   }
+  console.log(selectedIndex)
 
   return (
     <div className="min-h-screen pb-16">
@@ -64,7 +65,19 @@ export const SurveyPage = () => {
 
       <div className="flex flex-row w-screen">
         <div className="hidden md:block overflow-hidden w-0 md:w-1/3 md:min-w-1/3 relative p-8">
-          <button onClick={handleBackClick}>
+          <div className="pt-28 flex flex-col space-y-16">
+            {items.map((item, index) => (
+              <CircleListItem
+                key={index}
+                text={item}
+                onClick={() => handleItemClick(index)}
+                isSelected={selectedIndex === index}
+              />
+            ))}
+          </div>
+        </div>
+        <div className="relative">
+          <button className="absolute left-2 top-8" onClick={handleBackClick}>
             <div className="flex justify-center items-center bg-slate-300 h-8 w-8 rounded-full mb-10">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -82,21 +95,12 @@ export const SurveyPage = () => {
               </svg>
             </div>
           </button>
-          <div className="pt-12 flex flex-col space-y-16">
-            {items.map((item, index) => (
-              <CircleListItem
-                key={index}
-                text={item}
-                onClick={() => handleItemClick(index)}
-                isSelected={selectedIndex === index}
-              />
-            ))}
-          </div>
+
+          {selectedIndex == 0 ? <WhoSurvey /> : null}
+          {selectedIndex == 1 ? <WhenSurvey></WhenSurvey> : null}
+          {selectedIndex == 2 ? <HowSurvey></HowSurvey> : null}
+          {selectedIndex == 3 ? <ActivitySurvey></ActivitySurvey> : null}
         </div>
-        {selectedIndex == 0 ? <WhoSurvey /> : null}
-        {selectedIndex == 1 ? <WhenSurvey></WhenSurvey> : null}
-        {selectedIndex == 2 ? <HowSurvey></HowSurvey> : null}
-        {selectedIndex == 3 ? <ActivitySurvey></ActivitySurvey> : null}
       </div>
       <div className="fixed bottom-0 h-16 w-full border-t-2 bg-stone-50 shadow-gray-200 shadow-inner flex items-center justify-end pr-5">
         <button
