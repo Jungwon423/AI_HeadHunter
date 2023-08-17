@@ -38,13 +38,13 @@ const ActivitySurvey = () => {
         <div className="my-3 rounded-xl">
           {Object.entries(survey).map(([majorCategory, minorCategories]) => (
             <div
-              className="mt-3 shadow-md shadow-indigo-200 rounded-xl border-l-8 border-indigo-300"
+              className="mt-3 shadow-md shadow-indigo-200 rounded-xl rounded-t-none border-t-8 border-indigo-300"
               key={majorCategory}
             >
               <div className="font-bold pt-1 pl-2 text-gray-600 text-lg px-2">
                 {majorCategory}
               </div>
-              <div className="grid grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-4 p-2">
+              <div className="grid grid-cols-3 md:grid-cols-4 gap-4 p-2">
                 {minorCategories.map((minorCategory: MinorCategory) => (
                   <div
                     key={minorCategory.name}

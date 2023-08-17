@@ -111,25 +111,7 @@ const PreferencePage = () => {
     }
   }
 
-  return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="flex flex-col items-center justify-center">
-        <div className="rounded overflow-hidden border border-black">
-          <h2 className="text-2xl font-bold mb-2">Inferring</h2>
-          <p className="text-gray-600 text-lg">{preference.inferring}</p>
-        </div>
-        <div className="flex flex-col items-center justify-center">
-          <div className="rounded overflow-hidden border border-black">
-            <h2 className="text-2xl font-bold mb-2">Conclusion</h2>
-            <p className="text-gray-600 text-lg">{preference.conclusion}</p>
-          </div>
-        </div>
-        <button className={buttonClass} onClick={handleButtonClick}>
-          {buttonStatus}
-        </button>
-      </div>
-    </div>
-  )
+  return <div className="flex items-center justify-center h-96"></div>
 }
 
 export default PreferencePage
