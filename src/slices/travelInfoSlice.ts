@@ -9,14 +9,11 @@ import { MajorCategoriesWithMinorCategories } from '../interfaces/category'
 export interface TravelInfoState {
   user: string
   city: string
-
   travelId: string
-
   companion: string
   companion_adult?: string
   companion_child?: string
   companion_number?: number
-
   travel_start_date: string
   travel_end_date: string
   duration: number
@@ -41,11 +38,8 @@ export interface TravelInfoState {
 const initialState: TravelInfoState = {
   user: '',
   city: '서울',
-
   travelId: '',
-
   companion: '혼자',
-
   travel_start_date: '',
   travel_end_date: '',
   duration: 3,

@@ -39,7 +39,7 @@ const RecoContainer = () => {
                 >
                   <img
                     referrerPolicy="no-referrer"
-                    src={place.image!}
+                    src={place.naverImage!}
                     alt={place.name!}
                     width={170}
                     height={170}

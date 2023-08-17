@@ -6,6 +6,7 @@ const nextConfig = {
       'media.tacdn.com',
       'dbscthumb-phinf.pstatic.net',
       'media-cdn.tripadvisor.com',
+      'search.pstatic.net',
     ],
     minimumCacheTTL: 31536000,
     // formats: ['image/webp'],

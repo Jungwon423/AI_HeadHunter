@@ -72,6 +72,7 @@ export interface CityDetail {
   language: {
     langList: string[]
   }
+  naverImage: string
 }
 
 const initialState: CityDetail = {
@@ -123,6 +124,7 @@ const initialState: CityDetail = {
   shortestFlightInfo: { duration: 0, viaCount: 0 },
   timezone: { offset: 0 },
   language: { langList: [] },
+  naverImage: '',
 }
 
 export const CityDetailSlice = createSlice({
@@ -151,6 +153,13 @@ export const CityDetailSlice = createSlice({
 })
 export function convertToCityDetail(infos: any) {
   const destination = infos.destination_info
+  const originalUrl = destination.image.photoURL
+  const encodedUrl = encodeURIComponent(originalUrl)
+  const prefix = 'https://search.pstatic.net/common?src='
+  const suffix = '&type=m1500_travelsearch'
+
+  const apiUrl = prefix + encodedUrl + suffix
+  console.log(apiUrl)
   return {
     travel_id: destination._id,
     name_ko: destination.nameKo,
@@ -170,6 +179,7 @@ export function convertToCityDetail(infos: any) {
     shortestFlightInfo: destination.shortestFlightInfo,
     timezone: destination.timezone,
     language: destination.language,
+    naverImage: apiUrl,
   } as CityDetail
 }
 

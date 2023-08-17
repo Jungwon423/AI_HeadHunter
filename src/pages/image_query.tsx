@@ -99,9 +99,21 @@ const ImageQuery = () => {
   if (attractionQuery.loading === 'failed') {
     return <p>Error: {attractionQuery.error}</p>
   }
+  console.log(attractionQuery.query_list[count][1])
+  const originalUrl = attractionQuery.query_list[count][0].image!
+  const originalUrl2 = attractionQuery.query_list[count][1].image!
+  let encodedUrl = encodeURIComponent(originalUrl)
+  let encodedUrl2 = encodeURIComponent(originalUrl2)
+  const prefix = 'https://search.pstatic.net/common?src='
+  const suffix = '&type=w800_travelsearch'
 
-  console.log('image 1 : ', attractionQuery.query_list[count][0].image)
-  console.log('image 2 : ', attractionQuery.query_list[count][1].image)
+  // console.log('image 1 : ', attractionQuery.query_list[count][0].image)
+  // console.log('image 2 : ', attractionQuery.query_list[count][1].image)
+
+  const firstImage = prefix + encodedUrl + suffix
+  const secondImage = prefix + encodedUrl2 + suffix
+  console.log('FirstImage', firstImage)
+  console.log('SecondImage', secondImage)
 
   console.log(attractionQuery.query_list[count])
 
@@ -119,7 +131,7 @@ const ImageQuery = () => {
         <div className="relative w-1/2 h-full">
           <img
             referrerPolicy="no-referrer"
-            src={attractionQuery.query_list[count][0].image!}
+            src={firstImage}
             alt="Right Image"
             // fill
             sizes="undefined"
@@ -153,7 +165,7 @@ const ImageQuery = () => {
         <div className="relative w-1/2 h-full">
           <img
             referrerPolicy="no-referrer"
-            src={attractionQuery.query_list[count][1].image!}
+            src={secondImage}
             alt="Right Image"
             // fill
             sizes="undefined"

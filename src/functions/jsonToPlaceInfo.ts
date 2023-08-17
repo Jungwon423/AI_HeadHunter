@@ -24,11 +24,17 @@ export function convertToPlaceInfo(attraction: any): PlaceInfo {
   console.log('attraction.addressEn', attraction?.addressEn)
   console.log('attraction.homepage', attraction?.homepage)
   console.log('attraction.evaluation', attraction?.evaluation)
+  const originalUrl = attraction.image.photoURL
+  const encodedUrl = encodeURIComponent(originalUrl)
+  const prefix = 'https://search.pstatic.net/common?src='
+  const suffix = '&type=m1500_travelsearch'
+  const apiUrl = prefix + encodedUrl + suffix
 
   const placeInfo: PlaceInfo = {
     name: attraction.nameKo === null ? attraction.nameEn : attraction.nameKo,
     coordinate: [attraction.location?.lat, attraction.location?.lon],
     image: attraction.image?.photoURL,
+    naverImage: apiUrl,
     description: attraction.descriptionInfo?.publisher, // 이건 뭐냐?
     time: 15, // TODO
     summary: attraction.descriptionInfo?.publisher,

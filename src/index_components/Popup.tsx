@@ -230,8 +230,8 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
           <Image
             // 여기에 클래스 적용
             className="rounded"
-            src={cityDetail?.image.photoURL!}
-            alt="travel"
+            src={cityDetail?.naverImage!}
+            alt="image"
             width={300}
             height={200}
             quality={100}

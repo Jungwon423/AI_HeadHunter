@@ -5,6 +5,7 @@ export interface PlaceInfo {
   name?: string | null | undefined
   coordinate?: number[] | null | undefined
   image?: string | null | undefined
+  naverImage?: string | null | undefined
   description?: string | null | undefined
   time?: number | null | undefined
   summary?: Summary | null | undefined //editorial_summary, 짧은 설명
