@@ -117,10 +117,11 @@ const ImageQuery = () => {
       </div>
       <div className="flex justify-center items-center h-full bg-black">
         <div className="relative w-1/2 h-full">
-          <Image
+          <img
+            referrerPolicy="no-referrer"
             src={attractionQuery.query_list[count][0].image!}
             alt="Right Image"
-            fill
+            // fill
             sizes="undefined"
             onClick={() => handleImageClick('right')}
             style={{
@@ -140,20 +141,21 @@ const ImageQuery = () => {
           </div>
         </div>
         <div className="fixed z-10">
-          <Image
+          <img
             src="/assets/images/vs.png"
             onClick={() => handleImageClick('right')}
             alt="Right Image"
             width={150}
             height={150}
             style={{ width: '100%', height: 'auto' }}
-          ></Image>
+          ></img>
         </div>
         <div className="relative w-1/2 h-full">
-          <Image
+          <img
+            referrerPolicy="no-referrer"
             src={attractionQuery.query_list[count][1].image!}
             alt="Right Image"
-            fill
+            // fill
             sizes="undefined"
             onClick={() => handleImageClick('right')}
             style={{
