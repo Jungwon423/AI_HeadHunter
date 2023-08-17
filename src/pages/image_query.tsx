@@ -165,7 +165,6 @@ const ImageQuery = () => {
               height: '100%',
             }}
           />
-
           <div className="flex flex-col bg-gray-800 justify-end opacity-80 p-2">
             <div className="text-white text-base sm:text-xl font-bold mt-2 mb-2">
               {attractionQuery.query_list[count][1].name}
