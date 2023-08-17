@@ -6,9 +6,19 @@ import { SERVER_API_URL } from '../slices/api_url'
 import { AppThunk } from '../store'
 import { setImageQuery, setError, setLoading } from '../slices/imageQuerySlice'
 
+function convertImageListToPlaceInfoList(image: any): PlaceInfo {
+  return {
+    name: image.nameKo,
+    image: image.image.photoURL,
+    summary: {
+      overview: image.descriptionInfo.publisher,
+    },
+  }
+}
+
 export function processAttractionList(atttractionList: any): PlaceInfo[][] {
   return atttractionList.map((cluster: any) => {
-    const attractions = cluster.map(convertToPlaceInfo)
+    const attractions = cluster.map(convertImageListToPlaceInfoList)
     return [...attractions]
   })
 }
@@ -26,7 +36,7 @@ export const fetchImageQuery = async (
 
   const response = await axios.post(API_URL, ImageQueryInput, config)
 
-  console.log('response.data : ', response.data)
+  console.log('response.data : ', response.data.query_list)
 
   const placeInfos: PlaceInfo[][] = processAttractionList(
     response.data.query_list,

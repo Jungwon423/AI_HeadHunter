@@ -72,8 +72,7 @@ const ImageQuery = () => {
     }
   }
 
-  if (count === resultList.length && count !== 0) {
-    // TODO 길이 가변적으로 수정하기
+  if (count === attractionQuery.query_list.length && count !== 0) {
     router.push('/preference')
     return (
       <div className="flex items-center justify-center h-screen">
@@ -105,10 +104,10 @@ const ImageQuery = () => {
     <div className="flex flex-col h-screen">
       <div className="flex justify-center items-center w-screen h-28">
         <div className="text-2xl md:text-4xl xl:text-5xl font-bold">
-          여행 이상형 월드컵 16강
+          관광명소 월드컵
         </div>
         <div className="font-bold text-2xl md:text-4xl xl:text-5xl ml-5">
-          {count + 1}/8
+          {count + 1} / {attractionQuery.query_list.length}
         </div>
       </div>
       <div className="flex justify-center items-center h-full bg-black">
