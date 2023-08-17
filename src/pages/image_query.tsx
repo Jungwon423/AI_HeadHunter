@@ -123,6 +123,8 @@ const ImageQuery = () => {
         <div className="text-2xl md:text-4xl xl:text-5xl font-bold">
           관광명소 월드컵
         </div>
+        <div className="">{attractionQuery.query_list[count][0].name}</div>
+        <div className="">{attractionQuery.query_list[count][1].name}</div>
         <div className="font-bold text-2xl md:text-4xl xl:text-5xl ml-5">
           {count + 1} / {attractionQuery.query_list.length}
         </div>
