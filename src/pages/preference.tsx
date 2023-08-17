@@ -49,6 +49,7 @@ const PreferencePage = () => {
       user: userId,
       answers: resultList as ZeroOrOne[],
     }
+    console.log('preferenceInput: ', PreferenceInput)
     if (preferenceLoaded === false) {
       console.log('preferenceLoaded: ' + preferenceLoaded)
       console.log('preference Input: ', PreferenceInput)

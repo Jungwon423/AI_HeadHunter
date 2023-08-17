@@ -38,8 +38,8 @@ const RecoContainer = () => {
                   }}
                 >
                   <img
-                    src={place.image}
-                    alt={place.name}
+                    src={place.image!}
+                    alt={place.name!}
                     width={170}
                     height={170}
                     className="rounded-xl"

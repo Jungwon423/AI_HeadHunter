@@ -24,7 +24,8 @@ export const fetchPreference = async (
     withCredentials: true,
   }
 
-  let API_URL: string = SERVER_API_URL + '/travel/attractionQueryAnswer'
+  let API_URL: string =
+    SERVER_API_URL + '/preference/attractionImageQueryAnswer'
 
   console.log('API_URL', API_URL)
 
@@ -33,6 +34,8 @@ export const fetchPreference = async (
     PreferenceInput,
     config,
   )
+
+  console.log('response.data', response.data)
 
   return response.data
 }

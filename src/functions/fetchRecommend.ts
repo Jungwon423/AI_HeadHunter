@@ -8,15 +8,17 @@ import { AppThunk } from '../store'
 import { setAttractions, setError, setLoading } from '../slices/recommendSlice'
 
 export interface ResponseData {
-  cluster_attractions: Cluster[]
-  not_recommended_attractions: Cluster[]
+  clustered_recommended_attractions: Cluster[]
+  // not_recommended_attractions: Cluster[]
 }
 
 export function processCluster(clusterArray: Cluster[]): PlaceInfo[][] {
   return clusterArray.map((cluster) => {
+    console.log('cluster.attractions', cluster.attractions)
     const attractions = cluster.attractions.map(convertToPlaceInfo)
     // const restaurants = cluster.restaurants.map(convertToPlaceInfo)
     // return [...attractions, ...restaurants]
+    console.log('attractions', attractions)
     return [...attractions]
   })
 }
@@ -28,7 +30,9 @@ export const fetchRecommendAttractions = async (
     withCredentials: true,
   }
 
-  let API_URL: string = SERVER_API_URL + '/travel/recommendAttractions'
+  console.log('recommendInput', recommendInput)
+
+  let API_URL: string = SERVER_API_URL + '/preference/attractionRecommendation'
 
   console.log('API_URL', API_URL)
 
@@ -38,11 +42,11 @@ export const fetchRecommendAttractions = async (
     config,
   )
 
-  console.log('response', response)
+  console.log('response.data : ', response.data)
 
   // 이중 for문을 사용하여 JSON 데이터를 placeInfo[][]로 변환합니다.
   const placeInfos: PlaceInfo[][] = processCluster(
-    response.data.cluster_attractions,
+    response.data.clustered_recommended_attractions,
   )
   return placeInfos
 }

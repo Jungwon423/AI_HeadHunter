@@ -2,26 +2,50 @@ import { PlaceInfo } from '../interfaces/placeInfo'
 
 // placeInfo 객체와 JSON 객체 간의 변환을 수행하는 함수를 작성합니다.
 export function convertToPlaceInfo(attraction: any): PlaceInfo {
-  return {
-    name: attraction.name,
-    coordinate: [
-      attraction.geometry.location.lat,
-      attraction.geometry.location.lng,
-    ],
-    image: attraction.img,
-    description: attraction.description,
-    time: 15,
-    summary: attraction.editorial_summary,
-    rating: attraction.rating,
-    ratingCount: attraction.user_ratings_total,
-    hashtags: attraction.types,
-    phoneNumber: attraction.international_phone_number,
-    location: attraction.formatted_address,
-    googleUrl: attraction.url,
-    website: attraction.website,
-    openingHours: attraction.current_opening_hours,
-    thought: attraction.thought,
-    wheelchair: attraction.wheelchair_accessible_entrance,
-    reviews: attraction.reviews,
+  console.log('attraction', attraction)
+  console.log('attraction.nameKo', attraction.nameKo)
+  console.log('attraction.nameEn', attraction.nameEn)
+  console.log('attraction.location.lat', attraction.location?.lat)
+  console.log('attraction.location.lon', attraction.location?.lon)
+  console.log('attraction.image.photoURL', attraction.image?.photoURL)
+  console.log(
+    'attraction.descriptionInfo.publisher',
+    attraction.descriptionInfo.publisher,
+  )
+  console.log(
+    'attraction.quality.averageRating',
+    attraction.quality.averageRating,
+  )
+  console.log('attraction.quality.ranking', attraction.quality?.ranking)
+  console.log('attraction.datalab.keywordObj', attraction.datalab?.keywordObj)
+  console.log('attraction.datalab.keywordPop', attraction.datalab?.keywordPop)
+  console.log('attraction.phoneNumber', attraction?.phoneNumber)
+  console.log('attraction.addressKo', attraction?.addressKo)
+  console.log('attraction.addressEn', attraction?.addressEn)
+  console.log('attraction.homepage', attraction?.homepage)
+  console.log('attraction.evaluation', attraction?.evaluation)
+
+  const placeInfo: PlaceInfo = {
+    name: attraction.nameKo === null ? attraction.nameEn : attraction.nameKo,
+    coordinate: [attraction.location?.lat, attraction.location?.lon],
+    image: attraction.image?.photoURL,
+    description: attraction.descriptionInfo?.publisher, // 이건 뭐냐?
+    time: 15, // TODO
+    summary: attraction.descriptionInfo?.publisher,
+    rating: attraction.quality?.averageRating,
+    ratingCount: attraction.quality?.rankingDenominator,
+    hashtags: attraction.datalab?.keywordObj, // or attraction.datalab.keywordPop
+    phoneNumber: attraction.phoneNumber,
+    location:
+      attraction.addressKo === null
+        ? attraction.addressEn
+        : attraction.addressKo,
+    // googleUrl: attraction.google_url,
+    website: attraction.homepage,
+    // openingHours: attraction.current_opening_hours,
+    thought: attraction.evaluation,
+    // wheelchair: attraction.wheelchair_accessible_entrance,
+    // reviews: attraction.reviews,
   } as PlaceInfo
+  return placeInfo
 }
