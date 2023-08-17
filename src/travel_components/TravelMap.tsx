@@ -103,11 +103,14 @@ const TravelMap = () => {
     zoom: 11.7,
   })
   useEffect(() => {
-    if (selectedPlace?.coordinate !== undefined) {
+    if (
+      selectedPlace?.coordinate !== undefined &&
+      selectedPlace?.coordinate !== null
+    ) {
       console.log(selectedPlace?.coordinate)
       onSelectCity({
-        longitude: selectedPlace?.coordinate[1]!,
-        latitude: selectedPlace?.coordinate[0]!,
+        longitude: selectedPlace?.coordinate[1] ?? 0,
+        latitude: selectedPlace?.coordinate[0] ?? 0,
       })
     }
   }, [selectedPlace])

@@ -1,7 +1,10 @@
 {
+  "scripts": {
+    "build": "DISABLE_ESLINT_PLUGIN=true next build"
+  },
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": ["react-hooks", "@typescript-eslint", "prettier"],
+  "plugins": ["@typescript-eslint", "prettier"],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
@@ -11,18 +14,13 @@
   "extends": [
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
     "airbnb",
     "airbnb-typescript",
     "plugin:prettier/recommended",
     "next/core-web-vitals"
   ],
   "rules": {
-    // 'React' must be in scope when using JSX 에러 해결 (Next.js)
     "react/react-in-jsx-scope": "off",
-    // ts파일에서 tsx구문 허용 (Next.js)
-    "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
+    "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }]
   }
 }

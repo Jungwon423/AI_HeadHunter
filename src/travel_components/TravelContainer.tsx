@@ -26,7 +26,7 @@ const TravelContainer = () => {
       <div className="w-full">
         <Image
           src={selectedPlace?.image!}
-          alt={selectedPlace?.name}
+          alt={selectedPlace?.name! ?? ''}
           width={384}
           height={280}
           style={{

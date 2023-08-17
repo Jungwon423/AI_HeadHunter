@@ -24,8 +24,8 @@ const GuideContainer = () => {
             <div className="flex">
               <div className="w-42">
                 <Image
-                  src={placeInfo.image}
-                  alt={placeInfo.name}
+                  src={placeInfo.image ?? '/default-image.jpg'}
+                  alt={placeInfo.name!}
                   width={150}
                   height={200}
                   objectFit="cover"
