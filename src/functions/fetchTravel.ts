@@ -30,7 +30,7 @@ export const fetchTravelSchedule = async (
 
   // 이중 for문을 사용하여 JSON 데이터를 placeInfo[][]로 변환합니다.
   const placeInfos: PlaceInfo[][] = processCluster(
-    response.data.cluster_attractions,
+    response.data.clustered_recommended_attractions,
   )
   return placeInfos
 }
