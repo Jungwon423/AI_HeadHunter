@@ -38,6 +38,7 @@ const RecoContainer = () => {
                   }}
                 >
                   <img
+                    referrerPolicy="no-referrer"
                     src={place.image!}
                     alt={place.name!}
                     width={170}
