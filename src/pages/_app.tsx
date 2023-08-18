@@ -4,6 +4,7 @@ import { store } from '../store'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistStore } from 'redux-persist'
+import HeaderLayout from '../layout/header'
 
 const persistor = persistStore(store)
 
