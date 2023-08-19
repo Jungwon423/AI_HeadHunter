@@ -8,7 +8,7 @@ import { setImageQuery, setError, setLoading } from '../slices/imageQuerySlice'
 
 function convertImageListToPlaceInfoList(image: any): PlaceInfo {
   return {
-    name: image.nameKo,
+    name: image.nameKo ? image.nameKo : image.nameEn,
     image: image.image.photoURL,
     summary: {
       overview: image.descriptionInfo.publisher,

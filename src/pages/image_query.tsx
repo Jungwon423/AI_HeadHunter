@@ -23,8 +23,13 @@ import { fetchImageQueryAsync } from '../functions/fetchImageQuery'
 import { MajorCategoriesWithMinorCategories } from '../interfaces/category'
 import FallbackImage from '../components/FallbackImage'
 import DelayedImage from '../components/DelayedImage'
+import Loading2 from '../components/loading2'
+import ImageWithSkeleton from './imageWithSkeleton'
+import MyNavbar from '../components/MyNavbar'
+import NameAndDescription from '../image_query_component/name_and_description'
 
 const ImageQuery = () => {
+  const [isLoading, setIsLoading] = useState(true)
   const [count, setCount] = useState(0)
 
   const router = useRouter()
@@ -67,10 +72,12 @@ const ImageQuery = () => {
     console.log('resultList : ' + resultList)
     if (image === 'left') {
       dispatch(setResultList(0))
+      setIsLoading(true)
       setCount(count + 1)
     } else if (image === 'right') {
       dispatch(setResultList(1))
       setCount(count + 1)
+      setIsLoading(true)
     }
   }
 
@@ -83,19 +90,11 @@ const ImageQuery = () => {
     )
   }
 
-  if (attractionQuery.loading === 'idle') {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <p>Loading...</p>
-      </div>
-    )
-  }
-  if (attractionQuery.loading === 'pending') {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <p>Loading...</p>
-      </div>
-    )
+  if (
+    attractionQuery.loading === 'idle' ||
+    attractionQuery.loading === 'pending'
+  ) {
+    return <Loading2></Loading2>
   }
 
   if (attractionQuery.loading === 'failed') {
@@ -132,65 +131,69 @@ const ImageQuery = () => {
 
   return (
     <div className="flex flex-col h-screen">
+      <MyNavbar></MyNavbar>
       <div className="flex justify-center items-center w-screen h-28">
         <div className="text-2xl md:text-4xl xl:text-5xl font-bold">
           관광명소 월드컵
         </div>
-        <div className="">{attractionQuery.query_list[count][0].name}</div>
-        <div className="">{attractionQuery.query_list[count][1].name}</div>
         <div className="font-bold text-2xl md:text-4xl xl:text-5xl ml-5">
           {count + 1} / {attractionQuery.query_list.length}
         </div>
       </div>
       <div className="flex justify-center items-center h-full bg-black">
         <div className="relative w-1/2 h-full">
-          <img
+          <Image
             referrerPolicy="no-referrer"
             src={originalUrl}
             alt="Right Image"
-            // fill
+            fill
             sizes="undefined"
-            onClick={() => handleImageClick('left')}
+            onClick={() => {
+              handleImageClick('left')
+            }}
+            placeholder="blur"
+            blurDataURL="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=="
             style={{
               objectPosition: 'right',
               objectFit: 'contain',
               maxWidth: '100%',
               height: '100%',
+              display: isLoading ? 'block' : 'none', // 이미지가 로드된 경우에만 보이게 함
+            }}
+            onLoadStart={() => {
+              console.log('time : ', new Date())
+            }}
+            onLoadingComplete={() => {
+              console.log('time : ', new Date())
             }}
           />
-          {/* <DelayedImage
-            src={firstImage}
-            alt="Image 1"
-            width={400}
-            height={300}
-            delay={500}
-          /> */}
-          <div className="flex flex-col bg-gray-800 justify-end opacity-80 p-2">
-            <div className="flex justify-end text-white text-base sm:text-xl font-bold mt-2 mb-2">
-              {attractionQuery.query_list[count][0].name}
-            </div>
-            <div className="flex justify-end text-white text-xs sm:text-sm mt-3 mb-3">
-              {attractionQuery.query_list[count][0].summary?.overview}
-            </div>
-          </div>
+
+          <NameAndDescription
+            name={attractionQuery.query_list[count][0].name ?? ''}
+            description={
+              attractionQuery.query_list[count][0].summary?.overview ?? ''
+            }
+          ></NameAndDescription>
         </div>
         <div className="fixed z-10">
-          <img
+          <Image
             src="/assets/images/vs.png"
             onClick={() => handleImageClick('right')}
             alt="Right Image"
             width={150}
             height={150}
             style={{ width: '100%', height: 'auto' }}
-          ></img>
+          ></Image>
         </div>
         <div className="relative w-1/2 h-full">
-          <img
+          <Image
             referrerPolicy="no-referrer"
             src={originalUrl2}
             alt="Right Image"
-            // fill
+            fill
             sizes="undefined"
+            placeholder="blur"
+            blurDataURL="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=="
             onClick={() => handleImageClick('right')}
             style={{
               objectPosition: 'right',
@@ -199,21 +202,12 @@ const ImageQuery = () => {
               height: '100%',
             }}
           />
-          {/* <DelayedImage
-            src={secondImage}
-            alt="Image 2"
-            width={400}
-            height={300}
-            delay={1500} // 1초 지연
-          /> */}
-          <div className="flex flex-col bg-gray-800 justify-end opacity-80 p-2">
-            <div className="text-white text-base sm:text-xl font-bold mt-2 mb-2">
-              {attractionQuery.query_list[count][1].name}
-            </div>
-            <div className="text-white text-xs sm:text-sm mt-3 mb-3">
-              {attractionQuery.query_list[count][1].summary?.overview}
-            </div>
-          </div>
+          <NameAndDescription
+            name={attractionQuery.query_list[count][1].name ?? ''}
+            description={
+              attractionQuery.query_list[count][1].summary?.overview ?? ''
+            }
+          ></NameAndDescription>
         </div>
       </div>
     </div>
