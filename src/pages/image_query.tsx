@@ -27,9 +27,12 @@ import Loading2 from '../components/loading2'
 import ImageWithSkeleton from './imageWithSkeleton'
 import MyNavbar from '../components/MyNavbar'
 import NameAndDescription from '../image_query_component/name_and_description'
+import { set } from 'date-fns'
 
 const ImageQuery = () => {
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading1, setIsLoading1] = useState(false)
+
+  const [isLoading2, setIsLoading2] = useState(false)
   const [count, setCount] = useState(0)
 
   const router = useRouter()
@@ -64,30 +67,26 @@ const ImageQuery = () => {
 
   useEffect(() => {
     dispatch(initialize())
-    console.log('ImageQueryInput : ', ImageQueryInput)
     dispatch(fetchImageQueryAsync(ImageQueryInput))
   }, [])
 
   const handleImageClick = (image: string) => {
-    console.log('resultList : ' + resultList)
     if (image === 'left') {
       dispatch(setResultList(0))
-      setIsLoading(true)
+      setIsLoading1(true)
+      setIsLoading2(true)
       setCount(count + 1)
     } else if (image === 'right') {
       dispatch(setResultList(1))
       setCount(count + 1)
-      setIsLoading(true)
+      setIsLoading1(true)
+      setIsLoading2(true)
     }
   }
 
   if (count === attractionQuery.query_list.length && count !== 0) {
     router.push('/preference')
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <p>query complete!</p>
-      </div>
-    )
+    return <Loading2></Loading2>
   }
 
   if (
@@ -103,6 +102,7 @@ const ImageQuery = () => {
   const prefix = 'https://search.pstatic.net/common?src='
   const suffix = '&type=m1500_travelsearch'
   const suffix2 = '&type=w800_travelsearch'
+
   const encodingFirst = (url: string) => {
     let encodedUrl = encodeURIComponent(url)
     let firstImage = prefix + encodedUrl + suffix
@@ -121,18 +121,13 @@ const ImageQuery = () => {
   let firstImage2 = encodingFirst(originalUrl)[1]
   let secondImage = encodingSecond(originalUrl2)[0]
   let secondImage2 = encodingSecond(originalUrl2)[1]
-  console.log('firstImage : ', firstImage)
-  console.log('secondImage : ', secondImage)
 
-  // console.log('image 1 : ', attractionQuery.query_list[count][0].image)
-  // console.log('image 2 : ', attractionQuery.query_list[count][1].image)
-
-  console.log(attractionQuery.query_list[count])
+  console.log('imageUrl1', originalUrl)
+  console.log('imageUrl2', originalUrl2)
 
   return (
     <div className="flex flex-col h-screen">
       <div className="w-full"></div>
-      <MyNavbar></MyNavbar>
       <div className="flex justify-center items-center w-screen h-28">
         <div className="text-2xl md:text-4xl xl:text-5xl font-bold">
           관광명소 월드컵
@@ -144,37 +139,37 @@ const ImageQuery = () => {
       <div className="flex justify-center items-center h-full bg-black">
         <div className="relative w-1/2 h-full">
           <Image
+            property="true"
             referrerPolicy="no-referrer"
             src={originalUrl}
-            alt="Right Image"
+            alt="Left Image"
             fill
             sizes="undefined"
-            onClick={() => {
-              handleImageClick('left')
-            }}
             placeholder="blur"
             blurDataURL="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=="
+            onClick={() => handleImageClick('right')}
             style={{
-              objectPosition: 'right',
+              objectPosition: 'left',
               objectFit: 'contain',
               maxWidth: '100%',
               height: '100%',
-              display: isLoading ? 'block' : 'none', // 이미지가 로드된 경우에만 보이게 함
+              display: isLoading1 ? 'none' : '',
             }}
             onLoadStart={() => {
-              console.log('time : ', new Date())
+              console.log('loading')
             }}
             onLoadingComplete={() => {
-              console.log('time : ', new Date())
+              setIsLoading1(false)
+              console.log('loading complete')
             }}
           />
-
           <NameAndDescription
             name={attractionQuery.query_list[count][0].name ?? ''}
             description={
               attractionQuery.query_list[count][0].summary?.overview ?? ''
             }
           ></NameAndDescription>
+          {isLoading1 && <Loading2></Loading2>}
         </div>
         <div className="fixed z-10">
           <Image
@@ -201,6 +196,10 @@ const ImageQuery = () => {
               objectFit: 'contain',
               maxWidth: '100%',
               height: '100%',
+              display: isLoading2 ? 'none' : '',
+            }}
+            onLoadingComplete={() => {
+              setIsLoading2(false)
             }}
           />
           <NameAndDescription
@@ -209,6 +208,7 @@ const ImageQuery = () => {
               attractionQuery.query_list[count][1].summary?.overview ?? ''
             }
           ></NameAndDescription>
+          {isLoading2 && <Loading2></Loading2>}
         </div>
       </div>
     </div>
