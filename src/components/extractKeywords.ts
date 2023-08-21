@@ -3,6 +3,7 @@ import nlp from 'compromise'
 export const extractKeywords = (text: string): string[] => {
   const doc = nlp(text)
   const keywords = doc.nouns().out('array').concat(doc.verbs().out('array'))
+  console.log(keywords)
   return keywords
 }
 

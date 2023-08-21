@@ -12,13 +12,15 @@ import {
 import { RecommendInput } from '../interfaces/recommendInput'
 
 import Loading from '../components/loading'
-
+import Image from 'next/image'
 import {
   PreferenceInput,
   fetchPreferenceAsync,
 } from '../functions/fetchPreference'
 import { ZeroOrOne } from '../interfaces/zeroOrOne'
 import { fetchRecommendAttractionsAsync } from '../functions/fetchRecommend'
+import MyNavbar from '../components/MyNavbar'
+import { selectCityDetail } from '../slices/cityDetailSlice'
 
 const PreferencePage = () => {
   const router = useRouter()
@@ -38,6 +40,9 @@ const PreferencePage = () => {
 
   const [preferenceLoaded, setPreferenceLoaded] = useState(false)
   const [scheduleLoaded, setScheduleLoaded] = useState(false)
+
+  const cityDetail = useSelector(selectCityDetail)
+  const city = cityDetail.city_detail
 
   useEffect(() => {
     dispatch(initialize())
@@ -112,14 +117,22 @@ const PreferencePage = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <div className="w-[800px]">
-        ddddd
-        <div className="text-gray-600 text-lg">{preference.inferring}</div>
-        <div className="text-gray-600 text-lg">{preference.conclusion}</div>
-        <button className={buttonClass} onClick={handleButtonClick}>
-          {buttonStatus}
-        </button>
+    <div className="w-screen h-screen">
+      <MyNavbar></MyNavbar>
+
+      <div className="bg-indigo-100 h-screen flex items-center justify-center">
+        <div className='rounded-xl flex flex-row justify-center w-[950px] h-[550px] bg-cover bg-[url("/assets/postcard.png")]'>
+          <div className="w-1/2">
+            <div className="relative top-[300px] text-gray-600 p-10">
+              {preference.conclusion}
+            </div>
+          </div>
+          <div className="w-1/2">
+            <div className="leading-6 relative top-[260px] text-sm text-gray-600 p-10">
+              {preference.inferring}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )

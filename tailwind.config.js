@@ -47,6 +47,10 @@ module.exports = {
       lineHeight: {
         hero: '4.5rem',
       },
+      backgroundImage: {
+        pattern1: "url('/assets/pattern1.png')",
+        pattern2: "url('/assets/pattern2.png')",
+      },
     },
   },
   plugins: [],
