@@ -67,12 +67,17 @@ const ActivitySurvey = () => {
                         />
                       </div>
                     )}
-                    <div className="flex justify-center items-center px-3 pt-4 pb-2">
+                    <div className="flex justify-center items-center h-24 px-3 pt-4 pb-2">
                       <Image
-                        src="/assets/icons/테마파크.png"
+                        src={`/assets/icons/${minorCategory.name}.png`}
                         alt="대체_텍스트"
-                        width={70}
-                        height={70}
+                        width={80}
+                        height={80}
+                        style={{
+                          objectFit: 'fill',
+                          height: '100%',
+                          width: 'auto',
+                        }}
                       />
                     </div>
                     <div className="flex justify-center text-stone-500 text-base font-bold">

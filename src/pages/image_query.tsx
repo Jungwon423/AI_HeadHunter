@@ -146,7 +146,7 @@ const ImageQuery = () => {
             referrerPolicy="no-referrer"
             src={originalUrl}
             alt="Right Image"
-            // fill
+            fill
             sizes="undefined"
             onClick={() => {
               handleImageClick('left')
