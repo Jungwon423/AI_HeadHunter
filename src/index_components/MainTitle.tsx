@@ -1,6 +1,6 @@
 const MainTitle = () => {
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center mb-10">
       <h1 className="text-black text-2xl md:text-3xl xl:text-4xl font-bold text-center">
         AI가 만드는 당신만의 여행
       </h1>

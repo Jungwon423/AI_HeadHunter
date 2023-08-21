@@ -36,14 +36,9 @@ const WhenSurvey = () => {
         <div className="text-base font-bold text-indigo-500 pt-3 pb-7">
           현재 30박 31일까지 선택가능합니다.
         </div>
-        <MyDatePicker
-          startDate={startDate}
-          endDate={endDate}
-          onDatesChange={handleDatesChange}
-        ></MyDatePicker>
 
-        <div className="flex flex-row">
-          <div className="py-2 border-t-2">
+        <div className="flex flex-row pb-10">
+          <div className="py-2 border-b-2">
             <div className="font-bold">가는날</div>
             {startDate ? (
               <div className="font-bold text-lg text-indigo-600">
@@ -59,7 +54,7 @@ const WhenSurvey = () => {
               </div>
             )}
           </div>
-          <div className="pl-10 py-2 border-t-2">
+          <div className="pl-10 py-2 border-b-2">
             <div className="font-bold">오는날</div>
             {endDate ? (
               <div className="font-bold text-lg text-indigo-600">
@@ -75,9 +70,9 @@ const WhenSurvey = () => {
               </div>
             )}
           </div>
-          <div className="flex flex-grow-0 md:flex-grow border-t-2"></div>
+          <div className="flex flex-grow-0 md:flex-grow border-b-2"></div>
           {startDate && endDate ? (
-            <div className="pl-10 pt-4 border-t-2">
+            <div className="pl-10 pt-4 border-b-2">
               <div className="w-auto px-4 py-2 rounded-md bg-indigo-400 flex items-center justify-center">
                 <span className="text-center text-white text-sm md:text-base">
                   {(() => {
@@ -98,6 +93,12 @@ const WhenSurvey = () => {
             </div>
           ) : null}
         </div>
+
+        <MyDatePicker
+          startDate={startDate}
+          endDate={endDate}
+          onDatesChange={handleDatesChange}
+        ></MyDatePicker>
       </div>
     </div>
   )

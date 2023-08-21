@@ -14,19 +14,19 @@ const ButtonWithImage: React.FC<ButtonWithImageProps> = ({
   detailText,
 }) => {
   return (
-    <button className="flex flex-col w-[70px] h-18 mr-2 mb-2 px-2 py-2 bg-gray-50 rounded-md shadow-sm">
+    <button className="flex flex-col w-24 h-18 mr-2 mb-2 px-2 py-2 bg-gray-50 rounded-md shadow-sm">
       <div className="flex flex-row pb-3">
         <Image
           src={imageSrc}
           alt={text}
-          width={25}
-          height={25}
+          width={30}
+          height={30}
           style={{
             height: 'auto',
           }}
           className="px-1"
         />
-        <div className="pl-1 text-[8px]">{text}</div>
+        <div className="pl-1 text-[15px] font-semibold font-sans">{text}</div>
       </div>
       {detailText}
     </button>

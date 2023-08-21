@@ -100,12 +100,12 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
         >
           X
         </button>
-        <div className="flex-col w-80 mx-6">
-          <div className="text-2xl font-bold">{cityDetail?.name_ko}</div>
-          <div className="mb-3 text-xl text-gray-700 font-medium">
+        <div className="flex-col w-96 mx-6">
+          <div className="text-3xl font-bold">{cityDetail?.name_ko}</div>
+          <div className="mb-3 text-2xl text-gray-700 font-medium">
             {cityDetail?.name_en}
           </div>
-          <div className="text-xs mb-2 text-gray-500 font-bold">
+          <div className="text-sm mb-2 text-gray-500 font-bold">
             {cityDetail?.descriptionInfo.publisher}
           </div>
           <div className="flex pt-1">
@@ -116,7 +116,10 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
                 detailText={
                   <div>
                     {cityDetail?.weatherRecommend.season.map((month, index) => (
-                      <div className="pl-1 text-[8px]" key={index}>
+                      <div
+                        className="pl-1 text-[15px] font-semibold"
+                        key={index}
+                      >
                         {month}
                       </div>
                     ))}
@@ -128,7 +131,11 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
               <ButtonWithImage
                 imageSrc="/assets/buttonIcon/plane.png"
                 text="항공"
-                detailText={<div className="pl-1 text-[8px]">{flightText}</div>}
+                detailText={
+                  <div className="pl-1 text-[15px] font-semibold">
+                    {flightText}
+                  </div>
+                }
               />
             ) : null}
             {cityDetail?.visaInfo ? (
@@ -140,7 +147,9 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
                     <div className="text-[7px] text-gray-600 font-bold">
                       {splittedVisa![0]}
                     </div>
-                    <div className="pl-1 text-[8px]">{splittedVisa![1]}</div>
+                    <div className="text-[15px] font-semibold">
+                      {splittedVisa![1]}
+                    </div>
                   </div>
                 }
               />

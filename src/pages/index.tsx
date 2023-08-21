@@ -36,7 +36,7 @@ export default function Home() {
         {/* <div className="py-10">
           <MapboxGeocoderContainer accessToken={TOKEN} />
         </div> */}
-        <div className="pt-10 flex flex-col justify-center items-center">
+        <div className="pt-10 flex flex-col justify-center items-center pb-20">
           <ContinentInput openPopup={openPopup}></ContinentInput>
         </div>
         <Popup isOpen={isPopupOpen} onClose={closePopup}></Popup>{' '}
@@ -44,15 +44,19 @@ export default function Home() {
         <div className="pt-20 md:text-base sm:text-xl xl:text-2xl font-bold">
           추천 여행지 TOP 11
         </div>
-        <TravelCarousel></TravelCarousel>
-        <ImageExplain
-          left={true}
-          h1Text={'AI가 생성한 여행지를 지금 바로 확인해보세요!'}
-          pText={
-            '여행지에 대한 다양한 정보들과 AI가 추천한 이유를 확인할 수 있어요.'
-          }
-          image={'/assets/screenshot/screenshot2.png'}
-        ></ImageExplain>
+        <div className="pb-40">
+          <TravelCarousel></TravelCarousel>
+        </div>
+        <div className="pb-40">
+          <ImageExplain
+            left={true}
+            h1Text={'AI가 생성한 여행지를 지금바로 확인해보세요!'}
+            pText={
+              '여행지에 대한 다양한 정보들과 AI가 추천한 이유를 확인할 수 있어요.'
+            }
+            image={'/assets/screenshot/screenshot2.png'}
+          ></ImageExplain>
+        </div>
         <ImageExplain
           left={false}
           h1Text={'여행 이상형 월드컵으로 AI에게 여행지 추천받기'}

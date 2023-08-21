@@ -68,7 +68,7 @@ const WhoSurvey = () => {
           selectedSurvey={selectedSurvey3}
           onSurveyClick={handleSurveys3Click}
         ></SimpleButtons>
-        <div className="flex font-bold text-xl pt-3">나이</div>
+        <div className="flex font-bold text-xl pt-10">나이</div>
         <SurveyButton
           surveys={['10대', '20대', '30대', '40대', '50대', '60대 이상']}
           selectedSurveys={selectedSurveys}
