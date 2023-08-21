@@ -144,11 +144,24 @@ const ImageQuery = () => {
       </div>
       <div className="flex justify-center items-center h-full bg-black">
         <div className="relative w-1/2 h-full">
-          <img
+          {/* <img
             referrerPolicy="no-referrer"
             src={originalUrl}
             alt="Right Image"
-            // fill
+            sizes="undefined"
+            onClick={() => handleImageClick('left')}
+            style={{
+              objectPosition: 'right',
+              objectFit: 'contain',
+              width: '100%',
+              height: '100%',
+            }}
+          /> */}
+          <Image
+            src={attractionQuery.query_list[count][0].image!}
+            referrerPolicy="no-referrer"
+            alt="Left Image"
+            fill
             sizes="undefined"
             onClick={() => handleImageClick('left')}
             style={{
@@ -158,13 +171,6 @@ const ImageQuery = () => {
               height: '100%',
             }}
           />
-          {/* <DelayedImage
-            src={firstImage}
-            alt="Image 1"
-            width={400}
-            height={300}
-            delay={500}
-          /> */}
           <div className="flex flex-col bg-gray-800 justify-end opacity-80 p-2">
             <div className="flex justify-end text-white text-base sm:text-xl font-bold mt-2 mb-2">
               {attractionQuery.query_list[count][0].name}
@@ -185,27 +191,32 @@ const ImageQuery = () => {
           ></img>
         </div>
         <div className="relative w-1/2 h-full">
-          <img
+          {/* <img
             referrerPolicy="no-referrer"
             src={originalUrl2}
             alt="Right Image"
-            // fill
+            onClick={() => handleImageClick('right')}
+            style={{
+              objectPosition: 'left',
+              objectFit: 'contain',
+              width: '100%',
+              height: '100%',
+            }}
+          /> */}
+          <Image
+            src={attractionQuery.query_list[count][1].image!}
+            referrerPolicy="no-referrer"
+            alt="Right Image"
+            fill
             sizes="undefined"
             onClick={() => handleImageClick('right')}
             style={{
-              objectPosition: 'right',
+              objectPosition: 'left',
               objectFit: 'contain',
               maxWidth: '100%',
               height: '100%',
             }}
           />
-          {/* <DelayedImage
-            src={secondImage}
-            alt="Image 2"
-            width={400}
-            height={300}
-            delay={1500} // 1초 지연
-          /> */}
           <div className="flex flex-col bg-gray-800 justify-end opacity-80 p-2">
             <div className="text-white text-base sm:text-xl font-bold mt-2 mb-2">
               {attractionQuery.query_list[count][1].name}

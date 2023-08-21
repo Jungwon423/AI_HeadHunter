@@ -47,7 +47,7 @@ export default function Home() {
         <TravelCarousel></TravelCarousel>
         <ImageExplain
           left={true}
-          h1Text={'AI가 생성한 여행지를 지금바로 확인해보세요!'}
+          h1Text={'AI가 생성한 여행지를 지금 바로 확인해보세요!'}
           pText={
             '여행지에 대한 다양한 정보들과 AI가 추천한 이유를 확인할 수 있어요.'
           }

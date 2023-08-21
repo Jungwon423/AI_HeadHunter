@@ -1,7 +1,19 @@
 import Image from 'next/image'
 import DelayedImage from '../components/DelayedImage'
+import { useState } from 'react'
+import { extractKeywords } from '../components/extractKeywords'
+import KeywordImage from '../components/KeywordImage'
 
 const PreferencePage = () => {
+  const [text, setText] = useState('')
+  const [keywords, setKeywords] = useState<string[]>([])
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault()
+    const extractedKeywords = extractKeywords(text)
+    setKeywords(extractedKeywords)
+  }
+
   const prefix = 'https://search.pstatic.net/common?src='
   const suffix = '&type=m1500_travelsearch'
   const suffix2 = '&type=w800_travelsearch'
@@ -37,7 +49,7 @@ const PreferencePage = () => {
     <div className="flex flex-col items-center justify-center">
       {/* <Image src={apiUrl} alt="대체_텍스트" width={1500} height={1500} /> */}
       <div>
-        <DelayedImage
+        {/* <DelayedImage
           src={firstImage}
           alt="Image 1"
           width={400}
@@ -50,7 +62,27 @@ const PreferencePage = () => {
           width={400}
           height={300}
           delay={1000} // 1초 지연
+        /> */}
+      </div>
+      <form onSubmit={handleSubmit} className="mt-8">
+        <label htmlFor="textInput" className="mb-2">
+          문장을 입력하세요.
+        </label>
+        <input
+          type="text"
+          id="textInput"
+          value={text}
+          className="border p-2 mb-4"
+          onChange={(e) => setText(e.target.value)}
         />
+        <button type="submit" className="bg-blue-500 text-white p-2">
+          키워드로 이미지 찾기
+        </button>
+      </form>
+      <div className="flex flex-wrap justify-center mt-8">
+        {keywords.map((keyword, index) => (
+          <KeywordImage key={index} keyword={keyword} />
+        ))}
       </div>
     </div>
   )

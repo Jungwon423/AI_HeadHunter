@@ -20,6 +20,7 @@
     "axios": "^1.4.0",
     "bootstrap-icons": "^1.10.5",
     "classnames": "^2.3.2",
+    "compromise": "^14.10.0",
     "date-fns": "^2.30.0",
     "downshift": "^8.1.0",
     "mapbox-gl": "^2.15.0",
