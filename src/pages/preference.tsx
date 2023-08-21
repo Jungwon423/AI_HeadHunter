@@ -120,16 +120,27 @@ const PreferencePage = () => {
     <div className="w-screen h-screen">
       <MyNavbar></MyNavbar>
 
-      <div className="bg-indigo-100 h-screen flex items-center justify-center">
-        <div className='rounded-xl flex flex-row justify-center w-[950px] h-[550px] bg-cover bg-[url("/assets/postcard.png")]'>
-          <div className="w-1/2">
-            <div className="relative top-[300px] text-gray-600 p-10">
-              {preference.conclusion}
+      <div className="bg-indigo-100 h-screen">
+        <button className={buttonClass} onClick={handleButtonClick}>
+          {buttonStatus}
+        </button>
+        <button className="" onClick={handleButtonClick}>
+          back
+        </button>
+        <button className="" onClick={handleButtonClick}>
+          front
+        </button>
+        <div className=" flex items-center justify-center">
+          <div className='rounded-xl flex flex-row justify-center w-[950px] h-[550px] bg-cover bg-[url("/assets/postcard.png")]'>
+            <div className="w-1/2">
+              <div className="leading-7 relative top-[290px] font-bold text-indigo-400 p-12">
+                {preference.conclusion}
+              </div>
             </div>
-          </div>
-          <div className="w-1/2">
-            <div className="leading-6 relative top-[260px] text-sm text-gray-600 p-10">
-              {preference.inferring}
+            <div className="w-1/2">
+              <div className="leading-6 relative top-[250px] text-sm text-stone-500 px-14 py-10">
+                {preference.inferring}
+              </div>
             </div>
           </div>
         </div>
