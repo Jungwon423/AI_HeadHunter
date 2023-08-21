@@ -131,6 +131,7 @@ const ImageQuery = () => {
 
   return (
     <div className="flex flex-col h-screen">
+      <div className="w-full"></div>
       <MyNavbar></MyNavbar>
       <div className="flex justify-center items-center w-screen h-28">
         <div className="text-2xl md:text-4xl xl:text-5xl font-bold">

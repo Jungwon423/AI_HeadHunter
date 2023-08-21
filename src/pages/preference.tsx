@@ -113,13 +113,14 @@ const PreferencePage = () => {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <div className="text-gray-600 text-lg">{preference.inferring}</div>
-
-      <div className="text-gray-600 text-lg">{preference.conclusion}</div>
-
-      <button className={buttonClass} onClick={handleButtonClick}>
-        {buttonStatus}
-      </button>
+      <div className="w-[800px]">
+        ddddd
+        <div className="text-gray-600 text-lg">{preference.inferring}</div>
+        <div className="text-gray-600 text-lg">{preference.conclusion}</div>
+        <button className={buttonClass} onClick={handleButtonClick}>
+          {buttonStatus}
+        </button>
+      </div>
     </div>
   )
 }
