@@ -350,6 +350,7 @@ const CityList = ({ cities, searchTerm, openPopup }: ICityListProps) => {
             className="rounded-full"
             style={{
               height: 'auto',
+              maxWidth: '100%',
             }}
           ></Image>
 

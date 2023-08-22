@@ -70,9 +70,9 @@ const WhenSurvey = () => {
               </div>
             )}
           </div>
-          <div className="flex flex-grow-0 md:flex-grow border-b-2"></div>
+          <div className="flex-grow-0 md:flex-grow border-b-2"></div>
           {startDate && endDate ? (
-            <div className="pl-10 pt-4 border-b-2">
+            <div className=" pl-10 pt-4 border-b-2">
               <div className="w-auto px-4 py-2 rounded-md bg-indigo-400 flex items-center justify-center">
                 <span className="text-center text-white text-sm md:text-base">
                   {(() => {

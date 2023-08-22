@@ -2,9 +2,14 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from '../store'
+import TripDateTimeInput from '../components/trip'
 
 const HowSurvey = () => {
   const dispatch = useDispatch<AppDispatch>()
+  const handleDateTimeChanged = (start: string, end: string) => {
+    console.log('여행 시작 시간:', start)
+    console.log('여행 종료 시간:', end)
+  }
 
   return (
     <div className="flex py-5 w-full flex-row items-center">
@@ -42,6 +47,7 @@ const HowSurvey = () => {
             </div>
           </div>
         </div>
+        <TripDateTimeInput onDateTimeChanged={handleDateTimeChanged} />
       </div>
     </div>
   )

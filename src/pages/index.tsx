@@ -42,10 +42,10 @@ export default function Home() {
         <Popup isOpen={isPopupOpen} onClose={closePopup}></Popup>{' '}
         {/* 적용한 팝업(detail) */}
         <div className="pt-20 md:text-base sm:text-xl xl:text-2xl font-bold">
-          추천 여행지 TOP 11
+          추천 여행지 TOP 10
         </div>
         <div className="pb-40">
-          <TravelCarousel></TravelCarousel>
+          <TravelCarousel openPopup={openPopup}></TravelCarousel>
         </div>
         <div className="pb-40">
           <ImageExplain
