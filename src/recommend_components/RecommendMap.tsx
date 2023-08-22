@@ -129,6 +129,7 @@ const RecommendMap = () => {
         )}
         {selectedPlace && selectedPlace.coordinate && (
           <Popup
+            className="flex bg-white shadow-md rounded-xl cursor-pointer hover:shadow-indigo-500/40 shadow-slate-200"
             anchor="top"
             latitude={selectedPlace.coordinate[0]}
             longitude={selectedPlace.coordinate[1]}
@@ -137,6 +138,11 @@ const RecommendMap = () => {
             }}
           >
             <div>{selectedPlace.name}</div>
+            <div>{selectedPlace.description}</div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
           </Popup>
         )}
       </Map>
