@@ -126,7 +126,7 @@ const PreferencePage = () => {
     <div className="w-screen h-screen">
       <MyNavbar></MyNavbar>
 
-      <div className="bg-indigo-100 h-[1000px] md:h-screen">
+      <div className="bg-indigo-100 h-[1000px] md:h-screen xl:h-screen">
         <button className={buttonClass} onClick={handleButtonClick}>
           {buttonStatus}
         </button>

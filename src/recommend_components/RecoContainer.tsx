@@ -39,7 +39,7 @@ const RecoContainer = () => {
                 >
                   <img
                     referrerPolicy="no-referrer"
-                    src={place.naverImage!}
+                    src={place.image!}
                     alt={place.name!}
                     width={170}
                     height={170}
@@ -62,11 +62,9 @@ const RecoContainer = () => {
                       <span className="line-clamp-2 ">{place.location}</span>
                     </div>
                     <div className="py-3 text-gray-700 text-sm">
-                      {place.summary?.overview}
+                      {place.thought}
                     </div>
                   </div>
-
-                  {/* {place.thought} */}
                 </div>
               )
             }),
