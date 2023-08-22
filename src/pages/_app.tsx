@@ -6,6 +6,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { persistStore } from 'redux-persist'
 import HeaderLayout from '../layout/header'
 import Head from 'next/head'
+import dynamic from 'next/dynamic'
 
 const persistor = persistStore(store)
 
