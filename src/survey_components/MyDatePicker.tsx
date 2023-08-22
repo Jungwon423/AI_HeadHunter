@@ -30,74 +30,139 @@ const MyDatePicker = ({ startDate, endDate, onDatesChange }: myDateProps) => {
 
   return (
     <>
-      <DatePicker
-        minDate={new Date()}
-        maxDate={twoMonthsLater()}
-        dayClassName={dayClassNames}
-        locale={ko}
-        selected={startDate}
-        onChange={(dates) => {
-          const [newStartDate, newEndDate] = dates
-          onDatesChange(newStartDate, newEndDate)
-        }}
-        startDate={startDate}
-        endDate={endDate}
-        selectsRange
-        inline
-        monthsShown={2} // 동시에 보여질 달력의 개수 설정
-        peekNextMonth // 다음/이전 달의 일부를 미리보기 설
-        renderCustomHeader={({
-          date,
-          monthDate,
-          decreaseMonth,
-          increaseMonth,
-          customHeaderCount,
-        }) => (
-          <div className="pb-4">
-            <button
-              aria-label="Previous Month"
-              className={
-                'react-datepicker__navigation react-datepicker__navigation--previous'
-              }
-              style={customHeaderCount === 1 ? { visibility: 'hidden' } : {}}
-              onClick={decreaseMonth}
-            >
-              <span
+      <div className="hidden md:flex">
+        <DatePicker
+          minDate={new Date()}
+          maxDate={twoMonthsLater()}
+          dayClassName={dayClassNames}
+          locale={ko}
+          selected={startDate}
+          onChange={(dates) => {
+            const [newStartDate, newEndDate] = dates
+            onDatesChange(newStartDate, newEndDate)
+          }}
+          startDate={startDate}
+          endDate={endDate}
+          selectsRange
+          inline
+          monthsShown={2} // 동시에 보여질 달력의 개수 설정
+          peekNextMonth // 다음/이전 달의 일부를 미리보기 설
+          renderCustomHeader={({
+            date,
+            monthDate,
+            decreaseMonth,
+            increaseMonth,
+            customHeaderCount,
+          }) => (
+            <div className="pb-4">
+              <button
+                aria-label="Previous Month"
                 className={
-                  'react-datepicker__navigation-icon react-datepicker__navigation-icon--previous'
+                  'react-datepicker__navigation react-datepicker__navigation--previous'
                 }
+                style={customHeaderCount === 1 ? { visibility: 'hidden' } : {}}
+                onClick={decreaseMonth}
               >
-                {'<'}
-              </span>
-            </button>
-            {customHeaderCount === 0 ? (
+                <span
+                  className={
+                    'react-datepicker__navigation-icon react-datepicker__navigation-icon--previous'
+                  }
+                >
+                  {'<'}
+                </span>
+              </button>
+              {customHeaderCount === 0 ? (
+                <span className="text-sm">
+                  {date.getFullYear()}년 {monthDate.getMonth() + 1}월
+                </span>
+              ) : (
+                <span className="text-sm">
+                  {date.getFullYear()}년 {monthDate.getMonth() + 1}월
+                </span>
+              )}
+              <button
+                aria-label="Next Month"
+                className={
+                  'react-datepicker__navigation react-datepicker__navigation--next'
+                }
+                style={customHeaderCount === 0 ? { visibility: 'hidden' } : {}}
+                onClick={increaseMonth}
+              >
+                <span
+                  className={
+                    'react-datepicker__navigation-icon react-datepicker__navigation-icon--next'
+                  }
+                >
+                  {'>'}
+                </span>
+              </button>
+            </div>
+          )}
+        />
+      </div>
+      <div className="md:hidden">
+        <DatePicker
+          minDate={new Date()}
+          maxDate={twoMonthsLater()}
+          dayClassName={dayClassNames}
+          locale={ko}
+          selected={startDate}
+          onChange={(dates) => {
+            const [newStartDate, newEndDate] = dates
+            onDatesChange(newStartDate, newEndDate)
+          }}
+          startDate={startDate}
+          endDate={endDate}
+          selectsRange
+          inline
+          monthsShown={1} // 동시에 보여질 달력의 개수 설정
+          peekNextMonth // 다음/이전 달의 일부를 미리보기 설
+          renderCustomHeader={({
+            date,
+            monthDate,
+            decreaseMonth,
+            increaseMonth,
+          }) => (
+            <div className="pb-4">
+              <button
+                aria-label="Previous Month"
+                className={
+                  'react-datepicker__navigation react-datepicker__navigation--previous'
+                }
+                onClick={decreaseMonth}
+              >
+                <span
+                  className={
+                    'react-datepicker__navigation-icon react-datepicker__navigation-icon--previous'
+                  }
+                >
+                  {'<'}
+                </span>
+              </button>
+
               <span className="text-sm">
                 {date.getFullYear()}년 {monthDate.getMonth() + 1}월
               </span>
-            ) : (
-              <span className="text-sm">
-                {date.getFullYear()}년 {monthDate.getMonth() + 1}월
-              </span>
-            )}
-            <button
-              aria-label="Next Month"
-              className={
-                'react-datepicker__navigation react-datepicker__navigation--next'
-              }
-              style={customHeaderCount === 0 ? { visibility: 'hidden' } : {}}
-              onClick={increaseMonth}
-            >
-              <span
+
+              <button
+                aria-label="Next Month"
                 className={
-                  'react-datepicker__navigation-icon react-datepicker__navigation-icon--next'
+                  'react-datepicker__navigation react-datepicker__navigation--next'
                 }
+                onClick={increaseMonth}
               >
-                {'>'}
-              </span>
-            </button>
-          </div>
-        )}
-      />
+                <span
+                  className={
+                    'react-datepicker__navigation-icon react-datepicker__navigation-icon--next'
+                  }
+                >
+                  {'>'}
+                </span>
+              </button>
+            </div>
+          )}
+        />
+      </div>
     </>
   )
 }

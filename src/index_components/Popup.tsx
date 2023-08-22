@@ -56,8 +56,9 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
       (shortestFlightDuration! % 60) +
       '분'
   } else {
-    flightText = '항공 정보 없음'
+    flightText = '항공 정보없음'
   }
+  let splittedFlight = flightText.split(' ')
 
   let splittedVisa: string[] = []
   if (cityDetail && cityDetail.visaInfo) {
@@ -100,12 +101,12 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
         >
           X
         </button>
-        <div className="flex-col w-96 mx-6">
+        <div className="flex-col w-82 md:w-96 mx-6">
           <div className="text-3xl font-bold">{cityDetail?.name_ko}</div>
-          <div className="mb-3 text-2xl text-gray-700 font-medium">
+          <div className="ml-1 mb-3 text-2xl text-gray-700 font-medium">
             {cityDetail?.name_en}
           </div>
-          <div className="text-sm mb-2 text-gray-500 font-bold">
+          <div className="mb-2 text-gray-500 font-bold">
             {cityDetail?.descriptionInfo.publisher}
           </div>
           <div className="flex pt-1">
@@ -114,13 +115,10 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
                 imageSrc="/assets/buttonIcon/calendar.webp"
                 text="추천"
                 detailText={
-                  <div>
+                  <div className="flex flex-col w-full">
                     {cityDetail?.weatherRecommend.season.map((month, index) => (
-                      <div
-                        className="pl-1 text-[15px] font-semibold"
-                        key={index}
-                      >
-                        {month}
+                      <div className="text-[14px]" key={index}>
+                        <div className="justify-center">{month}</div>
                       </div>
                     ))}
                   </div>
@@ -132,8 +130,13 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
                 imageSrc="/assets/buttonIcon/plane.png"
                 text="항공"
                 detailText={
-                  <div className="pl-1 text-[15px] font-semibold">
-                    {flightText}
+                  <div className="w-full flex flex-col">
+                    <div className="flex justify-center text-[13px]">
+                      {splittedFlight[0]}
+                    </div>
+                    <div className="flex justify-center text-[13px]">
+                      {splittedFlight[1]}
+                    </div>
                   </div>
                 }
               />
@@ -143,11 +146,11 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
                 imageSrc="/assets/buttonIcon/boarding-pass.png"
                 text="비자"
                 detailText={
-                  <div>
-                    <div className="text-[7px] text-gray-600 font-bold">
+                  <div className="w-full flex flex-col">
+                    <div className="flex justify-center text-[11px] text-gray-600 font-bold">
                       {splittedVisa![0]}
                     </div>
-                    <div className="text-[15px] font-semibold">
+                    <div className="flex justify-center text-[13px] ">
                       {splittedVisa![1]}
                     </div>
                   </div>
@@ -159,7 +162,7 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
                 imageSrc="/assets/buttonIcon/exchange.png"
                 text="환율"
                 detailText={
-                  <div className="pl-1 text-[8px]">
+                  <div className="flex flex-col w-full text-[13px]">
                     {cityDetail?.countryInfo.currencyInformation.exchangeRate}
                   </div>
                 }
@@ -173,7 +176,9 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
                 imageSrc="/assets/buttonIcon/time-zones.png"
                 text="시차"
                 detailText={
-                  <div className="text-[7px]">{timeDifferenceText}</div>
+                  <div className="flex flex-col w-full text-[12px]">
+                    {timeDifferenceText}
+                  </div>
                 }
               />
             ) : null}
@@ -182,11 +187,11 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
                 imageSrc="/assets/buttonIcon/price-tag.png"
                 text="물가"
                 detailText={
-                  <div>
-                    <div className="text-[5px] text-gray-600 font-bold">
+                  <div className="flex flex-col w-full">
+                    <div className="text-[11px] text-gray-600 font-bold">
                       한국대비
                     </div>
-                    <div className="text-[8px]">
+                    <div className="text-[13px]">
                       {cityDetail?.priceInfo.shortDescription}
                     </div>
                   </div>
@@ -198,11 +203,11 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
                 imageSrc="/assets/buttonIcon/plug-in.png"
                 text="전압"
                 detailText={
-                  <div>
-                    <div className="text-[6px] text-gray-600 font-bold">
+                  <div className="flex flex-col w-full">
+                    <div className="text-[11px] text-gray-600 font-bold">
                       {frequency}
                     </div>
-                    <div className="text-[8px]">{electric}</div>
+                    <div className="text-[13px]">{electric}</div>
                   </div>
                 }
               />
@@ -212,9 +217,9 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
                 imageSrc="/assets/buttonIcon/languages.png"
                 text="언어"
                 detailText={
-                  <div>
+                  <div className="flex flex-col w-full">
                     {cityDetail?.language.langList.map((lang, index) => (
-                      <div className="pl-1 text-[6px]" key={index}>
+                      <div className="pl-1 text-[12px]" key={index}>
                         {lang}
                       </div>
                     ))}
@@ -224,24 +229,24 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
             ) : null}
           </div>
           <div className="pt-1 flex justify-between">
-            <button className="flex text-sm px-6 py-2 bg-gray-500 text-white rounded-md">
+            <button className="flex text px-10 py-2 bg-gray-500 text-white rounded-md">
               도시 정보 더 보기
             </button>
             <button
               onClick={gotoSurvey}
-              className="flex text-sm px-8 py-2 bg-indigo-500 text-white rounded-md"
+              className="flex flex-grow mx-1 px-8 py-2 bg-indigo-500 text-white rounded-md"
             >
               일정 만들기 {'>'}
             </button>
           </div>
         </div>
-        <div className="flex w-72 h-80 bg-white">
+        <div className="hidden md:flex w-[360px] h-[365px] bg-white">
           <Image
             // 여기에 클래스 적용
             className="rounded"
             src={cityDetail?.naverImage!}
             alt="image"
-            width={300}
+            width={350}
             height={200}
             quality={100}
             style={{
