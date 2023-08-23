@@ -2,7 +2,11 @@ import axios, { AxiosResponse } from 'axios'
 import { PlaceInfo } from '../interfaces/placeInfo'
 import { RecommendInput } from '../interfaces/recommendInput'
 import { SERVER_API_URL } from '../slices/api_url'
-import { ResponseData, processCluster } from './fetchRecommend'
+import {
+  ResponseData,
+  fetchRecommendAttractions,
+  processCluster,
+} from './fetchRecommend'
 import { AppThunk } from '../store'
 import {
   TravelInfoState,
@@ -18,7 +22,7 @@ export const fetchTravelSchedule = async (
     withCredentials: true,
   }
 
-  let API_URL: string = SERVER_API_URL + '/travel/recommendAttractions'
+  let API_URL: string = SERVER_API_URL + '/preference/recommendAttractions'
 
   console.log('API_URL', API_URL)
 
@@ -27,6 +31,8 @@ export const fetchTravelSchedule = async (
     recommendInput,
     config,
   )
+
+  console.log(response.data)
 
   // 이중 for문을 사용하여 JSON 데이터를 placeInfo[][]로 변환합니다.
   const placeInfos: PlaceInfo[][] = processCluster(
@@ -48,7 +54,7 @@ export const fetchTravelScheduleAsync =
   ) => {
     try {
       dispatch(setLoading('pending'))
-      const travelSchedule = await fetchTravelSchedule(recommendInput)
+      const travelSchedule = await fetchRecommendAttractions(recommendInput) // TODO : fetchTravelSchedule로 바꾸기
       dispatch(setTravelSchedule(travelSchedule))
       dispatch(setLoading('succeeded'))
     } catch (error: any) {

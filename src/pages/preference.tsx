@@ -62,8 +62,6 @@ const PreferencePage = () => {
     }
     console.log('preferenceInput: ', PreferenceInput)
     if (preferenceLoaded === false) {
-      console.log('preferenceLoaded: ' + preferenceLoaded)
-      console.log('preference Input: ', PreferenceInput)
       dispatch(fetchPreferenceAsync(PreferenceInput))
       setPreferenceLoaded(true)
     }
@@ -79,10 +77,6 @@ const PreferencePage = () => {
       preferenceLoaded === true &&
       recommendInfo.preferenceLoading === 'succeeded'
     ) {
-      console.log(
-        'recommendInfo.preferenceLoading : ' + recommendInfo.preferenceLoading,
-      )
-      console.log('여행지 추천 Input: ', recommendInput)
       dispatch(fetchRecommendAttractionsAsync(recommendInput))
       setScheduleLoaded(true)
     }

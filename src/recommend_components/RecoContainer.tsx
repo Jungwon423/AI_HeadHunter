@@ -8,6 +8,11 @@ import {
   setCurrentDay,
 } from '../slices/recommendSlice'
 import { PlaceInfo } from '../interfaces/placeInfo'
+import {
+  selectCity,
+  selectTravelEndDate,
+  selectTravelStartDate,
+} from '../slices/travelInfoSlice'
 
 const RecoContainer = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -15,13 +20,17 @@ const RecoContainer = () => {
   const attractions: PlaceInfo[][] = useSelector(selectAttractions)
   const currentDay: number = useSelector(selectCurrentDay)
 
+  const city: string = useSelector(selectCity)
+  const travelStartDate = useSelector(selectTravelStartDate)
+  const travelEndDate = useSelector(selectTravelEndDate)
+
   return (
     <div className="w-full bg-[#FAFAFA] h-screen overflow-y-auto">
       <div className="p-4">
         <div className="flex pt-7 pb-1">
-          <div className="pl-4 font-bold text-xl">오사카</div>
+          <div className="pl-4 font-bold text-xl">{city}</div>
           <span className="pt-2 text-gray-500 text-sm font-bold px-2">
-            2023.08.10(화) ~ 2023.08.20(목)
+            {travelStartDate} ~ {travelEndDate}
           </span>
         </div>
         {attractions.map(
@@ -62,7 +71,7 @@ const RecoContainer = () => {
                       <span className="line-clamp-2 ">{place.location}</span>
                     </div>
                     <div className="py-3 text-gray-700 text-sm">
-                      {place.thought}
+                      {place.description}
                     </div>
                   </div>
                 </div>

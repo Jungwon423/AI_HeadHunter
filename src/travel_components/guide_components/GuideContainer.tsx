@@ -37,7 +37,7 @@ const GuideContainer = () => {
                   {placeInfo.name}
                 </h2>
                 <div className="h-40 overflow-y-scroll text-gray-700 text-sm text-start w-40 p-2">
-                  {placeInfo.summary?.overview}
+                  {placeInfo.description}
                 </div>
               </div>
             </div>

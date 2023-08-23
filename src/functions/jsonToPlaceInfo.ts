@@ -2,28 +2,28 @@ import { PlaceInfo } from '../interfaces/placeInfo'
 
 // placeInfo 객체와 JSON 객체 간의 변환을 수행하는 함수를 작성합니다.
 export function convertToPlaceInfo(attraction: any): PlaceInfo {
-  console.log('attraction', attraction)
-  console.log('attraction.nameKo', attraction.nameKo)
-  console.log('attraction.nameEn', attraction.nameEn)
-  console.log('attraction.location.lat', attraction.location?.lat)
-  console.log('attraction.location.lon', attraction.location?.lon)
-  console.log('attraction.image.photoURL', attraction.image?.photoURL)
-  console.log(
-    'attraction.descriptionInfo.publisher',
-    attraction.descriptionInfo.publisher,
-  )
-  console.log(
-    'attraction.quality.averageRating',
-    attraction.quality.averageRating,
-  )
-  console.log('attraction.quality.ranking', attraction.quality?.ranking)
-  console.log('attraction.datalab.keywordObj', attraction.datalab?.keywordObj)
-  console.log('attraction.datalab.keywordPop', attraction.datalab?.keywordPop)
-  console.log('attraction.phoneNumber', attraction?.phoneNumber)
-  console.log('attraction.addressKo', attraction?.addressKo)
-  console.log('attraction.addressEn', attraction?.addressEn)
-  console.log('attraction.homepage', attraction?.homepage)
-  console.log('attraction.evaluation', attraction?.evaluation)
+  // console.log('attraction', attraction)
+  // console.log('attraction.nameKo', attraction.nameKo)
+  // console.log('attraction.nameEn', attraction.nameEn)
+  // console.log('attraction.location.lat', attraction.location?.lat)
+  // console.log('attraction.location.lon', attraction.location?.lon)
+  // console.log('attraction.image.photoURL', attraction.image?.photoURL)
+  // console.log(
+  //   'attraction.descriptionInfo.publisher',
+  //   attraction.descriptionInfo.publisher,
+  // )
+  // console.log(
+  //   'attraction.quality.averageRating',
+  //   attraction.quality.averageRating,
+  // )
+  // console.log('attraction.quality.ranking', attraction.quality?.ranking)
+  // console.log('attraction.datalab.keywordObj', attraction.datalab?.keywordObj)
+  // console.log('attraction.datalab.keywordPop', attraction.datalab?.keywordPop)
+  // console.log('attraction.phoneNumber', attraction?.phoneNumber)
+  // console.log('attraction.addressKo', attraction?.addressKo)
+  // console.log('attraction.addressEn', attraction?.addressEn)
+  // console.log('attraction.homepage', attraction?.homepage)
+  // console.log('attraction.evaluation', attraction?.evaluation)
   const originalUrl = attraction.image.photoURL
   const encodedUrl = encodeURIComponent(originalUrl)
   const prefix = 'https://search.pstatic.net/common?src='

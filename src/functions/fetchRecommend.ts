@@ -14,11 +14,9 @@ export interface ResponseData {
 
 export function processCluster(clusterArray: Cluster[]): PlaceInfo[][] {
   return clusterArray.map((cluster) => {
-    console.log('cluster.attractions', cluster.attractions)
     const attractions = cluster.attractions.map(convertToPlaceInfo)
     // const restaurants = cluster.restaurants.map(convertToPlaceInfo)
     // return [...attractions, ...restaurants]
-    console.log('attractions', attractions)
     return [...attractions]
   })
 }
@@ -66,7 +64,6 @@ export const fetchRecommendAttractionsAsync =
       dispatch(setLoading('pending'))
       const attractions = await fetchRecommendAttractions(recommendInput)
       dispatch(setAttractions(attractions))
-      console.log(attractions)
       dispatch(setLoading('succeeded'))
     } catch (error: any) {
       dispatch(setError(JSON.stringify(error)))

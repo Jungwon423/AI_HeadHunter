@@ -139,10 +139,18 @@ const RecommendMap = () => {
           >
             <div>{selectedPlace.name}</div>
             <div>{selectedPlace.description}</div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+            <div>{selectedPlace.time}</div>
+            {/* <div>{selectedPlace.summary}</div> */}
+
+            <div>{selectedPlace.rating}</div>
+            <div>{selectedPlace.ratingCount}</div>
+            <div>{selectedPlace.hashtags}</div>
+            <div>{selectedPlace.phoneNumber}</div>
+            <div>{selectedPlace.location}</div>
+            <div>{selectedPlace.googleUrl}</div>
+            <div>{selectedPlace.website}</div>
+            {/* <div>{selectedPlace.openingHours}</div>
+            <div>{selectedPlace.reviews}</div> */}
           </Popup>
         )}
       </Map>
