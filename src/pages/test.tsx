@@ -1,9 +1,7 @@
 import Image from 'next/image'
 import React, { useRef, useEffect, useState, useCallback } from 'react'
-
-import 'react-time-picker/dist/TimePicker.css'
 import TimePicker from 'react-ios-time-picker'
-import TimePicker2 from '../components/TimePicker2'
+// import TimePicker2 from '../components/TimePicker2'
 //import TimePicker from 'react-ios-time-picker';
 import dynamic from 'next/dynamic'
 
@@ -14,14 +12,46 @@ const DynamicComponentWithNoSSR = dynamic(
 
 const TestPage: React.FC = () => {
   const [time, setTime] = useState<Date>(new Date())
+  const [value, setValue] = useState(0)
 
-  const handleChange = (newTime: Date): void => {
-    setTime(newTime)
+  const increaseValue = () => {
+    setValue((prevValue) => prevValue + 1)
+  }
+
+  const decreaseValue = () => {
+    if (value > 0) {
+      setValue((prevValue) => prevValue - 1)
+    }
   }
 
   return (
     <>
-      <DynamicComponentWithNoSSR></DynamicComponentWithNoSSR>
+      {/* <DynamicComponentWithNoSSR></DynamicComponentWithNoSSR> */}
+      <div className="container mx-auto">
+        <h1 className="text-4xl my-8">시간 선택기</h1>
+        <div className="flex">
+          <input
+            type="number"
+            className="border-2 border-gray-300 p-2 rounded-md"
+            value={value}
+            onChange={(e) => setValue(Number(e.target.value))}
+          />
+
+          <button
+            onClick={increaseValue}
+            className="bg-blue-500 text-white px-4 py-2 rounded-md ml-auto"
+          >
+            Increase
+          </button>
+
+          <button
+            onClick={decreaseValue}
+            className="bg-red-500 text-white rounded-md"
+          >
+            Decrease
+          </button>
+        </div>
+      </div>
     </>
   )
 }

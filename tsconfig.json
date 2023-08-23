@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    // "types": ["react-ios-time-picker"],
+    //"types": ["react-ios-time-picker"],
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
