@@ -5,7 +5,7 @@ import TimePickerSelection from './TimePickerSelection'
 function TimePicker({
   value: initialValue = null,
   cellHeight = 28,
-  placeHolder = 'Select Time',
+  placeHolder = '10:00 AM',
   pickerDefaultValue = '10:00',
   onChange = () => {},
   onFocus = () => {},
@@ -14,12 +14,12 @@ function TimePicker({
   disabled = false,
   isOpen: initialIsOpenValue = false,
   required = false,
-  cancelButtonText = 'Cancel',
-  saveButtonText = 'Save',
+  cancelButtonText = '취소',
+  saveButtonText = '저장',
   controllers = true,
   seperator = true,
   id = 'null',
-  use12Hours = false,
+  use12Hours = true,
   onAmPmChange = () => {},
   name = 'null',
   onOpen = () => {},
@@ -68,7 +68,7 @@ function TimePicker({
 
   return (
     <>
-      <div className="react-ios-time-picker-main" onClick={handleClick}>
+      <div className="flex react-ios-time-picker-main" onClick={handleClick}>
         <input
           id={id}
           name={name}

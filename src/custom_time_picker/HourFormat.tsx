@@ -38,7 +38,7 @@ function HourFormat({
     {
       number: 'AM',
       translatedValue: (height * 2).toString(),
-      selected: false,
+      selected: true,
     },
     {
       number: 'PM',
@@ -64,9 +64,14 @@ function HourFormat({
   const [firstCursorPosition, setFirstCursorPosition] = useState<number | null>(
     null,
   )
-  const [currentTranslatedValue, setCurrentTranslatedValue] = useState(
-    parseInt(hours.filter((item) => item.selected === true)[0].translatedValue),
-  )
+  // const [currentTranslatedValue, setCurrentTranslatedValue] = useState(
+  //   parseInt(hours.filter((item) => item.selected === true)[0].translatedValue),
+  // )
+  const [currentTranslatedValue, setCurrentTranslatedValue] = useState(() => {
+    const selectedHour = hours.find((item) => item.selected === true)
+    return selectedHour ? parseInt(selectedHour.translatedValue) : 0
+  })
+
   const [startCapture, setStartCapture] = useState(false)
   const [showFinalTranslate, setShowFinalTranslate] = useState(false)
   // start and end times
@@ -185,6 +190,7 @@ function HourFormat({
         if (parseInt(item.translatedValue) === currentTranslatedValue) {
           setSelectedNumber(item.arrayNumber)
           setHourFormat({ mount: true, hourFormat: item.number })
+          console.log(`Selected hour format: ${item.number}`) // Add this line
           setHours(() => {
             const newValue = Hours.map((hour) => {
               if (

@@ -1,3 +1,10 @@
+interface SelectedValueType {
+  number: string
+  translatedValue: string
+  arrayNumber?: number
+  selected?: boolean
+}
+
 export const initialNumbersValue = (
   heightValue = 54,
   numbersLength = 24,
@@ -29,7 +36,7 @@ export const initialNumbersValue = (
       selected: false,
     },
   ]
-  const arrayOfSelectedValue =
+  const arrayOfSelectedValue: SelectedValueType[] =
     numbersLength === 13 ? initialValue12hourFormat : initialValue24hourFormat
   let count = 0
   for (let index = 0; index < 3; index++) {
@@ -76,7 +83,7 @@ export const initialNumbersValue = (
 }
 
 export const returnSelectedValue = (heightValue = 54, numbersLength = 24) => {
-  const arrayOfSelectedValue = [
+  const arrayOfSelectedValue: SelectedValueType[] = [
     {
       number: '00',
       translatedValue: (heightValue * 2).toString(),
@@ -98,13 +105,13 @@ export const returnSelectedValue = (heightValue = 54, numbersLength = 24) => {
         arrayOfSelectedValue.push({
           number: `0${j.toString()}`,
           translatedValue: `-${count}`,
-          arrayNumber: j, // 예시입니다.
+          selected: false,
         })
       } else {
         arrayOfSelectedValue.push({
           number: j.toString(),
           translatedValue: `-${count}`,
-          arrayNumber: j, // 예시입니다.
+          selected: false,
         })
       }
 

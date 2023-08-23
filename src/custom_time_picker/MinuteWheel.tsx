@@ -17,15 +17,18 @@ const MinuteObject = [
 
 type MinuteObjectType = typeof MinuteObject
 
-const defaultValue: string | null | undefined = '00'
-
 const MinuteWheel: React.FC<MinuteWheelProps> = ({
   height,
   value,
   setValue,
 }) => {
-  const [hours, setHours] = useState<MinuteObjectType>(
-    initialNumbersValue(height, 60, parseInt(value.slice(0, 2))),
+  //initialNumbersValue(height, 60, parseInt(value.slice(0, 2))),
+  const numbers = Array.from({ length: 61 }, (_, i) => i).filter(
+    (n) => n % 5 === 0,
+  )
+  //MinuteObjectType을 사용했어야함.
+  const [hours, setHours] = useState<any>(
+    initialNumbersValue(height, 48, parseInt(value.slice(0, 2))),
   )
   const mainListRef = useRef<HTMLDivElement>(null)
   const [cursorPosition, setCursorPosition] = useState<number | null>(null)

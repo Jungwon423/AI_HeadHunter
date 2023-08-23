@@ -21,8 +21,6 @@ import {
 import { ImageQueryInput } from '../interfaces/imageQuery'
 import { fetchImageQueryAsync } from '../functions/fetchImageQuery'
 import { MajorCategoriesWithMinorCategories } from '../interfaces/category'
-import FallbackImage from '../components/FallbackImage'
-import DelayedImage from '../components/DelayedImage'
 import Loading2 from '../components/loading2'
 import ImageWithSkeleton from './imageWithSkeleton'
 import MyNavbar from '../components/MyNavbar'

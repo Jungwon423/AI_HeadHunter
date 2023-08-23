@@ -9,7 +9,7 @@ function App() {
   }
 
   return (
-    <div className="flex h-screen justify-center items-center">
+    <div className="flex h-screen justify-start items-center">
       <TimePicker onChange={() => onChange(value)} />
     </div>
   )
