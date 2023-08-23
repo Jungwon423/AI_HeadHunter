@@ -12,9 +12,16 @@ input {
 input:focus {
   outline: none;
 }
+.parent-element {
+  position: relative;
+}
 
 .react-ios-time-picker {
-  margin-bottom: 50px;
+  position: absolute;
+  top: 45px;
+  left: 0px;
+  align-items: center;
+  justify-content: center;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 11px 15px #0005;
@@ -230,7 +237,7 @@ input:focus {
 }
 
 .react-ios-time-picker-popup {
-  position: fixed;
+  position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
@@ -250,8 +257,10 @@ input:focus {
 }
 
 .react-ios-time-picker-input {
-  cursor: text;
-  padding: 5px 10px;
+  cursor: pointer;
+  padding: 5px 15px;
+  width: 105px;
+  justify-content: center;
   border-radius: 5px;
   border: 1px solid #0005;
 }

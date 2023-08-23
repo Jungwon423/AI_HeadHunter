@@ -1,5 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { initialNumbersValue, returnSelectedValue } from './helpers'
+import {
+  initialMinutesValue,
+  //initialNumbersValue,
+  returnSelectedMinutes,
+} from './helpers'
 
 interface MinuteWheelProps {
   height: number
@@ -28,7 +32,7 @@ const MinuteWheel: React.FC<MinuteWheelProps> = ({
   )
   //MinuteObjectType을 사용했어야함.
   const [hours, setHours] = useState<any>(
-    initialNumbersValue(height, 48, parseInt(value.slice(0, 2))),
+    initialMinutesValue(height, 60, parseInt(value.slice(0, 2))),
   )
   const mainListRef = useRef<HTMLDivElement>(null)
   const [cursorPosition, setCursorPosition] = useState<number | null>(null)
@@ -36,14 +40,26 @@ const MinuteWheel: React.FC<MinuteWheelProps> = ({
     null,
   )
 
-  const [currentTranslatedValue, setCurrentTranslatedValue] = useState(
-    parseInt(
-      initialNumbersValue(height, 60, parseInt(value.slice(3, 6))).filter(
-        (item: any) =>
-          item.number === value.slice(3, 6) && item.selected === true,
-      )[0].translatedValue,
-    ),
+  const filteredValues = initialMinutesValue(
+    height,
+    60,
+    parseInt(value.slice(3, 6)),
+  ).filter(
+    (item: any) => item.number === value.slice(3, 6) && item.selected === true,
   )
+
+  const [currentTranslatedValue, setCurrentTranslatedValue] = useState(
+    filteredValues.length > 0 ? parseInt(filteredValues[0].translatedValue) : 0,
+  )
+
+  // const [currentTranslatedValue, setCurrentTranslatedValue] = useState(
+  //   parseInt(
+  //     initialNumbersValue(height, 60, parseInt(value.slice(3, 6))).filter(
+  //       (item: any) =>
+  //         item.number === value.slice(3, 6) && item.selected === true,
+  //     )[0].translatedValue,
+  //   ),
+  // )
   const [startCapture, setStartCapture] = useState(false)
   const [showFinalTranslate, setShowFinalTranslate] = useState(false)
   // start and end times
@@ -168,12 +184,12 @@ const MinuteWheel: React.FC<MinuteWheelProps> = ({
 
   // return to default position after drag end (handleTransitionEnd)
   const handleTransitionEnd = (e: any) => {
-    returnSelectedValue(height, 60).map((item: any) => {
+    returnSelectedMinutes(height, 60).map((item: any) => {
       if (parseInt(item.translatedValue) === currentTranslatedValue) {
         setSelectedNumber(item.arrayNumber)
         setValue((prev) => `${prev.slice(0, 2)}:${item.number}`)
         setHours(() => {
-          const newValue = initialNumbersValue(height, 60).map((hour: any) => {
+          const newValue = initialMinutesValue(height, 60).map((hour: any) => {
             if (
               hour.number == item.number &&
               hour.translatedValue == currentTranslatedValue
@@ -235,7 +251,7 @@ const MinuteWheel: React.FC<MinuteWheelProps> = ({
         onTransitionEnd={handleTransitionEnd}
         style={{ transform: `translateY(${currentTranslatedValue}px)` }}
       >
-        {hours.map((hourObj, index) => (
+        {hours.map((hourObj: any, index: any) => (
           <div
             key={index}
             className="react-ios-time-picker-cell-minute"
