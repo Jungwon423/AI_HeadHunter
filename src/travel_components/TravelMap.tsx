@@ -26,6 +26,8 @@ import TravelChat from './TravelChat'
 import { PlaceInfo } from '../interfaces/placeInfo'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import polyline from '@mapbox/polyline'
+import RecoContainer from '../recommend_components/RecoContainer'
+import TravelContainer from './TravelContainer'
 
 const TravelMap = () => {
   const pinColors = [
@@ -218,7 +220,9 @@ const TravelMap = () => {
         )}
         {selectedPlace && selectedPlace.coordinate && (
           <Popup
+            className="w-96"
             anchor="top"
+            // latitude={selectedPlace.coordinate[0] + 0.0025}
             latitude={selectedPlace.coordinate[0]}
             longitude={selectedPlace.coordinate[1]}
             onClose={() => {
@@ -226,6 +230,7 @@ const TravelMap = () => {
             }}
           >
             <div>{selectedPlace.name}</div>
+            {/* <TravelContainer></TravelContainer> */}
           </Popup>
         )}
         {routeGeoJSON && (

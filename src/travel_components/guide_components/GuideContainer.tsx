@@ -16,23 +16,26 @@ const GuideContainer = () => {
   return (
     <div className="flex flex-col justify-center">
       {TravelSchedule[currentDay - 1]?.map((placeInfo) => (
-        <div key={placeInfo.name} className="px-3 justify-center">
+        <div
+          key={placeInfo.name}
+          className="px-3 justify-center items-center flex-col"
+        >
           <button
-            className="h-50 rounded-xl px-5 my-8 flex-col bg-gray-50 shadow-lg hover:shadow-2xl"
+            className="h-50 rounded-xl px-5 my-2 flex-col bg-gray-50 shadow-lg hover:shadow-2xl"
             onClick={() => dispatch(handleCurrentPlace(placeInfo))}
           >
             <div className="flex">
-              <div className="w-42">
+              <div className="w-42 flex flex-col justify-center">
                 <Image
                   src={placeInfo.image ?? '/default-image.jpg'}
                   alt={placeInfo.name!}
                   width={150}
-                  height={200}
+                  height={180}
                   objectFit="cover"
                   className="rounded-lg"
                 />
               </div>
-              <div className="pl-3 w-40 flex-col">
+              <div className="pl-3 w-40 flex flex-col justify-center">
                 <h2 className="flex justify-center text-sm font-bold py-2 mt-2">
                   {placeInfo.name}
                 </h2>

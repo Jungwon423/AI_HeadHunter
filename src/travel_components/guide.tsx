@@ -33,7 +33,7 @@ const Guide = () => {
       <section className="bg-gray-50 py-4">
         <TabMenu tabs={tabs} />
       </section>
-      <GuideHero></GuideHero>
+      {/* <GuideHero></GuideHero> */}
       {currentDay !== 0 ? <GuideDay></GuideDay> : null}
       {currentDay === 0 ? (
         <div className="px-3 justify-center">

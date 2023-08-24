@@ -104,3 +104,28 @@ custom-popup {
 @import './datepicker.css';
 
 @import './react-ios-time-picker.css';
+
+/* .mapboxgl-popup-content {
+  max-width: 1200px !important;
+  max-height: 3000px !important;
+  height: auto !important;
+}
+
+.mapbox-gl-popup {
+  max-width: 1200px !important;
+  max-height: 3000px !important;
+  height: auto !important;
+  height: 1200px !important;
+}
+
+.mapboxgl-popup-tip {
+  max-width: 1200px !important;
+  max-height: 3000px !important;
+  height: auto !important;
+}
+
+.mapboxgl-popup-anchor-top {
+  max-width: 1200px !important;
+  max-height: 3000px !important;
+  height: auto !important;
+} */

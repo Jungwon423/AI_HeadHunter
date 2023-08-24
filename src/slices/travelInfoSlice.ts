@@ -27,6 +27,8 @@ export interface TravelInfoState {
 
   // @@@@@ 이상 /recommend -> RecommendNav.tsx
 
+  openRecommend: boolean
+
   coordinate: number[]
   location: string
   travelStyle: string[]
@@ -46,6 +48,9 @@ const initialState: TravelInfoState = {
 
   category: {},
   // @@@@@ 이상 /survey @@@@@
+
+  openRecommend: false,
+
   location: '서울 강남구 언주로110 경남아파트',
   coordinate: [135.5023, 34.6937],
   travelStyle: ['문화', '쇼핑', '음식'],
@@ -156,6 +161,10 @@ export const travelInfoSlice = createSlice({
         console.error('해당 majorCategory를 찾을 수 없습니다.')
       }
     },
+
+    toggleOpenRecommend: (state) => {
+      state.openRecommend = !state.openRecommend
+    },
   },
 })
 
@@ -186,6 +195,8 @@ export const {
 
   setCategory,
   checkMinorCategory,
+
+  toggleOpenRecommend,
 } = travelInfoSlice.actions
 
 const persistConfig = {
@@ -213,6 +224,10 @@ export const selectCurrentDay = (state: RootState) =>
   state.travelInfo.currentDay
 
 // @@@@@ 이하 /survey @@@@@
+
+export const selectOpenRecommend = (state: RootState) =>
+  state.travelInfo.openRecommend
+
 export const selectUser = (state: RootState) => state.travelInfo.user
 export const selectCity = (state: RootState) => state.travelInfo.city
 
