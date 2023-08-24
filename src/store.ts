@@ -6,10 +6,12 @@ import persistedTravelChatReducer from './slices/travelChatSlice'
 import persistedRecommendInfoReducer from './slices/recommendSlice'
 import persistedCityDetailReducer from './slices/cityDetailSlice'
 import persistedImageQueryReducer from './slices/imageQuerySlice'
+import persistedTimeDetailReducer from './slices/timeSlice'
 
 export const store = configureStore({
   reducer: {
     tab: tabSlice,
+    timeDetail: persistedTimeDetailReducer,
     cityDetail: persistedCityDetailReducer,
     travelInfo: persistedTravelInfoReducer,
     travelChat: persistedTravelChatReducer,

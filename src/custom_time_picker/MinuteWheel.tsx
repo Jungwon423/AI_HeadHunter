@@ -27,12 +27,9 @@ const MinuteWheel: React.FC<MinuteWheelProps> = ({
   setValue,
 }) => {
   //initialNumbersValue(height, 60, parseInt(value.slice(0, 2))),
-  const numbers = Array.from({ length: 61 }, (_, i) => i).filter(
-    (n) => n % 5 === 0,
-  )
   //MinuteObjectType을 사용했어야함.
   const [hours, setHours] = useState<any>(
-    initialMinutesValue(height, 60, parseInt(value.slice(0, 2))),
+    initialMinutesValue(height, 60, parseInt(value.slice(3, 6))),
   )
   const mainListRef = useRef<HTMLDivElement>(null)
   const [cursorPosition, setCursorPosition] = useState<number | null>(null)
