@@ -28,6 +28,7 @@ export interface TravelInfoState {
   // @@@@@ 이상 /recommend -> RecommendNav.tsx
 
   openRecommend: boolean
+  isCurrentPlaceInCourse: boolean
 
   coordinate: number[]
   location: string
@@ -50,6 +51,7 @@ const initialState: TravelInfoState = {
   // @@@@@ 이상 /survey @@@@@
 
   openRecommend: false,
+  isCurrentPlaceInCourse: false,
 
   location: '서울 강남구 언주로110 경남아파트',
   coordinate: [135.5023, 34.6937],
@@ -165,6 +167,12 @@ export const travelInfoSlice = createSlice({
     toggleOpenRecommend: (state) => {
       state.openRecommend = !state.openRecommend
     },
+    setOpenRecommend: (state, action: PayloadAction<boolean>) => {
+      state.openRecommend = action.payload
+    },
+    setIsCurrentPlaceInCourse: (state, action: PayloadAction<boolean>) => {
+      state.isCurrentPlaceInCourse = action.payload
+    },
   },
 })
 
@@ -197,6 +205,8 @@ export const {
   checkMinorCategory,
 
   toggleOpenRecommend,
+  setOpenRecommend,
+  setIsCurrentPlaceInCourse,
 } = travelInfoSlice.actions
 
 const persistConfig = {

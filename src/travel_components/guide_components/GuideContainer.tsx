@@ -6,6 +6,8 @@ import {
   selectCurrentDay,
   selectDuration,
   selectTravelSchedule,
+  setIsCurrentPlaceInCourse,
+  setOpenRecommend,
 } from '../../slices/travelInfoSlice'
 import { PlaceInfo } from '../../interfaces/placeInfo'
 
@@ -22,7 +24,11 @@ const GuideContainer = () => {
         >
           <button
             className="h-50 rounded-xl px-5 my-2 flex-col bg-gray-50 shadow-lg hover:shadow-2xl"
-            onClick={() => dispatch(handleCurrentPlace(placeInfo))}
+            onClick={() => {
+              dispatch(handleCurrentPlace(placeInfo))
+              dispatch(setOpenRecommend(false))
+              dispatch(setIsCurrentPlaceInCourse(true))
+            }}
           >
             <div className="flex">
               <div className="w-42 flex flex-col justify-center">

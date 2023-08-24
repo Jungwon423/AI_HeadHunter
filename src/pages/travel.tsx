@@ -14,6 +14,7 @@ const TravelCoursePage = () => {
     <div className="flex h-screen">
       <Guide></Guide>
       {openRecommend && <TravelInfo></TravelInfo>}
+      {!openRecommend && <TravelContainer></TravelContainer>}
       {/* <TravelContainer></TravelContainer> */}
       <TravelMap></TravelMap>
     </div>
