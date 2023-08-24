@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Portal } from 'react-portal'
 import TimePickerSelection from './TimePickerSelection'
 
-function TimePicker({
+function TimePickerPM({
   value: initialValue = null,
   cellHeight = 28,
-  placeHolder = '10:00 AM',
+  placeHolder = '10:00 PM',
   pickerDefaultValue = '10:00',
   onChange = () => {},
   onFocus = () => {},
@@ -44,7 +44,7 @@ function TimePicker({
   finalValue = inputValue
 
   if (initialValue === null && use12Hours) {
-    finalValue = `${pickerDefaultValue} AM`
+    finalValue = `${pickerDefaultValue} 오전`
   } else if (initialValue === null && !use12Hours) {
     finalValue = pickerDefaultValue
   }
@@ -66,9 +66,23 @@ function TimePicker({
     pickerDefaultValue,
   }
 
+  const inputRef = useRef<HTMLDivElement>(null) // useRef를 사용하여 input의 위치를 참조합니다.
+
+  const handlePickerPosition = () => {
+    if (!inputRef.current) {
+      return {}
+    }
+
+    const rect = inputRef.current.getBoundingClientRect()
+    return {
+      top: rect.top + rect.height + window.scrollY, // input 아래에 위치
+      left: rect.left + window.scrollX, //input과 같은 가로 위치
+    }
+  }
+
   return (
     <>
-      <div className="flex react-ios-time-picker-main" onClick={handleClick}>
+      <div className="react-ios-time-picker-main" onClick={handleClick}>
         <input
           id={id}
           name={name}
@@ -93,7 +107,10 @@ function TimePicker({
               }`}
               onClick={() => setIsOpen(!isOpen)}
             />
-            <div className="react-ios-time-picker react-ios-time-picker-transition">
+            <div
+              className="react-ios-time-picker react-ios-time-picker-transition"
+              style={handlePickerPosition()}
+            >
               <TimePickerSelection {...params} />
             </div>
           </div>
@@ -103,4 +120,4 @@ function TimePicker({
   )
 }
 
-export default TimePicker
+export default TimePickerPM

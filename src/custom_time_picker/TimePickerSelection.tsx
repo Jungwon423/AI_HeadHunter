@@ -61,6 +61,7 @@ function TimePickerSelection({
       : value
     setInputValue(finalSelectedValue)
     onChange(finalSelectedValue)
+    console.log(finalSelectedValue)
     onSave(finalSelectedValue)
     setIsOpen(false)
   }
@@ -70,7 +71,7 @@ function TimePickerSelection({
   }
 
   return (
-    <div className="react-ios-time-picker  react-ios-time-picker-transition">
+    <>
       {controllers && (
         <div className="react-ios-time-picker-btn-container">
           <button
@@ -100,7 +101,7 @@ function TimePickerSelection({
         <MinuteWheel {...params} />
         {use12Hours && <HourFormat {...params} />}
       </div>
-    </div>
+    </>
   )
 }
 

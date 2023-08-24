@@ -78,6 +78,7 @@ const WhenSurvey = () => {
                   {(() => {
                     const differenceInMilliseconds =
                       endDate.getTime() - startDate.getTime()
+                    console.log(endDate)
                     const differenceInDays = Math.ceil(
                       differenceInMilliseconds / (1000 * 60 * 60 * 24),
                     ) // 일수 계산 (소수점 올림)
