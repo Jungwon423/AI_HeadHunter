@@ -92,11 +92,11 @@ function TimePicker({
 
   return (
     <>
-      <div className="pl-1" onClick={handleClick}>
+      <div className="pl-1 " onClick={handleClick}>
         <input
           id={id}
           name={name}
-          className={`react-ios-time-picker-input border-none ${
+          className={`react-ios-time-picker-input shadow-sm bg-stone-100 border-none ${
             inputClassName || ''
           }`}
           value={inputValue === null ? '' : inputValue}

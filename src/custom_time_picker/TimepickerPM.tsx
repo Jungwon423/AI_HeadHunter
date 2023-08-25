@@ -109,7 +109,7 @@ function TimePickerPM({
         <input
           id={id}
           name={name}
-          className={`react-ios-time-picker-input border-none ${
+          className={`react-ios-time-picker-input shadow-sm bg-stone-100 border-none ${
             inputClassName || ''
           }`}
           value={inputValue === null ? '' : inputValue}

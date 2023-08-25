@@ -63,21 +63,94 @@ const HowSurvey = () => {
   const handleToggle = () => {
     setToggleState(!toggleState)
   }
-
+  const hi = true
   const dd = useSelector(selectDayDetails)
   console.log(dd)
   const header = ['일자', '요일', '시작시간', '종료시간']
   return (
-    <div className="flex py-5 w-full flex-row items-center">
+    <div className="flex flex-col py-5 w-full justify-center">
       <div className="px-10 flex flex-col flex-grow">
-        <div className="text-2xl font-bold pt-20">여행시작 시간</div>
-        <div className="flex pt-5">
-          <div className="font-bold pr-3 pt-1">{formatDate(startDate)}</div>{' '}
+        <div className="text-2xl pt-20 font-bold">여행 스타일을 알려주세요</div>
+        <div className="flex flex-row">
+          <div
+            className="flex flex-col items-center border-4 rounded p-2 mx-8 bg-white relative 
+    ${hi ? 'border-indigo-400' : 'border-stone-200'}"
+          >
+            <Image
+              src={`/assets/famous.jpg`}
+              alt="대체_텍스트"
+              width={80}
+              height={80}
+              layout="responsive"
+              objectFit="contain"
+            />
+            <div className="absolute bottom-0 w-full text-center text-stone-500 text-base font-bold bg-white">
+              건물
+            </div>
+          </div>
+
+          <div
+            className="flex flex-col mx-8 items-center border-4 rounded p-2 bg-white relative 
+    ${hi ? 'border-indigo-400' : 'border-stone-200'}"
+          >
+            <Image
+              src={`/assets/novel.jpg`}
+              alt="대체_텍스트"
+              width={200}
+              height={200}
+              layout="responsive"
+              objectFit="contain"
+            />
+            <div className="absolute bottom-0 w-full text-center text-stone-500 text-base font-bold bg-white">
+              건물
+            </div>
+          </div>
+          <div
+            className="flex flex-col mx-8 items-center border-4 rounded p-2 bg-white relative 
+    ${hi ? 'border-indigo-400' : 'border-stone-200'}"
+          >
+            <Image
+              src={`/assets/famous.jpg`}
+              alt="대체_텍스트"
+              width={80}
+              height={80}
+              layout="responsive"
+              objectFit="contain"
+            />
+            <div className="absolute bottom-0 w-full text-center text-stone-500 text-base font-bold bg-white">
+              건물
+            </div>
+          </div>
+          <div
+            className="flex flex-col mx-8 items-center border-4 rounded p-2 bg-white relative 
+    ${hi ? 'border-indigo-400' : 'border-stone-200'}"
+          >
+            <Image
+              src={`/assets/famous.jpg`}
+              alt="대체_텍스트"
+              width={80}
+              height={80}
+              layout="responsive"
+              objectFit="contain"
+            />
+            <div className="absolute bottom-0 w-full text-center text-stone-500 text-base font-bold bg-white">
+              건물
+            </div>
+          </div>
+        </div>
+
+        <div>유명한 곳에 갈래요</div>
+        <div>참신한 곳에 갈래요</div>
+        <div>부지런히 다녀요</div>
+        <div>느긋하게 다녀요</div>
+        <div className="flex pt-10">
+          <div className="flex text-lg font-bold pr-5">여행 시작</div>
+          <div className="px-2 pt-1">{formatDate(startDate)}</div>
           <TimePicker index={0} start={true}></TimePicker>
-          <div className="w-5 pt-1">---</div>
-          <div className="font-bold pl-3 pr-3 pt-1">
-            {formatDate(endDate)}
-          </div>{' '}
+        </div>
+        <div className="flex pt-5">
+          <div className="text-lg font-bold pr-5">여행 종료</div>
+          <div className="pl-2 pr-3 pt-1">{formatDate(endDate)}</div>
           <TimePickerPM index={data.length - 1} start={true} />
         </div>
         <div className="flex">

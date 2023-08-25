@@ -14,8 +14,8 @@ export interface TravelInfoState {
   companion_adult?: string
   companion_child?: string
   companion_number?: number
-  travel_start_date: string
-  travel_end_date: string
+  // travel_start_date: string
+  // travel_end_date: string
   duration: number
 
   category: MajorCategoriesWithMinorCategories
@@ -43,8 +43,8 @@ const initialState: TravelInfoState = {
   city: '서울',
   travelId: '',
   companion: '혼자',
-  travel_start_date: '',
-  travel_end_date: '',
+  // travel_start_date: '',
+  // travel_end_date: '',
   duration: 3,
 
   category: {},
