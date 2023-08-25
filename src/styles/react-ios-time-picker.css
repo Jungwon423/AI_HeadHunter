@@ -12,9 +12,6 @@ input {
 input:focus {
   outline: none;
 }
-.react-ios-time-picker-main {
-  position: relative;
-}
 
 .react-ios-time-picker {
   position: absolute;

@@ -1,33 +1,29 @@
 import React, { useState } from 'react'
 import MyDatePicker from './MyDatePicker'
 import { useDispatch } from 'react-redux'
-import {
-  setDuration,
-  setTravelEndDate,
-  setTravelStartDate,
-} from '../slices/travelInfoSlice'
+import { setDuration } from '../slices/travelInfoSlice'
 import { AppDispatch } from '../store'
 import { setEndDate, setStartDate } from '../slices/timeSlice'
 
 const WhenSurvey = () => {
   const dispatch = useDispatch<AppDispatch>()
 
-  const [startDate, setStartDate1] = useState<Date | null>(null)
-  const [endDate, setEndDate1] = useState<Date | null>(null)
+  const [startDate, setStart] = useState<Date | null>(null)
+  const [endDate, setEnd] = useState<Date | null>(null)
   const handleDatesChange = (
     newStartDate: Date | null,
     newEndDate: Date | null,
   ) => {
-    setStartDate1(newStartDate)
-    setEndDate1(newEndDate)
+    setStart(newStartDate)
+    setEnd(newEndDate)
     const maxDate = new Date(newStartDate!)
     maxDate.setDate(newStartDate!.getDate() + 29)
     if (newEndDate! > maxDate) {
-      setEndDate1(maxDate)
-    } else setEndDate1(newEndDate)
+      setEnd(maxDate)
+    } else setEnd(newEndDate)
 
-    dispatch(setTravelStartDate(startDate?.toDateString()!))
-    dispatch(setTravelEndDate(endDate?.toDateString()!))
+    dispatch(setStartDate(newStartDate?.toISOString()!))
+    dispatch(setEndDate(newEndDate?.toISOString()!))
   }
 
   return (

@@ -124,12 +124,12 @@ export const travelInfoSlice = createSlice({
     setCompanionChild: (state, action: PayloadAction<string>) => {
       state.companion_child = action.payload
     },
-    setTravelStartDate: (state, action: PayloadAction<string>) => {
-      state.travel_start_date = action.payload
-    },
-    setTravelEndDate: (state, action: PayloadAction<string>) => {
-      state.travel_end_date = action.payload
-    },
+    // setTravelStartDate: (state, action: PayloadAction<string>) => {
+    //   state.travel_start_date = action.payload
+    // },
+    // setTravelEndDate: (state, action: PayloadAction<string>) => {
+    //   state.travel_end_date = action.payload
+    // },
     setDuration: (state, action: PayloadAction<number>) => {
       state.duration = action.payload
     },
@@ -197,8 +197,8 @@ export const {
   setCompanionAdult,
   setCompanionChild,
 
-  setTravelStartDate,
-  setTravelEndDate,
+  // setTravelStartDate,
+  // setTravelEndDate,
   setDuration,
 
   setCategory,
@@ -249,10 +249,10 @@ export const selectCompanionAdult = (state: RootState) =>
 export const selectCompanionChild = (state: RootState) =>
   state.travelInfo.companion_child
 
-export const selectTravelStartDate = (state: RootState) =>
-  state.travelInfo.travel_start_date
-export const selectTravelEndDate = (state: RootState) =>
-  state.travelInfo.travel_end_date
+// export const selectTravelStartDate = (state: RootState) =>
+//   state.travelInfo.travel_start_date
+// export const selectTravelEndDate = (state: RootState) =>
+//   state.travelInfo.travel_end_date
 export const selectDuration = (state: RootState) => state.travelInfo.duration
 
 export const selectCategory = (state: RootState) => state.travelInfo.category
