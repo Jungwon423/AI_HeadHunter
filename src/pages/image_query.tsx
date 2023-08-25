@@ -6,7 +6,6 @@ import {
   selectUser,
   selectCompanion,
   selectDuration,
-  selectTravelStartDate,
   selectCategory,
   selectTravelId,
 } from '../slices/travelInfoSlice'
@@ -22,10 +21,9 @@ import { ImageQueryInput } from '../interfaces/imageQuery'
 import { fetchImageQueryAsync } from '../functions/fetchImageQuery'
 import { MajorCategoriesWithMinorCategories } from '../interfaces/category'
 import Loading2 from '../components/loading2'
-import ImageWithSkeleton from './imageWithSkeleton'
-import MyNavbar from '../components/MyNavbar'
 import NameAndDescription from '../image_query_component/name_and_description'
 import { set } from 'date-fns'
+import { selectStartDate } from '../slices/timeSlice'
 
 const ImageQuery = () => {
   const [isLoading1, setIsLoading1] = useState(false)
@@ -44,8 +42,8 @@ const ImageQuery = () => {
   const companion: string = useSelector(selectCompanion)
   const duration: number = useSelector(selectDuration)
 
-  const travelStartDate: string = useSelector(selectTravelStartDate)
-
+  //const travelStartDate: string = useSelector(selectTravelStartDate)
+  const travelStartDate: string = useSelector(selectStartDate) //IosdateString
   const majorCategoriesWithMinorCategories: MajorCategoriesWithMinorCategories =
     useSelector(selectCategory)
 

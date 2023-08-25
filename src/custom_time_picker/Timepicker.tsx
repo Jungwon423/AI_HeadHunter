@@ -31,13 +31,26 @@ function TimePicker({
   index = 0,
   start = true,
 }) {
+  function formatLocalTime(date: Date) {
+    let hours = date.getHours()
+    const minutes = ('0' + date.getMinutes()).slice(-2) // Always two digits
+    const period = hours >= 12 ? 'PM' : 'AM'
+
+    if (hours > 12) {
+      hours -= 12
+    } else if (hours === 0) {
+      hours = 12
+    }
+    return `${hours}:${minutes} ${period}`
+  }
+
   const [isOpen, setIsOpen] = useState(initialIsOpenValue)
   const [height, setHeight] = useState(cellHeight)
   let [inputValue, setInputValue] = useState<string | null>(initialValue)
   let temp = useSelector(selectDayDetails)
-  if (temp[0].startTime === null) {
-  } else {
-    inputValue = temp[0].startTime
+  if (temp[index].startTime) {
+    let tempDate = new Date(temp[index].startTime)
+    inputValue = formatLocalTime(tempDate)
   }
   const handleClick = () => {
     setIsOpen(!isOpen)
@@ -79,7 +92,7 @@ function TimePicker({
 
   return (
     <>
-      <div className="flex react-ios-time-picker-main" onClick={handleClick}>
+      <div className="pl-1" onClick={handleClick}>
         <input
           id={id}
           name={name}

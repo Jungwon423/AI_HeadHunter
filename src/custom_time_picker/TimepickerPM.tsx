@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Portal } from 'react-portal'
 import TimePickerSelection from './TimePickerSelection'
+import { useSelector } from 'react-redux'
+import { selectDayDetails } from '../slices/timeSlice'
 
 function TimePickerPM({
   value: initialValue = null,
@@ -28,10 +30,27 @@ function TimePickerPM({
   index = 0,
   start = false,
 }) {
+  function formatLocalTime(date: Date) {
+    let hours = date.getHours()
+    const minutes = ('0' + date.getMinutes()).slice(-2) // Always two digits
+    const period = hours >= 12 ? 'PM' : 'AM'
+
+    if (hours > 12) {
+      hours -= 12
+    } else if (hours === 0) {
+      hours = 12
+    }
+    return `${hours}:${minutes} ${period}`
+  }
+
   const [isOpen, setIsOpen] = useState(initialIsOpenValue)
   const [height, setHeight] = useState(cellHeight)
-  const [inputValue, setInputValue] = useState(initialValue)
-
+  let [inputValue, setInputValue] = useState<string | null>(initialValue)
+  let temp = useSelector(selectDayDetails)
+  if (temp[index].endTime) {
+    let tempDate = new Date(temp[index].endTime)
+    inputValue = formatLocalTime(tempDate)
+  }
   const handleClick = () => {
     setIsOpen(!isOpen)
   }
@@ -46,7 +65,7 @@ function TimePickerPM({
   finalValue = inputValue
 
   if (initialValue === null && use12Hours) {
-    finalValue = `${pickerDefaultValue} 오전`
+    finalValue = `${pickerDefaultValue} AM`
   } else if (initialValue === null && !use12Hours) {
     finalValue = pickerDefaultValue
   }

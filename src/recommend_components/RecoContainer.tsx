@@ -9,14 +9,13 @@ import {
 import { PlaceInfo } from '../interfaces/placeInfo'
 import {
   selectCity,
-  selectTravelEndDate,
-  selectTravelStartDate,
   handleCurrentPlace,
   setIsCurrentPlaceInCourse,
   setOpenRecommend,
 } from '../slices/travelInfoSlice'
 import Image from 'next/legacy/image'
 import { set } from 'date-fns'
+import { selectEndDate, selectStartDate } from '../slices/timeSlice'
 
 const RecoContainer = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -25,8 +24,8 @@ const RecoContainer = () => {
   const currentDay: number = useSelector(selectCurrentDay)
 
   const city: string = useSelector(selectCity)
-  const travelStartDate = useSelector(selectTravelStartDate)
-  const travelEndDate = useSelector(selectTravelEndDate)
+  const travelStartDate = useSelector(selectStartDate)
+  const travelEndDate = useSelector(selectEndDate)
 
   return (
     <div className="p-2">
