@@ -1,7 +1,9 @@
-import { useDispatch } from 'react-redux'
 import TimePicker from '../custom_time_picker/Timepicker'
+import { useDispatch, useSelector } from 'react-redux'
 import TimePickerPM from '../custom_time_picker/TimepickerPM'
 import { AppDispatch } from '../store'
+import { useFormatter } from 'next-intl'
+import { selectDayDetails } from '../slices/timeSlice'
 
 const getDateRange = (startDate: Date, endDate: Date): Date[] => {
   const dateArray: Date[] = []
@@ -17,8 +19,8 @@ const getDateRange = (startDate: Date, endDate: Date): Date[] => {
   return dateArray
 }
 
-const startDate = new Date('2022-08-24')
-const endDate = new Date('2022-08-27')
+const startDate = new Date('2023-08-24')
+const endDate = new Date('2023-08-27')
 
 // dateRange를 생성합니다.
 const dateRange = getDateRange(startDate, endDate)
@@ -28,7 +30,6 @@ export const data = dateRange.map((date, index) => {
   const dayOfWeekKorean = ['일', '월', '화', '수', '목', '금', '토'][
     date.getDay()
   ]
-
   return [
     <div>{`${date.getMonth() + 1}/${date.getDate()}`}</div>,
     <div>{dayOfWeekKorean}</div>,

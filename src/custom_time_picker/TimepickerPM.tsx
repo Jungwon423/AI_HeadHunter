@@ -25,6 +25,8 @@ function TimePickerPM({
   onOpen = () => {},
   popupClassName = null,
   inputClassName = null,
+  index = 0,
+  start = false,
 }) {
   const [isOpen, setIsOpen] = useState(initialIsOpenValue)
   const [height, setHeight] = useState(cellHeight)
@@ -64,6 +66,8 @@ function TimePickerPM({
     onAmPmChange,
     initialValue: finalValue,
     pickerDefaultValue,
+    index,
+    start,
   }
 
   const inputRef = useRef<HTMLDivElement>(null) // useRef를 사용하여 input의 위치를 참조합니다.

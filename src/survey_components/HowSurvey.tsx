@@ -1,46 +1,84 @@
 import React, { use, useState } from 'react'
 import Image from 'next/image'
 import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch } from '../store'
-import TripDateTimeInput from '../components/trip'
 import TimePicker from '../custom_time_picker/Timepicker'
 import TimePickerPM from '../custom_time_picker/TimepickerPM'
 import SimpleTable from './Table'
-import { data } from './timeData'
-import { selectDayDetails } from '../slices/timeSlice'
+// import { data } from './timeData'
+import {
+  selectDayDetails,
+  selectEndDate,
+  selectStartDate,
+} from '../slices/timeSlice'
 
 const HowSurvey = () => {
-  const dispatch = useDispatch<AppDispatch>()
-  const handleDateTimeChanged = (start: string, end: string) => {
-    console.log('여행 시작 시간:', start)
-    console.log('여행 종료 시간:', end)
-  }
-  const [value, setValue] = useState('10:00')
+  const getDateRange = (startDate: Date, endDate: Date): Date[] => {
+    const dateArray: Date[] = []
 
-  const onChange = (timeValue: any) => {
-    setValue(timeValue)
+    for (
+      let currentDate = startDate;
+      currentDate <= endDate;
+      currentDate.setDate(currentDate.getDate() + 1)
+    ) {
+      dateArray.push(new Date(currentDate))
+    }
+
+    return dateArray
   }
+
+  const startDate = useSelector(selectStartDate)
+  const endDate = useSelector(selectEndDate)
+
+  function formatDate(tempDate: string) {
+    const date = new Date(tempDate)
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0') // 월은 0부터 시작하기 때문에 +1 필요
+    const day = String(date.getDate()).padStart(2, '0')
+
+    const weekdays = ['일', '월', '화', '수', '목', '금', '토']
+    const weekday = weekdays[date.getDay()]
+
+    return `${year}.${month}.${day}(${weekday})`
+  }
+
+  // dateRange를 생성합니다.
+  const dateRange = getDateRange(new Date(startDate), new Date(endDate))
+  const data = dateRange.map((date, index) => {
+    const dayOfWeekKorean = ['일', '월', '화', '수', '목', '금', '토'][
+      date.getDay()
+    ]
+    return [
+      <div>{`${date.getMonth() + 1}/${date.getDate()}`}</div>,
+      <div>{dayOfWeekKorean}</div>,
+      <div>
+        <TimePicker index={index} start={true}></TimePicker>
+      </div>,
+      <div>
+        <TimePickerPM index={index} start={false}></TimePickerPM>
+      </div>,
+    ]
+  })
   const [toggleState, setToggleState] = useState<boolean>(false)
 
   const handleToggle = () => {
     setToggleState(!toggleState)
   }
 
+  const dd = useSelector(selectDayDetails)
+  console.log(dd)
   const header = ['일자', '요일', '시작시간', '종료시간']
-  const dayDetails = useSelector(selectDayDetails)
-  console.log(dayDetails)
-  console.log(new Date(2023, 8, 25).toDateString())
-
   return (
     <div className="flex py-5 w-full flex-row items-center">
       <div className="px-10 flex flex-col flex-grow">
         <div className="text-2xl font-bold pt-20">여행시작 시간</div>
         <div className="flex pt-5">
-          <div className="font-bold pr-3 pt-1">2023.08.24(목)</div>{' '}
-          <TimePicker onChange={() => onChange(value)} />
+          <div className="font-bold pr-3 pt-1">{formatDate(startDate)}</div>{' '}
+          <TimePicker index={0} start={true}></TimePicker>
           <div className="w-5 pt-1">---</div>
-          <div className="font-bold pl-3 pr-3 pt-1">2023.08.27(일)</div>{' '}
-          <TimePickerPM onChange={() => onChange(value)} />
+          <div className="font-bold pl-3 pr-3 pt-1">
+            {formatDate(endDate)}
+          </div>{' '}
+          <TimePickerPM index={data.length - 1} start={true} />
         </div>
         <div className="flex">
           <div className="pt-3 pr-2 text-gray-700">여행시간 상세 설정</div>

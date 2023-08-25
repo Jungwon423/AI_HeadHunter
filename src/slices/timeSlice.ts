@@ -6,16 +6,13 @@ import storage from 'redux-persist/lib/storage'
 
 export interface TimeState {
   dayDetails: DayDetail[]
-  startDate: Date
-  endDate: Date
+  startDate: string
+  endDate: string
 }
 export interface DayDetail {
-  month: number
-  day: number
-  startHour: number
-  startMinute: number
-  endHour: number
-  endMinute: number
+  day: string //date를 string으로
+  startTime: string
+  endTime: string
 }
 const getDateRange = (startDate: Date, endDate: Date): Date[] => {
   const dateArray: Date[] = []
@@ -31,31 +28,22 @@ const getDateRange = (startDate: Date, endDate: Date): Date[] => {
 
   return dateArray
 }
-// const daysBetween = (startDate: Date, endDate: Date): number => {
-//   const oneDay = 24 * 60 * 60 * 1000 // hours*minutes*seconds*milliseconds
-//   const firstDate = new Date(startDate)
-//   const secondDate = new Date(endDate)
-//   return (
-//     Math.round(
-//       Math.abs((firstDate.getTime() - secondDate.getTime()) / oneDay),
-//     ) + 1
-//   )
-// }
 const getInitialDayDetails = (startDate: Date, endDate: Date): DayDetail[] => {
-  //const numOfDays = daysBetween(startDate, endDate)
   const dates = getDateRange(startDate, endDate)
 
   const initialValue = (date: Date): DayDetail => {
+    const startDate = new Date(date)
+    startDate.setHours(10, 0, 0) // 오전 10시 설정
+
+    const endDate = new Date(date)
+    endDate.setHours(22, 0, 0) // 오후 10시 설정
+
     return {
-      month: date.getMonth(),
-      day: date.getDate(),
-      startHour: 10,
-      startMinute: 0,
-      endHour: 22,
-      endMinute: 0,
+      day: date.toISOString(),
+      startTime: startDate.toISOString(),
+      endTime: endDate.toISOString(),
     }
   }
-
   return dates.map((date) => initialValue(date))
 }
 
@@ -65,8 +53,8 @@ const initialState: TimeState = {
     new Date(2023, 8, 23),
     new Date(2023, 8, 27),
   ),
-  startDate: new Date(2023, 8, 25),
-  endDate: new Date(2023, 8, 27),
+  startDate: new Date(2023, 8, 25).toISOString(),
+  endDate: new Date(2023, 8, 27).toISOString(),
 }
 export const timeDetailSlice = createSlice({
   name: 'travelTime',
@@ -78,16 +66,35 @@ export const timeDetailSlice = createSlice({
     ) => {
       state.dayDetails[action.payload.index] = action.payload.dayDetail
     },
+    setStartTime: (
+      state,
+      action: PayloadAction<{ index: number; startTime: string }>,
+    ) => {
+      state.dayDetails[action.payload.index].startTime =
+        action.payload.startTime
+    },
+    setEndTime: (
+      state,
+      action: PayloadAction<{ index: number; endTime: string }>,
+    ) => {
+      state.dayDetails[action.payload.index].endTime = action.payload.endTime
+    },
     // setDayDetail: (state, action: PayloadAction<DayDetail>) => {
     //   state.dayDetails = action.payload
     // },
-    setStartDate: (state, action: PayloadAction<Date>) => {
+    setStartDate: (state, action: PayloadAction<string>) => {
       state.startDate = action.payload
-      state.dayDetails = getInitialDayDetails(state.startDate, state.endDate)
+      state.dayDetails = getInitialDayDetails(
+        new Date(action.payload),
+        new Date(state.endDate),
+      )
     },
-    setEndDate: (state, action: PayloadAction<Date>) => {
+    setEndDate: (state, action: PayloadAction<string>) => {
       state.endDate = action.payload
-      state.dayDetails = getInitialDayDetails(state.startDate, state.endDate)
+      state.dayDetails = getInitialDayDetails(
+        new Date(state.startDate),
+        new Date(action.payload),
+      )
     },
   },
 })
@@ -102,8 +109,13 @@ const persistedTimeDetailReducer = persistReducer(
   timeDetailSlice.reducer,
 )
 
-export const { updateDayDetail, setStartDate, setEndDate } =
-  timeDetailSlice.actions
+export const {
+  updateDayDetail,
+  setStartDate,
+  setEndDate,
+  setStartTime,
+  setEndTime,
+} = timeDetailSlice.actions
 
 export const selectDayDetails = (state: RootState) =>
   state.timeDetail.dayDetails

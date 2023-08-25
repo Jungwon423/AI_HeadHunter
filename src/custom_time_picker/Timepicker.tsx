@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Portal } from 'react-portal'
 import TimePickerSelection from './TimePickerSelection'
+import { useSelector } from 'react-redux'
+import { selectCityDetail } from '../slices/cityDetailSlice'
+import { selectDayDetails } from '../slices/timeSlice'
 
 function TimePicker({
   value: initialValue = null,
@@ -25,11 +28,17 @@ function TimePicker({
   onOpen = () => {},
   popupClassName = null,
   inputClassName = null,
+  index = 0,
+  start = true,
 }) {
   const [isOpen, setIsOpen] = useState(initialIsOpenValue)
   const [height, setHeight] = useState(cellHeight)
-  const [inputValue, setInputValue] = useState(initialValue)
-
+  let [inputValue, setInputValue] = useState<string | null>(initialValue)
+  let temp = useSelector(selectDayDetails)
+  if (temp[0].startTime === null) {
+  } else {
+    inputValue = temp[0].startTime
+  }
   const handleClick = () => {
     setIsOpen(!isOpen)
   }
@@ -64,6 +73,8 @@ function TimePicker({
     onAmPmChange,
     initialValue: finalValue,
     pickerDefaultValue,
+    index,
+    start,
   }
 
   return (

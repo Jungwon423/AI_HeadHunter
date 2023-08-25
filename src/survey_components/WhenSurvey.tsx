@@ -7,23 +7,24 @@ import {
   setTravelStartDate,
 } from '../slices/travelInfoSlice'
 import { AppDispatch } from '../store'
+import { setEndDate, setStartDate } from '../slices/timeSlice'
 
 const WhenSurvey = () => {
   const dispatch = useDispatch<AppDispatch>()
 
-  const [startDate, setStartDate] = useState<Date | null>(null)
-  const [endDate, setEndDate] = useState<Date | null>(null)
+  const [startDate, setStartDate1] = useState<Date | null>(null)
+  const [endDate, setEndDate1] = useState<Date | null>(null)
   const handleDatesChange = (
     newStartDate: Date | null,
     newEndDate: Date | null,
   ) => {
-    setStartDate(newStartDate)
-    setEndDate(newEndDate)
+    setStartDate1(newStartDate)
+    setEndDate1(newEndDate)
     const maxDate = new Date(newStartDate!)
     maxDate.setDate(newStartDate!.getDate() + 29)
     if (newEndDate! > maxDate) {
-      setEndDate(maxDate)
-    } else setEndDate(newEndDate)
+      setEndDate1(maxDate)
+    } else setEndDate1(newEndDate)
 
     dispatch(setTravelStartDate(startDate?.toDateString()!))
     dispatch(setTravelEndDate(endDate?.toDateString()!))
@@ -78,7 +79,8 @@ const WhenSurvey = () => {
                   {(() => {
                     const differenceInMilliseconds =
                       endDate.getTime() - startDate.getTime()
-                    console.log(endDate)
+                    dispatch(setStartDate(startDate.toDateString()!))
+                    dispatch(setEndDate(endDate.toDateString()!))
                     const differenceInDays = Math.ceil(
                       differenceInMilliseconds / (1000 * 60 * 60 * 24),
                     ) // 일수 계산 (소수점 올림)
