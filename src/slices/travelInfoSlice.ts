@@ -55,7 +55,7 @@ const initialState: TravelInfoState = {
 
   location: '서울 강남구 언주로110 경남아파트',
   coordinate: [135.5023, 34.6937],
-  travelStyle: ['문화', '쇼핑', '음식'],
+  travelStyle: ['famous', 'busy'],
   travelSchedule: [],
   loading: 'idle',
   error: null,
