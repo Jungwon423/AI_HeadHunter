@@ -234,7 +234,7 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
             </button>
             <button
               onClick={gotoSurvey}
-              className="flex flex-grow mx-1 px-8 py-2 bg-indigo-500 text-white rounded-md"
+              className="flex flex-grow mx-1 px-8 py-2 bg-indigo-500 text-white rounded-md justify-center"
             >
               일정 만들기 {'>'}
             </button>

@@ -12,7 +12,6 @@ import {
 import { RecommendInput } from '../interfaces/recommendInput'
 
 import Loading from '../components/loading'
-import Image from 'next/image'
 import {
   PreferenceInput,
   fetchPreferenceAsync,
@@ -91,7 +90,10 @@ const PreferencePage = () => {
     }
   }, [recommendInfo.preferenceLoading])
 
-  if (recommendInfo.preferenceLoading === 'pending') {
+  if (
+    recommendInfo.preferenceLoading === 'pending' ||
+    recommendInfo.preferenceLoading === 'idle'
+  ) {
     return <Loading></Loading>
   }
 
@@ -130,14 +132,19 @@ const PreferencePage = () => {
       <MyNavbar></MyNavbar>
 
       <div className="bg-indigo-100 h-[1000px] md:h-screen xl:h-screen">
-        <button className={buttonClass} onClick={handleButtonClick}>
-          {buttonStatus}
-        </button>
-        <div className="font-bold text-xl text-indigo-500 flex items-center justify-center">
+        {/* <div className="font-bold text-xl text-indigo-500 flex items-center justify-center">
           앤비님의 여행 엽서가 도착했어요!
-        </div>
-        <div className="flex items-center justify-center py-8">
-          <Switcher12 onToggle={handleToggle}></Switcher12>
+        </div> */}
+        <div className="grid grid-cols-3 py-8">
+          <div className="w-1/3"></div>
+          <div className="justify-self-center">
+            <Switcher12 onToggle={handleToggle}></Switcher12>
+          </div>
+          <div className="justify-self-end px-5">
+            <button className={buttonClass} onClick={handleButtonClick}>
+              {buttonStatus}
+            </button>
+          </div>
         </div>
         {isChecked ? (
           <div className=" flex items-center justify-center">
