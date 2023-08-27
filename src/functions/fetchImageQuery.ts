@@ -32,7 +32,7 @@ export const fetchImageQuery = async (
 
   let API_URL: string = SERVER_API_URL + '/preference/attractionImageQuery'
 
-  console.log('/preference/attractionQuery : ', ImageQueryInput)
+  console.log('/preference/attractionImageQuery : ', ImageQueryInput)
 
   const response = await axios.post(API_URL, ImageQueryInput, config)
 

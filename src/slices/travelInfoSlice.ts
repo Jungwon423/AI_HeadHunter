@@ -10,7 +10,7 @@ export interface TravelInfoState {
   user: string
   city: string
   travelId: string
-  companion: string
+  companion: string | null
   companion_adult?: string
   companion_child?: string
   companion_number?: number
@@ -43,7 +43,7 @@ const initialState: TravelInfoState = {
   user: '',
   city: '서울',
   travelId: '',
-  companion: '혼자',
+  companion: null,
   // travel_start_date: '',
   // travel_end_date: '',
   duration: 3,
@@ -55,7 +55,7 @@ const initialState: TravelInfoState = {
 
   location: '서울 강남구 언주로110 경남아파트',
   coordinate: [135.5023, 34.6937],
-  travelStyle: ['문화', '쇼핑', '음식'],
+  travelStyle: ['famous', 'busy'],
   travelSchedule: [],
   recommendSchedule: [],
   loading: 'idle',
@@ -132,7 +132,7 @@ export const travelInfoSlice = createSlice({
       state.travelId = action.payload
     },
 
-    setCompanion: (state, action: PayloadAction<string>) => {
+    setCompanion: (state, action: PayloadAction<string | null>) => {
       state.companion = action.payload
     },
 

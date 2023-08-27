@@ -1,4 +1,4 @@
-import React, { use, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useDispatch, useSelector } from 'react-redux'
 import TimePicker from '../custom_time_picker/Timepicker'
@@ -10,6 +10,7 @@ import {
   selectEndDate,
   selectStartDate,
 } from '../slices/timeSlice'
+import { HowStyle } from './HowStyle'
 
 const HowSurvey = () => {
   const getDateRange = (startDate: Date, endDate: Date): Date[] => {
@@ -63,76 +64,14 @@ const HowSurvey = () => {
   const handleToggle = () => {
     setToggleState(!toggleState)
   }
-  const hi = true
+
   const dd = useSelector(selectDayDetails)
   console.log(dd)
   const header = ['일자', '요일', '시작시간', '종료시간']
   return (
     <div className="flex flex-col py-5 w-full justify-center">
       <div className="px-10 flex flex-col flex-grow">
-        <div className="text-2xl pt-20 font-bold">여행 스타일을 알려주세요</div>
-        <div className="pt-5 font-bold text-stone-600">
-          가보고 싶은 곳을 고를 때 나는
-        </div>
-        <div className="w-[500px] grid grid-cols-2 gap-4 pt-2">
-          <div className="w-[220px] h-[230px] border-2 pt-2 px-5 flex flex-col rounded-lg items-center justify-center">
-            <div className="p-1">
-              <Image
-                src={`/assets/famous.jpg`}
-                alt="대체_텍스트"
-                width={200}
-                height={200}
-                layout="responsive"
-                objectFit="contain"
-              />
-            </div>
-            <div className="font-bold text-gray-600">유명한 곳에 갈래요</div>
-          </div>
-          <div className="w-[220px] h-[230px] border-2 pt-2 px-5 flex flex-col rounded-lg items-center justify-center">
-            <div className="p-1">
-              <Image
-                src={`/assets/novel.jpg`}
-                alt="대체_텍스트"
-                width={200}
-                height={200}
-                layout="responsive"
-                objectFit="contain"
-              />
-            </div>
-            <div className="font-bold text-gray-600">참신한 곳에 갈래요</div>
-          </div>
-        </div>
-        <div className="pt-5 font-bold text-stone-600">
-          관광지를 둘러볼 때 나는
-        </div>
-        <div className="w-[500px] grid grid-cols-2 gap-4 pt-2">
-          <div className="w-[220px] h-[230px] border-2 pt-2 px-5 flex flex-col rounded-lg items-center justify-center">
-            <div className="p-1">
-              <Image
-                src={`/assets/busy.jpg`}
-                alt="대체_텍스트"
-                width={200}
-                height={200}
-                layout="responsive"
-                objectFit="contain"
-              />
-            </div>
-            <div className="font-bold text-gray-600">바쁘게 돌아다닌다</div>
-          </div>
-          <div className="w-[220px] h-[230px] border-2 pt-2 px-5 flex flex-col rounded-lg items-center justify-center">
-            <div className="p-1">
-              <Image
-                src={`/assets/lazy.jpg`}
-                alt="대체_텍스트"
-                width={200}
-                height={200}
-                layout="responsive"
-                objectFit="contain"
-              />
-            </div>
-            <div className="font-bold text-gray-600">느긋하게 다닌다</div>
-          </div>
-        </div>
+        <HowStyle></HowStyle>
         <div className="flex pt-10">
           <div className="flex text-lg font-bold pr-5">여행 시작 시간</div>
           <div className="px-2 pt-1">{formatDate(startDate)}</div>
@@ -194,7 +133,6 @@ const HowSurvey = () => {
                 <SimpleTable header={header} data={data} />
               </div>
             </div>
-            {/* <TripDateTimeInput onDateTimeChanged={handleDateTimeChanged} /> */}
           </div>
         ) : null}
       </div>

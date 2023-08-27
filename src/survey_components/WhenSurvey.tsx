@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import MyDatePicker from './MyDatePicker'
 import { useDispatch } from 'react-redux'
 import { setDuration } from '../slices/travelInfoSlice'
@@ -21,10 +21,11 @@ const WhenSurvey = () => {
     if (newEndDate! > maxDate) {
       setEnd(maxDate)
     } else setEnd(newEndDate)
-
-    dispatch(setStartDate(newStartDate?.toISOString()!))
-    dispatch(setEndDate(newEndDate?.toISOString()!))
   }
+  useEffect(() => {
+    dispatch(setStartDate(startDate?.toISOString()!))
+    dispatch(setEndDate(endDate?.toISOString()!))
+  }, [startDate, endDate])
 
   return (
     <div className="flex py-5 w-full flex-col items-center">

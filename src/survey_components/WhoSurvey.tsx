@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SurveyButton } from './SurveyButtons'
 import NumberButton from './NumberButton'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from '../store'
 import {
+  selectCompanion,
+  selectCompanionAdult,
+  selectCompanionChild,
   setCompanion,
   setCompanionAdult,
   setCompanionChild,
@@ -12,45 +15,41 @@ import { SimpleButtons } from './SimpleButtons'
 
 const WhoSurvey = () => {
   const dispatch = useDispatch<AppDispatch>()
-  const [selectedSurveys, setSelectedSurveys] = useState<string[]>([])
-  const handleSurveysClick = (style: string) => {
-    if (selectedSurveys.includes(style)) {
-      setSelectedSurveys(selectedSurveys.filter((c) => c !== style))
+  const selectedCompanion = useSelector(selectCompanion)
+  useEffect(() => {
+    dispatch(setCompanion(selectedCompanion))
+  }, [selectedCompanion])
+  const [selectedAdult, setSelectedAdult] = useState<string[]>([])
+  const handleAdultClick = (style: string) => {
+    if (selectedAdult.includes(style)) {
+      setSelectedAdult(selectedAdult.filter((c) => c !== style))
     } else {
-      setSelectedSurveys([...selectedSurveys, style])
+      setSelectedAdult([...selectedAdult, style])
     }
-    // TODO : 1개만 설정되도록 수정
   }
-  const [selectedSurveys2, setSelectedSurveys2] = useState<string[]>([])
-  const handleSurveys2Click = (style: string) => {
-    if (selectedSurveys2.includes(style)) {
-      setSelectedSurveys2(selectedSurveys2.filter((c) => c !== style))
+  useEffect(() => {
+    dispatch(setCompanionAdult(selectedAdult[0]))
+  }, [selectedAdult])
+  const [selectedChild, setSelectedChild] = useState<string[]>([])
+  const handleChildClick = (style: string) => {
+    if (selectedChild.includes(style)) {
+      setSelectedChild(selectedChild.filter((c) => c !== style))
     } else {
-      setSelectedSurveys2([...selectedSurveys2, style])
+      setSelectedChild([...selectedChild, style])
     }
-    // TODO : 1개만 설정되도록 수정
-    dispatch(setCompanionAdult(selectedSurveys2[0]))
   }
-  const [selectedSurvey3, setSelectedSurvey3] = useState<string | null>(null)
-  const handleSurveys3Click = (style: string) => {
-    if (selectedSurvey3 === style) {
-      setSelectedSurvey3(null)
-      dispatch(setCompanionChild(''))
-    } else {
-      dispatch(setCompanionChild(style))
-      setSelectedSurvey3(style)
-    }
-    console.log()
-  }
+  useEffect(() => {
+    dispatch(setCompanionChild(selectedChild[0]))
+  }, [selectedChild])
   const [travelDuration, setTravelDuration] = useState<number>(0)
   const handleDurationChange = (value: number) => {
     setTravelDuration(value)
   }
   const shouldShowChildrenButton = () => {
     return (
-      selectedSurvey3 === '부모님과' ||
-      selectedSurvey3 === '친구와' ||
-      selectedSurvey3 === '배우자와'
+      selectedCompanion === '부모님과' ||
+      selectedCompanion === '친구와' ||
+      selectedCompanion === '배우자와'
     )
   }
 
@@ -65,14 +64,12 @@ const WhoSurvey = () => {
         </div>
         <SimpleButtons
           surveys={['혼자', '연인과', '친구와', '부모님과', '배우자와']}
-          selectedSurvey={selectedSurvey3}
-          onSurveyClick={handleSurveys3Click}
         ></SimpleButtons>
         <div className="flex font-bold text-xl pt-10">나이</div>
         <SurveyButton
           surveys={['10대', '20대', '30대', '40대', '50대', '60대 이상']}
-          selectedSurveys={selectedSurveys}
-          onSurveyClick={handleSurveysClick}
+          selectedSurveys={selectedAdult}
+          onSurveyClick={handleAdultClick}
         />
         {shouldShowChildrenButton() && (
           <>
@@ -85,8 +82,8 @@ const WhoSurvey = () => {
                 '중학생',
                 '고등학생',
               ]}
-              selectedSurveys={selectedSurveys2}
-              onSurveyClick={handleSurveys2Click}
+              selectedSurveys={selectedChild}
+              onSurveyClick={handleChildClick}
             />
           </>
         )}
