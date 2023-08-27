@@ -22,8 +22,7 @@ import { fetchImageQueryAsync } from '../functions/fetchImageQuery'
 import { MajorCategoriesWithMinorCategories } from '../interfaces/category'
 import Loading2 from '../components/loading2'
 import NameAndDescription from '../image_query_component/name_and_description'
-import { set } from 'date-fns'
-import { selectStartDate } from '../slices/timeSlice'
+import { selectEndDate, selectStartDate } from '../slices/timeSlice'
 
 const ImageQuery = () => {
   const [isLoading1, setIsLoading1] = useState(false)
@@ -39,7 +38,7 @@ const ImageQuery = () => {
   const userId: string = useSelector(selectUser)
   const travelId: string = useSelector(selectTravelId)
 
-  const companion: string = useSelector(selectCompanion)
+  const companion: string | null = useSelector(selectCompanion)
   const duration: number = useSelector(selectDuration)
 
   //const travelStartDate: string = useSelector(selectTravelStartDate)
@@ -50,6 +49,8 @@ const ImageQuery = () => {
   // selector from 'imageQuerySlice'
   const attractionQuery = useSelector(selectImageQuery)
   const resultList = useSelector(selectImageQueryResultList)
+  const startDate = useSelector(selectStartDate)
+  const endDate = useSelector(selectEndDate)
 
   // 여기서 초기 쿼리 입력 값을 설정하십시오.
   const ImageQueryInput: ImageQueryInput = {
@@ -59,6 +60,8 @@ const ImageQuery = () => {
     companion: companion,
     duration: duration,
     date: travelStartDate, // TODO : 실제값 채워넣기
+    startDate: startDate,
+    endDate: endDate,
   }
 
   useEffect(() => {
