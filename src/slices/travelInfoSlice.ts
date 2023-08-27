@@ -16,7 +16,7 @@ export interface TravelInfoState {
   companion_number?: number
   // travel_start_date: string
   // travel_end_date: string
-  duration: number
+  duration: number // 실제 일차
 
   category: MajorCategoriesWithMinorCategories
 
@@ -34,6 +34,7 @@ export interface TravelInfoState {
   location: string
   travelStyle: string[]
   travelSchedule: PlaceInfo[][]
+  recommendSchedule: PlaceInfo[][]
   currentPlace: PlaceInfo | null
   currentDay: number
 }
@@ -49,7 +50,6 @@ const initialState: TravelInfoState = {
 
   category: {},
   // @@@@@ 이상 /survey @@@@@
-
   openRecommend: false,
   isCurrentPlaceInCourse: false,
 
@@ -57,6 +57,7 @@ const initialState: TravelInfoState = {
   coordinate: [135.5023, 34.6937],
   travelStyle: ['famous', 'busy'],
   travelSchedule: [],
+  recommendSchedule: [],
   loading: 'idle',
   error: null,
   currentPlace: null,
@@ -78,6 +79,24 @@ export const travelInfoSlice = createSlice({
     },
     setTravelSchedule: (state, action: PayloadAction<PlaceInfo[][]>) => {
       state.travelSchedule = action.payload
+    },
+    setRecommendSchedule: (state, action: PayloadAction<PlaceInfo[][]>) => {
+      state.recommendSchedule = action.payload
+    },
+    deleteDuplicatePlace: (state, action: PayloadAction<PlaceInfo[][]>) => {
+      const travelSchedule = action.payload
+
+      const recommendSchedule = [...state.recommendSchedule]
+
+      for (let i = 0; i < travelSchedule.length; i++) {
+        recommendSchedule[i] = recommendSchedule[i].filter((place) => {
+          return !travelSchedule[i].some((place2) => {
+            return place.name === place2.name
+          })
+        })
+      }
+
+      state.recommendSchedule = recommendSchedule
     },
     handleCurrentPlace: (state, action: PayloadAction<PlaceInfo>) => {
       if (state.currentPlace?.name === action.payload.name) {
@@ -173,6 +192,86 @@ export const travelInfoSlice = createSlice({
     setIsCurrentPlaceInCourse: (state, action: PayloadAction<boolean>) => {
       state.isCurrentPlaceInCourse = action.payload
     },
+
+    changeTravelScheduleOrder: (
+      state,
+      action: PayloadAction<{ prevIndex: number; newIndex: any }>,
+    ) => {
+      const prevIndex = action.payload.prevIndex
+      const newIndex = action.payload.newIndex
+
+      const currentDay = state.currentDay - 1
+
+      console.log(currentDay, prevIndex, newIndex)
+
+      let newTravelSchedule = [...state.travelSchedule]
+
+      let tmp = newTravelSchedule[currentDay].splice(prevIndex, 1)[0]
+      newTravelSchedule[currentDay].splice(newIndex, 0, tmp)
+
+      state.travelSchedule = newTravelSchedule
+    },
+
+    moveRecommendToTravel: (
+      state,
+      action: PayloadAction<{ prevIndex: number; newIndex: any }>,
+    ) => {
+      const prevIndex = action.payload.prevIndex
+      const newIndex = action.payload.newIndex
+
+      const currentDay = state.currentDay - 1
+
+      console.log(currentDay, prevIndex, newIndex)
+
+      let newTravelSchedule = [...state.travelSchedule]
+      let newRecommendSchedule = [...state.recommendSchedule]
+
+      let tmp = newRecommendSchedule[currentDay].splice(prevIndex, 1)[0]
+
+      newTravelSchedule[currentDay].splice(newIndex, 0, tmp)
+
+      state.travelSchedule = newTravelSchedule
+      state.recommendSchedule = newRecommendSchedule
+    },
+    moveTravelToRecommend: (
+      state,
+      action: PayloadAction<{ prevIndex: number; newIndex: any }>,
+    ) => {
+      const prevIndex = action.payload.prevIndex
+      const newIndex = action.payload.newIndex
+
+      const currentDay = state.currentDay - 1
+
+      console.log(currentDay, prevIndex, newIndex)
+
+      let newTravelSchedule = [...state.travelSchedule]
+      let newRecommendSchedule = [...state.recommendSchedule]
+
+      let tmp = newTravelSchedule[currentDay].splice(prevIndex, 1)[0]
+
+      newRecommendSchedule[currentDay].splice(newIndex, 0, tmp)
+
+      state.travelSchedule = newTravelSchedule
+      state.recommendSchedule = newRecommendSchedule
+    },
+    changeRecommendScheduleOrder: (
+      state,
+      action: PayloadAction<{ prevIndex: number; newIndex: any }>,
+    ) => {
+      const prevIndex = action.payload.prevIndex
+      const newIndex = action.payload.newIndex
+
+      const currentDay = state.currentDay - 1
+
+      console.log(currentDay, prevIndex, newIndex)
+
+      let newRecommendSchedule = [...state.recommendSchedule]
+
+      let tmp = newRecommendSchedule[currentDay].splice(prevIndex, 1)[0]
+      newRecommendSchedule[currentDay].splice(newIndex, 0, tmp)
+
+      state.recommendSchedule = newRecommendSchedule
+    },
   },
 })
 
@@ -181,6 +280,7 @@ export const {
   setCoordinate,
   setTravelStyle,
   setTravelSchedule,
+  setRecommendSchedule,
   handleCurrentPlace,
   setCurrentDay,
   setError,
@@ -207,6 +307,12 @@ export const {
   toggleOpenRecommend,
   setOpenRecommend,
   setIsCurrentPlaceInCourse,
+
+  changeTravelScheduleOrder,
+  moveRecommendToTravel,
+  deleteDuplicatePlace,
+  moveTravelToRecommend,
+  changeRecommendScheduleOrder,
 } = travelInfoSlice.actions
 
 const persistConfig = {
@@ -228,6 +334,8 @@ export const selectTravelStyle = (state: RootState) =>
   state.travelInfo.travelStyle
 export const selectTravelSchedule = (state: RootState) =>
   state.travelInfo.travelSchedule
+export const selectRecommendSchedule = (state: RootState) =>
+  state.travelInfo.recommendSchedule
 export const selectCurrentPlace = (state: RootState) =>
   state.travelInfo.currentPlace
 export const selectCurrentDay = (state: RootState) =>

@@ -133,11 +133,11 @@ const TravelMap = () => {
   const fetchOptimizedRoute = async (coordinates: number[][]): Promise<any> => {
     const profile = 'mapbox/driving'
     const coordinatesStr = convertCoordinatesToString(coordinates)
-    console.log('coordinatesStr: ' + coordinatesStr)
+    // console.log('coordinatesStr: ' + coordinatesStr)
 
     const url = `https://api.mapbox.com/optimized-trips/v1/${profile}/${coordinatesStr}?access_token=${TOKEN}`
 
-    console.log('url: ' + url)
+    // console.log('url: ' + url)
 
     try {
       const response = await fetch(url)
@@ -150,14 +150,14 @@ const TravelMap = () => {
           return response.json()
         })
         .then((jsonData) => {
-          console.log('JSON data:', jsonData)
+          // console.log('JSON data:', jsonData)
           return jsonData
         })
         .catch((error) => {
           console.error('Fetch error:', error)
         })
       const jsonResponse = await response
-      console.log('response:', jsonResponse)
+      // console.log('response:', jsonResponse)
       return jsonResponse
     } catch (error) {
       console.error('Error fetching optimized route:', error)
@@ -171,11 +171,11 @@ const TravelMap = () => {
         currentCoordinates.slice(0, 12),
       )
       // 여기서 수정: 객체를 그대로 전달합니다.
-      console.log('optimizedRoute:', optimizedRoute)
+      // console.log('optimizedRoute:', optimizedRoute)
       const geometry = optimizedRoute.trips[0].geometry
-      console.log('geometry:', geometry)
+      // console.log('geometry:', geometry)
       const routeGeoJSONLine = createGeoJSONLine(polyline.decode(geometry))
-      console.log('routeGeoJSONLine:', routeGeoJSONLine)
+      // console.log('routeGeoJSONLine:', routeGeoJSONLine)
       setRouteGeoJSON(routeGeoJSONLine)
     }
 

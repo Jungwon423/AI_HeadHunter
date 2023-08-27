@@ -6,12 +6,14 @@ import { ResponseData, fetchRecommendAttractions } from './fetchRecommend'
 import { AppThunk } from '../store'
 import {
   TravelInfoState,
+  deleteDuplicatePlace,
   setError,
   setLoading,
   setTravelSchedule,
 } from '../slices/travelInfoSlice'
 import { Cluster } from '../interfaces/Cluster'
 import { convertToPlaceInfo } from './jsonToPlaceInfo'
+import { de } from 'date-fns/locale'
 
 export function processClusterTest(clusterArray: Cluster[]): PlaceInfo[][] {
   return clusterArray.map((cluster) => {
@@ -61,12 +63,17 @@ export const fetchTravelScheduleAsync =
         | 'travelInfo/setTravelSchedule'
         | 'travelInfo/setLoading'
         | 'travelInfo/setError'
+        | 'travelInfo/deleteDuplicatePlace'
     }) => void,
   ) => {
     try {
       dispatch(setLoading('pending'))
-      const travelSchedule = await fetchTravelSchedule(recommendInput) // TODO : fetchTravelSchedule로 바꾸기
+      const travelSchedule = await fetchTravelSchedule(recommendInput) // TODO : fetchTravelSchedule API 구현
       dispatch(setTravelSchedule(travelSchedule))
+
+      // filter로 정제
+      dispatch(deleteDuplicatePlace(travelSchedule))
+      console.log('제거 완료')
       dispatch(setLoading('succeeded'))
     } catch (error: any) {
       dispatch(setError(JSON.stringify(error)))
