@@ -22,6 +22,7 @@ import MyNavbar from '../components/MyNavbar'
 import { selectCityDetail } from '../slices/cityDetailSlice'
 import Switcher12 from '../components/switcher'
 import { fetchTravelScheduleAsync } from '../functions/fetchTravel'
+import SmallLoading from '../components/small_loading'
 
 const PreferencePage = () => {
   const router = useRouter()
@@ -103,18 +104,23 @@ const PreferencePage = () => {
 
   let buttonStatus: string = ''
   let buttonColor: string = 'bg-blue-500'
+  let buttonHover: string = ''
+
   if (recommendInfo.loading === 'pending') {
     buttonStatus = 'loading'
     buttonColor = 'bg-gray-500'
+    buttonHover = ''
   } else if (recommendInfo.loading === 'failed') {
     buttonStatus = 'something wrong'
     buttonColor = 'bg-red-500'
+    buttonHover = ''
   } else {
     buttonStatus = '추천 관광명소 보러가기'
     buttonColor = 'bg-blue-500'
+    buttonHover = 'hover:bg-blue-600'
   }
 
-  let buttonClass = `rounded px-4 py-2 font-bold text-white hover:bg-blue-600 ${buttonColor} `
+  let buttonClass = `rounded px-4 py-2 font-bold text-white ${buttonHover} ${buttonColor} `
 
   const handleButtonClick = () => {
     if (recommendInfo.loading === 'succeeded') {
@@ -136,8 +142,17 @@ const PreferencePage = () => {
             <Switcher12 onToggle={handleToggle}></Switcher12>
           </div>
           <div className="justify-self-end px-5">
-            <button className={buttonClass} onClick={handleButtonClick}>
-              {buttonStatus}
+            <button
+              className={buttonClass}
+              onClick={handleButtonClick}
+              disabled={recommendInfo.loading !== 'succeeded'}
+            >
+              <div className="flex flex-row justify-center items-center">
+                {recommendInfo.loading == 'pending' && (
+                  <SmallLoading></SmallLoading>
+                )}
+                {buttonStatus}
+              </div>
             </button>
           </div>
         </div>
