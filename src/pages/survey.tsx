@@ -31,14 +31,14 @@ export const SurveyPage = () => {
   const city = useSelector(selectCity)
   const travelStyle = useSelector(selectTravelStyle)
 
-  useEffect(() => {
-    // const surveyInput: SurveyInput = {
-    //   user: user!,
-    //   destination: city,
-    //   travelStyle: travelStyle,
-    // }
-    // dispatch(fecthSurveyInputAsync(surveyInput))
-  }, [travelStyle])
+  // useEffect(() => {
+  //   const surveyInput: SurveyInput = {
+  //     user: user!,
+  //     destination: city,
+  //     travelStyle: travelStyle,
+  //   }
+  //   dispatch(fecthSurveyInputAsync(surveyInput))
+  // }, [travelStyle])
 
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
 

@@ -22,11 +22,23 @@ const WhenSurvey = () => {
       setEnd(maxDate)
     } else setEnd(newEndDate)
   }
+
   useEffect(() => {
     dispatch(setStartDate(startDate?.toISOString()!))
     dispatch(setEndDate(endDate?.toISOString()!))
+    dispatch(setDuration(duration(startDate, endDate)))
   }, [startDate, endDate])
 
+  const duration = (startDate: Date | null, endDate: Date | null) => {
+    if (endDate != null && startDate != null) {
+      const differenceInMilliseconds = endDate.getTime() - startDate.getTime()
+      const differenceInDays = Math.ceil(
+        differenceInMilliseconds / (1000 * 60 * 60 * 24),
+      ) // 일수 계산 (소수점 올림)
+      const days = differenceInDays + 1
+      return days
+    } else return 0
+  }
   return (
     <div className="flex py-5 w-full flex-col items-center">
       <div className="px-10 flex flex-col flex-grow">
@@ -73,21 +85,8 @@ const WhenSurvey = () => {
             <div className=" pl-10 pt-4 border-b-2">
               <div className="w-auto px-4 py-2 rounded-md bg-indigo-400 flex items-center justify-center">
                 <span className="text-center text-white text-sm md:text-base">
-                  {(() => {
-                    const differenceInMilliseconds =
-                      endDate.getTime() - startDate.getTime()
-                    dispatch(setStartDate(startDate.toDateString()!))
-                    dispatch(setEndDate(endDate.toDateString()!))
-                    const differenceInDays = Math.ceil(
-                      differenceInMilliseconds / (1000 * 60 * 60 * 24),
-                    ) // 일수 계산 (소수점 올림)
-                    const nights = differenceInDays // 박 수 계산
-                    const days = differenceInDays + 1
-                    dispatch(setDuration(days!))
-                    if (nights == 0) {
-                      return `당일치기`
-                    } else return `${nights}박 ${days}일`
-                  })()}
+                  {duration(startDate, endDate) - 1}박{' '}
+                  {duration(startDate, endDate)}일
                 </span>
               </div>
             </div>
