@@ -26,7 +26,7 @@ import TravelChat from './TravelChat'
 import { PlaceInfo } from '../interfaces/placeInfo'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import polyline from '@mapbox/polyline'
-import RecoContainer from '../recommend_components/RecoContainer'
+import RecoContainer from './RecoContainer'
 import TravelContainer from './TravelContainer'
 
 const TravelMap = () => {

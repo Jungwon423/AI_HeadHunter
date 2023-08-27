@@ -102,20 +102,15 @@ const PreferencePage = () => {
   }
 
   let buttonStatus: string = ''
-  if (recommendInfo.loading === 'pending') {
-    buttonStatus = 'loading'
-  } else if (recommendInfo.loading === 'failed') {
-    buttonStatus = 'something wrong'
-  } else {
-    buttonStatus = '추천 확인하러 가기'
-  }
-
   let buttonColor: string = 'bg-blue-500'
   if (recommendInfo.loading === 'pending') {
+    buttonStatus = 'loading'
     buttonColor = 'bg-gray-500'
   } else if (recommendInfo.loading === 'failed') {
+    buttonStatus = 'something wrong'
     buttonColor = 'bg-red-500'
   } else {
+    buttonStatus = '추천 관광명소 보러가기'
     buttonColor = 'bg-blue-500'
   }
 

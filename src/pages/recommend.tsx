@@ -11,7 +11,7 @@ import {
 } from '../slices/travelInfoSlice'
 import { RecommendInput } from '../interfaces/recommendInput'
 import RecommendNav from '../recommend_components/RecommendNav'
-import RecoContainer from '../recommend_components/RecoContainer'
+import RecoContainer from '../travel_components/RecoContainer'
 import { fetchTravelScheduleAsync } from '../functions/fetchTravel'
 import { PlaceInfo } from '../interfaces/placeInfo'
 

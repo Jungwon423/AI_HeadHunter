@@ -1,4 +1,4 @@
-import RecoContainer from '../recommend_components/RecoContainer'
+import RecoContainer from './RecoContainer'
 
 const TravelInfo = () => {
   return (

@@ -1,5 +1,5 @@
 import { use } from 'react'
-import RecoContainer from '../recommend_components/RecoContainer'
+import RecoContainer from '../travel_components/RecoContainer'
 import TravelContainer from '../travel_components/TravelContainer'
 import TravelMap from '../travel_components/TravelMap'
 import Guide from '../travel_components/guide'
