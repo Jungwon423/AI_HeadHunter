@@ -3,7 +3,7 @@ import loadingJson_2 from '../../public/assets/lottie/loading_2.json'
 
 const Loading2 = () => {
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="h-screen flex flex-col items-center justify-center">
       <Lottie
         loop
         animationData={loadingJson_2}
