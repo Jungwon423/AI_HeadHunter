@@ -193,9 +193,12 @@ export const travelInfoSlice = createSlice({
       state.isCurrentPlaceInCourse = action.payload
     },
 
-    changeTravelScheduleOrder: (state, action: PayloadAction<number[]>) => {
-      const prevIndex = action.payload[0]
-      const newIndex = action.payload[1]
+    changeTravelScheduleOrder: (
+      state,
+      action: PayloadAction<{ prevIndex: number; newIndex: any }>,
+    ) => {
+      const prevIndex = action.payload.prevIndex
+      const newIndex = action.payload.newIndex
 
       const currentDay = state.currentDay - 1
 
@@ -207,6 +210,67 @@ export const travelInfoSlice = createSlice({
       newTravelSchedule[currentDay].splice(newIndex, 0, tmp)
 
       state.travelSchedule = newTravelSchedule
+    },
+
+    moveRecommendToTravel: (
+      state,
+      action: PayloadAction<{ prevIndex: number; newIndex: any }>,
+    ) => {
+      const prevIndex = action.payload.prevIndex
+      const newIndex = action.payload.newIndex
+
+      const currentDay = state.currentDay - 1
+
+      console.log(currentDay, prevIndex, newIndex)
+
+      let newTravelSchedule = [...state.travelSchedule]
+      let newRecommendSchedule = [...state.recommendSchedule]
+
+      let tmp = newRecommendSchedule[currentDay].splice(prevIndex, 1)[0]
+
+      newTravelSchedule[currentDay].splice(newIndex, 0, tmp)
+
+      state.travelSchedule = newTravelSchedule
+      state.recommendSchedule = newRecommendSchedule
+    },
+    moveTravelToRecommend: (
+      state,
+      action: PayloadAction<{ prevIndex: number; newIndex: any }>,
+    ) => {
+      const prevIndex = action.payload.prevIndex
+      const newIndex = action.payload.newIndex
+
+      const currentDay = state.currentDay - 1
+
+      console.log(currentDay, prevIndex, newIndex)
+
+      let newTravelSchedule = [...state.travelSchedule]
+      let newRecommendSchedule = [...state.recommendSchedule]
+
+      let tmp = newTravelSchedule[currentDay].splice(prevIndex, 1)[0]
+
+      newRecommendSchedule[currentDay].splice(newIndex, 0, tmp)
+
+      state.travelSchedule = newTravelSchedule
+      state.recommendSchedule = newRecommendSchedule
+    },
+    changeRecommendScheduleOrder: (
+      state,
+      action: PayloadAction<{ prevIndex: number; newIndex: any }>,
+    ) => {
+      const prevIndex = action.payload.prevIndex
+      const newIndex = action.payload.newIndex
+
+      const currentDay = state.currentDay - 1
+
+      console.log(currentDay, prevIndex, newIndex)
+
+      let newRecommendSchedule = [...state.recommendSchedule]
+
+      let tmp = newRecommendSchedule[currentDay].splice(prevIndex, 1)[0]
+      newRecommendSchedule[currentDay].splice(newIndex, 0, tmp)
+
+      state.recommendSchedule = newRecommendSchedule
     },
   },
 })
@@ -245,7 +309,10 @@ export const {
   setIsCurrentPlaceInCourse,
 
   changeTravelScheduleOrder,
+  moveRecommendToTravel,
   deleteDuplicatePlace,
+  moveTravelToRecommend,
+  changeRecommendScheduleOrder,
 } = travelInfoSlice.actions
 
 const persistConfig = {

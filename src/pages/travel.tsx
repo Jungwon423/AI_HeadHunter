@@ -3,20 +3,72 @@ import RecoContainer from '../recommend_components/RecoContainer'
 import TravelContainer from '../travel_components/TravelContainer'
 import TravelMap from '../travel_components/TravelMap'
 import Guide from '../travel_components/guide'
-import { selectOpenRecommend } from '../slices/travelInfoSlice'
-import { useSelector } from 'react-redux'
+import {
+  changeRecommendScheduleOrder,
+  changeTravelScheduleOrder,
+  moveRecommendToTravel,
+  moveTravelToRecommend,
+  selectOpenRecommend,
+} from '../slices/travelInfoSlice'
+import { useDispatch, useSelector } from 'react-redux'
 import TravelInfo from '../travel_components/TravelInfo'
+import { DragDropContext } from 'react-beautiful-dnd'
+import { AppDispatch } from '../store'
 
 const TravelCoursePage = () => {
   const openRecommend = useSelector(selectOpenRecommend)
 
+  const dispatch = useDispatch<AppDispatch>()
+
   return (
     <div className="flex h-screen">
-      <Guide></Guide>
-      {openRecommend && <TravelInfo></TravelInfo>}
-      {!openRecommend && <TravelContainer></TravelContainer>}
-      {/* <TravelContainer></TravelContainer> */}
-      <TravelMap></TravelMap>
+      <DragDropContext
+        onDragEnd={(result) => {
+          console.log('onDragEnd')
+          const prevId = result.source.droppableId
+          const newId = result.destination?.droppableId
+          const prevIndex = result.source.index
+          const newIndex = result.destination?.index
+
+          console.log('prevId', prevId)
+          console.log('nextId', newId)
+          console.log('prevIndex', prevIndex)
+          console.log('nextIndex', newIndex)
+
+          if (prevId === 'travelSchedule' && newId === 'travelSchedule') {
+            dispatch(
+              changeTravelScheduleOrder({
+                prevIndex,
+                newIndex,
+              }),
+            )
+          } else if (
+            prevId === 'recommendSchedule' &&
+            newId === 'travelSchedule'
+          ) {
+            dispatch(moveRecommendToTravel({ prevIndex, newIndex }))
+          } else if (
+            prevId === 'travelSchedule' &&
+            newId === 'recommendSchedule'
+          ) {
+            dispatch(moveTravelToRecommend({ prevIndex, newIndex }))
+          } else if (
+            prevId === 'recommendSchedule' &&
+            newId === 'recommendSchedule'
+          ) {
+            dispatch(changeRecommendScheduleOrder({ prevIndex, newIndex }))
+          }
+        }}
+        onDragStart={() => {
+          console.log('onDragStart')
+        }}
+      >
+        <Guide></Guide>
+        {openRecommend && <TravelInfo></TravelInfo>}
+        {!openRecommend && <TravelContainer></TravelContainer>}
+        {/* <TravelContainer></TravelContainer> */}
+        <TravelMap></TravelMap>
+      </DragDropContext>
     </div>
   )
 }
