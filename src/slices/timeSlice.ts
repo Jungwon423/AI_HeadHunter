@@ -50,11 +50,11 @@ const getInitialDayDetails = (startDate: Date, endDate: Date): DayDetail[] => {
 const initialState: TimeState = {
   //dayDetail: { startHour: 0, startMinute: 0, endHour: 0, endMinute: 0 },
   dayDetails: getInitialDayDetails(
-    new Date(2023, 8, 23),
-    new Date(2023, 8, 27),
+    new Date(2011, 8, 23),
+    new Date(2011, 8, 27),
   ),
-  startDate: new Date(2023, 8, 25).toISOString(),
-  endDate: new Date(2023, 8, 27).toISOString(),
+  startDate: '',
+  endDate: '',
 }
 export const timeDetailSlice = createSlice({
   name: 'travelTime',

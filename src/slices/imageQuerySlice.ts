@@ -31,6 +31,12 @@ export const imageQuerySlice = createSlice({
     setResultList: (state, action: PayloadAction<ZeroOrOne>) => {
       state.resultList = [...state.resultList, action.payload]
     },
+    setNextLoading: (
+      state,
+      action: PayloadAction<'idle' | 'pending' | 'succeeded' | 'failed'>,
+    ) => {
+      state.loading = action.payload
+    },
     initialize: (state) => {
       state.resultList = []
       state.loading = 'idle'

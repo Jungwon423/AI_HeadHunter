@@ -1,7 +1,7 @@
 import router from 'next/router'
 import MyNavbar from '../components/MyNavbar'
 import CircleListItem from '../survey_components/CircleList'
-import { useEffect, useState } from 'react'
+import { use, useEffect, useState } from 'react'
 import WhoSurvey from '../survey_components/WhoSurvey'
 import 'react-datepicker/dist/react-datepicker.css'
 import WhenSurvey from '../survey_components/WhenSurvey'
@@ -10,27 +10,35 @@ import {
   selectDuration,
   selectUser,
   selectCity,
+  selectTravelStyle,
+  selectCompanion,
 } from '../slices/travelInfoSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import { AppDispatch } from '../store'
 import { SurveyInput } from '../interfaces/input'
 import { fecthSurveyInputAsync } from '../functions/fetchSurveyInput'
 import ActivitySurvey from '../survey_components/AcitivitySurvey'
+import {
+  selectEndDate,
+  selectStartDate,
+  setStartDate,
+} from '../slices/timeSlice'
 
 export const SurveyPage = () => {
   const dispatch = useDispatch<AppDispatch>()
 
   const user = useSelector(selectUser)
   const city = useSelector(selectCity)
+  const travelStyle = useSelector(selectTravelStyle)
 
   useEffect(() => {
-    const surveyInput: SurveyInput = {
-      user: user!,
-      destination: city,
-    }
-
-    dispatch(fecthSurveyInputAsync(surveyInput))
-  }, [])
+    // const surveyInput: SurveyInput = {
+    //   user: user!,
+    //   destination: city,
+    //   travelStyle: travelStyle,
+    // }
+    // dispatch(fecthSurveyInputAsync(surveyInput))
+  }, [travelStyle])
 
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
 
@@ -43,13 +51,53 @@ export const SurveyPage = () => {
     '여행 스타일은 어떻게 되시나요?',
     '여행지에서 하고 싶은 활동을 골라주세요',
   ]
+  let startDate = useSelector(selectStartDate)
+  let endDate = useSelector(selectEndDate)
+  let companion = useSelector(selectCompanion)
+
   const handleButtonClick = async () => {
-    if (selectedIndex === 3) {
-      router.push('/image_query')
+    let isValid = false
+
+    switch (selectedIndex) {
+      case 0: // WhoSurvey
+        isValid = companion != null
+        break
+      case 1: // WhenSurvey
+        isValid =
+          startDate != null &&
+          endDate != null &&
+          startDate <= endDate &&
+          startDate != '' &&
+          endDate != ''
+        break
+      case 2: // HowSurvey
+        isValid =
+          travelStyle.includes('famous') || travelStyle.includes('novel')
+        break
+      case 3: // ActivitySurvey
+        const surveyInput: SurveyInput = {
+          user: user!,
+          destination: city,
+          travelStyle: travelStyle,
+        }
+        dispatch(fecthSurveyInputAsync(surveyInput))
+        isValid = true
+        break
+      default:
+        return
+    }
+
+    if (isValid) {
+      if (selectedIndex === items.length - 1) {
+        router.push('/image_query')
+      } else {
+        setSelectedIndex(selectedIndex + 1)
+      }
     } else {
-      setSelectedIndex(selectedIndex + 1)
+      alert('옵션을 선택해주세요!')
     }
   }
+
   const handleBackClick = async () => {
     if (selectedIndex === 0) {
       router.replace('/')
@@ -57,7 +105,6 @@ export const SurveyPage = () => {
       setSelectedIndex(selectedIndex - 1)
     }
   }
-  console.log(selectedIndex)
 
   return (
     <div className="min-h-screen pb-16">
@@ -70,7 +117,8 @@ export const SurveyPage = () => {
               <CircleListItem
                 key={index}
                 text={item}
-                onClick={() => handleItemClick(index)}
+                // onClick={() => handleItemClick(index)}
+                onClick={() => console.log('click')}
                 isSelected={selectedIndex === index}
               />
             ))}

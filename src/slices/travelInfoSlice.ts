@@ -10,7 +10,7 @@ export interface TravelInfoState {
   user: string
   city: string
   travelId: string
-  companion: string
+  companion: string | null
   companion_adult?: string
   companion_child?: string
   companion_number?: number
@@ -42,7 +42,7 @@ const initialState: TravelInfoState = {
   user: '',
   city: '서울',
   travelId: '',
-  companion: '혼자',
+  companion: null,
   // travel_start_date: '',
   // travel_end_date: '',
   duration: 3,
@@ -113,7 +113,7 @@ export const travelInfoSlice = createSlice({
       state.travelId = action.payload
     },
 
-    setCompanion: (state, action: PayloadAction<string>) => {
+    setCompanion: (state, action: PayloadAction<string | null>) => {
       state.companion = action.payload
     },
 

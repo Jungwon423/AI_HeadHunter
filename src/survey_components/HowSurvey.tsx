@@ -133,7 +133,6 @@ const HowSurvey = () => {
                 <SimpleTable header={header} data={data} />
               </div>
             </div>
-            {/* <TripDateTimeInput onDateTimeChanged={handleDateTimeChanged} /> */}
           </div>
         ) : null}
       </div>
