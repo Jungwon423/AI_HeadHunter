@@ -25,20 +25,20 @@ import {
 } from '../slices/timeSlice'
 
 export const SurveyPage = () => {
+  const travelStyle = useSelector(selectTravelStyle)
   const dispatch = useDispatch<AppDispatch>()
 
   const user = useSelector(selectUser)
   const city = useSelector(selectCity)
-  const travelStyle = useSelector(selectTravelStyle)
 
-  // useEffect(() => {
-  //   const surveyInput: SurveyInput = {
-  //     user: user!,
-  //     destination: city,
-  //     travelStyle: travelStyle,
-  //   }
-  //   dispatch(fecthSurveyInputAsync(surveyInput))
-  // }, [travelStyle])
+  useEffect(() => {
+    const surveyInput: SurveyInput = {
+      user: user!,
+      destination: city,
+      travelStyle: travelStyle,
+    }
+    dispatch(fecthSurveyInputAsync(surveyInput))
+  }, [travelStyle])
 
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
 
@@ -75,12 +75,6 @@ export const SurveyPage = () => {
           travelStyle.includes('famous') || travelStyle.includes('novel')
         break
       case 3: // ActivitySurvey
-        const surveyInput: SurveyInput = {
-          user: user!,
-          destination: city,
-          travelStyle: travelStyle,
-        }
-        dispatch(fecthSurveyInputAsync(surveyInput))
         isValid = true
         break
       default:

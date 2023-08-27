@@ -15,7 +15,9 @@ export interface ImageQueryInput {
   user: string
   travel_id: string
   majorCategoriesWithMinorCategories: MajorCategoriesWithMinorCategories
-  companion: string
+  companion: string | null
   duration: number
   date: string
+  startDate: string
+  endDate: string
 }

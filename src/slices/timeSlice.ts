@@ -39,9 +39,9 @@ const getInitialDayDetails = (startDate: Date, endDate: Date): DayDetail[] => {
     endDate.setHours(22, 0, 0) // 오후 10시 설정
 
     return {
-      day: date.toISOString(),
-      startTime: startDate.toISOString(),
-      endTime: endDate.toISOString(),
+      day: date.toString(),
+      startTime: startDate.toString(),
+      endTime: endDate.toString(),
     }
   }
   return dates.map((date) => initialValue(date))

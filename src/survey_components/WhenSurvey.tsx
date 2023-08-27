@@ -24,8 +24,8 @@ const WhenSurvey = () => {
   }
 
   useEffect(() => {
-    dispatch(setStartDate(startDate?.toISOString()!))
-    dispatch(setEndDate(endDate?.toISOString()!))
+    dispatch(setStartDate(startDate?.toString()!))
+    dispatch(setEndDate(endDate?.toString()!))
     dispatch(setDuration(duration(startDate, endDate)))
   }, [startDate, endDate])
 

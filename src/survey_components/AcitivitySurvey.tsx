@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from '../store'
@@ -13,6 +13,7 @@ import {
 } from '../slices/travelInfoSlice'
 
 const ActivitySurvey = () => {
+  const city = useSelector(selectCity)
   const dispatch = useDispatch<AppDispatch>()
   const survey: MajorCategoriesWithMinorCategories = useSelector(selectCategory)
 
@@ -24,7 +25,6 @@ const ActivitySurvey = () => {
       }),
     )
   }
-  const city = useSelector(selectCity)
 
   return (
     <div className="flex py-5 w-full flex-col items-center overflow-y-auto">

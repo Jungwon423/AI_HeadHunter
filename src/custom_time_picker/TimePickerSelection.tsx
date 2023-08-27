@@ -96,9 +96,9 @@ function TimePickerSelection({
     newDate.setHours(hours)
     newDate.setMinutes(minutes)
     if (start) {
-      dispatch(setStartTime({ index, startTime: newDate.toISOString() }))
+      dispatch(setStartTime({ index, startTime: newDate.toString() }))
     } else {
-      dispatch(setEndTime({ index, endTime: newDate.toISOString() }))
+      dispatch(setEndTime({ index, endTime: newDate.toString() }))
     }
     onSave(finalSelectedValue)
     setIsOpen(false)
