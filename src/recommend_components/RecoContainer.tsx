@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from '../store'
-import {
-  selectAttractions,
-  selectCurrentDay,
-  setCurrentDay,
-} from '../slices/recommendSlice'
+import { selectAttractions, setCurrentDay } from '../slices/recommendSlice'
 import { PlaceInfo } from '../interfaces/placeInfo'
 import {
   selectCity,
   handleCurrentPlace,
   setIsCurrentPlaceInCourse,
   setOpenRecommend,
+  selectRecommendSchedule,
+  selectCurrentDay,
 } from '../slices/travelInfoSlice'
 import Image from 'next/legacy/image'
 import { set } from 'date-fns'
@@ -20,7 +18,10 @@ import { selectEndDate, selectStartDate } from '../slices/timeSlice'
 const RecoContainer = () => {
   const dispatch = useDispatch<AppDispatch>()
 
-  const attractions: PlaceInfo[][] = useSelector(selectAttractions)
+  // const attractions: PlaceInfo[][] = useSelector(selectAttractions)
+  const attractions: PlaceInfo[][] = useSelector(selectRecommendSchedule)
+  console.log(attractions)
+
   const currentDay: number = useSelector(selectCurrentDay)
 
   const city: string = useSelector(selectCity)

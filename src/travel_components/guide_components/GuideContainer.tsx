@@ -8,6 +8,7 @@ import {
   selectTravelSchedule,
   setIsCurrentPlaceInCourse,
   setOpenRecommend,
+  changeTravelScheduleOrder,
 } from '../../slices/travelInfoSlice'
 import { PlaceInfo } from '../../interfaces/placeInfo'
 import { Droppable, DragDropContext, Draggable } from 'react-beautiful-dnd'
@@ -18,8 +19,18 @@ const GuideContainer = () => {
   const dispatch = useDispatch()
   return (
     <DragDropContext
-      onDragEnd={() => {
+      onDragEnd={(result) => {
         console.log('onDragEnd')
+        console.log(result)
+        console.log(result.destination?.index)
+        console.log(result.source.index)
+        dispatch(
+          changeTravelScheduleOrder([
+            result.source.index,
+            result.destination?.index!,
+          ]),
+        )
+        console.log(TravelSchedule[currentDay - 1])
       }}
       onDragStart={() => {
         console.log('onDragStart')
