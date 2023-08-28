@@ -39,14 +39,17 @@ const RecommendContainer = () => {
 
   const places = (recommendState: any) => {
     if (recommendState === '전체') {
-      return attractions
-        .concat(restaurant)
-        .concat(deprecatedAttractions)
-        .concat(deprecatedRestaurants)
+      // return attractions
+      //   .concat(restaurant)
+      //   .concat(deprecatedAttractions)
+      //   .concat(deprecatedRestaurants)
+      return attractions.concat(deprecatedAttractions)
     } else if (recommendState === '추천') {
-      return attractions.concat(restaurant)
+      // return attractions.concat(restaurant)
+      return attractions
     } else {
-      return deprecatedAttractions.concat(deprecatedRestaurants)
+      // return deprecatedAttractions.concat(deprecatedRestaurants)
+      return deprecatedAttractions
     }
   }
 
