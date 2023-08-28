@@ -22,31 +22,9 @@ import { PlaceInfo } from '../interfaces/placeInfo'
 import ChatScreen from '../travel_components/ChatScreen'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { selectRecommendSchedule } from '../slices/travelInfoSlice'
+import PrettyPin from '../components/PrettyPin'
 
 const RecommendMap = () => {
-  const pinColors = [
-    '#FF5A5F',
-    '#00A699',
-    '#FFB400',
-    '#007A87',
-    '#FEBB31',
-    '#6B5B95',
-    '#F37735',
-    '#CCD6DD',
-    '#D84A4A',
-    '#DBD5B5',
-    '#7DCFB6',
-    '#1287A5',
-    '#F3C969',
-    '#A5AAD9',
-    '#E6B89C',
-    '#EFEFEF',
-    '#CF6766',
-    '#4F84C4',
-    '#A5AA52',
-    '#D4CFC9',
-  ]
-
   const showChat = useSelector(selectShowChat)
 
   const dispatch = useDispatch()
@@ -119,7 +97,7 @@ const RecommendMap = () => {
                 dispatch(handleCurrentPlace(place))
               }}
             >
-              <Pin color={pinColors[i]}></Pin>
+              <PrettyPin></PrettyPin>
             </Marker>
           )),
         )}

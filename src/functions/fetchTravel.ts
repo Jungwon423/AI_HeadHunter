@@ -11,7 +11,6 @@ import {
   setLoading,
   setTravelSchedule,
 } from '../slices/travelInfoSlice'
-import { Cluster } from '../interfaces/Cluster'
 import { convertToPlaceInfo } from './jsonToPlaceInfo'
 
 export const convertToItinerary = (response: any) => {
@@ -47,8 +46,11 @@ export const fetchTravelSchedule = async (
     config,
   )
 
+  console.log('response', response)
+
   // 이중 for문을 사용하여 JSON 데이터를 placeInfo[][]로 변환합니다.
   const itineraryInfo: any = convertToItinerary(response.data)
+  console.log('itineraryInfo', itineraryInfo)
 
   return itineraryInfo
 }
@@ -68,6 +70,7 @@ export const fetchTravelScheduleAsync =
     try {
       dispatch(setLoading('pending'))
       const itineraryInfo = await fetchTravelSchedule(recommendInput)
+      console.log('itineraryInfo', itineraryInfo)
       dispatch(setTravelSchedule(itineraryInfo.get('placeInfos')))
       // overviews 추가
 

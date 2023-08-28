@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from '../store'
 import { selectAttractions } from '../slices/recommendSlice'
@@ -13,7 +13,6 @@ import {
   setCurrentDay,
 } from '../slices/travelInfoSlice'
 import Image from 'next/legacy/image'
-import { set } from 'date-fns'
 import {
   dateToString,
   selectEndDate,
