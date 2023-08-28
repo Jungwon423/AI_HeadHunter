@@ -67,6 +67,8 @@ const ImageQuery = () => {
   useEffect(() => {
     dispatch(initialize())
     dispatch(fetchImageQueryAsync(ImageQueryInput))
+    setIsLoading1(false)
+    setIsLoading2(false)
   }, [])
 
   const handleImageClick = (image: string) => {
@@ -98,28 +100,8 @@ const ImageQuery = () => {
   if (attractionQuery.loading === 'failed') {
     return <p>Error: {attractionQuery.error}</p>
   }
-  const prefix = 'https://search.pstatic.net/common?src='
-  const suffix = '&type=m1500_travelsearch'
-  const suffix2 = '&type=w800_travelsearch'
-
-  const encodingFirst = (url: string) => {
-    let encodedUrl = encodeURIComponent(url)
-    let firstImage = prefix + encodedUrl + suffix
-    let firstImage2 = prefix + encodedUrl + suffix2
-    return [firstImage, firstImage2]
-  }
-  const encodingSecond = (url: string) => {
-    let encodedUrl = encodeURIComponent(url)
-    let secondImage = prefix + encodedUrl + suffix
-    let secondImage2 = prefix + encodedUrl + suffix2
-    return [secondImage, secondImage2]
-  }
   let originalUrl = attractionQuery.query_list[count][0].image!
   let originalUrl2 = attractionQuery.query_list[count][1].image!
-  let firstImage = encodingFirst(originalUrl)[0]
-  let firstImage2 = encodingFirst(originalUrl)[1]
-  let secondImage = encodingSecond(originalUrl2)[0]
-  let secondImage2 = encodingSecond(originalUrl2)[1]
 
   console.log('imageUrl1', originalUrl)
   console.log('imageUrl2', originalUrl2)
@@ -161,6 +143,7 @@ const ImageQuery = () => {
               console.log('loading complete')
             }}
           />
+
           <NameAndDescription
             name={attractionQuery.query_list[count][0].name ?? ''}
             description={
