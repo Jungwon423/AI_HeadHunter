@@ -52,6 +52,8 @@ export function convertToPlaceInfo(attraction: any): PlaceInfo {
     thought: attraction.evaluation,
     // wheelchair: attraction.wheelchair_accessible_entrance,
     // reviews: attraction.reviews,
+    attractionStartTime: attraction.attractionStartTime,
+    attractionEndTime: attraction.attractionEndTime,
   } as PlaceInfo
   return placeInfo
 }
