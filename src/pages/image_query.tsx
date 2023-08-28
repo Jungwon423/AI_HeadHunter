@@ -144,11 +144,10 @@ const ImageQuery = () => {
             alt="Left Image"
             fill
             sizes="undefined"
-            placeholder="blur"
             blurDataURL="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=="
-            onClick={() => handleImageClick('right')}
+            onClick={() => handleImageClick('left')}
             style={{
-              objectPosition: 'left',
+              objectPosition: 'right',
               objectFit: 'contain',
               maxWidth: '100%',
               height: '100%',
@@ -187,7 +186,6 @@ const ImageQuery = () => {
             alt="Right Image"
             fill
             sizes="undefined"
-            placeholder="blur"
             blurDataURL="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=="
             onClick={() => handleImageClick('right')}
             style={{
