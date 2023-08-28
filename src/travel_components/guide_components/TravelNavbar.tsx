@@ -4,21 +4,21 @@ import Image from 'next/image'
 export default function MyNavbar() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white shadow">
-      <div className="flex justify-between h-16">
+      <div className="flex justify-between py-3">
         <button onClick={() => router.push('/')}>
           <div className="flex-shrink-0 flex items-center">
             <Image
               src="/assets/logo.png"
               alt="Logo"
-              width={40}
-              height={40}
+              width={30}
+              height={30}
               style={{
                 maxWidth: '100%',
                 width: 'auto',
                 height: 'auto',
               }}
             />
-            <span className="ml-2 font-bold text-xl font-mono">Trippy</span>
+            <span className="ml-2 font-bold font-mono">Trippy</span>
           </div>
         </button>
         <div className="flex items-center">
@@ -29,7 +29,7 @@ export default function MyNavbar() {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-6 h-6"
+              className="w-5 h-5"
             >
               <path
                 strokeLinecap="round"

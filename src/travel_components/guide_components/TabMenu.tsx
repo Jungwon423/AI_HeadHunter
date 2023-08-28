@@ -1,14 +1,6 @@
 import DraggableScrollbar from '../DraggableScrollbar'
 import { useSelector, useDispatch } from 'react-redux'
-import {
-  selectCity,
-  selectDuration,
-  selectCoordinate,
-  selectTravelSchedule,
-  handleCurrentPlace,
-  selectCurrentDay,
-  setCurrentDay,
-} from '../../slices/travelInfoSlice'
+import { selectCurrentDay, setCurrentDay } from '../../slices/travelInfoSlice'
 
 const TabMenu: React.FC<{
   tabs: string[]
@@ -17,15 +9,15 @@ const TabMenu: React.FC<{
   const currendDay: number = useSelector(selectCurrentDay)
 
   return (
-    <div className="flex overflow-x-auto whitespace-nowrap no-scrollbar">
+    <div className="flex justify-center overflow-x-auto whitespace-nowrap no-scrollbar">
       <DraggableScrollbar>
-        <div className="flex justify-center space-x-2 py-2">
+        <div className="flex space-x-3 py-2">
           {tabs.map((tab, index) => {
             return (
               <button
                 key={tab}
                 onClick={() => dispatch(setCurrentDay(index))}
-                className={`relative px-4 font-semibold cursor-pointer hover:text-black ${
+                className={`relative px-4 text-sm font-semibold cursor-pointer hover:text-black ${
                   currendDay === index ? 'text-gray-700' : 'text-gray-500'
                 }`}
               >

@@ -37,7 +37,7 @@ const RecommendPage = () => {
 
   return (
     <div className="flex flex-row">
-      <div className="bg-white w-1/2 min-w-[700px] relative h-screen max-h-screen overflow-hidden">
+      <div className="bg-white min-w-[700px] relative h-screen max-h-screen overflow-hidden">
         <div className="flex flex-row">
           <RecommendNav></RecommendNav>
           <RecommendContainer></RecommendContainer>

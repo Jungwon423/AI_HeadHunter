@@ -13,7 +13,11 @@ import {
 } from '../slices/travelInfoSlice'
 import Image from 'next/legacy/image'
 import { set } from 'date-fns'
-import { selectEndDate, selectStartDate } from '../slices/timeSlice'
+import {
+  dateToString,
+  selectEndDate,
+  selectStartDate,
+} from '../slices/timeSlice'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
 
 const RecoContainer = () => {
@@ -26,8 +30,10 @@ const RecoContainer = () => {
   const currentDay: number = useSelector(selectCurrentDay)
 
   const city: string = useSelector(selectCity)
-  const travelStartDate = useSelector(selectStartDate)
-  const travelEndDate = useSelector(selectEndDate)
+  const StartDate = useSelector(selectStartDate)
+  const travelStartDate = dateToString(new Date(StartDate))
+  const EndDate = useSelector(selectEndDate)
+  const travelEndDate = dateToString(new Date(EndDate))
 
   return (
     <Droppable droppableId="recommendSchedule">
@@ -60,7 +66,7 @@ const RecoContainer = () => {
                         ref={provided.innerRef}
                       >
                         <div
-                          className="flex flex-row p-3 bg-white shadow-md rounded-xl px-5 my-5 cursor-pointer hover:shadow-indigo-500/40 shadow-slate-200"
+                          className="flex h-24 flex-row my-4 p-3 bg-white shadow-md rounded-xl cursor-pointer hover:shadow-indigo-500/40 shadow-slate-200"
                           key={place.name}
                           onClick={() => {
                             dispatch(handleCurrentPlace(place))
@@ -71,37 +77,33 @@ const RecoContainer = () => {
                             )
                           }}
                         >
-                          <div className="w-42 flex flex-col justify-center">
+                          <div className="justify-center">
                             <Image
                               referrerPolicy="no-referrer"
                               src={place.image!}
                               alt={place.name!}
-                              width={150}
-                              height={180}
-                              className="rounded-xl w-1/2"
+                              width={70}
+                              height={70}
+                              className="rounded-xl"
                             />
                           </div>
-                          <div className="px-3 flex flex-col w-40">
-                            <div className="text-base font-bold">
+                          <div className="px-3 flex flex-col w-[270px]">
+                            <div className="tracking-tighter leading-3 text-[13px] font-bold">
                               {place.name}
                             </div>
-                            <div className="flex flex-row pl-1s pt-1">
-                              <div className="text-sm font-bold">
+                            <div className="flex flex-row pt-1">
+                              <div className="text-xs font-bold">
                                 {place.rating}
                               </div>
                               <i
                                 key={place.rating}
-                                className="pl-1 bi bi-star-fill text-yellow-400 text-sm"
+                                className="pl-1 bi bi-star-fill text-yellow-400 text-xs"
                               ></i>
-                              <span className="font-bold text-blue-300 text-xs pt-0.5 pl-2">
+                              <span className="font-bold text-blue-300 text-[10px] pt-0.5 pl-2">
                                 명소
                               </span>
                             </div>
-
-                            {/* <div className="pt-1 text-xs text-gray-500">
-                    <span className="line-clamp-2 ">{place.location}</span>
-                  </div> */}
-                            <div className="py-3 text-gray-700 text-sm">
+                            <div className="pt-1 text-[11px] text-gray-600 line-clamp-2">
                               {place.description}
                             </div>
                           </div>
