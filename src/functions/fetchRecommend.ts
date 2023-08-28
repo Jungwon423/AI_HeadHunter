@@ -57,7 +57,6 @@ function convertToRecommendInfos(response: any): any {
   recommendInfo.set('depreactedAttractions', depreactedAttractions)
   recommendInfo.set('depreactedRestaurants', depreactedRestaurants)
 
-  console.log(recommendInfo)
   return recommendInfo
 }
 

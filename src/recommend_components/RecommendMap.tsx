@@ -11,12 +11,16 @@ import Map, {
   GeolocateControl,
   MapRef,
 } from 'react-map-gl'
-import Pin from '../travel_components/Pin'
 import TravelChat from '../travel_components/TravelChat'
 import {
   selectCoordinate,
   selectCurrentPlace,
   handleCurrentPlace,
+  selectAttractions,
+  selectRestaurants,
+  selectDepreactedAttractions,
+  selectDepreactedRestaurants,
+  selectRecommendState,
 } from '../slices/recommendSlice'
 import { PlaceInfo } from '../interfaces/placeInfo'
 import ChatScreen from '../travel_components/ChatScreen'
@@ -31,8 +35,42 @@ const RecommendMap = () => {
 
   const selectedPlace = useSelector(selectCurrentPlace)
 
+  const attractions: PlaceInfo[] = useSelector(selectAttractions).reduce(
+    (acc, val) => acc.concat(val),
+    [],
+  )
+  const restaurant: PlaceInfo[] = useSelector(selectRestaurants).reduce(
+    (acc, val) => acc.concat(val),
+    [],
+  )
+  const deprecatedAttractions: PlaceInfo[] = useSelector(
+    selectDepreactedAttractions,
+  )
+  const deprecatedRestaurants: PlaceInfo[] = useSelector(
+    selectDepreactedRestaurants,
+  )
+
+  const recommendState = useSelector(selectRecommendState)
+
+  const places = (recommendState: any) => {
+    if (recommendState === '전체') {
+      // return attractions
+      //   .concat(restaurant)
+      //   .concat(deprecatedAttractions)
+      //   .concat(deprecatedRestaurants)
+      return attractions.concat(deprecatedAttractions)
+    } else if (recommendState === '추천') {
+      // return attractions.concat(restaurant)
+      return attractions
+    } else {
+      // return deprecatedAttractions.concat(deprecatedRestaurants)
+      return deprecatedAttractions
+    }
+  }
+
   const travelSchedule: PlaceInfo[][] =
     useSelector(selectRecommendSchedule) || []
+
   const TOKEN =
     'pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtrcGNwdXQwNm1oM2xvZTJ5Z2Q4djk5In0._rw_aFaBfUjQC-tjkV53Aw'
 
@@ -49,7 +87,6 @@ const RecommendMap = () => {
       selectedPlace?.coordinate !== undefined &&
       selectedPlace?.coordinate !== null
     ) {
-      console.log(selectedPlace?.coordinate)
       onSelectCity({
         longitude: selectedPlace?.coordinate![1],
         latitude: selectedPlace?.coordinate![0],
@@ -86,21 +123,19 @@ const RecommendMap = () => {
         <NavigationControl position="top-left" />
         <ScaleControl />
 
-        {travelSchedule.map((day, i) =>
-          day.map((place, j) => (
-            <Marker
-              key={j + 10}
-              latitude={place.coordinate![0]}
-              longitude={place.coordinate![1]}
-              onClick={(e) => {
-                e.originalEvent.stopPropagation()
-                dispatch(handleCurrentPlace(place))
-              }}
-            >
-              <PrettyPin></PrettyPin>
-            </Marker>
-          )),
-        )}
+        {places(recommendState).map((place, j) => (
+          <Marker
+            key={j + 10}
+            latitude={place.coordinate![0]}
+            longitude={place.coordinate![1]}
+            onClick={(e) => {
+              e.originalEvent.stopPropagation()
+              dispatch(handleCurrentPlace(place))
+            }}
+          >
+            <PrettyPin></PrettyPin>
+          </Marker>
+        ))}
         {selectedPlace && selectedPlace.coordinate && (
           <Popup
             className="flex bg-white shadow-md rounded-xl cursor-pointer hover:shadow-indigo-500/40 shadow-slate-200"

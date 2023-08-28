@@ -26,6 +26,7 @@ import TravelChat from './TravelChat'
 import { PlaceInfo } from '../interfaces/placeInfo'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import polyline from '@mapbox/polyline'
+import PrettyPin from '../components/PrettyPin'
 
 const TravelMap = () => {
   const pinColors = [
@@ -59,7 +60,6 @@ const TravelMap = () => {
   const currentDay: number = useSelector(selectCurrentDay)
 
   const travelSchedule: PlaceInfo[][] = useSelector(selectTravelSchedule) || []
-  console.log('travelSchedule:', useSelector(selectTravelSchedule))
   const TOKEN =
     'pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtrcGNwdXQwNm1oM2xvZTJ5Z2Q4djk5In0._rw_aFaBfUjQC-tjkV53Aw'
 
@@ -90,15 +90,10 @@ const TravelMap = () => {
     }
   }
 
-  const currentCoordinates = travelSchedule
-    .map((day) =>
-      day.map((place) => [place.coordinate![1], place.coordinate![0]]),
-    )
-    .flat()
-
-  // const currentCoordinates = travelSchedule[currentDay - 1]
-  //   .map((place) => [place.coordinate![1], place.coordinate![0]])
-  //   .flat()
+  const currentCoordinates = travelSchedule[currentDay - 1].map((place) => [
+    place.coordinate![1],
+    place.coordinate![0],
+  ])
 
   const [routeGeoJSON, setRouteGeoJSON] = useState<RouteGeoJSON | null>(null)
 
@@ -126,7 +121,7 @@ const TravelMap = () => {
       mapRef.current?.flyTo({
         center: [longitude, latitude],
         duration: 2000,
-        zoom: 16,
+        // zoom: 16,
       })
     },
     [],
@@ -138,7 +133,7 @@ const TravelMap = () => {
     const coordinatesStr = convertCoordinatesToString(coordinates)
     // console.log('coordinatesStr: ' + coordinatesStr)
 
-    const url = `https://api.mapbox.com/optimized-trips/v1/${profile}/${coordinatesStr}?access_token=${TOKEN}`
+    const url = `https://api.mapbox.com/optimized-trips/v1/${profile}/${coordinatesStr}?access_token=${TOKEN}&source=first&destination=last&roundtrip=false`
 
     // console.log('url: ' + url)
 
@@ -170,9 +165,7 @@ const TravelMap = () => {
 
   useEffect(() => {
     const getOptimizedRoute = async () => {
-      const optimizedRoute = await fetchOptimizedRoute(
-        currentCoordinates.slice(0, 12),
-      )
+      const optimizedRoute = await fetchOptimizedRoute(currentCoordinates)
       // 여기서 수정: 객체를 그대로 전달합니다.
       // console.log('optimizedRoute:', optimizedRoute)
       const geometry = optimizedRoute.trips[0].geometry
@@ -183,7 +176,7 @@ const TravelMap = () => {
     }
 
     getOptimizedRoute()
-  }, [])
+  }, [currentDay])
 
   return (
     <div className="flex-grow">
@@ -216,7 +209,10 @@ const TravelMap = () => {
                     console.log(place)
                   }}
                 >
-                  <Pin color={pinColors[i]}></Pin>
+                  <div className="flex justify-center font-bold text-rose-500 text-lg">
+                    {j + 1}
+                  </div>
+                  <PrettyPin></PrettyPin>
                 </Marker>
               ),
           ),
@@ -257,47 +253,13 @@ const TravelMap = () => {
               type="line"
               source="route"
               paint={{
-                'line-width': 3,
-                'line-color': '#007cbf',
+                'line-width': 6,
+                'line-color': '#80FF00',
+                // 'line-offset': 2,
               }}
             />
           </Source>
         )}
-        {/* {travelSchedule.map(
-          (day, i) =>
-            (currentDay == 0 || currentDay == i + 1) && (
-              <Source
-                key={i}
-                id="route"
-                type="geojson"
-                data={{
-                  type: 'Feature',
-                  properties: {},
-                  geometry: {
-                    type: 'LineString',
-                    coordinates: day.map((place, j) => [
-                      place.coordinate[1],
-                      place.coordinate[0],
-                    ]),
-                  },
-                }}
-              >
-                <Layer
-                  id="route"
-                  type="line"
-                  source="route"
-                  // layout={{
-                  //   'line-join': 'round',
-                  //   'line-cap': 'round',
-                  // }}
-                  paint={{
-                    'line-color': '#007cbf',
-                    'line-width': 4,
-                  }}
-                />
-              </Source>
-            ),
-        )} */}
       </Map>
 
       {showChat && <ChatScreen onClose={() => dispatch(setShowChat(false))} />}
