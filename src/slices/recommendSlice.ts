@@ -11,6 +11,11 @@ export interface RecommendInfoState {
   preferenceError: string | null
 
   attractions: PlaceInfo[][]
+  restaurants: PlaceInfo[][]
+
+  depreactedAttractions: PlaceInfo[]
+  depreactedRestaurants: PlaceInfo[]
+
   loading: 'idle' | 'pending' | 'succeeded' | 'failed'
   error: string | null
 
@@ -18,7 +23,7 @@ export interface RecommendInfoState {
   coordinate: number[]
   location: string
   currentPlace: PlaceInfo | null
-  currentDay: number
+  recommendState: '전체' | '추천' | '비추천'
 }
 
 const initialState: RecommendInfoState = {
@@ -30,15 +35,18 @@ const initialState: RecommendInfoState = {
   preferenceError: null,
 
   attractions: [],
+  restaurants: [],
+  depreactedAttractions: [],
+  depreactedRestaurants: [],
+
   loading: 'idle',
   error: null,
 
   // @@@@@ 이상 /preference @@@@@
-
   location: '서울 강남구 언주로110 경남아파트',
   coordinate: [135.5023, 34.6937],
   currentPlace: null,
-  currentDay: 0,
+  recommendState: '추천',
 }
 
 const recommendInfoSlice = createSlice({
@@ -61,6 +69,19 @@ const recommendInfoSlice = createSlice({
     setAttractions: (state, action) => {
       state.attractions = action.payload
     },
+
+    setRestaurants: (state, action) => {
+      state.restaurants = action.payload
+    },
+
+    setDepreactedAttractions: (state, action) => {
+      state.depreactedAttractions = action.payload
+    },
+
+    setDepreactedRestaurants: (state, action) => {
+      state.depreactedRestaurants = action.payload
+    },
+
     setLoading: (
       state,
       action: PayloadAction<'idle' | 'pending' | 'succeeded' | 'failed'>,
@@ -85,8 +106,11 @@ const recommendInfoSlice = createSlice({
         state.currentPlace = action.payload
       }
     },
-    setCurrentDay: (state, action: PayloadAction<number>) => {
-      state.currentDay = action.payload
+    setRecommendState: (
+      state,
+      action: PayloadAction<'전체' | '추천' | '비추천'>,
+    ) => {
+      state.recommendState = action.payload
     },
 
     initialize: (state) => {
@@ -106,6 +130,10 @@ export const {
   setPreferenceError,
 
   setAttractions,
+  setRestaurants,
+  setDepreactedAttractions,
+  setDepreactedRestaurants,
+
   setError,
   setLoading,
 
@@ -114,7 +142,7 @@ export const {
   setCoordinate,
   setLocation,
   handleCurrentPlace,
-  setCurrentDay,
+  setRecommendState,
   initialize,
 } = recommendInfoSlice.actions
 export const selectRecommendInfo = (state: RootState) => state.recommendInfo
@@ -125,6 +153,15 @@ export const selectPreference = (state: RootState) =>
 export const selectAttractions = (state: RootState) =>
   state.recommendInfo.attractions
 
+export const selectRestaurants = (state: RootState) =>
+  state.recommendInfo.restaurants
+
+export const selectDepreactedAttractions = (state: RootState) =>
+  state.recommendInfo.depreactedAttractions
+
+export const selectDepreactedRestaurants = (state: RootState) =>
+  state.recommendInfo.depreactedRestaurants
+
 // @@@@@ 이상 /preference @@@@@
 
 export const selectCoordinate = (state: RootState) =>
@@ -132,8 +169,8 @@ export const selectCoordinate = (state: RootState) =>
 export const selectLocation = (state: RootState) => state.recommendInfo.location
 export const selectCurrentPlace = (state: RootState) =>
   state.recommendInfo.currentPlace
-export const selectCurrentDay = (state: RootState) =>
-  state.recommendInfo.currentDay
+export const selectRecommendState = (state: RootState) =>
+  state.recommendInfo.recommendState
 
 const persistConfig = {
   key: 'recommendInfo',

@@ -14,10 +14,8 @@ import Map, {
 import Pin from '../travel_components/Pin'
 import TravelChat from '../travel_components/TravelChat'
 import {
-  selectAttractions,
   selectCoordinate,
   selectCurrentPlace,
-  selectCurrentDay,
   handleCurrentPlace,
 } from '../slices/recommendSlice'
 import { PlaceInfo } from '../interfaces/placeInfo'
@@ -54,7 +52,6 @@ const RecommendMap = () => {
   const dispatch = useDispatch()
 
   const selectedPlace = useSelector(selectCurrentPlace)
-  const currentDay: number = useSelector(selectCurrentDay)
 
   const travelSchedule: PlaceInfo[][] =
     useSelector(selectRecommendSchedule) || []
@@ -112,22 +109,19 @@ const RecommendMap = () => {
         <ScaleControl />
 
         {travelSchedule.map((day, i) =>
-          day.map(
-            (place, j) =>
-              (currentDay == 0 || currentDay == i + 1) && (
-                <Marker
-                  key={j + 10}
-                  latitude={place.coordinate![0]}
-                  longitude={place.coordinate![1]}
-                  onClick={(e) => {
-                    e.originalEvent.stopPropagation()
-                    dispatch(handleCurrentPlace(place))
-                  }}
-                >
-                  <Pin color={pinColors[i]}></Pin>
-                </Marker>
-              ),
-          ),
+          day.map((place, j) => (
+            <Marker
+              key={j + 10}
+              latitude={place.coordinate![0]}
+              longitude={place.coordinate![1]}
+              onClick={(e) => {
+                e.originalEvent.stopPropagation()
+                dispatch(handleCurrentPlace(place))
+              }}
+            >
+              <Pin color={pinColors[i]}></Pin>
+            </Marker>
+          )),
         )}
         {selectedPlace && selectedPlace.coordinate && (
           <Popup

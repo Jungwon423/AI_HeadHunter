@@ -21,10 +21,8 @@ import { fetchRecommendAttractionsAsync } from '../functions/fetchRecommend'
 import MyNavbar from '../components/MyNavbar'
 import { selectCityDetail } from '../slices/cityDetailSlice'
 import Switcher12 from '../components/switcher'
-import { fetchTravelScheduleAsync } from '../functions/fetchTravel'
 import SmallLoading from '../components/small_loading'
 import { ItineraryInput } from '../interfaces/preference'
-import { fetchItinerary } from '../functions/fetchItinerary'
 
 const PreferencePage = () => {
   const router = useRouter()
@@ -82,28 +80,9 @@ const PreferencePage = () => {
       recommendInfo.preferenceLoading === 'succeeded'
     ) {
       dispatch(fetchRecommendAttractionsAsync(recommendInput))
-
-      // // TODO : 실제 API로 대체
-      // dispatch(initialize())
-      // const travelInput: RecommendInput = {
-      //   user: userId,
-      //   travel_id: travelId,
-      // }
-      // dispatch(fetchTravelScheduleAsync(travelInput))
       setScheduleLoaded(true)
     }
   }, [recommendInfo.preferenceLoading])
-
-  useEffect(() => {
-    const ItineraryInput: ItineraryInput = {
-      travel_id: travelId,
-      user: userId,
-    }
-    if (itineraryLoaded === false) {
-      // dispatch(fetchItinerary(ItineraryInput))
-      setPreferenceLoaded(true)
-    }
-  }, [])
 
   if (
     recommendInfo.preferenceLoading === 'pending' ||
