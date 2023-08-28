@@ -20,6 +20,8 @@ export interface PlaceInfo {
   thought?: string | null | undefined //thought, ai의 추천 이유
   wheelchair?: boolean | null | undefined //wheelchair_accessible_entrance, 휠체어 이용 가능 여부
   reviews?: Review[] | null | undefined
+  attractionStartTime?: string | null | undefined
+  attractionEndTime?: string | null | undefined
 }
 
 interface Summary {

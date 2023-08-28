@@ -13,29 +13,31 @@ import {
 } from '../slices/travelInfoSlice'
 import { Cluster } from '../interfaces/Cluster'
 import { convertToPlaceInfo } from './jsonToPlaceInfo'
-import { de } from 'date-fns/locale'
 
-export function processClusterTest(clusterArray: Cluster[]): PlaceInfo[][] {
-  return clusterArray.map((cluster) => {
-    const travelAttractions: Map<string, any>[] = cluster.attractions.slice(
-      0,
-      3,
-    )
-    const attractions = travelAttractions.map(convertToPlaceInfo)
-    // const restaurants = cluster.restaurants.map(convertToPlaceInfo)
-    // return [...attractions, ...restaurants]
-    return [...attractions]
+export const convertToItinerary = (response: any) => {
+  let convertedMap = new Map()
+  let overviews: string[] = []
+  let placeInfos: PlaceInfo[][] = []
+
+  response.itinerary.map((day: any) => {
+    overviews.push(day.overview)
+    placeInfos.push(day.itinerary.map(convertToPlaceInfo))
   })
+
+  convertedMap.set('overviews', overviews)
+  convertedMap.set('placeInfos', placeInfos)
+
+  return convertedMap
 }
 
 export const fetchTravelSchedule = async (
   recommendInput: RecommendInput,
-): Promise<PlaceInfo[][]> => {
+): Promise<any> => {
   const config = {
     withCredentials: true,
   }
 
-  let API_URL: string = SERVER_API_URL + '/preference/attractionRecommendation'
+  let API_URL: string = SERVER_API_URL + '/itinerary/create'
 
   console.log('API_URL', API_URL)
 
@@ -45,20 +47,17 @@ export const fetchTravelSchedule = async (
     config,
   )
 
-  console.log(response.data)
-
   // 이중 for문을 사용하여 JSON 데이터를 placeInfo[][]로 변환합니다.
-  const placeInfos: PlaceInfo[][] = processClusterTest(
-    response.data.clustered_recommended_attractions,
-  )
-  return placeInfos
+  const itineraryInfo: any = convertToItinerary(response.data)
+
+  return itineraryInfo
 }
 
 export const fetchTravelScheduleAsync =
   (recommendInput: RecommendInput): AppThunk =>
   async (
     dispatch: (arg0: {
-      payload: TravelInfoState | string | PlaceInfo[][] | null
+      payload: TravelInfoState | string | PlaceInfo[][] | null | string[]
       type:
         | 'travelInfo/setTravelSchedule'
         | 'travelInfo/setLoading'
@@ -68,11 +67,12 @@ export const fetchTravelScheduleAsync =
   ) => {
     try {
       dispatch(setLoading('pending'))
-      const travelSchedule = await fetchTravelSchedule(recommendInput) // TODO : fetchTravelSchedule API 구현
-      dispatch(setTravelSchedule(travelSchedule))
+      const itineraryInfo = await fetchTravelSchedule(recommendInput)
+      dispatch(setTravelSchedule(itineraryInfo.get('placeInfos')))
+      // overviews 추가
 
       // filter로 정제
-      dispatch(deleteDuplicatePlace(travelSchedule))
+      dispatch(deleteDuplicatePlace(itineraryInfo.get('placeInfos')))
       console.log('제거 완료')
       dispatch(setLoading('succeeded'))
     } catch (error: any) {
