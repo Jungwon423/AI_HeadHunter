@@ -46,6 +46,24 @@ const getInitialDayDetails = (startDate: Date, endDate: Date): DayDetail[] => {
   }
   return dates.map((date) => initialValue(date))
 }
+export const dateToString = (date: Date): string => {
+  const options: any = {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    weekday: 'long',
+  }
+  const formattedDate = new Intl.DateTimeFormat('ko-KR', options).format(date)
+
+  // "2023년 08월 29일 화요일" 형태를 "2023.8.29(화)" 형태로 변경
+  let [year, month, day, weekday] = formattedDate.split(' ')
+
+  year = year.slice(0, -1)
+  month = month.slice(0, -1)
+  day = day.slice(0, -1)
+  weekday = weekday.substring(0, weekday.length - 2)
+  return `${year}.${month}.${day}(${weekday})`
+}
 
 const initialState: TimeState = {
   //dayDetail: { startHour: 0, startMinute: 0, endHour: 0, endMinute: 0 },
@@ -79,9 +97,6 @@ export const timeDetailSlice = createSlice({
     ) => {
       state.dayDetails[action.payload.index].endTime = action.payload.endTime
     },
-    // setDayDetail: (state, action: PayloadAction<DayDetail>) => {
-    //   state.dayDetails = action.payload
-    // },
     setStartDate: (state, action: PayloadAction<string>) => {
       state.startDate = action.payload
       state.dayDetails = getInitialDayDetails(

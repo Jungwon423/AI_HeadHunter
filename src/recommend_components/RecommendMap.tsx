@@ -23,6 +23,7 @@ import {
 import { PlaceInfo } from '../interfaces/placeInfo'
 import ChatScreen from '../travel_components/ChatScreen'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { selectRecommendSchedule } from '../slices/travelInfoSlice'
 
 const RecommendMap = () => {
   const pinColors = [
@@ -55,7 +56,8 @@ const RecommendMap = () => {
   const selectedPlace = useSelector(selectCurrentPlace)
   const currentDay: number = useSelector(selectCurrentDay)
 
-  const travelSchedule: PlaceInfo[][] = useSelector(selectAttractions) || []
+  const travelSchedule: PlaceInfo[][] =
+    useSelector(selectRecommendSchedule) || []
   const TOKEN =
     'pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtrcGNwdXQwNm1oM2xvZTJ5Z2Q4djk5In0._rw_aFaBfUjQC-tjkV53Aw'
 

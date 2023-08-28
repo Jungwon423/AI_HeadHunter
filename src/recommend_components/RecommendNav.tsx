@@ -37,7 +37,7 @@ const RecommendNav = () => {
   }
 
   return (
-    <div className="w-[100px] h-screen flex flex-col">
+    <div className="w-[170px] h-screen flex flex-col">
       <button
         className="flex list-none ml-3 my-5"
         onClick={() => router.push('/')}
