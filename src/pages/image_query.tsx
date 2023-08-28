@@ -66,9 +66,9 @@ const ImageQuery = () => {
 
   useEffect(() => {
     dispatch(initialize())
-    setIsLoading1(true)
-    setIsLoading2(true)
     dispatch(fetchImageQueryAsync(ImageQueryInput))
+    setIsLoading1(false)
+    setIsLoading2(false)
   }, [])
 
   const handleImageClick = (image: string) => {
