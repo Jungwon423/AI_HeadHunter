@@ -26,8 +26,6 @@ import TravelChat from './TravelChat'
 import { PlaceInfo } from '../interfaces/placeInfo'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import polyline from '@mapbox/polyline'
-import RecoContainer from './RecoContainer'
-import TravelContainer from './TravelContainer'
 
 const TravelMap = () => {
   const pinColors = [
@@ -61,6 +59,7 @@ const TravelMap = () => {
   const currentDay: number = useSelector(selectCurrentDay)
 
   const travelSchedule: PlaceInfo[][] = useSelector(selectTravelSchedule) || []
+  console.log('travelSchedule:', useSelector(selectTravelSchedule))
   const TOKEN =
     'pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtrcGNwdXQwNm1oM2xvZTJ5Z2Q4djk5In0._rw_aFaBfUjQC-tjkV53Aw'
 
@@ -96,6 +95,10 @@ const TravelMap = () => {
       day.map((place) => [place.coordinate![1], place.coordinate![0]]),
     )
     .flat()
+
+  // const currentCoordinates = travelSchedule[currentDay - 1]
+  //   .map((place) => [place.coordinate![1], place.coordinate![0]])
+  //   .flat()
 
   const [routeGeoJSON, setRouteGeoJSON] = useState<RouteGeoJSON | null>(null)
 
