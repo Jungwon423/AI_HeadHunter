@@ -23,6 +23,8 @@ import { selectCityDetail } from '../slices/cityDetailSlice'
 import Switcher12 from '../components/switcher'
 import { fetchTravelScheduleAsync } from '../functions/fetchTravel'
 import SmallLoading from '../components/small_loading'
+import { ItineraryInput } from '../interfaces/preference'
+import { fetchItinerary } from '../functions/fetchItinerary'
 
 const PreferencePage = () => {
   const router = useRouter()
@@ -42,6 +44,7 @@ const PreferencePage = () => {
 
   const [preferenceLoaded, setPreferenceLoaded] = useState(false)
   const [scheduleLoaded, setScheduleLoaded] = useState(false)
+  const [itineraryLoaded, setItineraryLoaded] = useState(false)
 
   const cityDetail = useSelector(selectCityDetail)
   const city = cityDetail.city_detail
@@ -90,6 +93,17 @@ const PreferencePage = () => {
       setScheduleLoaded(true)
     }
   }, [recommendInfo.preferenceLoading])
+
+  useEffect(() => {
+    const ItineraryInput: ItineraryInput = {
+      travel_id: travelId,
+      user: userId,
+    }
+    if (itineraryLoaded === false) {
+      // dispatch(fetchItinerary(ItineraryInput))
+      setPreferenceLoaded(true)
+    }
+  }, [])
 
   if (
     recommendInfo.preferenceLoading === 'pending' ||
