@@ -56,10 +56,12 @@ export const SurveyPage = () => {
         isValid = companion != null
         break
       case 1: // WhenSurvey
+        let sd = new Date(startDate)
+        let ed = new Date(endDate)
         isValid =
           startDate != null &&
           endDate != null &&
-          startDate <= endDate &&
+          sd < ed &&
           startDate != '' &&
           endDate != ''
         break
@@ -161,7 +163,7 @@ export const SurveyPage = () => {
           onClick={async () => handleButtonClick()}
         >
           <span className="text-center text-white text-sm md:text-base">
-            Next
+            다음
           </span>
         </button>
       </div>
