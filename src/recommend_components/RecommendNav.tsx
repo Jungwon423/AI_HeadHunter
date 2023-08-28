@@ -1,17 +1,21 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Image from 'next/image'
 import router from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectTravelInfo } from '../slices/travelInfoSlice'
-import { PlaceInfo } from '../interfaces/placeInfo'
-import { selectAttractions, setCurrentDay } from '../slices/recommendSlice'
 import { AppDispatch } from '../store'
+import {
+  selectRecommendState,
+  setRecommendState,
+} from '../slices/recommendSlice'
 
 const RecommendNav = () => {
   const dispatch = useDispatch<AppDispatch>()
   const travelInfo = useSelector(selectTravelInfo)
 
-  const attractions: PlaceInfo[][] = useSelector(selectAttractions) || []
+  const recommendState: '전체' | '추천' | '비추천' =
+    useSelector(selectRecommendState)
+
   let buttonStatus: string = ''
   let buttonColor: string = 'bg-blue-500'
 
@@ -32,10 +36,6 @@ const RecommendNav = () => {
 
   let buttonClass = `rounded px-4 py-2 font-bold text-white hover:bg-blue-600 ${buttonColor} `
 
-  const changeDay = (day: number) => {
-    dispatch(setCurrentDay(day))
-  }
-
   return (
     <div className="w-[170px] h-screen flex flex-col">
       <button
@@ -55,19 +55,17 @@ const RecommendNav = () => {
         />
         <span className="ml-1 font-bold text-xs font-mono">Trippy</span>
       </button>
-      <div
-        className="text-slate-300 text-sm py-5 ml-6 cursor-pointer font-bold hover:text-blue-400"
-        onClick={() => changeDay(0)}
-      >
-        전체
-      </div>
-      {attractions.map((attraction, day) => (
+      {['전체', '추천', '비추천'].map((state) => (
         <div
-          key={day}
-          className="text-slate-300 text-sm py-5 ml-6 cursor-pointer font-bold hover:text-blue-400"
-          onClick={() => changeDay(day + 1)}
+          key={state}
+          className={`${
+            state === recommendState ? 'text-blue-400' : 'text-slate-300'
+          } text-sm py-5 ml-6 cursor-pointer font-bold hover:text-blue-300 `}
+          onClick={() => {
+            dispatch(setRecommendState(state as '전체' | '추천' | '비추천'))
+          }}
         >
-          Day {day + 1}
+          {state}
         </div>
       ))}
 

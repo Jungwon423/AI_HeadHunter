@@ -24,7 +24,7 @@ export function convertToPlaceInfo(attraction: any): PlaceInfo {
   // console.log('attraction.addressEn', attraction?.addressEn)
   // console.log('attraction.homepage', attraction?.homepage)
   // console.log('attraction.evaluation', attraction?.evaluation)
-  const originalUrl = attraction.image.photoURL
+  const originalUrl = attraction.image?.photoURL
   const encodedUrl = encodeURIComponent(originalUrl)
   const prefix = 'https://search.pstatic.net/common?src='
   const suffix = '&type=m1500_travelsearch'
@@ -53,7 +53,6 @@ export function convertToPlaceInfo(attraction: any): PlaceInfo {
     // wheelchair: attraction.wheelchair_accessible_entrance,
     // reviews: attraction.reviews,
     attractionStartTime: attraction.attractionStartTime,
-    attractionEndTime: attraction.attractionEndTime,
   } as PlaceInfo
   return placeInfo
 }
