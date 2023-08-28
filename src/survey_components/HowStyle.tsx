@@ -27,7 +27,7 @@ const HowStyle = () => {
   }
   useEffect(() => {
     dispatch(setTravelStyle(selected))
-    console.log(selected)
+    // console.log(selected)
   }, [dispatch, selected])
 
   return (

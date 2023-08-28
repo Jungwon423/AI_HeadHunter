@@ -23,6 +23,7 @@ import {
   selectStartDate,
   setStartDate,
 } from '../slices/timeSlice'
+import Loading2 from '../components/loading2'
 
 export const SurveyPage = () => {
   const travelStyle = useSelector(selectTravelStyle)
@@ -31,16 +32,8 @@ export const SurveyPage = () => {
   const user = useSelector(selectUser)
   const city = useSelector(selectCity)
 
-  useEffect(() => {
-    const surveyInput: SurveyInput = {
-      user: user!,
-      destination: city,
-      travelStyle: travelStyle,
-    }
-    dispatch(fecthSurveyInputAsync(surveyInput))
-  }, [travelStyle])
-
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleItemClick = (index: number) => {
     setSelectedIndex(index)
@@ -72,7 +65,19 @@ export const SurveyPage = () => {
         break
       case 2: // HowSurvey
         isValid =
-          travelStyle.includes('famous') || travelStyle.includes('novel')
+          (travelStyle.includes('famous') || travelStyle.includes('novel')) &&
+          (travelStyle.includes('lazy') || travelStyle.includes('busy'))
+
+        if (isValid) {
+          setIsLoading(true)
+          const surveyInput: SurveyInput = {
+            user: user!,
+            destination: city,
+            travelStyle: travelStyle,
+          }
+          await dispatch(fecthSurveyInputAsync(surveyInput))
+          setIsLoading(false)
+        }
         break
       case 3: // ActivitySurvey
         isValid = true
@@ -141,7 +146,13 @@ export const SurveyPage = () => {
           {selectedIndex == 0 ? <WhoSurvey /> : null}
           {selectedIndex == 1 ? <WhenSurvey></WhenSurvey> : null}
           {selectedIndex == 2 ? <HowSurvey></HowSurvey> : null}
-          {selectedIndex == 3 ? <ActivitySurvey></ActivitySurvey> : null}
+          {selectedIndex == 3 ? (
+            isLoading ? (
+              <Loading2 />
+            ) : (
+              <ActivitySurvey></ActivitySurvey>
+            )
+          ) : null}
         </div>
       </div>
       <div className="fixed bottom-0 h-16 w-full border-t-2 bg-stone-50 shadow-gray-200 shadow-inner flex items-center justify-end pr-5">

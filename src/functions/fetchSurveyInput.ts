@@ -35,7 +35,7 @@ export const fecthSurveyInputAsync =
   async (
     dispatch: (arg0: {
       payload: MajorCategoriesWithMinorCategories | string
-      type: 'travelInfo/setCategory' | 'travelInfo/setTravelId'
+      type: 'travelInfo/setCategory' | 'travelInfo/setTravelId' | ''
     }) => void,
   ) => {
     try {
