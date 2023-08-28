@@ -11,7 +11,6 @@ import {
   selectOpenRecommend,
 } from '../slices/travelInfoSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import TravelInfo from '../travel_components/TravelInfo'
 import { DragDropContext } from 'react-beautiful-dnd'
 import { AppDispatch } from '../store'
 
@@ -64,7 +63,7 @@ const TravelCoursePage = () => {
         }}
       >
         <Guide></Guide>
-        {openRecommend && <TravelInfo></TravelInfo>}
+        {openRecommend && <RecoContainer></RecoContainer>}
         {!openRecommend && <TravelContainer></TravelContainer>}
         {/* <TravelContainer></TravelContainer> */}
         <TravelMap></TravelMap>

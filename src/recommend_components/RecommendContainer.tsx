@@ -39,7 +39,7 @@ const RecommendContainer = () => {
     <div className="bg-[#FAFAFA] h-screen overflow-y-auto">
       <div className="p-4">
         <div className="flex pt-7 pb-1 ">
-          <div className="pl-4 font-bold text-xl">오사카</div>
+          <div className="pl-3 font-bold text-xl">오사카</div>
           <span className="pt-2 text-gray-500 text-sm font-bold px-2">
             {travelStartDate} ~ {travelEndDate}
           </span>
@@ -47,11 +47,11 @@ const RecommendContainer = () => {
         {attractions.map(
           (day: PlaceInfo[], i) =>
             (currentDay == 0 || currentDay == i + 1) && (
-              <div className="grid grid-cols-2 gap-3" key={i}>
+              <div className="grid grid-cols-2 gap-3 pt-5" key={i}>
                 {day.map((place: PlaceInfo) => {
                   return (
                     <div
-                      className="flex flex-row p-3 h-24 bg-white shadow-md rounded-xl px-5 cursor-pointer hover:shadow-indigo-500/40 shadow-slate-200"
+                      className="flex flex-row my-1 py-3 h-24 bg-white shadow-md rounded-xl px-5 cursor-pointer hover:shadow-indigo-500/40 shadow-slate-200"
                       key={place.name}
                       onClick={() => {
                         dispatch(handleCurrentPlace(place))
@@ -66,11 +66,11 @@ const RecommendContainer = () => {
                         height={70}
                         className="rounded-xl"
                       />
-                      <div className="px-3 flex flex-col">
-                        <div className="text-[12px] font-bold">
+                      <div className="pl-3 flex flex-col">
+                        <div className="tracking-tighter leading-3 text-[12px] font-bold">
                           {place.name}
                         </div>
-                        <div className="flex flex-row">
+                        <div className="pt-1 flex flex-row">
                           <div className="text-xs font-bold">
                             {place.rating}
                           </div>
@@ -83,8 +83,8 @@ const RecommendContainer = () => {
                           </span>
                         </div>
 
-                        <div className="pt-1 text-[10px] text-gray-500">
-                          <span className="line-clamp-2">
+                        <div className="pt-1 text-[10px] text-gray-600">
+                          <span className="line-clamp-2 hover:line-clamp-3">
                             {place.description}
                           </span>
                         </div>

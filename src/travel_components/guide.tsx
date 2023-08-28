@@ -28,28 +28,33 @@ const Guide = () => {
   const tabs = createTabs(duration)
 
   return (
-    <div className="flex-col w-96 overflow-y-auto">
-      <TravelNavbar />
-      <section className="bg-gray-50 py-4">
-        <TabMenu tabs={tabs} />
-      </section>
-      {/* <GuideHero></GuideHero> */}
-      {currentDay !== 0 ? <GuideDay></GuideDay> : null}
-      {currentDay === 0 ? (
-        <div className="px-3 justify-center">
-          <div className="flex justify-center text-sm font-bold py-2 mt-2">
-            이번 코스에서 언급된 <b className="px-1"> 주요 키워드</b>
+    <div className="w-96 bg-[#FAFAFA] h-screen overflow-y-auto">
+      <div className="flex-col w-96 overflow-y-auto">
+        <TravelNavbar />
+        <section className="bg-gray-50 px-1 py-2">
+          <TabMenu tabs={tabs} />
+        </section>
+        {/* <GuideHero></GuideHero> */}
+        {currentDay !== 0 ? <GuideDay></GuideDay> : null}
+        {currentDay === 0 ? (
+          <div className="px-3 justify-center">
+            <div className="flex justify-center text-sm font-bold py-2 mt-2">
+              이번 코스에서 언급된 <b className="px-1"> 주요 키워드</b>
+            </div>
+            <h2 className="flex justify-center text-sm font-bold py-2 mt-2">
+              여행 요약
+            </h2>
+            <div className="flex justify-center text-sm font-bold py-2 mt-2">
+              오사카 여행에서 주의해야 할 사항은 아주 덥다는 것입니다.
+            </div>
+            <div className="flex justify-center text-sm font-bold py-2 mt-2">
+              overview
+            </div>
           </div>
-          <h2 className="flex justify-center text-sm font-bold py-2 mt-2">
-            여행 요약
-          </h2>
-          <div className="flex justify-center text-sm font-bold py-2 mt-2">
-            오사카 여행에서 주의해야 할 사항은 아주 덥다는 것입니다.
-          </div>
-        </div>
-      ) : (
-        <GuideContainer></GuideContainer>
-      )}
+        ) : (
+          <GuideContainer></GuideContainer>
+        )}
+      </div>
     </div>
   )
 }
