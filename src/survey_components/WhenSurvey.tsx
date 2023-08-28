@@ -16,7 +16,7 @@ const WhenSurvey = () => {
   ) => {
     setStart(newStartDate)
     setEnd(newEndDate)
-    const maxDate = new Date(newStartDate!)
+    let maxDate = new Date(newStartDate!)
     maxDate.setDate(newStartDate!.getDate() + 29)
     if (newEndDate! > maxDate) {
       setEnd(maxDate)
