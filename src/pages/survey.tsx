@@ -12,6 +12,10 @@ import {
   selectCity,
   selectTravelStyle,
   selectCompanion,
+  setCompanion,
+  setCompanionChild,
+  setCompanionAdult,
+  setTravelStyle,
 } from '../slices/travelInfoSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import { AppDispatch } from '../store'
@@ -21,6 +25,7 @@ import ActivitySurvey from '../survey_components/AcitivitySurvey'
 import {
   selectEndDate,
   selectStartDate,
+  setEndDate,
   setStartDate,
 } from '../slices/timeSlice'
 import Loading2 from '../components/loading2'
@@ -34,6 +39,18 @@ export const SurveyPage = () => {
 
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
   const [isLoading, setIsLoading] = useState(false)
+
+  const initializeSurvey = () => {
+    dispatch(setCompanion(null))
+    dispatch(setStartDate(''))
+    dispatch(setEndDate(''))
+    // dispatch(setCompanionAdult(''))
+    // dispatch(setCompanionChild(''))
+    dispatch(setTravelStyle([]))
+  }
+  useEffect(() => {
+    dispatch(initializeSurvey)
+  }, [])
 
   const handleItemClick = (index: number) => {
     setSelectedIndex(index)

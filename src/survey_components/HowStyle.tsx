@@ -5,31 +5,28 @@ import { selectTravelStyle, setTravelStyle } from '../slices/travelInfoSlice'
 import { AppDispatch } from '../store'
 
 const HowStyle = () => {
-  const [selected, setSelected] = useState<string[]>([])
+  const travelStyle = useSelector(selectTravelStyle)
   const dispatch = useDispatch<AppDispatch>()
 
   const handleSelectPlace = (value: string) => {
-    setSelected((prev) =>
-      prev.filter((item) => item !== 'famous' && item !== 'novel'),
+    let newTravelStyle = travelStyle.filter(
+      (item) => item !== 'famous' && item !== 'novel',
     )
-    if (!selected.includes(value)) {
-      setSelected((prev) => [...prev, value])
-    }
+    newTravelStyle.push(value)
+    dispatch(setTravelStyle(newTravelStyle))
   }
 
   const handleSelectStyle = (value: string) => {
-    setSelected((prev) =>
-      prev.filter((item) => item !== 'busy' && item !== 'lazy'),
+    let newTravelStyle = travelStyle.filter(
+      (item) => item !== 'busy' && item !== 'lazy',
     )
-    if (!selected.includes(value)) {
-      setSelected((prev) => [...prev, value])
-    }
+    newTravelStyle.push(value)
+    dispatch(setTravelStyle(newTravelStyle))
   }
-  useEffect(() => {
-    dispatch(setTravelStyle(selected))
-    // console.log(selected)
-  }, [dispatch, selected])
 
+  useEffect(() => {
+    console.log(travelStyle)
+  }, [dispatch, travelStyle])
   return (
     <>
       <div className="text-2xl pt-20 font-bold">여행 스타일을 알려주세요</div>
@@ -40,12 +37,12 @@ const HowStyle = () => {
         <div
           onClick={() => handleSelectPlace('famous')}
           className={`relative w-[220px] h-[230px] pt-2 px-5 flex flex-col rounded-lg items-center justify-center ${
-            selected.includes('famous')
+            travelStyle.includes('famous')
               ? 'border-indigo-400 border-4'
               : 'border-2'
           }`}
         >
-          {selected.includes('famous') ? (
+          {travelStyle.includes('famous') ? (
             <div className="absolute top-0 right-0">
               <Image
                 src="/assets/images/check.png"
@@ -70,12 +67,12 @@ const HowStyle = () => {
         <div
           onClick={() => handleSelectPlace('novel')}
           className={`relative w-[220px] h-[230px] border-2 pt-2 px-5 flex flex-col rounded-lg items-center justify-center ${
-            selected.includes('novel')
+            travelStyle.includes('novel')
               ? 'border-indigo-400 border-4'
               : 'border-2'
           }`}
         >
-          {selected.includes('novel') ? (
+          {travelStyle.includes('novel') ? (
             <div className="absolute top-0 right-0">
               <Image
                 src="/assets/images/check.png"
@@ -105,12 +102,12 @@ const HowStyle = () => {
         <div
           onClick={() => handleSelectStyle('busy')}
           className={`relative w-[220px] h-[230px] border-2 pt-2 px-5 flex flex-col rounded-lg items-center justify-center ${
-            selected.includes('busy')
+            travelStyle.includes('busy')
               ? 'border-indigo-400 border-4'
               : 'border-2'
           }`}
         >
-          {selected.includes('busy') ? (
+          {travelStyle.includes('busy') ? (
             <div className="absolute top-0 right-0">
               <Image
                 src="/assets/images/check.png"
@@ -135,12 +132,12 @@ const HowStyle = () => {
         <div
           onClick={() => handleSelectStyle('lazy')}
           className={`relative w-[220px] h-[230px] border-2 pt-2 px-5 flex flex-col rounded-lg items-center justify-center ${
-            selected.includes('lazy')
+            travelStyle.includes('lazy')
               ? 'border-indigo-400 border-4'
               : 'border-2'
           }`}
         >
-          {selected.includes('lazy') ? (
+          {travelStyle.includes('lazy') ? (
             <div className="absolute top-0 right-0">
               <Image
                 src="/assets/images/check.png"
