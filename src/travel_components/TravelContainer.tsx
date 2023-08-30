@@ -21,7 +21,7 @@ const TravelContainer = () => {
     return <div className="w-96 rounded-none hidden z-10"></div>
   }
   return (
-    <div className="w-96 flex-col overflow-y-auto">
+    <div className="w-96 flex-col overflow-y-auto relative">
       <CloseButton />
       <div className="w-full">
         <Image

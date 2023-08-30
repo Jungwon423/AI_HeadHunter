@@ -36,7 +36,7 @@ const RecoContainer = () => {
   const travelEndDate = dateToString(new Date(EndDate))
 
   return (
-    <div className="bg-[#FAFAFA] h-screen overflow-y-auto">
+    <div className="bg-[#FAFAFA] h-screen overflow-y-auto relative">
       <Droppable droppableId="recommendSchedule">
         {(provided, snapshot) => (
           <div

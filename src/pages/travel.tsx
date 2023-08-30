@@ -64,7 +64,7 @@ const TravelCoursePage = () => {
       >
         <Guide></Guide>
         {openRecommend && <RecoContainer></RecoContainer>}
-        {/* {!openRecommend && <TravelContainer></TravelContainer>} */}
+        {!openRecommend && <TravelContainer></TravelContainer>}
         <TravelMap></TravelMap>
       </DragDropContext>
     </div>

@@ -9,6 +9,7 @@ import {
   deleteDuplicatePlace,
   setError,
   setLoading,
+  setTravelOverview,
   setTravelSchedule,
 } from '../slices/travelInfoSlice'
 import { convertToPlaceInfo } from './jsonToPlaceInfo'
@@ -64,6 +65,7 @@ export const fetchTravelScheduleAsync =
         | 'travelInfo/setLoading'
         | 'travelInfo/setError'
         | 'travelInfo/deleteDuplicatePlace'
+        | 'travelInfo/setTravelOverview'
     }) => void,
   ) => {
     try {
@@ -71,6 +73,7 @@ export const fetchTravelScheduleAsync =
       const itineraryInfo = await fetchTravelSchedule(recommendInput)
       dispatch(setTravelSchedule(itineraryInfo.get('placeInfos')))
       // overviews 추가
+      dispatch(setTravelOverview(itineraryInfo.get('overviews')))
 
       // filter로 정제
       dispatch(deleteDuplicatePlace(itineraryInfo.get('placeInfos')))

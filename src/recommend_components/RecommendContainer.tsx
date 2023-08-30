@@ -70,6 +70,7 @@ const RecommendContainer = () => {
 
         <div className="grid grid-cols-2 gap-3 pt-5">
           {places(recommendState).map((place: PlaceInfo) => {
+            // console.log(place)
             return (
               <div
                 className="flex flex-row my-1 h-24 py-3 bg-white shadow-md rounded-xl px-5 cursor-pointer hover:shadow-indigo-500/40 shadow-slate-200"

@@ -34,6 +34,8 @@ export interface TravelInfoState {
   location: string
   travelStyle: string[]
   travelSchedule: PlaceInfo[][]
+  travelOverview: string[]
+
   recommendSchedule: PlaceInfo[][]
   currentPlace: PlaceInfo | null
   currentDay: number
@@ -62,6 +64,7 @@ const initialState: TravelInfoState = {
   error: null,
   currentPlace: null,
   currentDay: 0,
+  travelOverview: [],
 }
 
 export const travelInfoSlice = createSlice({
@@ -98,12 +101,13 @@ export const travelInfoSlice = createSlice({
 
       state.recommendSchedule = recommendSchedule
     },
-    handleCurrentPlace: (state, action: PayloadAction<PlaceInfo>) => {
-      if (state.currentPlace?.name === action.payload.name) {
-        state.currentPlace = {} as PlaceInfo
-      } else {
-        state.currentPlace = action.payload
-      }
+    handleCurrentPlace: (state, action: PayloadAction<PlaceInfo | null>) => {
+      // if (state.currentPlace?.name === action.payload.name) {
+      //   state.currentPlace = {} as PlaceInfo
+      // } else {
+      //   state.currentPlace = action.payload
+      // }
+      state.currentPlace = action.payload
     },
     setCurrentDay: (state, action: PayloadAction<number>) => {
       state.currentDay = action.payload
@@ -272,6 +276,9 @@ export const travelInfoSlice = createSlice({
 
       state.recommendSchedule = newRecommendSchedule
     },
+    setTravelOverview: (state, action: PayloadAction<string[]>) => {
+      state.travelOverview = action.payload
+    },
   },
 })
 
@@ -313,6 +320,7 @@ export const {
   deleteDuplicatePlace,
   moveTravelToRecommend,
   changeRecommendScheduleOrder,
+  setTravelOverview,
 } = travelInfoSlice.actions
 
 const persistConfig = {
@@ -364,5 +372,8 @@ export const selectCompanionChild = (state: RootState) =>
 export const selectDuration = (state: RootState) => state.travelInfo.duration
 
 export const selectCategory = (state: RootState) => state.travelInfo.category
+
+export const selectTravelOverview = (state: RootState) =>
+  state.travelInfo.travelOverview
 
 export default persistedTravelInfoReducer

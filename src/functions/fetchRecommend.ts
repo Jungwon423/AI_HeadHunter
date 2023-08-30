@@ -44,11 +44,11 @@ function convertToRecommendInfos(response: any): any {
     response.clustered_recommended_attractions,
   )
   let depreactedAttractions: PlaceInfo[] =
-    response.clustered_not_recommended_attractions[0].attractions.map(
+    response.clustered_not_recommended_attractions[0]?.attractions.map(
       convertToPlaceInfo,
     )
   let depreactedRestaurants: PlaceInfo[] =
-    response.clustered_not_recommended_attractions[0].restaurants.map(
+    response.clustered_not_recommended_attractions[0]?.restaurants.map(
       convertToPlaceInfo,
     )
 
