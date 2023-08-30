@@ -22,6 +22,7 @@ export interface PlaceInfo {
   reviews?: Review[] | null | undefined
   attractionStartTime?: string | null | undefined
   attractionEndTime?: string | null | undefined
+  type?: 'attraction' | 'restaurant'
 }
 
 interface Summary {
