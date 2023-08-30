@@ -90,6 +90,8 @@ const TravelMap = () => {
     }
   }
 
+  console.log(travelSchedule)
+  console.log(currentDay)
   const currentCoordinates = travelSchedule[currentDay - 1].map((place) => [
     place.coordinate![1],
     place.coordinate![0],

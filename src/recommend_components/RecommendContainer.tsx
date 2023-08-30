@@ -72,7 +72,7 @@ const RecommendContainer = () => {
           {places(recommendState).map((place: PlaceInfo) => {
             return (
               <div
-                className="flex flex-row my-1 py-3 h-24 bg-white shadow-md rounded-xl px-5 cursor-pointer hover:shadow-indigo-500/40 shadow-slate-200"
+                className="flex flex-row my-1 h-24 py-3 bg-white shadow-md rounded-xl px-5 cursor-pointer hover:shadow-indigo-500/40 shadow-slate-200"
                 key={place.name}
                 onClick={() => {
                   dispatch(handleCurrentPlace(place))
@@ -82,11 +82,12 @@ const RecommendContainer = () => {
                   referrerPolicy="no-referrer"
                   src={place.image!}
                   alt={place.name!}
-                  width={70}
-                  height={70}
-                  className="rounded-xl"
+                  style={{ height: '70px', objectFit: 'cover' }}
+                  object-fit="fill"
+                  className="rounded-xl w-[70px]"
                 />
-                <div className="pl-3 flex flex-col">
+
+                <div className="pl-3">
                   <div className="tracking-tighter leading-3 text-[12px] font-bold">
                     {place.name}
                   </div>
