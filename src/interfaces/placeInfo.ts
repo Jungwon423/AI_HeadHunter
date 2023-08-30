@@ -25,6 +25,7 @@ export interface PlaceInfo {
   review?: Review[]
   naverBlog?: NaverBlog[]
   youtube?: Youtube[]
+  type?: 'attraction' | 'restaurant'
 }
 
 interface Summary {
