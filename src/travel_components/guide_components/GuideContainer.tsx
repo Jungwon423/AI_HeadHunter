@@ -87,7 +87,7 @@ const GuideContainer = () => {
                             {placeInfo.description}
                           </div>
                         ) : (
-                          <div className="pt-1 text-[11px] text-gray-600 text-xs">
+                          <div className="pt-1 text-[11px] text-gray-600">
                             오사카의 유명한 맛집입니다.
                           </div>
                         )}
