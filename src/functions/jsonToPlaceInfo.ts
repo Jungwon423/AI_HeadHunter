@@ -17,8 +17,6 @@ export function convertToPlaceInfo(attraction: any): PlaceInfo {
   //   attraction.quality.averageRating,
   // )
   // console.log('attraction.quality.ranking', attraction.quality?.ranking)
-  // console.log('attraction.datalab.keywordObj', attraction.datalab?.keywordObj)
-  // console.log('attraction.datalab.keywordPop', attraction.datalab?.keywordPop)
   // console.log('attraction.phoneNumber', attraction?.phoneNumber)
   // console.log('attraction.addressKo', attraction?.addressKo)
   // console.log('attraction.addressEn', attraction?.addressEn)
@@ -39,8 +37,8 @@ export function convertToPlaceInfo(attraction: any): PlaceInfo {
     time: 15, // TODO
     summary: attraction.descriptionInfo?.publisher,
     rating: attraction.quality?.averageRating,
-    ratingCount: attraction.quality?.rankingDenominator,
-    hashtags: attraction.datalab?.keywordObj, // or attraction.datalab.keywordPop
+    ratingCount: attraction.quality?.reviewCount,
+    hashtags: attraction.subCategory,
     phoneNumber: attraction.phoneNumber,
     location:
       attraction.addressKo === null
@@ -51,8 +49,10 @@ export function convertToPlaceInfo(attraction: any): PlaceInfo {
     // openingHours: attraction.current_opening_hours,
     thought: attraction.evaluation,
     // wheelchair: attraction.wheelchair_accessible_entrance,
-    // reviews: attraction.reviews,
+    reviews: attraction.reviews,
     attractionStartTime: attraction.attractionStartTime,
+    naverBlog: attraction.naverBlog.items,
+    youtube: attraction.youtube,
   } as PlaceInfo
   return placeInfo
 }

@@ -5,6 +5,7 @@ import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { PlaceInfo } from '../interfaces/placeInfo'
 import { MajorCategoriesWithMinorCategories } from '../interfaces/category'
+import { NaverBlog, Review, Youtube } from '../interfaces/review'
 
 export interface TravelInfoState {
   user: string
@@ -17,19 +18,13 @@ export interface TravelInfoState {
   // travel_start_date: string
   // travel_end_date: string
   duration: number // 실제 일차
-
   category: MajorCategoriesWithMinorCategories
-
   // @@@@@ 이상 /survey @@@@@
-
   loading: 'idle' | 'pending' | 'succeeded' | 'failed'
   error: string | null
-
   // @@@@@ 이상 /recommend -> RecommendNav.tsx
-
   openRecommend: boolean
   isCurrentPlaceInCourse: boolean
-
   coordinate: number[]
   location: string
   travelStyle: string[]
@@ -47,12 +42,10 @@ const initialState: TravelInfoState = {
   // travel_start_date: '',
   // travel_end_date: '',
   duration: 3,
-
   category: {},
   // @@@@@ 이상 /survey @@@@@
   openRecommend: false,
   isCurrentPlaceInCourse: false,
-
   location: '서울 강남구 언주로110 경남아파트',
   coordinate: [135.5023, 34.6937],
   travelStyle: ['famous', 'busy'],
