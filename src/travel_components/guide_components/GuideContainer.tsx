@@ -16,6 +16,12 @@ import { Droppable, DragDropContext, Draggable } from 'react-beautiful-dnd'
 const GuideContainer = () => {
   const currentDay: number = useSelector(selectCurrentDay)
   const TravelSchedule: PlaceInfo[][] = useSelector(selectTravelSchedule)
+
+  console.log(
+    'TravelSchedule - currentDay',
+    TravelSchedule[currentDay === 0 ? 0 : currentDay - 1],
+  )
+
   const dispatch = useDispatch()
   return (
     <Droppable droppableId="travelSchedule">

@@ -90,12 +90,13 @@ const TravelMap = () => {
     }
   }
 
-  console.log(travelSchedule)
-  console.log(currentDay)
-  const currentCoordinates = travelSchedule[currentDay].map((place) => [
-    place.coordinate![1],
-    place.coordinate![0],
-  ])
+  const currentCoordinates =
+    currentDay != 0
+      ? travelSchedule[currentDay - 1].map((place) => [
+          place.coordinate![1],
+          place.coordinate![0],
+        ])
+      : []
 
   const [routeGeoJSON, setRouteGeoJSON] = useState<RouteGeoJSON | null>(null)
 
@@ -109,7 +110,6 @@ const TravelMap = () => {
       selectedPlace?.coordinate !== undefined &&
       selectedPlace?.coordinate !== null
     ) {
-      console.log(selectedPlace?.coordinate)
       onSelectCity({
         longitude: selectedPlace?.coordinate[1] ?? 0,
         latitude: selectedPlace?.coordinate[0] ?? 0,
@@ -177,7 +177,7 @@ const TravelMap = () => {
       setRouteGeoJSON(routeGeoJSONLine)
     }
 
-    getOptimizedRoute()
+    if (currentDay != 0) getOptimizedRoute()
   }, [currentDay])
 
   return (

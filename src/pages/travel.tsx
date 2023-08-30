@@ -29,10 +29,10 @@ const TravelCoursePage = () => {
           const prevIndex = result.source.index
           const newIndex = result.destination?.index
 
-          console.log('prevId', prevId)
-          console.log('nextId', newId)
-          console.log('prevIndex', prevIndex)
-          console.log('nextIndex', newIndex)
+          // console.log('prevId', prevId)
+          // console.log('nextId', newId)
+          // console.log('prevIndex', prevIndex)
+          // console.log('nextIndex', newIndex)
 
           if (prevId === 'travelSchedule' && newId === 'travelSchedule') {
             dispatch(

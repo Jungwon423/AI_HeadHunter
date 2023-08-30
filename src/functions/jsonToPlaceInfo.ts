@@ -31,7 +31,7 @@ export function convertToPlaceInfo(attraction: any): PlaceInfo {
   const apiUrl = prefix + encodedUrl + suffix
 
   const placeInfo: PlaceInfo = {
-    name: attraction.nameKo === null ? attraction.nameEn : attraction.nameKo,
+    name: attraction.nameKo === '' ? attraction.nameEn : attraction.nameKo,
     coordinate: [attraction.location?.lat, attraction.location?.lon],
     image: attraction.image?.photoURL,
     naverImage: apiUrl,
