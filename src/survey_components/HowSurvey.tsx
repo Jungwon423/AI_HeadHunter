@@ -65,8 +65,8 @@ const HowSurvey = () => {
     setToggleState(!toggleState)
   }
 
-  const dd = useSelector(selectDayDetails)
-  console.log(dd)
+  // const dd = useSelector(selectDayDetails)
+  // console.log(dd)
   const header = ['일자', '요일', '시작시간', '종료시간']
   return (
     <div className="flex flex-col py-5 w-full justify-center">

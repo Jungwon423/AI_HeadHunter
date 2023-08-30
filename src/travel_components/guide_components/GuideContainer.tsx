@@ -45,35 +45,52 @@ const GuideContainer = () => {
                 >
                   <div
                     key={placeInfo.name}
-                    className="px-3 justify-center items-center flex-col"
+                    className="px-2 justify-center items-center flex-col"
                   >
                     <div
-                      className="h-50 rounded-xl px-5 my-2 flex-col bg-gray-50 shadow-lg hover:shadow-2xl"
+                      className="flex flex-row h-24 rounded-xl px-3 my-2 bg-gray-50 shadow-lg hover:shadow-2xl"
                       onClick={() => {
                         dispatch(handleCurrentPlace(placeInfo))
                         dispatch(setOpenRecommend(false))
                         dispatch(setIsCurrentPlaceInCourse(true))
                       }}
                     >
-                      <div className="flex">
-                        <div className="w-42 flex flex-col justify-center">
-                          <Image
-                            src={placeInfo.image ?? '/default-image.jpg'}
-                            alt={placeInfo.name!}
-                            width={150}
-                            height={180}
-                            objectFit="cover"
-                            className="rounded-lg"
-                          />
+                      <div className="h-20 py-3">
+                        <Image
+                          src={placeInfo.image ?? '/default-image.jpg'}
+                          alt={placeInfo.name!}
+                          width={70}
+                          height={70}
+                          objectFit="cover"
+                          className="rounded-lg"
+                        />
+                      </div>
+
+                      <div className="pl-3 w-64 flex flex-col">
+                        <h2 className="tracking-tighter leading-3 text-[13px] font-bold mt-3">
+                          {placeInfo.name}
+                        </h2>
+                        <div className="flex flex-row pt-1">
+                          <div className="text-xs font-bold">
+                            {placeInfo.rating}
+                          </div>
+                          <i
+                            key={placeInfo.rating}
+                            className="pl-1 bi bi-star-fill text-yellow-400 text-xs"
+                          ></i>
+                          <span className="font-bold text-blue-300 text-[10px] pt-0.5 pl-2">
+                            명소
+                          </span>
                         </div>
-                        <div className="pl-3 w-40 flex flex-col justify-center">
-                          <h2 className="flex justify-center text-sm font-bold py-2 mt-2">
-                            {placeInfo.name}
-                          </h2>
-                          <div className="h-40 overflow-y-scroll text-gray-700 text-sm text-start w-40 p-2">
+                        {placeInfo.description != null ? (
+                          <div className="pt-1 text-[11px] text-gray-600 line-clamp-2">
                             {placeInfo.description}
                           </div>
-                        </div>
+                        ) : (
+                          <div className="pt-1 text-[11px] text-gray-600 text-xs">
+                            오사카의 유명한 맛집입니다.
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
