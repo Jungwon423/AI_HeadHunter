@@ -1,5 +1,5 @@
 import { OpeningHours } from './openingHours'
-import { Review } from './review'
+import { HashTag, NaverBlog, Review, Youtube } from './review'
 
 export interface PlaceInfo {
   name?: string | null | undefined
@@ -11,7 +11,7 @@ export interface PlaceInfo {
   summary?: Summary | null | undefined //editorial_summary, 짧은 설명
   rating?: number | null | undefined //rating,  구글 별점
   ratingCount?: number | null | undefined //user_ratings_total, 구글 별점 갯수
-  hashtags?: string[] | null | undefined //types, 를 해쉬태그로
+  hashtags?: HashTag[] | null | undefined //types, 를 해쉬태그로
   phoneNumber?: number | null | undefined //international_phone_number, 전화번호
   location?: string | null | undefined //formatted address
   googleUrl?: string | null | undefined //url, 구글 url
@@ -22,6 +22,9 @@ export interface PlaceInfo {
   reviews?: Review[] | null | undefined
   attractionStartTime?: string | null | undefined
   attractionEndTime?: string | null | undefined
+  review?: Review[]
+  naverBlog?: NaverBlog[]
+  youtube?: Youtube[]
   type?: 'attraction' | 'restaurant'
 }
 

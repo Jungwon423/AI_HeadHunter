@@ -48,7 +48,7 @@ const GuideContainer = () => {
                     className="px-2 justify-center items-center flex-col"
                   >
                     <div
-                      className="flex flex-row h-24 rounded-xl px-3 my-2 bg-gray-50 shadow-lg hover:shadow-2xl"
+                      className="flex flex-row h-24 rounded-xl px-3 my-2 bg-gray-50 shadow-md hover:shadow-indigo-500/40 shadow-slate-200"
                       onClick={() => {
                         dispatch(handleCurrentPlace(placeInfo))
                         dispatch(setOpenRecommend(false))

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setCurrentTabIndex, selectCurrentTabIndex } from '../slices/tabSlice'
 
 const ReviewTab = () => {
-  const tabs = ['개요', '리뷰', '정보']
+  const tabs = ['개요', '리뷰', '블로그', '유투브']
   const dispatch = useDispatch()
   const currentTabIndex = useSelector(selectCurrentTabIndex)
 
@@ -18,7 +18,7 @@ const ReviewTab = () => {
           return (
             <button
               key={tab}
-              className={`flex-1 relative px-4 font-semibold cursor-pointer hover:text-black ${
+              className={`flex-1 relative text-sm px-4 font-semibold cursor-pointer hover:text-black ${
                 currentTabIndex === index ? 'text-gray-700' : 'text-gray-500'
               }`}
               onClick={() => handleClickTab(index)}

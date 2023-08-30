@@ -67,7 +67,7 @@ const RecoContainer = () => {
                           ref={provided.innerRef}
                         >
                           <div
-                            className="flex h-24 flex-row my-4 p-3 bg-white shadow-md rounded-xl cursor-pointer hover:shadow-indigo-500/40 shadow-slate-200"
+                            className="flex h-24 flex-row my-4 p-3 bg-white shadow-md rounded-xl hover:shadow-indigo-500/40 shadow-slate-200"
                             key={place.name}
                             onClick={() => {
                               dispatch(handleCurrentPlace(place))

@@ -11,16 +11,20 @@ const ContainerTitle = () => {
       </h2>
       {selectedPlace?.rating ? (
         <div className="flex px-2">
-          <span className="mt-1 mx-1 mr-2">{selectedPlace?.rating}</span>
+          <span className="text-gray-700 mt-1 mx-1 mr-2">
+            {selectedPlace?.rating}
+          </span>
           <StarRating rating={selectedPlace?.rating} />
-          <span className="mt-1 ml-1">({selectedPlace?.ratingCount})</span>
+          <span className="text-gray-700 mt-1 ml-1">
+            ({selectedPlace?.ratingCount})
+          </span>
         </div>
       ) : null}
-      <div className="flex text-gray-500  px-2">
+      <div className="flex text-gray-500 px-2 pt-1">
         <div>
           {selectedPlace?.hashtags &&
             selectedPlace?.hashtags?.map((tag, index) => (
-              <span key={index}>#{tag} </span>
+              <span key={index}>#{tag.nameKo} </span>
             ))}
         </div>
       </div>
