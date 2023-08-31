@@ -72,8 +72,7 @@ const TravelMap = () => {
   // }
 
   // const currentCoordinates =
-  //   currentDay != 0
-  //     ? travelSchedule[currentDay - 1].map((place) => [
+  //   currentDay != 0 ? travelSchedule[currentDay - 1].map((place) => [
   //         place.coordinate![1],
   //         place.coordinate![0],
   //       ])
@@ -210,6 +209,7 @@ const TravelMap = () => {
             (place, j) =>
               (currentDay == 0 || currentDay == i + 1) && (
                 <div
+                  key={i + j}
                   onMouseEnter={() => {
                     setActiveIndex(1000 * i + j)
                   }}

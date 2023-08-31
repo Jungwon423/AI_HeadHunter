@@ -27,16 +27,22 @@ export function convertToPlaceInfo(attraction: any): PlaceInfo {
   const prefix = 'https://search.pstatic.net/common?src='
   const suffix = '&type=m1500_travelsearch'
   const apiUrl = prefix + encodedUrl + suffix
+  let rating = attraction.quality?.averageRating
+  rating = Math.round(rating * 100) / 100
+  let name = attraction.nameKo
+  if (name === '' || name === null) {
+    name = attraction.nameEn
+  }
 
   const placeInfo: PlaceInfo = {
-    name: attraction.nameKo === '' ? attraction.nameEn : attraction.nameKo,
+    name: name,
     coordinate: [attraction.location?.lat, attraction.location?.lon],
     image: attraction.image?.photoURL,
     naverImage: apiUrl,
     description: attraction.descriptionInfo?.publisher, // 이건 뭐냐?
     time: 15, // TODO
     summary: attraction.descriptionInfo?.publisher,
-    rating: attraction.quality?.averageRating,
+    rating: rating,
     ratingCount: attraction.quality?.reviewCount,
     hashtags: attraction.subCategory,
     phoneNumber: attraction.phoneNumber,

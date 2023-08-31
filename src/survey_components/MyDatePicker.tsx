@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker'
 import DatePicker from 'react-datepicker'
 import ko from 'date-fns/locale/ko'
+import { max } from 'date-fns'
 // import '../styles/datepicker.css'
 //import styles from '../styles/datepicker.module.css'
 // import 'react-datepicker/dist/react-datepicker.css'
@@ -16,7 +16,30 @@ const MyDatePicker = ({ startDate, endDate, onDatesChange }: myDateProps) => {
     const currentDate = new Date()
     return new Date(currentDate.setMonth(currentDate.getMonth() + 2))
   }
+  const [maxEndDate, setMaxEndDate] = useState<Date | null>(null)
+  const [initialMaxEndDate, setInitialMaxEndDate] = useState<Date | null>(null)
 
+  // 처음 렌더링 시 초기 maxEnddate 설정
+  useEffect(() => {
+    const currentDate = new Date()
+    currentDate.setMonth(currentDate.getMonth() + 4) // 현재로부터 4개월 후
+    setInitialMaxEndDate(currentDate)
+    setMaxEndDate(currentDate)
+  }, [])
+
+  useEffect(() => {
+    if (startDate && !endDate) {
+      // endDate 가 null인 경우만 처리
+      const newMaxEndDate = new Date(startDate)
+      newMaxEndDate.setDate(newMaxEndDate.getDate() + 7)
+      setMaxEndDate(newMaxEndDate) // 최대 종료날짜 업데이트
+    } else if (!startDate && !endDate) {
+      // 둘다 null 인 경우 초기화
+      setMaxEndDate(initialMaxEndDate) // 최대 종료날짜 초기화
+    } else {
+      setMaxEndDate(initialMaxEndDate)
+    }
+  }, [startDate, endDate]) // startDate 와 endDate 변경 모두 감지
   const dayClassNames = (date: Date) => {
     const day = date.getDay()
     if (day === 6) {
@@ -33,7 +56,7 @@ const MyDatePicker = ({ startDate, endDate, onDatesChange }: myDateProps) => {
       <div className="hidden md:flex">
         <DatePicker
           minDate={new Date()}
-          maxDate={twoMonthsLater()}
+          maxDate={maxEndDate}
           dayClassName={dayClassNames}
           locale={ko}
           selected={startDate}

@@ -15,6 +15,8 @@ import RecoContainer from '../travel_components/RecoContainer'
 import { fetchTravelScheduleAsync } from '../functions/fetchTravel'
 import { PlaceInfo } from '../interfaces/placeInfo'
 import RecommendContainer from '../recommend_components/RecommendContainer'
+import TravelContainer from '../travel_components/TravelContainer'
+import RecommmendDetail from '../recommend_components/RecommendDetail'
 
 const RecommendPage = () => {
   const TOKEN =
@@ -43,9 +45,12 @@ const RecommendPage = () => {
           <RecommendContainer></RecommendContainer>
         </div>
       </div>
-      <div className="w-1/2">
-        <RecommendMap></RecommendMap>
+      <div className="flex w-1/3 h-screen">
+        <RecommmendDetail></RecommmendDetail>
       </div>
+      {/* <div className="w-1/2">
+        <RecommendMap></RecommendMap>
+      </div> */}
     </div>
   )
 }

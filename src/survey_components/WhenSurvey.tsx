@@ -17,7 +17,7 @@ const WhenSurvey = () => {
     setStart(newStartDate)
     setEnd(newEndDate)
     let maxDate = new Date(newStartDate!)
-    maxDate.setDate(newStartDate!.getDate() + 29)
+    maxDate.setDate(newStartDate!.getDate() + 7)
     if (newEndDate! > maxDate) {
       setEnd(maxDate)
     } else setEnd(newEndDate)
@@ -44,7 +44,7 @@ const WhenSurvey = () => {
       <div className="px-10 flex flex-col flex-grow">
         <div className="text-2xl font-bold pt-16">여행 날짜는 언제인가요?</div>
         <div className="text-base font-bold text-indigo-500 pt-3 pb-7">
-          현재 30박 31일까지 선택가능합니다.
+          현재 7박 8일까지 선택가능합니다.
         </div>
 
         <div className="flex flex-row pb-10">
@@ -84,10 +84,16 @@ const WhenSurvey = () => {
           {startDate && endDate ? (
             <div className=" pl-10 pt-4 border-b-2">
               <div className="w-auto px-4 py-2 rounded-md bg-indigo-400 flex items-center justify-center">
-                <span className="text-center text-white text-sm md:text-base">
-                  {duration(startDate, endDate) - 1}박{' '}
-                  {duration(startDate, endDate)}일
-                </span>
+                {duration(startDate, endDate) == 0 ? (
+                  <span className="text-center text-white text-sm md:text-base">
+                    당일치기
+                  </span>
+                ) : (
+                  <span className="text-center text-white text-sm md:text-base">
+                    {duration(startDate, endDate) - 1}박{' '}
+                    {duration(startDate, endDate)}일
+                  </span>
+                )}
               </div>
             </div>
           ) : null}
