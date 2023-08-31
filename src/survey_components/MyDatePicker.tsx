@@ -16,31 +16,30 @@ const MyDatePicker = ({ startDate, endDate, onDatesChange }: myDateProps) => {
     const currentDate = new Date()
     return new Date(currentDate.setMonth(currentDate.getMonth() + 2))
   }
-  const SetMaxDate = (dates: any) => {
-    const [newStartDate, newEndDate] = dates
-    if (newStartDate) {
-      const maxEndDate = new Date(newStartDate)
-      maxEndDate.setDate(maxEndDate.getDate() + 7)
-      return maxEndDate
-    } else {
-      const currentDate = new Date()
-      return new Date(currentDate.setMonth(currentDate.getMonth() + 4))
-    }
-  }
   const [maxEndDate, setMaxEndDate] = useState<Date | null>(null)
+  const [initialMaxEndDate, setInitialMaxEndDate] = useState<Date | null>(null)
+
+  // 처음 렌더링 시 초기 maxEnddate 설정
+  useEffect(() => {
+    const currentDate = new Date()
+    currentDate.setMonth(currentDate.getMonth() + 4) // 현재로부터 4개월 후
+    setInitialMaxEndDate(currentDate)
+    setMaxEndDate(currentDate)
+  }, [])
 
   useEffect(() => {
-    if (startDate) {
+    if (startDate && !endDate) {
+      // endDate 가 null인 경우만 처리
       const newMaxEndDate = new Date(startDate)
       newMaxEndDate.setDate(newMaxEndDate.getDate() + 7)
       setMaxEndDate(newMaxEndDate) // 최대 종료날짜 업데이트
+    } else if (!startDate && !endDate) {
+      // 둘다 null 인 경우 초기화
+      setMaxEndDate(initialMaxEndDate) // 최대 종료날짜 초기화
     } else {
-      const currentDate = new Date()
-      currentDate.setMonth(currentDate.getMonth() + 4) // 현재로부터 4개월 후
-      setMaxEndDate(currentDate) // 최대 종료날짜 초기화
+      setMaxEndDate(initialMaxEndDate)
     }
-  }, [startDate])
-
+  }, [startDate, endDate]) // startDate 와 endDate 변경 모두 감지
   const dayClassNames = (date: Date) => {
     const day = date.getDay()
     if (day === 6) {
