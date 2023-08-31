@@ -209,7 +209,6 @@ const TravelMap = () => {
             (place, j) =>
               (currentDay == 0 || currentDay == i + 1) && (
                 <div
-                  key={i + j}
                   onMouseEnter={() => {
                     setActiveIndex(1000 * i + j)
                   }}
