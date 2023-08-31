@@ -153,7 +153,7 @@ const RecommendMap = () => {
 
             <div>{selectedPlace.rating}</div>
             <div>{selectedPlace.ratingCount}</div>
-            <div>{selectedPlace.hashtags}</div>
+            {/* <div>{selectedPlace.hashtags}</div> */}
             <div>{selectedPlace.phoneNumber}</div>
             <div>{selectedPlace.location}</div>
             <div>{selectedPlace.googleUrl}</div>

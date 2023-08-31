@@ -17,7 +17,7 @@ const WhenSurvey = () => {
     setStart(newStartDate)
     setEnd(newEndDate)
     let maxDate = new Date(newStartDate!)
-    maxDate.setDate(newStartDate!.getDate() + 29)
+    maxDate.setDate(newStartDate!.getDate() + 7)
     if (newEndDate! > maxDate) {
       setEnd(maxDate)
     } else setEnd(newEndDate)
@@ -84,10 +84,16 @@ const WhenSurvey = () => {
           {startDate && endDate ? (
             <div className=" pl-10 pt-4 border-b-2">
               <div className="w-auto px-4 py-2 rounded-md bg-indigo-400 flex items-center justify-center">
-                <span className="text-center text-white text-sm md:text-base">
-                  {duration(startDate, endDate) - 1}박{' '}
-                  {duration(startDate, endDate)}일
-                </span>
+                {duration(startDate, endDate) == 0 ? (
+                  <span className="text-center text-white text-sm md:text-base">
+                    당일치기
+                  </span>
+                ) : (
+                  <span className="text-center text-white text-sm md:text-base">
+                    {duration(startDate, endDate) - 1}박{' '}
+                    {duration(startDate, endDate)}일
+                  </span>
+                )}
               </div>
             </div>
           ) : null}
