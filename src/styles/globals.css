@@ -129,3 +129,11 @@ custom-popup {
   max-height: 3000px !important;
   height: auto !important;
 } */
+
+.mapboxgl-ctrl-logo {
+  display: none !important;
+}
+
+.mapboxgl-ctrl-scale {
+  display: none !important;
+}

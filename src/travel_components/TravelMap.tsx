@@ -28,6 +28,9 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import polyline from '@mapbox/polyline'
 import PrettyPin from '../components/PrettyPin'
 import NaverPin from '../components/NaverPin'
+import { current } from '@reduxjs/toolkit'
+
+import { motion } from 'framer-motion'
 
 const TravelMap = () => {
   const showChat = useSelector(selectShowChat)
@@ -89,11 +92,28 @@ const TravelMap = () => {
       selectedPlace?.coordinate !== null
     ) {
       onSelectCity({
-        longitude: selectedPlace?.coordinate[1] ?? 0,
+        longitude: selectedPlace?.coordinate[1] - 0.012 ?? 0,
         latitude: selectedPlace?.coordinate[0] ?? 0,
       })
     }
   }, [selectedPlace])
+  useEffect(() => {
+    const currentTravelSchedule: PlaceInfo[] = travelSchedule[currentDay - 1]
+    const longtitude: number =
+      currentTravelSchedule.reduce(
+        (total, place) => total + place.coordinate![1],
+        0,
+      ) / currentTravelSchedule.length
+    const latitude: number =
+      currentTravelSchedule.reduce(
+        (total, place) => total + place.coordinate![0],
+        0,
+      ) / currentTravelSchedule.length
+    onSelectCity({
+      longitude: longtitude - 0.03,
+      latitude: latitude,
+    })
+  }, [currentDay])
   const mapRef = useRef<MapRef | null>(null)
 
   const onSelectCity = useCallback(
@@ -101,7 +121,7 @@ const TravelMap = () => {
       mapRef.current?.flyTo({
         center: [longitude, latitude],
         duration: 2000,
-        // zoom: 16,
+        zoom: 12.5,
       })
     },
     [],
@@ -161,19 +181,28 @@ const TravelMap = () => {
   const [activeIndex, setActiveIndex] = useState<number>(-1)
 
   return (
-    <div className="flex-grow">
+    <motion.div
+      initial={{ x: -1000 }} // 초기 위치 (왼쪽)
+      animate={{ x: 0 }} // 최종 위치 (오른쪽)
+      transition={{
+        type: 'spring',
+        stiffness: 60,
+        damping: 20,
+      }}
+      className="flex-grow"
+    >
       <TravelChat></TravelChat>
       <Map
         ref={mapRef}
-        // style={{ width: '100vw', height: '100vh' }}
+        style={{ width: '100wh', height: '100vh' }}
         {...viewState}
         onMove={(evt) => setViewState(evt.viewState)}
         mapStyle="mapbox://styles/zigdeal/clkjl2a7y001401r27iv81iw2"
         mapboxAccessToken={TOKEN}
       >
-        <GeolocateControl position="top-left" />
-        <FullscreenControl position="top-left" />
-        <NavigationControl position="top-left" />
+        <GeolocateControl position="top-right" />
+        <FullscreenControl position="top-right" />
+        <NavigationControl position="top-right" />
         <ScaleControl />
         {/* <GeocoderControl mapboxAccessToken={TOKEN} position="top-left" /> */}
         {travelSchedule.map((day, i) =>
@@ -187,6 +216,7 @@ const TravelMap = () => {
                   onMouseLeave={() => {
                     setActiveIndex(-1)
                   }}
+                  key={1000 * i + j}
                 >
                   <Marker
                     style={{
@@ -264,7 +294,7 @@ const TravelMap = () => {
       </Map>
 
       {showChat && <ChatScreen onClose={() => dispatch(setShowChat(false))} />}
-    </div>
+    </motion.div>
   )
 }
 

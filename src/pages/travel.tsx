@@ -63,9 +63,16 @@ const TravelCoursePage = () => {
         }}
       >
         <Guide></Guide>
-        {openRecommend && <RecoContainer></RecoContainer>}
-        {!openRecommend && <TravelContainer></TravelContainer>}
-        <TravelMap></TravelMap>
+        <div className="flex flex-grow relative">
+          <TravelMap></TravelMap>
+          <div className="z-1 absolute">
+            {openRecommend && <RecoContainer></RecoContainer>}
+          </div>
+
+          <div className="z-1 absolute">
+            {!openRecommend && <TravelContainer></TravelContainer>}
+          </div>
+        </div>
       </DragDropContext>
     </div>
   )
