@@ -1,6 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
 import { PlaceInfo } from '../interfaces/placeInfo'
-import { RecommendInput } from '../interfaces/recommendInput'
 import { SERVER_API_URL } from '../slices/api_url'
 import { Cluster } from '../interfaces/Cluster'
 import { convertToPlaceInfo } from './jsonToPlaceInfo'

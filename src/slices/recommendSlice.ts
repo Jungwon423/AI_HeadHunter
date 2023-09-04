@@ -113,13 +113,14 @@ const recommendInfoSlice = createSlice({
       state.recommendState = action.payload
     },
 
-    initialize: (state) => {
+    initializeRecommend: (state) => {
       // setPreferenceLoading('idle')
       // setPreferenceError(null)
       // state.loading = 'idle'
       // state.error = null
-      setLoading('idle')
-      setError(null)
+      console.log('initializeRecommenddd', state.loading)
+      state.loading = 'idle'
+      state.error = null
     },
   },
 })
@@ -143,7 +144,7 @@ export const {
   setLocation,
   handleCurrentPlace,
   setRecommendState,
-  initialize,
+  initializeRecommend,
 } = recommendInfoSlice.actions
 export const selectRecommendInfo = (state: RootState) => state.recommendInfo
 

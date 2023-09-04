@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  initialize,
+  initializeRecommend,
   selectAttractions,
   selectRecommendInfo,
 } from '../slices/recommendSlice'
@@ -25,10 +25,6 @@ import RecommmendDetail from '../recommend_components/RecommendDetail'
 import { ImageQueryInput } from '../interfaces/imageQuery'
 import { selectEndDate, selectStartDate } from '../slices/timeSlice'
 import { MajorCategoriesWithMinorCategories } from '../interfaces/category'
-import {
-  selectImageQuery,
-  selectImageQueryResultList,
-} from '../slices/imageQuerySlice'
 import { fetchRecommendAttractionsAsync } from '../functions/fetchRecommend'
 import Loading2 from '../components/loading2'
 
@@ -53,8 +49,6 @@ const RecommendPage = () => {
 
   const recommendSchedule: PlaceInfo[][] = useSelector(selectAttractions)
 
-  const [recommendFetched, setRecommendFetched] = useState(false)
-
   // selector from 'recommendSlice'
   const recommendInfo = useSelector(selectRecommendInfo)
 
@@ -72,13 +66,14 @@ const RecommendPage = () => {
 
   useEffect(() => {
     dispatch(fetchRecommendAttractionsAsync(ImageQueryInput))
+    dispatch(initializeRecommend())
   }, [])
 
   useEffect(() => {
     if (recommendInfo.loading == 'succeeded') {
+      console.log(recommendInfo)
       console.log('recommendInfo loading succeeded')
       dispatch(setRecommendSchedule(recommendSchedule))
-      dispatch(initialize())
       const travelInput: RecommendInput = {
         user: userId,
         travel_id: travelId,
