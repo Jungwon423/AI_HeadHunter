@@ -19,6 +19,7 @@ import {
   selectStartDate,
 } from '../slices/timeSlice'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
+import { motion } from 'framer-motion'
 
 const RecoContainer = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -36,7 +37,16 @@ const RecoContainer = () => {
   const travelEndDate = dateToString(new Date(EndDate))
 
   return (
-    <div className="bg-[#FAFAFA] h-screen overflow-y-auto">
+    <motion.div
+      initial={{ x: -1000 }} // 초기 위치 (왼쪽)
+      animate={{ x: 0 }} // 최종 위치 (오른쪽)
+      transition={{
+        type: 'spring',
+        stiffness: 60,
+        damping: 20,
+      }}
+      className="bg-[#FAFAFA] h-screen overflow-y-auto"
+    >
       <Droppable droppableId="recommendSchedule">
         {(provided, snapshot) => (
           <div
@@ -119,7 +129,7 @@ const RecoContainer = () => {
           </div>
         )}
       </Droppable>
-    </div>
+    </motion.div>
   )
 }
 
