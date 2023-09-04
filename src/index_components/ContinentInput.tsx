@@ -87,8 +87,11 @@ const ContinentInput = (props: ContinentProps) => {
   const [showContent, setShowContent] = useState(false)
 
   const handleClickOutside = () => {
-    if (isFocused) {
-      setIsFocused(false)
+    // if (isFocused && !showContent) {
+    //   setIsFocused(false)
+    //   setShowContent(false)
+    // }
+    if (showContent) {
       setShowContent(false)
     }
   }
@@ -114,9 +117,12 @@ const ContinentInput = (props: ContinentProps) => {
   }
 
   const searchResults = filterData()
+  const handleClickInside = (e: any) => {
+    e.stopPropagation()
+  }
 
   return (
-    <>
+    <div ref={wrapperRef} className="bg-white rounded-xl">
       <div
         className={`flex flex-row border-2 border-stone-300 rounded-md w-[360px] h-10 px-2 py-1  ${
           isFocused ? 'border-indigo-500' : ''
@@ -143,6 +149,8 @@ const ContinentInput = (props: ContinentProps) => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           onFocus={handleFocus}
+          onClick={handleClickInside}
+          onBlur={() => setIsFocused(false)} // <-- onBlur 추가
           className="border-0 rounded-md w-[330px] px-2 py-1 focus:outline-none"
         />
 
@@ -164,9 +172,9 @@ const ContinentInput = (props: ContinentProps) => {
           </svg>
         ) : null}
       </div>
-      <div ref={wrapperRef}>
+      <div>
         {showContent && (
-          <div className="test">
+          <div className="">
             {searchTerm !== '' ? (
               <div className="p-1 mt-1 overflow-y-auto h-[350px] w-[355px] cursor-pointer">
                 {searchResults.map((item, index) => {
@@ -228,7 +236,7 @@ const ContinentInput = (props: ContinentProps) => {
           </div>
         )}
       </div>
-    </>
+    </div>
   )
 }
 

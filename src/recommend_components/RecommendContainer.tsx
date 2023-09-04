@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from '../store'
 import { PlaceInfo } from '../interfaces/placeInfo'
-import { handleCurrentPlace } from '../slices/travelInfoSlice'
+import { handleCurrentPlace, selectCity } from '../slices/travelInfoSlice'
 import {
   dateToString,
   selectEndDate,
@@ -56,12 +56,13 @@ const RecommendContainer = () => {
   const travelStartDate = dateToString(new Date(StartDate))
   const EndDate = useSelector(selectEndDate)
   const travelEndDate = dateToString(new Date(EndDate))
+  let city = useSelector(selectCity)
 
   return (
     <div className="bg-[#FAFAFA] h-screen overflow-y-auto">
       <div className="p-4">
         <div className="flex pt-7 pb-1 ">
-          <div className="pl-3 font-bold text-xl">오사카</div>
+          <div className="pl-3 font-bold text-xl">{city}</div>
           <span className="pt-2 text-gray-500 text-sm font-bold px-2">
             {travelStartDate} ~ {travelEndDate}
           </span>
@@ -69,8 +70,6 @@ const RecommendContainer = () => {
 
         <div className="grid grid-cols-3 gap-3 pt-5">
           {places(recommendState).map((place: PlaceInfo) => {
-            console.log(place)
-            console.log(place.description)
             return (
               <div
                 className="flex flex-row my-1 h-24 py-3 bg-white shadow-md rounded-xl px-5 cursor-pointer hover:shadow-indigo-500/40 shadow-slate-200"
