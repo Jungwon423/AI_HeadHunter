@@ -158,8 +158,6 @@ const RecommendMap = () => {
             <div>{selectedPlace.location}</div>
             <div>{selectedPlace.googleUrl}</div>
             <div>{selectedPlace.website}</div>
-            {/* <div>{selectedPlace.openingHours}</div>
-            <div>{selectedPlace.reviews}</div> */}
           </Popup>
         )}
       </Map>

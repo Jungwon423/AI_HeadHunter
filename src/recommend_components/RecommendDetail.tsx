@@ -1,12 +1,12 @@
 import Image from 'next/legacy/image'
 import { useSelector } from 'react-redux'
-import { selectCurrentPlace } from '../slices/recommendSlice'
+import { selectCurrentPlace } from '../slices/travelInfoSlice'
 import GuideTab from '../travel_components/ReviewTab'
 import GoogleButton from '../travel_components/GoogleButton'
 import { selectCurrentTabIndex } from '../slices/tabSlice'
 import CloseButton from '../travel_components/container_components/CloseButton'
 
-import ContainerTitle from './detail_components/ContainerTitle'
+import ContainerTitle from '../travel_components/container_components/ContainerTitle'
 import Recommend from '../travel_components/container_components/Recommend'
 import Location from '../travel_components/container_components/Location'
 import OperationHours from '../travel_components/container_components/OperationHours'
@@ -81,7 +81,7 @@ const RecommmendDetail = () => {
           </div>
         ) : null}
         {currentReviewTab === 1 ? (
-          <div>
+          <>
             <div className="px-3 pt-5 font-bold">리뷰</div>
             {selectedPlace?.reviews ? (
               selectedPlace?.reviews?.map((review, index) => (
@@ -156,7 +156,7 @@ const RecommmendDetail = () => {
             ) : (
               <div className="p-3">리뷰가 없습니다.</div>
             )}
-          </div>
+          </>
         ) : null}
         {currentReviewTab === 2 ? (
           <div>

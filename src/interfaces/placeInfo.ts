@@ -19,10 +19,10 @@ export interface PlaceInfo {
   openingHours?: OpeningHours | null | undefined //current_opening_hours -> weekday_text, 운영 시간
   thought?: string | null | undefined //thought, ai의 추천 이유
   wheelchair?: boolean | null | undefined //wheelchair_accessible_entrance, 휠체어 이용 가능 여부
-  reviews?: Review[] | null | undefined
+  //googleReviews?: Review[] | null | undefined
   attractionStartTime?: string | null | undefined
   attractionEndTime?: string | null | undefined
-  review?: Review[]
+  reviews?: Review[]
   naverBlog?: NaverBlog[]
   youtube?: Youtube[]
   type?: 'attraction' | 'restaurant'

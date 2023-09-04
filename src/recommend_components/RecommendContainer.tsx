@@ -2,14 +2,13 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from '../store'
 import { PlaceInfo } from '../interfaces/placeInfo'
-import {} from '../slices/travelInfoSlice'
+import { handleCurrentPlace } from '../slices/travelInfoSlice'
 import {
   dateToString,
   selectEndDate,
   selectStartDate,
 } from '../slices/timeSlice'
 import {
-  handleCurrentPlace,
   selectAttractions,
   selectRestaurants,
   selectDepreactedAttractions,
@@ -70,7 +69,8 @@ const RecommendContainer = () => {
 
         <div className="grid grid-cols-3 gap-3 pt-5">
           {places(recommendState).map((place: PlaceInfo) => {
-            // console.log(place)
+            console.log(place)
+            console.log(place.description)
             return (
               <div
                 className="flex flex-row my-1 h-24 py-3 bg-white shadow-md rounded-xl px-5 cursor-pointer hover:shadow-indigo-500/40 shadow-slate-200"
