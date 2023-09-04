@@ -36,8 +36,10 @@ export default function Home() {
         {/* <div className="py-10">
           <MapboxGeocoderContainer accessToken={TOKEN} />
         </div> */}
-        <div className="pt-10 flex flex-col justify-center items-center pb-20">
-          <ContinentInput openPopup={openPopup}></ContinentInput>
+        <div className="relative pt-10 flex flex-col justify-center items-center pb-20 z-20">
+          <div className="absolute z-999 top-12">
+            <ContinentInput openPopup={openPopup}></ContinentInput>
+          </div>
         </div>
         <Popup isOpen={isPopupOpen} onClose={closePopup}></Popup>{' '}
         {/* 적용한 팝업(detail) */}
