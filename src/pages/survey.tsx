@@ -107,7 +107,7 @@ export const SurveyPage = () => {
 
     if (isValid) {
       if (selectedIndex === items.length - 1) {
-        router.push('/image_query')
+        router.push('/recommend')
       } else {
         setSelectedIndex(selectedIndex + 1)
       }

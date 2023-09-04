@@ -175,6 +175,12 @@ export const selectRecommendState = (state: RootState) =>
 const persistConfig = {
   key: 'recommendInfo',
   storage,
+  blacklist: [
+    'attractions',
+    'restaurants',
+    'depreactedAttractions',
+    'depreactedRestaurants',
+  ],
 }
 
 const persistedRecommendInfoReducer = persistReducer(

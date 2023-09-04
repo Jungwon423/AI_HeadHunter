@@ -13,6 +13,7 @@ import {
   setLoading,
   setRestaurants,
 } from '../slices/recommendSlice'
+import { ImageQueryInput } from '../interfaces/imageQuery'
 
 export interface ResponseData {
   clustered_recommended_attractions: Cluster[]
@@ -61,7 +62,7 @@ function convertToRecommendInfos(response: any): any {
 }
 
 export const fetchRecommendAttractions = async (
-  recommendInput: RecommendInput,
+  recommendInput: ImageQueryInput,
 ): Promise<any> => {
   const config = {
     withCredentials: true,
@@ -87,7 +88,7 @@ export const fetchRecommendAttractions = async (
 }
 
 export const fetchRecommendAttractionsAsync =
-  (recommendInput: RecommendInput): AppThunk =>
+  (recommendInput: ImageQueryInput): AppThunk =>
   async (
     dispatch: (arg0: {
       payload: string | PlaceInfo[][] | null | any
