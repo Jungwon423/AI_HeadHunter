@@ -29,6 +29,7 @@ import {
   setStartDate,
 } from '../slices/timeSlice'
 import Loading2 from '../components/loading2'
+import { initializeRecommend } from '../slices/recommendSlice'
 
 export const SurveyPage = () => {
   const travelStyle = useSelector(selectTravelStyle)
@@ -108,6 +109,7 @@ export const SurveyPage = () => {
     if (isValid) {
       if (selectedIndex === items.length - 1) {
         router.push('/recommend')
+        dispatch(initializeRecommend())
       } else {
         setSelectedIndex(selectedIndex + 1)
       }

@@ -70,6 +70,7 @@ const RecommendPage = () => {
   }, [])
 
   useEffect(() => {
+    console.log(recommendInfo.loading)
     if (recommendInfo.loading == 'succeeded') {
       console.log(recommendInfo)
       console.log('recommendInfo loading succeeded')

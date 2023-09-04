@@ -118,7 +118,7 @@ const recommendInfoSlice = createSlice({
       // setPreferenceError(null)
       // state.loading = 'idle'
       // state.error = null
-      console.log('initializeRecommenddd', state.loading)
+      console.log('initializeRecommend', state.loading)
       state.loading = 'idle'
       state.error = null
     },
@@ -181,6 +181,7 @@ const persistConfig = {
     'restaurants',
     'depreactedAttractions',
     'depreactedRestaurants',
+    'loading',
   ],
 }
 
