@@ -97,21 +97,18 @@ const TravelMap = () => {
     }
   }, [selectedPlace])
   useEffect(() => {
-    const currentTravelSchedule: PlaceInfo[] = travelSchedule[currentDay - 1]
+    const currentTravelSchedule: PlaceInfo[] =
+      currentDay > 0 ? travelSchedule[currentDay - 1] : []
     const longtitude: number =
-      currentTravelSchedule.length === 0
-        ? 0
-        : currentTravelSchedule.reduce(
-            (total, place) => total + place.coordinate![1],
-            0,
-          ) / currentTravelSchedule.length
+      currentTravelSchedule.reduce(
+        (total, place) => total + place.coordinate![1],
+        0,
+      ) / currentTravelSchedule.length
     const latitude: number =
-      currentTravelSchedule.length === 0
-        ? 0
-        : currentTravelSchedule.reduce(
-            (total, place) => total + place.coordinate![0],
-            0,
-          ) / currentTravelSchedule.length
+      currentTravelSchedule.reduce(
+        (total, place) => total + place.coordinate![0],
+        0,
+      ) / currentTravelSchedule.length
     onSelectCity({
       longitude: longtitude - 0.03,
       latitude: latitude,
