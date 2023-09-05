@@ -25,7 +25,6 @@ function TravelCarousel({ openPopup }: CarouselProps) {
   function getCityInfo(cityName: any) {
     dispatch(setCity(cityName))
     openPopup()
-    console.log(cityName)
   }
 
   return (

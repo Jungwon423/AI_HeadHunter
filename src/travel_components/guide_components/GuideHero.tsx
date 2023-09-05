@@ -13,8 +13,6 @@ const GuideHero = () => {
   const duration: number = useSelector(selectDuration)
   const currentDay: number = useSelector(selectCurrentDay)
   const TravelSchedule: PlaceInfo[][] = useSelector(selectTravelSchedule)
-  console.log(TravelSchedule)
-
   return (
     <section className="relative">
       <div className="absolute inset-0">

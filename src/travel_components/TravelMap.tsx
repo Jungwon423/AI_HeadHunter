@@ -233,8 +233,6 @@ const TravelMap = () => {
                     onClick={(e) => {
                       e.originalEvent.stopPropagation()
                       dispatch(handleCurrentPlace(place))
-                      console.log('Marker Clicked')
-                      console.log(place)
                     }}
                   >
                     <NaverPin

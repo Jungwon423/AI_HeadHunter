@@ -77,7 +77,6 @@ export const fetchTravelScheduleAsync =
 
       // filter로 정제
       dispatch(deleteDuplicatePlace(itineraryInfo.get('placeInfos')))
-      console.log('제거 완료')
       dispatch(setLoading('succeeded'))
     } catch (error: any) {
       dispatch(setError(JSON.stringify(error)))

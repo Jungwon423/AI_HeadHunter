@@ -27,8 +27,6 @@ const TravelMarker = (props: TravelMarkerProps) => {
       onClick={(e) => {
         e.originalEvent.stopPropagation()
         dispatch(handleCurrentPlace(props.place))
-        console.log('Marker Clicked')
-        console.log(props.place)
       }}
     >
       <NaverPin name={props.place.name}></NaverPin>

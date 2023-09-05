@@ -67,11 +67,10 @@ export const fetchRecommendAttractions = async (
     withCredentials: true,
   }
 
-  console.log('recommendInput', recommendInput)
-
   let API_URL: string = SERVER_API_URL + '/preference/attractionRecommendation'
 
   console.log('API_URL', API_URL)
+  console.log('Input', recommendInput)
 
   const response: AxiosResponse<ResponseData> = await axios.post(
     API_URL,

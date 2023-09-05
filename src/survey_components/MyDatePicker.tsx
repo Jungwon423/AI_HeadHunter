@@ -56,7 +56,7 @@ const MyDatePicker = ({ startDate, endDate, onDatesChange }: myDateProps) => {
       <div className="hidden md:flex">
         <DatePicker
           minDate={new Date()}
-          maxDate={maxEndDate}
+          maxDate={twoMonthsLater()}
           dayClassName={dayClassNames}
           locale={ko}
           selected={startDate}

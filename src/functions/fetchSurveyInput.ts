@@ -41,11 +41,7 @@ export const fecthSurveyInputAsync =
     try {
       const surveyResponse: SurveyResponse = await fecthSurveyInput(SurveyInput)
       dispatch(setCategory(surveyResponse.majorCategoriesWithMinorCategories))
-      console.log(
-        'majorCategoriesWithMinorCategories',
-        surveyResponse.majorCategoriesWithMinorCategories,
-      )
+
       dispatch(setTravelId(surveyResponse.travelId))
-      console.log('travelId', surveyResponse.travelId)
     } catch (error: any) {}
   }

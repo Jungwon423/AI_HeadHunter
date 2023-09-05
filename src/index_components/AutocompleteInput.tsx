@@ -25,14 +25,10 @@ export const AutocompleteInput: React.FC<AutocompleteInputProps> = ({
     onInputValueChange: ({ inputValue }) => {
       setValue('searchText', inputValue || '')
     },
-    onSelectedItemChange: ({ selectedItem }) => {
-      console.log(selectedItem)
-    },
+    onSelectedItemChange: ({ selectedItem }) => {},
   })
 
-  const onSubmit = (data: FormData) => {
-    console.log(data)
-  }
+  const onSubmit = (data: FormData) => {}
 
   const filteredItems = items.filter((item) =>
     item.toLowerCase().startsWith(combobox.inputValue.toLowerCase()),

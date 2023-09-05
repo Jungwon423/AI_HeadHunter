@@ -8,7 +8,6 @@ export interface NaverPinProps {
 }
 
 const NaverPin = (props: NaverPinProps) => {
-  // console.log(props)
   return (
     <div className={`relative flex flex-col `}>
       <div

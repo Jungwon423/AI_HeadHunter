@@ -216,7 +216,6 @@ export const fetchCityDetailAsync =
   ) => {
     try {
       const cityDetail = await fetchCityDetail(cityInput)
-      // console.log('cityDetail', cityDetail)
       dispatch(setCityDetail(cityDetail))
     } catch (error: any) {
       console.log(error)

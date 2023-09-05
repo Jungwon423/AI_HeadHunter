@@ -137,7 +137,6 @@ export const SurveyPage = () => {
               <CircleListItem
                 key={index}
                 text={item}
-                // onClick={() => handleItemClick(index)}
                 onClick={() => console.log('click')}
                 isSelected={selectedIndex === index}
               />

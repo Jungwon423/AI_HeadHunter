@@ -190,7 +190,6 @@ function HourFormat({
         if (parseInt(item.translatedValue) === currentTranslatedValue) {
           setSelectedNumber(item.arrayNumber)
           setHourFormat({ mount: true, hourFormat: item.number })
-          console.log(`Selected hour format: ${item.number}`) // Add this line
           setHours(() => {
             const newValue = Hours.map((hour) => {
               if (

@@ -118,7 +118,6 @@ const recommendInfoSlice = createSlice({
       // setPreferenceError(null)
       // state.loading = 'idle'
       // state.error = null
-      console.log('initializeRecommend', state.loading)
       state.loading = 'idle'
       state.error = null
     },

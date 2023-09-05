@@ -89,7 +89,6 @@ function TimePickerSelection({
       : value
     setInputValue(finalSelectedValue)
     onChange(finalSelectedValue)
-    console.log(finalSelectedValue)
     const { hours, minutes }: { hours: number; minutes: number } =
       convertTo24Hour(finalSelectedValue)
     const newDate = new Date(startTime)

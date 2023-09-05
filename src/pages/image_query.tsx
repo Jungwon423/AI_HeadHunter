@@ -103,9 +103,6 @@ const ImageQuery = () => {
   let originalUrl = attractionQuery.query_list[count][0].image!
   let originalUrl2 = attractionQuery.query_list[count][1].image!
 
-  console.log('imageUrl1', originalUrl)
-  console.log('imageUrl2', originalUrl2)
-
   return (
     <div className="flex flex-col h-screen">
       <div className="w-full"></div>
@@ -135,12 +132,9 @@ const ImageQuery = () => {
               height: '100%',
               display: isLoading1 ? 'none' : '',
             }}
-            onLoadStart={() => {
-              console.log('loading')
-            }}
+            onLoadStart={() => {}}
             onLoadingComplete={() => {
               setIsLoading1(false)
-              console.log('loading complete')
             }}
           />
 

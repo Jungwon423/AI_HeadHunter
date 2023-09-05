@@ -32,11 +32,7 @@ export const fetchImageQuery = async (
 
   let API_URL: string = SERVER_API_URL + '/preference/attractionImageQuery'
 
-  console.log('/preference/attractionImageQuery : ', ImageQueryInput)
-
   const response = await axios.post(API_URL, ImageQueryInput, config)
-
-  console.log('response.data : ', response.data.query_list)
 
   const placeInfos: PlaceInfo[][] = processAttractionList(
     response.data.query_list,

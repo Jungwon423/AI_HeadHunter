@@ -11,7 +11,6 @@ type ISurveyProps = {
 const SimpleButtons = (props: ISurveyProps) => {
   const tempSurveys = props.surveys
   const selectedCompanion = useSelector(selectCompanion)
-  console.log('selected', selectedCompanion)
   const dispatch = useDispatch<AppDispatch>()
   return (
     <div className="text-center">

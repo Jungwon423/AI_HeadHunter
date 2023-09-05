@@ -44,7 +44,7 @@ const WhenSurvey = () => {
       <div className="px-10 flex flex-col flex-grow">
         <div className="text-2xl font-bold pt-16">여행 날짜는 언제인가요?</div>
         <div className="text-base font-bold text-indigo-500 pt-3 pb-7">
-          현재 7박 8일까지 선택가능합니다.
+          7박 8일까지 선택가능합니다
         </div>
 
         <div className="flex flex-row pb-10">

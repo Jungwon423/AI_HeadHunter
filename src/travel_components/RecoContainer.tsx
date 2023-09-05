@@ -26,8 +26,6 @@ const RecoContainer = () => {
 
   // const attractions: PlaceInfo[][] = useSelector(selectAttractions)
   const attractions: PlaceInfo[][] = useSelector(selectRecommendSchedule)
-  console.log(attractions)
-
   const currentDay: number = useSelector(selectCurrentDay)
 
   const city: string = useSelector(selectCity)

@@ -11,7 +11,6 @@ const ImageWithSkeleton = ({
   handleImageClick,
 }: ImageWithSkeletonProps) => {
   const [loaded, setLoaded] = useState(false)
-  console.log()
 
   return (
     <div className={`${loaded ? '' : 'animate-pulse bg-gray-400'}`}>

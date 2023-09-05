@@ -27,15 +27,11 @@ export const fetchPreference = async (
   let API_URL: string =
     SERVER_API_URL + '/preference/attractionImageQueryAnswer'
 
-  console.log('API_URL', API_URL)
-
   const response: AxiosResponse<Preference> = await axios.post(
     API_URL,
     PreferenceInput,
     config,
   )
-
-  console.log('response.data', response.data)
 
   return response.data
 }

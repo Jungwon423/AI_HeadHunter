@@ -199,8 +199,6 @@ export const travelInfoSlice = createSlice({
 
       const currentDay = state.currentDay - 1
 
-      console.log(currentDay, prevIndex, newIndex)
-
       let newTravelSchedule = [...state.travelSchedule]
 
       let tmp = newTravelSchedule[currentDay].splice(prevIndex, 1)[0]
@@ -217,8 +215,6 @@ export const travelInfoSlice = createSlice({
       const newIndex = action.payload.newIndex
 
       const currentDay = state.currentDay - 1
-
-      console.log(currentDay, prevIndex, newIndex)
 
       let newTravelSchedule = [...state.travelSchedule]
       let newRecommendSchedule = [...state.recommendSchedule]
@@ -239,8 +235,6 @@ export const travelInfoSlice = createSlice({
 
       const currentDay = state.currentDay - 1
 
-      console.log(currentDay, prevIndex, newIndex)
-
       let newTravelSchedule = [...state.travelSchedule]
       let newRecommendSchedule = [...state.recommendSchedule]
 
@@ -259,8 +253,6 @@ export const travelInfoSlice = createSlice({
       const newIndex = action.payload.newIndex
 
       const currentDay = state.currentDay - 1
-
-      console.log(currentDay, prevIndex, newIndex)
 
       let newRecommendSchedule = [...state.recommendSchedule]
 

@@ -24,9 +24,7 @@ const HowStyle = () => {
     dispatch(setTravelStyle(newTravelStyle))
   }
 
-  useEffect(() => {
-    console.log(travelStyle)
-  }, [dispatch, travelStyle])
+  useEffect(() => {}, [dispatch, travelStyle])
   return (
     <>
       <div className="text-2xl pt-20 font-bold">여행 스타일을 알려주세요</div>

@@ -22,7 +22,6 @@ export function stringToTime(timeString: string): Date {
   }
   const date = new Date()
   date.setHours(hours, parseInt(minute, 10), 0, 0)
-  console.log(date)
   return date
 }
 
