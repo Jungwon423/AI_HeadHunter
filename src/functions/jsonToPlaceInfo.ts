@@ -59,6 +59,7 @@ export function convertToPlaceInfo(attraction: any): PlaceInfo {
     attractionStartTime: attraction.attractionStartTime,
     naverBlog: attraction.naverBlog.items,
     youtube: attraction.youtube,
+    imageList: attraction.imageList,
   } as PlaceInfo
   return placeInfo
 }

@@ -27,6 +27,7 @@ import { selectEndDate, selectStartDate } from '../slices/timeSlice'
 import { MajorCategoriesWithMinorCategories } from '../interfaces/category'
 import { fetchRecommendAttractionsAsync } from '../functions/fetchRecommend'
 import Loading2 from '../components/loading2'
+import Loading from '../components/loading'
 
 const RecommendPage = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -81,17 +82,17 @@ const RecommendPage = () => {
   }, [recommendInfo.loading])
 
   if (recommendInfo.loading === 'idle' || recommendInfo.loading === 'pending') {
-    return <Loading2></Loading2>
+    return <Loading></Loading>
   } else {
     return (
       <div className="flex flex-row">
-        <div className="bg-white min-w-[700px] relative h-screen max-h-screen overflow-hidden">
+        <div className="bg-white min-w-[700px] w-1/2 relative h-screen max-h-screen overflow-hidden">
           <div className="flex flex-row">
             <RecommendNav></RecommendNav>
             <RecommendContainer></RecommendContainer>
           </div>
         </div>
-        <div className="flex w-1/3 h-screen">
+        <div className="flex w-1/2 h-screen">
           <RecommmendDetail></RecommmendDetail>
         </div>
         {/* <div className="w-1/2">
