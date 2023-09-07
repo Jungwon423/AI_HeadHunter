@@ -5,7 +5,7 @@ const RecommendDetailBlog = () => {
   const selectedPlace = useSelector(selectCurrentPlace)
   return (
     <div>
-      <div className="px-3 pt-5 font-bold">블로그</div>
+      <div className="px-3 pt-5 font-bold w-1/5">블로그</div>
       {selectedPlace?.naverBlog ? (
         selectedPlace?.naverBlog?.map((blog, index) => (
           <div key={index}>

@@ -12,6 +12,8 @@ const RecommendDetailHome = () => {
     <>
       <BasicInfo></BasicInfo>
       <TripAdviser></TripAdviser>
+      <TripAdviser></TripAdviser>
+      <TripAdviser></TripAdviser>
     </>
   )
 }

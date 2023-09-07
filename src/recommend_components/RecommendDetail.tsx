@@ -17,7 +17,7 @@ const RecommmendDetail = () => {
     return <div className="w-1/3 rounded-none hidden z-10"></div>
   }
   return (
-    <div className="flex flex-col h-screen overflow-y-auto items-center ">
+    <div className="flex flex-col h-full overflow-y-auto items-center ">
       <GuideTab></GuideTab>
       {/* {selectedPlace?.googleUrl ? (
         <GoogleButton url={selectedPlace?.googleUrl}></GoogleButton>

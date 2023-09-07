@@ -4,7 +4,7 @@ import { selectCurrentPlace } from '../../slices/travelInfoSlice'
 const TripAdviser = () => {
   const selectedPlace = useSelector(selectCurrentPlace)
   return (
-    <div className="flex flex-col w-4/5  bg-white shadow-md rounded-xl   hover:shadow-indigo-500/40 shadow-slate-200 my-10 overflow-hidden">
+    <div className="flex flex-col w-4/5  bg-white shadow-md rounded-xl   hover:shadow-indigo-500/40 shadow-slate-200">
       <div>트립어드바이저 정보</div>
       <div>
         평점 {selectedPlace?.rating} {selectedPlace?.ratingCount}

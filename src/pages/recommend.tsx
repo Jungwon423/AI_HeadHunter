@@ -6,7 +6,6 @@ import {
 } from '../slices/recommendSlice'
 import { useEffect, useState } from 'react'
 import { AppDispatch } from '../store'
-import RecommendMap from '../recommend_components/RecommendMap'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import {
   selectCategory,
@@ -86,12 +85,12 @@ const RecommendPage = () => {
   } else {
     return (
       <div className="flex flex-row">
-        {/* <div className="bg-white min-w-[700px] w-1/2 relative h-screen max-h-screen overflow-hidden">
+        <div className="bg-white min-w-[700px] w-1/2 relative h-screen max-h-screen overflow-hidden">
           <div className="flex flex-row">
             <RecommendNav></RecommendNav>
             <RecommendContainer></RecommendContainer>
           </div>
-        </div> */}
+        </div>
         {/* <div className="flex flex-col w-1/2 h-screen items-center bg-slate-50"> */}
         <div className="flex flex-col w-full h-screen items-center bg-slate-50">
           <RecommmendDetail></RecommmendDetail>

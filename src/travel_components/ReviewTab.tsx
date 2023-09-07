@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setCurrentTabIndex, selectCurrentTabIndex } from '../slices/tabSlice'
 
-const ReviewTab = () => {
+const GuideTab = () => {
   const tabs = ['기본 정보', '리뷰', '블로그', '유투브']
   const dispatch = useDispatch()
   const currentTabIndex = useSelector(selectCurrentTabIndex)
@@ -37,4 +37,4 @@ const ReviewTab = () => {
   )
 }
 
-export default ReviewTab
+export default GuideTab
