@@ -19,9 +19,9 @@ const RecommmendDetail = () => {
   return (
     <div className="flex flex-col h-screen overflow-y-auto items-center ">
       <GuideTab></GuideTab>
-      {selectedPlace?.googleUrl ? (
+      {/* {selectedPlace?.googleUrl ? (
         <GoogleButton url={selectedPlace?.googleUrl}></GoogleButton>
-      ) : null}
+      ) : null} */}
       {currentReviewTab === 0 ? (
         <RecommendDetailHome></RecommendDetailHome>
       ) : null}
