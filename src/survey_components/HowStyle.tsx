@@ -9,11 +9,16 @@ const HowStyle = () => {
   const dispatch = useDispatch<AppDispatch>()
 
   const handleSelectPlace = (value: string) => {
-    let newTravelStyle = travelStyle.filter(
-      (item) => item !== 'famous' && item !== 'novel',
-    )
-    newTravelStyle.push(value)
-    dispatch(setTravelStyle(newTravelStyle))
+    // let newTravelStyle = travelStyle.filter(
+    //   (item) => item !== 'famous' && item !== 'novel',
+    // )
+    let newTravelSchedule = [...travelStyle]
+    if (newTravelSchedule.includes(value)) {
+      newTravelSchedule = newTravelSchedule.filter((item) => item !== value)
+    } else {
+      newTravelSchedule.push(value)
+    }
+    dispatch(setTravelStyle(newTravelSchedule))
   }
 
   const handleSelectStyle = (value: string) => {

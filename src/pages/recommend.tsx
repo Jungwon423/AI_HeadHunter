@@ -86,13 +86,14 @@ const RecommendPage = () => {
   } else {
     return (
       <div className="flex flex-row">
-        <div className="bg-white min-w-[700px] w-1/2 relative h-screen max-h-screen overflow-hidden">
+        {/* <div className="bg-white min-w-[700px] w-1/2 relative h-screen max-h-screen overflow-hidden">
           <div className="flex flex-row">
             <RecommendNav></RecommendNav>
             <RecommendContainer></RecommendContainer>
           </div>
-        </div>
-        <div className="flex w-1/2 h-screen">
+        </div> */}
+        {/* <div className="flex flex-col w-1/2 h-screen items-center bg-slate-50"> */}
+        <div className="flex flex-col w-full h-screen items-center bg-slate-50">
           <RecommmendDetail></RecommmendDetail>
         </div>
         {/* <div className="w-1/2">

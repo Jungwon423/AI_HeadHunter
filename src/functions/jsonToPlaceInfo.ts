@@ -22,6 +22,10 @@ export function convertToPlaceInfo(attraction: any): PlaceInfo {
   // console.log('attraction.addressEn', attraction?.addressEn)
   // console.log('attraction.homepage', attraction?.homepage)
   // console.log('attraction.evaluation', attraction?.evaluation)
+  // console.log(
+  //   'attraction.imageList',
+  //   attraction.imageList.map((image: any) => image.photoURL),
+  // )
   const originalUrl = attraction.image?.photoURL
   const encodedUrl = encodeURIComponent(originalUrl)
   const prefix = 'https://search.pstatic.net/common?src='
@@ -39,27 +43,34 @@ export function convertToPlaceInfo(attraction: any): PlaceInfo {
     coordinate: [attraction.location?.lat, attraction.location?.lon],
     image: attraction.image?.photoURL,
     naverImage: apiUrl,
-    description: attraction.descriptionInfo?.publisher, // 이건 뭐냐?
     time: 15, // TODO
     summary: attraction.descriptionInfo?.publisher,
-    rating: rating,
-    ratingCount: attraction.quality?.reviewCount,
     hashtags: attraction.subCategory,
-    phoneNumber: attraction.phoneNumber,
-    location:
-      attraction.addressKo === null
-        ? attraction.addressEn
-        : attraction.addressKo,
     // googleUrl: attraction.google_url,
-    website: attraction.homepage,
-    // openingHours: attraction.current_opening_hours,
-    thought: attraction.evaluation,
     // wheelchair: attraction.wheelchair_accessible_entrance,
-    reviews: attraction.reviews,
     attractionStartTime: attraction.attractionStartTime,
+    reviews: attraction.reviews,
     naverBlog: attraction.naverBlog.items,
     youtube: attraction.youtube,
-    imageList: attraction.imageList,
+
+    // 2023.09.07 (목) 추가
+    imageList: attraction.imageList.map((image: any) => image.photoURL),
+    geoHierarchy: attraction.geoHierarchy,
+    nameKo: attraction.nameKo,
+    nameEn: attraction.nameEn,
+    subCategory: attraction.subCategory,
+    rating: rating,
+    ratingCount: attraction.quality?.reviewCount,
+    description: attraction.descriptionInfo?.publisher,
+    addressEn: attraction.addressEn,
+    addressKo: attraction.addressKo,
+    recommendedVisitLength: attraction.recommendedVisitLength,
+    operationTime: attraction.operationTime,
+    itemPrice: attraction.itemPrice,
+    homepage: attraction.homepage,
+    phoneNumber: attraction.phoneNumber,
+    datalab: attraction.datalab,
+    articles: attraction.articles,
   } as PlaceInfo
   return placeInfo
 }
