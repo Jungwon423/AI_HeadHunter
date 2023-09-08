@@ -56,7 +56,7 @@ const initialState: TravelInfoState = {
   loading: 'idle',
   error: null,
   currentPlace: null,
-  currentDay: 0,
+  currentDay: 1,
   travelOverview: [],
 }
 
