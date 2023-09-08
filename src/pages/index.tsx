@@ -5,7 +5,6 @@ import React, { useState } from 'react'
 import MainTitle from '../index_components/MainTitle'
 import TitleImage from '../index_components/TitleImage'
 import ImageExplain from '../index_components/ImageExplain'
-import { Footer } from '../footer/Footer'
 import Popup from '../index_components/Popup'
 import Link from 'next/link'
 import ContinentInput from '../index_components/ContinentInput'
@@ -52,24 +51,20 @@ export default function Home() {
         <div className="pb-40">
           <ImageExplain
             left={true}
-            h1Text={'AI가 생성한 여행지를 지금바로 확인해보세요!'}
-            pText={
-              '여행지에 대한 다양한 정보들과 AI가 추천한 이유를 확인할 수 있어요.'
-            }
-            image={'/assets/screenshot/screenshot2.png'}
+            h1Text={'나에게 딱 맞는 관광명소를 추천'}
+            pText={'여행지에 대한 모든 정보는 여기에서!'}
+            image={'/assets/screenshot/recommend.png'}
           ></ImageExplain>
         </div>
         <ImageExplain
           left={false}
-          h1Text={'여행 이상형 월드컵으로 AI에게 여행지 추천받기'}
-          pText={
-            '가고 싶은 여행지를 선택하면 AI가 사용자의 성향을 파악합니다. 그에 맞는 여행지를 추천받고 코스를 받아볼 수 있어요.'
-          }
-          image={'/assets/screenshot/screen1.png'}
+          h1Text={'나만의 여행 플래너 '}
+          pText={'AI가 계획해준 최적의 여행코스를 만나보세요'}
+          image={'/assets/screenshot/travel.png'}
         ></ImageExplain>
+        <div className="py-20"></div>
         {/* <Carousel></Carousel> */}
       </main>
-      <Footer></Footer>
     </div>
   )
 }

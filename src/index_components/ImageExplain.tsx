@@ -21,7 +21,7 @@ const ImageExplain: React.FC<ImageExplainProps> = ({
           <h1 className="text-lg md:text-xl xl:text-2xl font-extrabold text-gray-900">
             {h1Text}
           </h1>
-          <p className="mt-4 text-base md:text-lg xl:text-xl text-gray-500">
+          <p className="mt-4 text-base md:text-lg xl:text-xl text-gray-600">
             {pText}
           </p>
         </div>
@@ -66,7 +66,7 @@ const ImageExplain: React.FC<ImageExplainProps> = ({
           <div className="text-lg md:text-xl xl:text-2xl font-extrabold text-gray-900">
             {h1Text}
           </div>
-          <div className="mt-4 text-base md:text-lg xl:text-xl text-gray-500">
+          <div className="mt-4 text-base md:text-lg xl:text-xl text-gray-600">
             {pText}
           </div>
         </div>
