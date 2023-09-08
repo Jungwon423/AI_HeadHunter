@@ -18,6 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           name="viewport"
           content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width"
         />
+        <meta name="referrer" content="no-referrer"></meta>
       </Head>
       <Provider store={store}>
         <PersistGate persistor={persistor}>

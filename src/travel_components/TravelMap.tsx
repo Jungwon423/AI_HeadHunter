@@ -99,6 +99,7 @@ const TravelMap = () => {
   useEffect(() => {
     const currentTravelSchedule: PlaceInfo[] =
       currentDay > 0 ? travelSchedule[currentDay - 1] : []
+    if (currentTravelSchedule.length === 0) return
     const longtitude: number =
       currentTravelSchedule.reduce(
         (total, place) => total + place.coordinate![1],
@@ -181,16 +182,7 @@ const TravelMap = () => {
   const [activeIndex, setActiveIndex] = useState<number>(-1)
 
   return (
-    <motion.div
-      initial={{ x: -1000 }} // 초기 위치 (왼쪽)
-      animate={{ x: 0 }} // 최종 위치 (오른쪽)
-      transition={{
-        type: 'spring',
-        stiffness: 60,
-        damping: 20,
-      }}
-      className="flex-grow"
-    >
+    <div className="flex-grow">
       <TravelChat></TravelChat>
       <Map
         ref={mapRef}
@@ -292,7 +284,7 @@ const TravelMap = () => {
       </Map>
 
       {showChat && <ChatScreen onClose={() => dispatch(setShowChat(false))} />}
-    </motion.div>
+    </div>
   )
 }
 

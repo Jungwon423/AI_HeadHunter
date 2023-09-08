@@ -65,11 +65,11 @@ const TravelCoursePage = () => {
         <Guide></Guide>
         <div className="flex flex-grow relative">
           <TravelMap></TravelMap>
-          <div className="z-1 absolute">
+          <div className="z-1 absolute ">
             {openRecommend && <RecoContainer></RecoContainer>}
           </div>
 
-          <div className="z-1 absolute">
+          <div className="z-1 absolute w-5/12 ">
             {!openRecommend && <TravelContainer></TravelContainer>}
           </div>
         </div>

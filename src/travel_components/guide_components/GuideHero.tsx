@@ -27,7 +27,7 @@ const GuideHero = () => {
       </div>
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-2">
         <div className="md:pb-1">
-          <span className="text-sm font-bold text-white">앤비님</span>
+          <span className="text-sm font-bold text-white">사용자님</span>
           <span className="text-xs text-white">을 위한 여행 일정</span>
         </div>
         <div className="pb-4">

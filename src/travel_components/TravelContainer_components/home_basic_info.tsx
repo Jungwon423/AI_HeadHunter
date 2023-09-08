@@ -17,7 +17,7 @@ const BasicInfo = () => {
     }),
   )
   return (
-    <div className="flex flex-col w-3/5  bg-white shadow-md rounded-xl   hover:shadow-indigo-500/40 shadow-slate-200 my-10 overflow-hidden">
+    <div className="flex flex-col w-10/12  bg-white shadow-md rounded-xl   hover:shadow-indigo-500/40 shadow-slate-200 my-10 overflow-hidden">
       <DynamicImportedComponent items={imageList}></DynamicImportedComponent>
       <div className="px-7">
         {/* 도시 정보 */}

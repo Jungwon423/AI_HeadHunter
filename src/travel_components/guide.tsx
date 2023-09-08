@@ -1,15 +1,10 @@
 import TabMenu from './guide_components/TabMenu'
 import TravelNavbar from './guide_components/TravelNavbar'
-import { useSelector, useDispatch } from 'react-redux'
-import {
-  selectDuration,
-  selectTravelSchedule,
-  selectCurrentDay,
-} from '../slices/travelInfoSlice'
+import { useSelector } from 'react-redux'
+import { selectDuration, selectCurrentDay } from '../slices/travelInfoSlice'
 import GuideHero from './guide_components/GuideHero'
 import GuideDay from './guide_components/GuideDay'
 import GuideContainer from './guide_components/GuideContainer'
-import { PlaceInfo } from '../interfaces/placeInfo'
 
 const Guide = () => {
   const duration: number = useSelector(selectDuration)
@@ -28,7 +23,7 @@ const Guide = () => {
   const tabs = createTabs(duration)
 
   return (
-    <div className="w-96 bg-[#FAFAFA] h-screen overflow-y-auto">
+    <div className="w-96 bg-[#FAFAFA] h-screen overflow-y-auto z-50">
       <div className="flex-col w-96 overflow-y-auto">
         <TravelNavbar />
         <section className="bg-gray-50 px-1 py-2">
