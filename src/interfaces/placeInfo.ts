@@ -13,9 +13,9 @@ export interface SubCategory {
 }
 
 export interface OperationTimeByDay {
-  dayName?: string
-  openTime?: string
-  closeTime?: string
+  dayName?: any
+  openTime?: any
+  closeTime?: any
 }
 
 export interface PlaceInfo {
@@ -51,6 +51,7 @@ export interface PlaceInfo {
 
   recommendedVisitLength?: string
   operationTime?: OperationTimeByDay[]
+  operationDescription?: string[]
 
   itemPrice?: string[]
 

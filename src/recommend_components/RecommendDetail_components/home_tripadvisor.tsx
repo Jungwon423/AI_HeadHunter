@@ -31,16 +31,34 @@ const TripAdviser = () => {
             : selectedPlace?.addressKo}
         </span>
       </div>
-      <div className="my-1">
-        <span className="mt-1 mr-5 text-gray-500 font-bold">시간 </span>
-        <span></span>
-        {selectedPlace?.recommendedVisitLength}{' '}
-        {selectedPlace?.operationTime?.toString()}
-      </div>
+      {selectedPlace?.operationDescription ? (
+        <div className="my-1">
+          <span className="mt-1 mr-5 text-gray-500 font-bold">시간 </span>
+          <span>
+            {selectedPlace?.operationDescription.map((time, index) => (
+              <span key={index}>
+                {time}
+                {selectedPlace?.operationDescription?.length! - 1 !== index && (
+                  <span className="px-1"> {'|'} </span>
+                )}
+              </span>
+            ))}
+          </span>
+        </div>
+      ) : null}
       {selectedPlace?.itemPrice === null ? null : (
         <div className="my-1">
           <span className="mt-1 mr-5 text-gray-500 font-bold">가격 </span>
-          <span>{selectedPlace?.itemPrice?.toString()}</span>
+          <span>
+            {selectedPlace?.itemPrice?.map((price, index) => (
+              <span key={index}>
+                {price}
+                {selectedPlace?.itemPrice?.length! - 1 !== index && (
+                  <span className="px-1"> {'|'} </span>
+                )}
+              </span>
+            ))}
+          </span>
         </div>
       )}
       {selectedPlace?.homepage === null ? null : (
