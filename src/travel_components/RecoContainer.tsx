@@ -60,6 +60,9 @@ const RecoContainer = () => {
                 {travelStartDate} ~ {travelEndDate}
               </span>
             </div>
+            <div className="pl-4 font-base text-base text-blue-300 pt-3">
+              관광명소를 내 일정에 드래그해서 추가하세요!
+            </div>
             {attractions.map(
               (day: PlaceInfo[], i) =>
                 (currentDay == 0 || currentDay == i + 1) &&

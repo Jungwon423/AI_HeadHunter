@@ -24,7 +24,7 @@ const GuideDay = () => {
               dispatch(toggleOpenRecommend())
             }}
           >
-            <div className="text-white text-sm ">여행 편집하러가기</div>
+            <div className="text-white text-sm ">여행 편집하기</div>
           </button>
         </div>
       </div>
