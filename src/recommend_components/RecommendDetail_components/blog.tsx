@@ -19,13 +19,20 @@ const RecommendDetailBlog = () => {
             return (
               <div key={index}>
                 <div className="flex">
-                  <img
-                    src={selectedPlace?.naverImageList![index]?.link}
-                    style={{ height: 100 }}
-                    object-fit="fill"
-                    className="rounded-xl w-[70px] m-1"
-                  ></img>
-                  <div className="flex flex-col p-3">
+                  <div
+                    className="basis-1/4 cursor-pointer"
+                    onClick={() =>
+                      window.open(`https://${blog.bloggerlink}`, '_blank')
+                    }
+                  >
+                    <img
+                      src={selectedPlace?.naverImageList![index]?.link}
+                      style={{ height: 100 }}
+                      object-fit="fill"
+                      className="rounded-xl w-[100%] m-1"
+                    ></img>
+                  </div>
+                  <div className="flex flex-col p-3 basis-3/4">
                     <div
                       dangerouslySetInnerHTML={{ __html: blog.title }}
                       onClick={() => window.open(blog.link, '_blank')}

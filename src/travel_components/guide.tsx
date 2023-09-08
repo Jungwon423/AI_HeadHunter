@@ -23,7 +23,7 @@ const Guide = () => {
   const tabs = createTabs(duration)
 
   return (
-    <div className="w-96 bg-[#FAFAFA] h-screen overflow-y-auto z-50">
+    <div className="w-96 bg-[#FAFAFA] h-screen overflow-y-auto z-50 border-x-2 ">
       <div className="flex-col w-96 overflow-y-auto">
         <TravelNavbar />
         <section className="bg-gray-50 px-1 py-2">

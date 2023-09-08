@@ -62,10 +62,16 @@ const RecommendContainer = () => {
     <div className="bg-[#FAFAFA] h-screen overflow-y-auto">
       <div className="p-4">
         <div className="flex pt-7 pb-1 ">
-          <div className="pl-3 font-bold text-xl">{city}</div>
+          <div className="pl-3 font-bold text-xl">{city + ' 둘러보기'}</div>
           <span className="pt-2 text-gray-500 text-sm font-bold px-2">
             {travelStartDate} ~ {travelEndDate}
           </span>
+        </div>
+        <div className="pl-3 font-base text-sm text-sky-500">
+          추천 관광명소를 둘러보고 계시면 맞춤형 여행 계획을 세워드릴게요!
+        </div>
+        <div className="pl-3 font-base text-sm text-sky-500">
+          준비가 되면 좌측 하단 버튼에 파란불이 들어와요!
         </div>
 
         <div className="grid grid-cols-2 gap-3 pt-5">
@@ -88,7 +94,7 @@ const RecommendContainer = () => {
                 />
 
                 <div className="pl-3">
-                  <div className="tracking-tighter leading-3 text-[12px] font-bold">
+                  <div className="tracking-tighter leading-3 text-[14px] font-bold">
                     {place.name}
                   </div>
                   <div className="pt-1 flex flex-row">
@@ -102,7 +108,7 @@ const RecommendContainer = () => {
                     </span>
                   </div>
 
-                  <div className="pt-1 text-[10px] text-gray-600">
+                  <div className="pt-1 text-[13px] text-gray-600">
                     <span className="line-clamp-2 hover:line-clamp-3">
                       {place.description}
                     </span>
