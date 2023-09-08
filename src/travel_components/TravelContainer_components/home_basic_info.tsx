@@ -6,8 +6,6 @@ import dynamic from 'next/dynamic'
 const BasicInfo = () => {
   const selectedPlace = useSelector(selectCurrentPlace)
 
-  console.log(selectedPlace)
-
   const imageList: ReactImageGalleryItem[] = selectedPlace!.imageList!.map(
     (image: any) => ({
       original: image,
@@ -16,20 +14,37 @@ const BasicInfo = () => {
       originalWidth: 300,
     }),
   )
+  const geoHierarchyList: string[] = []
+  if (selectedPlace?.geoHierarchy?.country) {
+    geoHierarchyList.push(selectedPlace?.geoHierarchy?.country)
+  }
+  if (selectedPlace?.geoHierarchy?.state) {
+    geoHierarchyList.push(selectedPlace?.geoHierarchy?.state)
+  }
+  if (selectedPlace?.geoHierarchy?.city) {
+    geoHierarchyList.push(selectedPlace?.geoHierarchy?.city)
+  }
+  const geoHierarchyString: String = geoHierarchyList.join(' > ')
+
   return (
-    <div className="flex flex-col w-10/12  bg-white shadow-md rounded-xl   hover:shadow-indigo-500/40 shadow-slate-200 my-10 overflow-hidden">
+    <div className="flex flex-col w-5/6  bg-white shadow-md rounded-xl   hover:shadow-indigo-500/40 shadow-slate-200 my-10 overflow-hidden">
       <DynamicImportedComponent items={imageList}></DynamicImportedComponent>
       <div className="px-7">
         {/* 도시 정보 */}
-        <div className="flex text-start text-sm font-normal pt-10 pb-1 text-gray-500">
-          {selectedPlace?.geoHierarchy?.country +
-            ' > ' +
-            selectedPlace?.geoHierarchy?.state +
-            ' > ' +
-            selectedPlace?.geoHierarchy?.city}
-        </div>
+        {geoHierarchyString ? (
+          <div
+            className="flex text-start text-sm font-normal pt-10 pb-1 text-gray-500"
+            style={{ color: '#0068c3' }}
+          >
+            {geoHierarchyString}
+          </div>
+        ) : null}
         {/* 이름 */}
-        <div className="text-2xl font-black">{selectedPlace?.nameKo}</div>
+        <div className="text-2xl font-black">
+          {selectedPlace?.nameKo
+            ? selectedPlace?.nameKo
+            : selectedPlace?.nameEn}
+        </div>
         {/* 별점 */}
         {/* {selectedPlace?.rating ? (
           <div className="flex px-2">
@@ -43,7 +58,7 @@ const BasicInfo = () => {
           </div>
         ) : null} */}
         {/* 태그 */}
-        <div className="flex text-gray-500 pt-1">
+        <div className="flex text-gray-700 pt-1">
           <span className="mr-2">{selectedPlace?.nameEn} | </span>
           <span> </span>
           <span className="flex">

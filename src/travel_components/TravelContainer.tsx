@@ -2,7 +2,6 @@ import Image from 'next/legacy/image'
 import { useSelector } from 'react-redux'
 import { selectCurrentPlace } from '../slices/travelInfoSlice'
 import StarRating from './StarRating'
-import GuideTab from './ReviewTab'
 import GoogleButton from './GoogleButton'
 import { selectCurrentTabIndex } from '../slices/tabSlice'
 import CloseButton from './container_components/CloseButton'
@@ -16,6 +15,7 @@ import RecommendDetailHome from './TravelContainer_components/home'
 import RecommendDetailReview from './TravelContainer_components/review'
 import RecommendDetailBlog from './TravelContainer_components/blog'
 import RecommendDetailYoutube from './TravelContainer_components/youtube'
+import GuideTab from './TravelContainer_components/TravelReviewTab'
 
 const TravelContainer = () => {
   const selectedPlace = useSelector(selectCurrentPlace)
@@ -34,7 +34,7 @@ const TravelContainer = () => {
         damping: 20,
       }}
       // "flex flex-col h-full overflow-y-auto items-center
-      className="flex-col  overflow-y-auto bg-[#FAFAFA] h-screen z-0 "
+      className="flex-col flex  overflow-y-auto bg-[#FAFAFA] h-screen z-0 "
     >
       <CloseButton />
 

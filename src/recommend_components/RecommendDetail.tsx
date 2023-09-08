@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { selectCurrentPlace } from '../slices/travelInfoSlice'
-import GuideTab from '../travel_components/ReviewTab'
+import GuideTab from './ReviewTab'
 import GoogleButton from '../travel_components/GoogleButton'
 import { selectCurrentTabIndex } from '../slices/tabSlice'
 import 'react-image-gallery/styles/css/image-gallery.css'

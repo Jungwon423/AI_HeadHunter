@@ -30,7 +30,7 @@ const GuideContainer = () => {
             <Draggable
               index={i}
               draggableId={placeInfo.name!}
-              key={placeInfo.name!}
+              key={placeInfo.name! + i.toString()}
             >
               {(provided, snapshot) => (
                 <div

@@ -23,8 +23,8 @@ const RecommendDetailYoutube = () => {
   }
 
   return (
-    <div className="w-3/5  bg-white shadow-md rounded-xl   hover:shadow-indigo-500/40 shadow-slate-200 my-10 ">
-      <div className="px-3 pt-5 font-bold">유투브</div>
+    <div className="w-5/6  bg-white shadow-md rounded-xl   hover:shadow-indigo-500/40 shadow-slate-200 my-10 ">
+      <div className="px-3 pt-5 font-bold">YouTube</div>
       {selectedPlace?.youtube ? (
         selectedPlace?.youtube?.map((youtube, index) => (
           <>

@@ -311,6 +311,7 @@ export const {
 const persistConfig = {
   key: 'travel',
   storage,
+  blacklist: ['currentPlace'],
 }
 
 const persistedTravelInfoReducer = persistReducer(

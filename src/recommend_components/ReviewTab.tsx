@@ -13,7 +13,7 @@ const GuideTab = () => {
 
   return (
     <div className="flex w-full bg-white h-16 items-center">
-      <div className="w-1/5"></div>
+      <div className="w-1/6"></div>
       <div className="flex space-x-2">
         {tabs.map((tab, index) => {
           return (
