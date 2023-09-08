@@ -50,7 +50,7 @@ export function convertToPlaceInfo(attraction: any): PlaceInfo {
     // wheelchair: attraction.wheelchair_accessible_entrance,
     attractionStartTime: attraction.attractionStartTime,
     reviews: attraction.reviews,
-    naverBlog: attraction.naverBlog.items,
+    naverBlog: attraction.naverBlog?.items,
     youtube: attraction.youtube,
 
     // 2023.09.07 (목) 추가
@@ -64,13 +64,14 @@ export function convertToPlaceInfo(attraction: any): PlaceInfo {
     description: attraction.descriptionInfo?.publisher,
     addressEn: attraction.addressEn,
     addressKo: attraction.addressKo,
-    recommendedVisitLength: attraction.recommendedVisitLength,
+    recommendedVisitLength: attraction.hours?.recommendedVisitLength,
     operationTime: attraction.operationTime,
     itemPrice: attraction.itemPrice,
     homepage: attraction.homepage,
     phoneNumber: attraction.phoneNumber,
     datalab: attraction.datalab,
     articles: attraction.articles,
+    naverImageList: attraction.naverImage?.items,
   } as PlaceInfo
   return placeInfo
 }

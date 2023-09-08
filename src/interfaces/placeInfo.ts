@@ -60,6 +60,7 @@ export interface PlaceInfo {
 
   datalab?: any
   articles?: any
+  naverImageList?: any
 }
 
 interface Summary {
