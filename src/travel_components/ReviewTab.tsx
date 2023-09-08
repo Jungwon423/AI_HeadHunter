@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setCurrentTabIndex, selectCurrentTabIndex } from '../slices/tabSlice'
 
 const GuideTab = () => {
-  const tabs = ['기본 정보', '리뷰', '블로그', '유투브']
+  const tabs = ['기본 정보', '리뷰', '블로그', 'YouTube']
   const dispatch = useDispatch()
   const currentTabIndex = useSelector(selectCurrentTabIndex)
 
@@ -13,7 +13,7 @@ const GuideTab = () => {
 
   return (
     <div className="flex w-full bg-white h-16 items-center">
-      <div className="w-1/12"></div>
+      <div className="w-1/5"></div>
       <div className="flex space-x-2">
         {tabs.map((tab, index) => {
           return (
@@ -26,7 +26,7 @@ const GuideTab = () => {
               >
                 {tab}
                 {currentTabIndex === index && (
-                  <span className="absolute left-1/2 transform -translate-x-1/2 top-11 w-[60%] h-0.5 bg-sky-400"></span>
+                  <span className="absolute left-1/2 transform -translate-x-1/2 top-14 w-[60%] h-0.5 bg-sky-400"></span>
                 )}
               </button>
             </div>

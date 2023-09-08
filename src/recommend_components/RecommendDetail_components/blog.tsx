@@ -4,7 +4,7 @@ import { selectCurrentPlace } from '../../slices/travelInfoSlice'
 const RecommendDetailBlog = () => {
   const selectedPlace = useSelector(selectCurrentPlace)
   return (
-    <div>
+    <div className="w-3/5  bg-white shadow-md rounded-xl   hover:shadow-indigo-500/40 shadow-slate-200 my-10 ">
       <div className="px-3 pt-5 font-bold w-1/5">블로그</div>
       {selectedPlace?.naverBlog ? (
         selectedPlace?.naverBlog?.map((blog, index) => (

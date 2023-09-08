@@ -4,7 +4,7 @@ import {
   selectAttractions,
   selectRecommendInfo,
 } from '../slices/recommendSlice'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { AppDispatch } from '../store'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import {
@@ -25,7 +25,6 @@ import { ImageQueryInput } from '../interfaces/imageQuery'
 import { selectEndDate, selectStartDate } from '../slices/timeSlice'
 import { MajorCategoriesWithMinorCategories } from '../interfaces/category'
 import { fetchRecommendAttractionsAsync } from '../functions/fetchRecommend'
-import Loading2 from '../components/loading2'
 import Loading from '../components/loading'
 
 const RecommendPage = () => {
@@ -85,19 +84,15 @@ const RecommendPage = () => {
   } else {
     return (
       <div className="flex flex-row">
-        <div className="bg-white min-w-[700px] w-1/2 relative h-screen max-h-screen overflow-hidden">
+        <div className="bg-white min-w-[700px] basis-1/2  max-h-screen ">
           <div className="flex flex-row">
             <RecommendNav></RecommendNav>
             <RecommendContainer></RecommendContainer>
           </div>
         </div>
-        {/* <div className="flex flex-col w-1/2 h-screen items-center bg-slate-50"> */}
-        <div className="flex flex-col w-full h-screen items-center bg-slate-50">
+        <div className="bg-slate-50 min-w-[700px] basis-1/2">
           <RecommmendDetail></RecommmendDetail>
         </div>
-        {/* <div className="w-1/2">
-        <RecommendMap></RecommendMap>
-      </div> */}
       </div>
     )
   }

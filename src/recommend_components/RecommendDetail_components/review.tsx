@@ -15,7 +15,7 @@ const RecommendDetailReview = () => {
   }
 
   return (
-    <>
+    <div className="w-3/5  bg-white shadow-md rounded-xl   hover:shadow-indigo-500/40 shadow-slate-200 my-10 ">
       <div className="px-3 pt-5 font-bold">리뷰</div>
       {selectedPlace?.reviews ? (
         selectedPlace?.reviews?.map((review, index) => (
@@ -90,7 +90,7 @@ const RecommendDetailReview = () => {
       ) : (
         <div className="p-3">리뷰가 없습니다.</div>
       )}
-    </>
+    </div>
   )
 }
 

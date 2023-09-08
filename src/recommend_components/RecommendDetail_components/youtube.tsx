@@ -23,36 +23,36 @@ const RecommendDetailYoutube = () => {
   }
 
   return (
-    <div>
+    <div className="w-3/5  bg-white shadow-md rounded-xl   hover:shadow-indigo-500/40 shadow-slate-200 my-10 ">
       <div className="px-3 pt-5 font-bold">유투브</div>
       {selectedPlace?.youtube ? (
         selectedPlace?.youtube?.map((youtube, index) => (
           <>
             <div key={index} className="flex flex-row">
               <div
-                className="p-3 relative cursor-pointer"
+                className="p-3 relative cursor-pointer basis-1/3"
                 onClick={() => handleThumbnailClick(index)}
               >
                 <img
                   src={youtube.thumbnails[0]}
                   alt={`Profile of `}
-                  width={150}
-                  height={150}
+                  width={200}
+                  height={200}
                   className="rounded-lg"
                 />
                 <div className="text-xs absolute bottom-3 left-5">
                   <img
                     src="/assets/youtube2.png"
                     alt={`Profile of `}
-                    width={20}
-                    height={20}
+                    width={40}
+                    height={40}
                   />
                 </div>
                 <div className="text-xs font-bold text-white absolute bottom-3 right-5">
                   {youtube.duration}
                 </div>
               </div>
-              <div className="flex flex-col p-3 w-[270px]">
+              <div className="flex flex-col p-3 basis-2/3">
                 <div
                   className="cursor-pointer text-sm font-bold text-indigo-400 line-clamp-2"
                   onClick={() =>

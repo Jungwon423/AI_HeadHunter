@@ -17,11 +17,11 @@ const BasicInfo = () => {
     }),
   )
   return (
-    <div className="flex flex-col w-4/5  bg-white shadow-md rounded-xl   hover:shadow-indigo-500/40 shadow-slate-200 my-10 overflow-hidden">
+    <div className="flex flex-col w-3/5  bg-white shadow-md rounded-xl   hover:shadow-indigo-500/40 shadow-slate-200 my-10 overflow-hidden">
       <DynamicImportedComponent items={imageList}></DynamicImportedComponent>
       <div className="px-7">
         {/* 도시 정보 */}
-        <div className="flex text-start text-2xl font-black pt-10 pb-5">
+        <div className="flex text-start text-sm font-normal pt-10 pb-1 text-gray-500">
           {selectedPlace?.geoHierarchy?.country +
             ' > ' +
             selectedPlace?.geoHierarchy?.state +
@@ -29,9 +29,7 @@ const BasicInfo = () => {
             selectedPlace?.geoHierarchy?.city}
         </div>
         {/* 이름 */}
-        <h2 className="flex text-start text-2xl font-black pt-10 pb-5">
-          {selectedPlace?.nameKo}
-        </h2>
+        <div className="text-2xl font-black">{selectedPlace?.nameKo}</div>
         {/* 별점 */}
         {/* {selectedPlace?.rating ? (
           <div className="flex px-2">
@@ -45,22 +43,23 @@ const BasicInfo = () => {
           </div>
         ) : null} */}
         {/* 태그 */}
-        <div className="flex text-gray-500 px-2 pt-1">
-          <div>{selectedPlace?.nameEn}</div>
-          <div className="flex">
+        <div className="flex text-gray-500 pt-1">
+          <span className="mr-2">{selectedPlace?.nameEn} | </span>
+          <span> </span>
+          <span className="flex">
             {selectedPlace?.hashtags &&
               selectedPlace?.hashtags?.map((tag, index) => (
-                <div>
+                <>
                   <span key={index}>{' ' + tag.nameKo + ' '} </span>
                   {selectedPlace.hashtags?.length! - 1 !== index && (
-                    <span> {'|' + ' '}</span>
+                    <span> {'|'}</span>
                   )}
-                </div>
+                </>
               ))}
-          </div>
+          </span>
         </div>
         {/* 한 줄 소개 */}
-        <div className="p-3 text-gray-700 text-sm">
+        <div className="py-3 text-gray-700 text-base font-normal">
           {selectedPlace?.description}
         </div>
       </div>
