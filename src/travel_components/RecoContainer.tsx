@@ -20,6 +20,7 @@ import {
 } from '../slices/timeSlice'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
 import { motion } from 'framer-motion'
+import CloseButton from './container_components/CloseButton'
 
 const RecoContainer = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -45,6 +46,7 @@ const RecoContainer = () => {
       }}
       className="bg-[#FAFAFA] h-screen overflow-y-auto"
     >
+      <CloseButton></CloseButton>
       <Droppable droppableId="recommendSchedule">
         {(provided, snapshot) => (
           <div

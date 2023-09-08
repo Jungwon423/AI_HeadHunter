@@ -1,12 +1,15 @@
 import { useSelector, useDispatch } from 'react-redux'
 import {
   selectCurrentDay,
+  selectTravelOverview,
   toggleOpenRecommend,
 } from '../../slices/travelInfoSlice'
 import { AppDispatch } from '../../store'
 
 const GuideDay = () => {
   const currentDay: number = useSelector(selectCurrentDay)
+
+  const overview = useSelector(selectTravelOverview)
 
   const dispatch = useDispatch<AppDispatch>()
 
@@ -25,6 +28,7 @@ const GuideDay = () => {
           </button>
         </div>
       </div>
+      <div>{overview[currentDay - 1]}</div>
     </div>
   )
 }

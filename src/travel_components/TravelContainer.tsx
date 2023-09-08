@@ -22,7 +22,7 @@ const TravelContainer = () => {
   let currentReviewTab = useSelector(selectCurrentTabIndex)
 
   if (!selectedPlace || !selectedPlace?.coordinate) {
-    return <div className="w-96 rounded-none hidden z-10"></div>
+    return <div className="w-1/3 rounded-none hidden z-10"></div>
   }
   return (
     <motion.div
@@ -33,6 +33,7 @@ const TravelContainer = () => {
         stiffness: 60,
         damping: 20,
       }}
+      // "flex flex-col h-full overflow-y-auto items-center
       className="flex-col  overflow-y-auto bg-[#FAFAFA] h-screen z-0 "
     >
       <CloseButton />
