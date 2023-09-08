@@ -6,9 +6,7 @@ import GuideTab from './ReviewTab'
 import GoogleButton from './GoogleButton'
 import { selectCurrentTabIndex } from '../slices/tabSlice'
 import CloseButton from './container_components/CloseButton'
-import ContainerTitle from './container_components/ContainerTitle'
 import Recommend from './container_components/Recommend'
-import Location from './container_components/Location'
 import OperationHours from './container_components/OperationHours'
 import Website from './container_components/Website'
 import PhoneNumber from './container_components/PhoneNumber'
@@ -63,7 +61,6 @@ const TravelContainer = () => {
         />
       </div>
       <div className="w-full h-16 flex-col">
-        <ContainerTitle></ContainerTitle>
         <div className="p-3 text-gray-700">{selectedPlace?.description}</div>
         <div className="h-3 bg-gray-300 w-full"> </div>
         <Recommend></Recommend>
@@ -74,7 +71,6 @@ const TravelContainer = () => {
         <GuideTab></GuideTab>
         {currentReviewTab === 0 ? (
           <div>
-            <Location></Location>
             <OperationHours></OperationHours>
             <Website></Website>
             <PhoneNumber></PhoneNumber>
