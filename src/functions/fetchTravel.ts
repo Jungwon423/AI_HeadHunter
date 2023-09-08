@@ -79,6 +79,7 @@ export const fetchTravelScheduleAsync =
       dispatch(deleteDuplicatePlace(itineraryInfo.get('placeInfos')))
       dispatch(setLoading('succeeded'))
     } catch (error: any) {
+      console.log(error)
       dispatch(setError(JSON.stringify(error)))
       dispatch(setLoading('failed'))
     }

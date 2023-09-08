@@ -182,6 +182,7 @@ const persistConfig = {
     'depreactedRestaurants',
     'loading',
     'currentPlace',
+    'recommendState',
   ],
 }
 

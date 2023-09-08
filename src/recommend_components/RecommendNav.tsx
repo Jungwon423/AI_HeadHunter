@@ -18,23 +18,31 @@ const RecommendNav = () => {
 
   let buttonStatus: string = ''
   let buttonColor: string = 'bg-blue-500'
+  let buttonHover: string = 'bg-gray-500'
 
   const navigateToTravelPage = () => {
+    // if (travelInfo.loading === 'succeeded') {
+    //   router.push('/travel')
+    // }
     router.push('/travel')
   }
 
   if (travelInfo.loading === 'pending') {
     buttonStatus = 'loading'
     buttonColor = 'bg-gray-500'
-  } else if (travelInfo.loading === 'failed') {
-    buttonStatus = 'something wrong'
-    buttonColor = 'bg-red-500'
+    buttonHover = 'hover:bg-gray-500'
+    // } else if (travelInfo.loading === 'failed') {
+    //   buttonStatus = 'something wrong'
+    //   buttonColor = 'bg-red-500'
+    //   buttonHover = 'bg-red-500'
   } else {
     buttonStatus = '다음'
     buttonColor = 'bg-blue-500'
+    buttonHover = 'hover:bg-blue-500'
   }
+  console.log('버튼 색', buttonColor)
 
-  let buttonClass = `rounded px-4 py-2 font-bold text-white hover:bg-blue-600 ${buttonColor} `
+  let buttonClass = `rounded px-4 py-2 font-bold text-white ${buttonColor} ${buttonHover} `
 
   return (
     <div className="w-[170px] h-screen flex flex-col">
