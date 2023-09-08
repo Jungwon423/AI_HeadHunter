@@ -13,8 +13,8 @@ export interface RecommendInfoState {
   attractions: PlaceInfo[][]
   restaurants: PlaceInfo[][]
 
-  depreactedAttractions: PlaceInfo[]
-  depreactedRestaurants: PlaceInfo[]
+  depreactedAttractions: PlaceInfo[][]
+  depreactedRestaurants: PlaceInfo[][]
 
   loading: 'idle' | 'pending' | 'succeeded' | 'failed'
   error: string | null

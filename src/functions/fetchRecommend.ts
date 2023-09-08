@@ -43,14 +43,12 @@ function convertToRecommendInfos(response: any): any {
   let restaurants: PlaceInfo[][] = processRestaurantCluster(
     response.clustered_recommended_attractions,
   )
-  let depreactedAttractions: PlaceInfo[] =
-    response.clustered_not_recommended_attractions[0]?.attractions.map(
-      convertToPlaceInfo,
-    )
-  let depreactedRestaurants: PlaceInfo[] =
-    response.clustered_not_recommended_attractions[0]?.restaurants.map(
-      convertToPlaceInfo,
-    )
+  let depreactedAttractions: PlaceInfo[][] = processCluster(
+    response.clustered_not_recommended_attractions,
+  )
+  let depreactedRestaurants: PlaceInfo[][] = processRestaurantCluster(
+    response.clustered_not_recommended_attractions,
+  )
 
   recommendInfo.set('attractions', attractions)
   recommendInfo.set('restaurants', restaurants)

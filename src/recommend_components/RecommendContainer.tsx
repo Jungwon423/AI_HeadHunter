@@ -29,10 +29,10 @@ const RecommendContainer = () => {
   )
   const deprecatedAttractions: PlaceInfo[] = useSelector(
     selectDepreactedAttractions,
-  )
+  ).reduce((acc, val) => acc.concat(val), [])
   const deprecatedRestaurants: PlaceInfo[] = useSelector(
     selectDepreactedRestaurants,
-  )
+  ).reduce((acc, val) => acc.concat(val), [])
 
   const recommendState = useSelector(selectRecommendState)
 
