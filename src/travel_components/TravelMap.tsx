@@ -44,7 +44,20 @@ const TravelMap = () => {
   const TOKEN =
     'pk.eyJ1IjoiemlnZGVhbCIsImEiOiJjbGtrcGNwdXQwNm1oM2xvZTJ5Z2Q4djk5In0._rw_aFaBfUjQC-tjkV53Aw'
 
-  const coordinate = useSelector(selectCoordinate)
+  // const coordinate = useSelector(selectCoordinate)
+  const coordinate = [
+    travelSchedule[0].reduce(
+      (total, place) => total + place.coordinate![1],
+      0,
+    ) /
+      travelSchedule[0].length -
+      0.03,
+    travelSchedule[0].reduce(
+      (total, place) => total + place.coordinate![0],
+      0,
+    ) / travelSchedule[0].length,
+  ]
+
   // interface RouteGeoJSON {
   //   type: string
   //   properties: {}

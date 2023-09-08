@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux'
 import { selectCurrentPlace } from '../../slices/travelInfoSlice'
 import { ReactImageGalleryItem } from 'react-image-gallery'
 import dynamic from 'next/dynamic'
+import 'react-image-gallery/styles/css/image-gallery.css'
 
 const BasicInfo = () => {
   const selectedPlace = useSelector(selectCurrentPlace)

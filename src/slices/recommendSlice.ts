@@ -181,6 +181,7 @@ const persistConfig = {
     'depreactedAttractions',
     'depreactedRestaurants',
     'loading',
+    'currentPlace',
   ],
 }
 

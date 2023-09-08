@@ -56,7 +56,7 @@ const initialState: TravelInfoState = {
   loading: 'idle',
   error: null,
   currentPlace: null,
-  currentDay: 0,
+  currentDay: 1,
   travelOverview: [],
 }
 
@@ -311,7 +311,7 @@ export const {
 const persistConfig = {
   key: 'travel',
   storage,
-  blacklist: ['currentPlace'],
+  blacklist: ['currentPlace', 'currentDay', 'openRecommend'],
 }
 
 const persistedTravelInfoReducer = persistReducer(
