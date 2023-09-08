@@ -11,6 +11,7 @@ import {
   setLoading,
   setTravelOverview,
   setTravelSchedule,
+  setCurrentDay,
 } from '../slices/travelInfoSlice'
 import { convertToPlaceInfo } from './jsonToPlaceInfo'
 
@@ -59,16 +60,24 @@ export const fetchTravelScheduleAsync =
   (recommendInput: RecommendInput): AppThunk =>
   async (
     dispatch: (arg0: {
-      payload: TravelInfoState | string | PlaceInfo[][] | null | string[]
+      payload:
+        | TravelInfoState
+        | string
+        | PlaceInfo[][]
+        | null
+        | string[]
+        | number
       type:
         | 'travelInfo/setTravelSchedule'
         | 'travelInfo/setLoading'
         | 'travelInfo/setError'
         | 'travelInfo/deleteDuplicatePlace'
         | 'travelInfo/setTravelOverview'
+        | 'travelInfo/setCurrentDay'
     }) => void,
   ) => {
     try {
+      dispatch(setCurrentDay(1))
       dispatch(setLoading('pending'))
       const itineraryInfo = await fetchTravelSchedule(recommendInput)
       dispatch(setTravelSchedule(itineraryInfo.get('placeInfos')))

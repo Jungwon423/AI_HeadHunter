@@ -13,7 +13,8 @@ const TabMenu: React.FC<{
       <DraggableScrollbar>
         <div className="flex space-x-3 py-2">
           {tabs.map((tab, index) => {
-            if (index === 0) return null
+            // if (index === 0) return hidden tab
+            if (index === 0) return <div key={tab}></div>
             return (
               <button
                 key={tab}
