@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from '../store'
 import { PlaceInfo } from '../interfaces/placeInfo'
 import { handleCurrentPlace, selectCity } from '../slices/travelInfoSlice'
+import { converToNaverImage, imgError } from '../functions/imageToNaverImage'
 import {
   dateToString,
   selectEndDate,
@@ -86,8 +87,9 @@ const RecommendContainer = () => {
               >
                 <img
                   referrerPolicy="no-referrer"
-                  src={place.image!}
+                  src={converToNaverImage(place.image!)}
                   alt={place.name!}
+                  onError={imgError}
                   style={{ height: '70px', objectFit: 'cover' }}
                   object-fit="fill"
                   className="rounded-xl w-[70px]"
