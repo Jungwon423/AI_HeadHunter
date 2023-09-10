@@ -17,4 +17,5 @@ export const converToDefaultImage = (image: string): string => {
 
 export const imgError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
   e.currentTarget.src = converToDefaultImage(e.currentTarget.src)
+  e.currentTarget.onerror = null
 }
