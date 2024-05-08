@@ -1,1 +1,1 @@
-export const SERVER_API_URL: string = 'https://travelAPI.wonmo.net'
+export const SERVER_API_URL: string = 'https://komail.wonmo.net'

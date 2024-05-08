@@ -38,7 +38,7 @@ export const fetchTravelSchedule = async (
     withCredentials: true,
   }
 
-  let API_URL: string = SERVER_API_URL + '/itinerary/create'
+  let API_URL: string = SERVER_API_URL + '/itinerary/create2'
 
   console.log('API_URL', API_URL)
 
